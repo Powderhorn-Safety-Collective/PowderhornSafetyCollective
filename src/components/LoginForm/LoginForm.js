@@ -30,9 +30,14 @@ class LoginForm extends Component {
     });
   };
 
+  // this will need to the thing to bring up the modal to register
+  register = () => {
+
+  };
+
   render() {
     return (
-      <form className="formPanel" onSubmit={this.login}>
+      <form className="loginForm" onSubmit={this.login}>
         <h2>Login</h2>
         {this.props.store.errors.loginMessage && (
           <h3 className="alert" role="alert">
@@ -66,6 +71,15 @@ class LoginForm extends Component {
         <div>
           <input className="btn" type="submit" name="submit" value="Log In" />
         </div>
+        <h4>New to PSC?</h4>
+        {/* button to get registration modal */}
+        <button
+            type="button"
+            className="btn"
+            onClick={() => {this.register()}}
+          >
+            Register Here
+        </button>
       </form>
     );
   }

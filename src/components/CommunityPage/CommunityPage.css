@@ -1,0 +1,14 @@
+.column {
+    flex: 30%;
+    border: 1px solid blue;
+}
+
+.row {
+    display: flex;
+}
+
+.box {
+    border: 3px solid black;
+    margin: 5px;
+    padding: 5px;
+}

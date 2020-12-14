@@ -122,7 +122,7 @@ class RegisterForm extends Component {
               value="yes"
               onChange={this.handleInputChangeFor('adult')}
             />
-            <label for="yes">Yes</label>
+            <label htmlFor="yes">Yes</label>
             <input 
               type="radio" 
               id="no" 
@@ -130,7 +130,7 @@ class RegisterForm extends Component {
               value="no"
               onChange={this.handleInputChangeFor('adult')}
             />
-            <label for="no">No</label>
+            <label htmlFor="no">No</label>
           </div>
           <div>
             <p>Terms and Conditions:</p>
@@ -155,7 +155,7 @@ class RegisterForm extends Component {
               name="terms" 
               value="yes" 
               onChange={this.handleInputChangeFor('terms')}/>
-            <label for="terms">I accept the above terms and conditons*</label>
+            <label htmlFor="terms">I accept the above terms and conditons*</label>
           </div>
             {/* option to learn more about volunteering */}
             {/* need to figure out volunteer angle */}
@@ -166,7 +166,7 @@ class RegisterForm extends Component {
               name="volunteer"
               value="yes" 
               onChange={this.handleInputChangeFor('volunteer')}/>
-            <label for="volunteer">I would like to learn more about how to volunteer</label>
+            <label htmlFor="volunteer">I would like to learn more about how to volunteer</label>
           </div>
         </div>
         <div>

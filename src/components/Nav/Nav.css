@@ -8,14 +8,14 @@
 
 .nav {
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: #06989d;
   overflow: hidden;
 }
 
 .nav-link {
   float: left;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: black;
+  background-color: #fdf761;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -31,7 +31,13 @@
 .nav-link:hover {
   background-color: #008183;
 }
-
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
 .nav-right {
   float: right;
+}
+.patrolDisplay {
+  text-align: right;
 }

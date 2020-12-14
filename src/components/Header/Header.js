@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {HashRouter as Router, Link} from 'react-router-dom';
+import {HashRouter as Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import "./Header.css";
 import Nav from '../Nav/Nav';

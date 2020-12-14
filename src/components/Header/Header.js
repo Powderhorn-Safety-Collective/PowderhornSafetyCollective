@@ -25,7 +25,6 @@ class Header extends Component {
             {this.props.reduxStore.patrolCountReducer == 0 &&
               <h2>No One is on Patrol</h2>
             }
-            
             {this.props.reduxStore.patrolCountReducer > 1 &&
               <h2> {this.props.reduxStore.patrolCountReducer} people are on patrol</h2>
             }

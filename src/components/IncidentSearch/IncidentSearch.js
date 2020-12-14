@@ -11,7 +11,8 @@ class IncidentSearch extends Component {
   // this will need to be changed to search for the text entered
   search = (event) => {
     event.preventDefault();
-
+    console.log('the search string is ', this.state.searchNumber);
+    
 
   }; // end 
 
@@ -30,6 +31,7 @@ class IncidentSearch extends Component {
         <div>
           <label htmlFor="username">
             Incident ID
+          </label>
             <input
               type="text"
               name="username"
@@ -37,7 +39,6 @@ class IncidentSearch extends Component {
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
             />
-          </label>
         </div>
         <div>
           <label htmlFor="password">

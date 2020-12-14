@@ -1,4 +1,4 @@
-CREATE TABLE "users" (
+CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"handle" varchar(255) NOT NULL UNIQUE,
 	"first_name" varchar(255) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE "roles" (
 
 
 
-CREATE TABLE "users_roles" (
+CREATE TABLE "user_roles" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"role_id" integer NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE "users_roles" (
 
 
 
-CREATE TABLE "users_skills" (
+CREATE TABLE "user_skills" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"skill_id" integer NOT NULL,
@@ -89,12 +89,12 @@ CREATE TABLE "skills" (
 
 
 ALTER TABLE "incident_followers" ADD CONSTRAINT "incident_followers_fk0" FOREIGN KEY ("incident_id") REFERENCES "incidents"("id");
-ALTER TABLE "incident_followers" ADD CONSTRAINT "incident_followers_fk1" FOREIGN KEY ("user_id") REFERENCES "users"("id");
+ALTER TABLE "incident_followers" ADD CONSTRAINT "incident_followers_fk1" FOREIGN KEY ("user_id") REFERENCES "user"("id");
 
 
-ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
-ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_fk1" FOREIGN KEY ("role_id") REFERENCES "roles"("id");
+ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
+ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_fk1" FOREIGN KEY ("role_id") REFERENCES "roles"("id");
 
-ALTER TABLE "users_skills" ADD CONSTRAINT "users_skills_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
-ALTER TABLE "users_skills" ADD CONSTRAINT "users_skills_fk1" FOREIGN KEY ("skill_id") REFERENCES "skills"("id");
+ALTER TABLE "user_skills" ADD CONSTRAINT "user_skills_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
+ALTER TABLE "user_skills" ADD CONSTRAINT "user_skills_fk1" FOREIGN KEY ("skill_id") REFERENCES "skills"("id");
 

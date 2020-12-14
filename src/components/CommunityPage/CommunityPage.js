@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 import './CommunityPage.css';
+import IncidentSearch from '../IncidentSearch/IncidentSearch';
 
 
 // Community Page component
@@ -64,7 +65,12 @@ class CommunityPage extends Component {
         </div>
         {/* right column stuff / login and search */}
         <div className="column">
-          <LoginForm/>
+          <div className="box">
+            <LoginForm/>
+          </div>
+          <div className="box">
+            <IncidentSearch/>
+          </div>
         </div>
       </div>
     );

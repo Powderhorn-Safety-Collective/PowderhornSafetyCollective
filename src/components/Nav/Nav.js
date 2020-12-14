@@ -8,8 +8,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 const Nav = (props) => {
   props.dispatch({type: 'FETCH_PATROL_COUNT'});
   
-
-
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
@@ -21,17 +19,6 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="nav">
-      <div className="titleContainer">
-      <Link to="/home">
-        <h2 className="nav-title">Powderhorn Safety Collective</h2>
-      </Link>
-      <div className="patrolDisplay">
-        <h2>### people are on patrol</h2>
-        <h2>### people are on call</h2>
-      </div>
-      </div>
-
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -53,7 +40,6 @@ const Nav = (props) => {
           About
         </Link>
       </div>
-    </div>
   );
 };
 

@@ -7,6 +7,9 @@ import Nav from '../Nav/Nav';
 
 class Header extends Component {
 
+  componentDidMount = () => {
+    this.props.dispatch({type: 'FETCH_PATROL_COUNT'});
+  }
 
   render() {
     return ( 
@@ -16,7 +19,16 @@ class Header extends Component {
             <h2 className="nav-title">Powderhorn Safety Collective</h2>
           </Link>
           <div className="patrolDisplay">
-            <h2> {this.props.reduxStore.patrolCountReducer} people are on patrol</h2>
+            {this.props.reduxStore.patrolCountReducer == 1 && 
+              <h2> {this.props.reduxStore.patrolCountReducer} person is on patrol</h2>
+            }
+            {this.props.reduxStore.patrolCountReducer == 0 &&
+              <h2>No One is on Patrol</h2>
+            }
+            
+            {this.props.reduxStore.patrolCountReducer > 1 &&
+              <h2> {this.props.reduxStore.patrolCountReducer} people are on patrol</h2>
+            }
             <h2>### people are on call</h2>
           </div>
         </div>

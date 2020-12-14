@@ -6,7 +6,7 @@ import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const Nav = (props) => {
-  props.dispatch({type: 'FETCH_PATROL_COUNT'});
+  
   
   let loginLinkData = {
     path: '/login',

@@ -6,6 +6,8 @@ import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const Nav = (props) => {
+  
+  
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
@@ -17,10 +19,6 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -42,8 +40,9 @@ const Nav = (props) => {
           About
         </Link>
       </div>
-    </div>
   );
 };
+
+
 
 export default connect(mapStoreToProps)(Nav);

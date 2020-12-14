@@ -7,11 +7,13 @@ CREATE TABLE "user" (
 	"email" varchar(255) NOT NULL,
 	"phone" varchar(255) NOT NULL,
 	"adult" BOOLEAN NOT NULL,
-	"patrol" varchar(255),
+	"on_patrol" BOOLEAN NOT NULL,
+	"on_call" BOOLEAN NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
+
 
 
 

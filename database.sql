@@ -1,17 +1,19 @@
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"username" varchar(255) NOT NULL UNIQUE,
+	"handle" varchar(255) NOT NULL UNIQUE,
 	"first_name" varchar(255) NOT NULL,
 	"last_name" varchar(255) NOT NULL,
 	"address" varchar(255),
 	"email" varchar(255) NOT NULL,
 	"phone" varchar(255) NOT NULL,
 	"adult" BOOLEAN NOT NULL,
-	"patrol" varchar(255),
+	"on_patrol" BOOLEAN NOT NULL,
+	"on_call" BOOLEAN NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
+
 
 
 

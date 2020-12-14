@@ -1,6 +1,6 @@
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"handle" varchar(255) NOT NULL UNIQUE,
+	"username" varchar(255) NOT NULL UNIQUE,
 	"first_name" varchar(255) NOT NULL,
 	"last_name" varchar(255) NOT NULL,
 	"address" varchar(255),

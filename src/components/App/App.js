@@ -19,6 +19,10 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import MemberPage from '../MemberPage/MemberPage';
+import AdminPage from '../MemberPage/MemberPage';
+
+
 
 import './App.css';
 
@@ -53,6 +57,20 @@ class App extends Component {
               exact
               path="/user"
               component={UserPage}
+            />
+
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/member"
+              component={MemberPage}
+            />
+
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/admin"
+              component={AdminPage}
             />
 
             <ProtectedRoute

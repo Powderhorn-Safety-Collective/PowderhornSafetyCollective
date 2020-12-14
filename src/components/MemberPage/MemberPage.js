@@ -9,13 +9,13 @@ class MemberPage extends Component {
     return (
       <div>
         <h1>FOR THE NAV BAR</h1>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+        <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
         <p>Your ID is: {this.props.store.user.id}</p>
 
         <h1> FOR THE INCIDENT COMPONENT</h1>
         <h1>WILL INCLUDE # of members out on patrol</h1>
         <h1>WILL INCLUDE # of members out on call</h1>
-        
+
 
         <LogOutButton className="log-in" />
       </div>

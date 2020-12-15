@@ -6,16 +6,30 @@ const {
   } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    // data to populate incident table
-    // retrieving all data from all users
-    const queryText = `SELECT * FROM "incidents";`
-    pool.query(queryText)
-      .then((results) => res.send(results.rows))
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-      });
+  // data to populate incident table
+  // retrieving all data from all users
+  const queryText = `SELECT * FROM "incidents";`
+  pool.query(queryText)
+  .then((results) => res.send(results.rows))
+  .catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
   });
+});
+
+// this one will get only the public incidents to be displayed
+// and sent back to fetchPublicIncidents saga
+router.get('/public', (req, res) => {
+  const queryText = `SELECT * FROM "incidents"
+  where view_publicly = true;`
+  pool.query(queryText)
+  .then((results) => res.send(results.rows))
+  .catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});  
+
 
 // POST route to save new incident data
 router.post('/', (req, res) => {

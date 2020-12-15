@@ -16,6 +16,16 @@ class CommunityPage extends Component {
   state = {
   };
 
+    // GET request is called on page load
+    // to retrieve all incident data
+  componentDidMount = () => {
+    this.getPublicIncidents();
+  }
+
+  // function to fetch all incident data
+  getPublicIncidents = () => {
+    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
+  }
 
   render() {
     return (

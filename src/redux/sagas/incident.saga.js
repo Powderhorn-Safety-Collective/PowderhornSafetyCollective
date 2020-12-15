@@ -1,16 +1,29 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // this function grabs all incidents data from the incident table
 // then passes all data along to incidentReducer
 function* fetchIncidents() {
-    try {
-      const response = yield axios.get('/api/incident');
-      console.log(response.data);
-      yield put ( {type:'SET_INCIDENTS', payload: response.data} );
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const response = yield axios.get('/api/incident');
+    console.log(response.data);
+    yield put ( {type:'SET_INCIDENTS', payload: response.data} );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// this function grabs all incidents data from the incident table
+// if view_publicly is set to true then passes all data along to publicIncidentReducer
+function* fetchPublicIncidents() {
+  try {
+    const response = yield axios.get('/api/incident/public');
+    console.log('public response data', response.data);
+    yield put ( {type:'SET_PUBLIC_INCIDENTS', payload: response.data} );
+  } 
+  catch (error) {
+    console.log(error);
+  }
 }
 
 // function to post client's incident data to database
@@ -102,6 +115,7 @@ function* sortClient() {
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
+    yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
 
     // below are all the yields to sort incident table by column
     yield takeLatest("SORT_TYPE", sortType);

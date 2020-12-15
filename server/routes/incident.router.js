@@ -142,4 +142,3 @@ router.get('/client_id', rejectUnauthenticated, (req, res) => {
 // end of table sorting routes
 
 module.exports = router;
-  const queryText = `SELECT * FROM "incidents";`

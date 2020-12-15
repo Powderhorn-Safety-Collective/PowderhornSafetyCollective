@@ -13,8 +13,20 @@ function* fetchIncidents() {
     }
 }
 
+// function to post client's incident data to database
+function* postIncident(action) {
+  console.log(action.payload);
+  try {
+    yield axios.post('/api/incident', action.payload);
+    yield put( {type: 'GET_INCIDENTS'} );
+  } catch (error) {
+    console.log(error);
+  }
+ }
+
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
+    yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
 }
 
 export default incidentSaga;

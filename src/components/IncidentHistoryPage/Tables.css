@@ -1,0 +1,36 @@
+/* CSS for table styling */
+
+table {
+  table-layout: fixed;
+}
+
+table, th, td {
+  width: 80%;
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  margin: auto;
+  overflow: auto;
+}
+
+table th {
+background-color: #d2d2d2;
+font-weight: normal;
+}
+
+table tr:nth-child(even) {
+background-color: #efefef;;
+}
+
+table tr:nth-child(odd) {
+background-color: #ffffff;
+}
+
+.foot {
+  background-color: #d2d2d2;
+}
+
+.trash:hover {
+  background-color: rgb(255, 23, 23);
+}

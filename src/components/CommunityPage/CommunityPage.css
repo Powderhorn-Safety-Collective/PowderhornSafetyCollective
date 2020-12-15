@@ -12,3 +12,8 @@
     margin: 5px;
     padding: 5px;
 }
+
+.scrollable {
+    height: 600px;
+    overflow-y: auto;
+}

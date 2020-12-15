@@ -7,6 +7,7 @@ import './CommunityPage.css';
 import IncidentSearch from '../IncidentSearch/IncidentSearch';
 
 
+
 // Community Page component
 // visible to everyone
 class CommunityPage extends Component {
@@ -56,11 +57,12 @@ class CommunityPage extends Component {
               About Us
             </h2>
           </div>
-          <div className="box" >
+          <div className="box scrollable" >
             <h2>
               Incidents
               {/* incident card components will go here */}
             </h2>
+          
           </div>
         </div>
         {/* right column stuff / login and search */}

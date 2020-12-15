@@ -30,40 +30,23 @@ class IncidentSearch extends Component {
         <h4>Search for an incident by Incident ID</h4>
         <div>
           <label htmlFor="username">
-            Incident ID
+            Incident ID:
           </label>
-            <input
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
+          <input
+            type="text"
+            name="searchNumber"
+            required
+            value={this.state.searchNumber}
+            onChange={this.handleInputChangeFor()}
+          />
         </div>
         <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
+          <button className="btn" 
+            onClick={this.search} 
+          > 
+            Search
+          </button>
         </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
-        </div>
-        <h4>New to PSC?</h4>
-        {/* button to get registration modal */}
-        <button
-            type="button"
-            className="btn"
-            onClick={() => {this.register()}}
-          >
-            Register Here
-        </button>
       </form>
     );
   }

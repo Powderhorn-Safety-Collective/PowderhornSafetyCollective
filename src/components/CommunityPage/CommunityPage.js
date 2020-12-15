@@ -5,18 +5,17 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 import './CommunityPage.css';
 import IncidentSearch from '../IncidentSearch/IncidentSearch';
-
+import IncidentModule from '../IncidentModule/IncidentModule';
 
 
 // Community Page component
 // visible to everyone
+// contains organization info and links, a list of incidents, and
+// a section for login and search for an incident
 class CommunityPage extends Component {
   state = {
   };
 
-  onLogin = (event) => {
-    this.props.history.push('/login');
-  };
 
   render() {
     return (
@@ -60,9 +59,18 @@ class CommunityPage extends Component {
           <div className="box scrollable" >
             <h2>
               Incidents
-              {/* incident card components will go here */}
             </h2>
-          
+              {/* incident card components will go here */}
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
+              <IncidentModule/>
           </div>
         </div>
         {/* right column stuff / login and search */}

@@ -25,6 +25,7 @@ import AdminPage from '../AdminPage/AdminPage';
 
 import Header from '../Header/Header.js';
 import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component to display incident table data
+import EditUser from '../EditUser/EditUser'; // Component to display all user data in a table
 
 import './App.css';
 
@@ -119,6 +120,13 @@ class App extends Component {
               exact 
               path="/history" 
               component={History} 
+            />
+
+            {/* route leading to incident history page */}
+            <ProtectedRoute
+              exact 
+              path="/edit" 
+              component={EditUser} 
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

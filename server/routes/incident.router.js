@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// below are all the query functions to sort the incident table by row
+// below are all the query functions to sort the incident table by column
 router.get('/type', rejectUnauthenticated, (req, res) => {
   // sort by type
   const queryText = `SELECT * FROM "incidents" ORDER BY "type";`

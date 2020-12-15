@@ -24,7 +24,7 @@ function* postIncident(action) {
   }
  }
 
-// below are the functions used to sort the incident table by row
+// below are the functions used to sort the incident table by column
 function* sortType() {
   try {
       const response = yield axios.get('/api/incident/type');
@@ -103,7 +103,7 @@ function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
 
-    // below are all the yields to sort incident table by row
+    // below are all the yields to sort incident table by column
     yield takeLatest("SORT_TYPE", sortType);
     yield takeLatest("SORT_NOTES", sortNotes);
     yield takeLatest("SORT_LOCATION", sortLocation);

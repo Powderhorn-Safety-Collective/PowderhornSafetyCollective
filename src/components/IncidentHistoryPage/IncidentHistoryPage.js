@@ -18,7 +18,7 @@ class TemplateClass extends Component {
         this.props.dispatch( {type: 'GET_INCIDENTS'});
     }
 
-    // below are functions used to sort incident table by row
+    // below are functions used to sort incident table by column
     sortByType = () => {
         this.props.dispatch( {type:'SORT_TYPE'} );
       }

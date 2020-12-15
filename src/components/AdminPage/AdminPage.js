@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import PatrolItem from '../PatrolItem/PatrolItem.js';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class AdminPage extends Component {
@@ -14,11 +14,14 @@ class AdminPage extends Component {
         <button>Community Page</button>
 
         <h1 id="welcome">Welcome ADMIN, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
-
         <h1> FOR THE INCIDENT COMPONENT
         </h1>
         <h2>Members on patrol: </h2>
+        <ul>  
+          {this.props.store.patrolReducer.map((patroller) => {
+            return <PatrolItem patroller={patroller}/>
+          })}
+        </ul>
         <h2>Members on call: </h2>
         
 

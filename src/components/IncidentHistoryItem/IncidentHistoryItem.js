@@ -20,7 +20,7 @@ class TemplateClass extends Component {
             <td>{this.props.incident.client_id}</td>
 
             {/* trash can row to delete incident? */}
-            <td className="trash" onClick={this.delete}><span role="img" aria-labelledby="trash bin">🗑️ </span></td>
+            <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️ </span></td>
         </tr>
     );
   }

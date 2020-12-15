@@ -13,6 +13,17 @@ function* fetchIncidents() {
     }
 }
 
+// function to fetch the count of all active incidents
+function* fetchActive() {
+  try {
+    const response = yield axios.get('/api/incident/active');
+    console.log(response.data);
+    yield put ( {type:'SET_ACTIVE_INCIDENTS', payload: response.data[0].status} );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // function to post client's incident data to database
 function* postIncident(action) {
   console.log(action.payload);
@@ -103,12 +114,14 @@ function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
 
+    yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
+
     // below are all the yields to sort incident table by column
     yield takeLatest("SORT_TYPE", sortType);
     yield takeLatest("SORT_NOTES", sortNotes);
     yield takeLatest("SORT_LOCATION", sortLocation);
     yield takeLatest("SORT_TIME", sortTime);
-    yield takeLatest("SORT_LOCATION", sortStatus);
+    yield takeLatest("SORT_STATUS", sortStatus);
     yield takeLatest("SORT_PUBLIC", sortPublic);
     yield takeLatest("SORT_RESPONDER", sortResponder);
     yield takeLatest("SORT_DUPLICATE", sortDuplicate);

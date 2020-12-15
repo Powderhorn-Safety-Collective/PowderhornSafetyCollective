@@ -17,6 +17,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       });
   });
 
+  // route to get count of all active incidents
+  router.get('/active', rejectUnauthenticated, (req, res) => {
+    // query to count the number of active incidents
+    const queryText = `SELECT count("status") AS "status" FROM "incidents" WHERE "status" = 'Active';`
+    pool.query(queryText)
+      .then((results) => res.send(results.rows))
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+      });
+  });
+
 // POST route to save new incident data
 router.post('/', (req, res) => {
   // POST route code here

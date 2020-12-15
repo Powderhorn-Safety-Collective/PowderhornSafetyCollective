@@ -15,9 +15,38 @@ class TemplateClass extends Component {
 
     // function to fetch all incident data
     getIncidents = () => {
-        console.log('getting incidents');
         this.props.dispatch( {type: 'GET_INCIDENTS'});
     }
+
+    // below are functions used to sort incident table by row
+    sortByType = () => {
+        this.props.dispatch( {type:'SORT_TYPE'} );
+      }
+      sortByNotes = () => {
+        this.props.dispatch( {type:'SORT_TYPE'} );
+      }
+      sortByLocation = () => {
+        this.props.dispatch( {type:'SORT_LOCATION'} );
+      }
+      sortByTime = () => {
+        this.props.dispatch( {type:'SORT_TIME'} );
+      }
+      sortByStatus = () => {
+        this.props.dispatch( {type:'SORT_STATUS'} );
+      }
+      sortByPublic = () => {
+        this.props.dispatch( {type:'SORT_PUBLIC'} );
+      }
+      sortByResponder = () => {
+        this.props.dispatch( {type:'SORT_RESPONDER'} );
+      }
+      sortByDuplicate = () => {
+        this.props.dispatch( {type:'SORT_DUPLICATE'} );
+      }
+      sortByClient = () => {
+        this.props.dispatch( {type:'SORT_CLIENT'} );
+      }
+      // end of sorting functions
 
     // this component is intended to display the history of all incidents reported by all users
   render() {
@@ -27,16 +56,16 @@ class TemplateClass extends Component {
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Type</th>
-                        <th>Notes</th>
-                        <th>Location</th>
-                        <th>Time Submitted</th>
-                        <th>Status</th>
-                        <th>Public</th>
-                        <th>Responder Notes</th>
-                        <th>Duplicate</th>
-                        <th>User Who Reported Incident</th>
+                        <th onClick={this.getIncidents}>Id</th>
+                        <th onClick={this.sortByType}>Type</th>
+                        <th onClick={this.sortByNotes}>Notes</th>
+                        <th onClick={this.sortByLocation}>Location</th>
+                        <th onClick={this.sortByTime}>Time Submitted</th>
+                        <th onClick={this.sortByStatus}>Status</th>
+                        <th onClick={this.sortByPublic}>Public</th>
+                        <th onClick={this.sortByResponder}>Responder Notes</th>
+                        <th onClick={this.sortByDuplicate}>Duplicate</th>
+                        <th onClick={this.sortByClient}>User Who Reported Incident</th>
                         <th>Delete</th>
                     </tr>
                 </thead>

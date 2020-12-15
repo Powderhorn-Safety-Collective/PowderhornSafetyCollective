@@ -4,6 +4,7 @@ import user from './user.reducer';
 import patrolCountReducer from './patrol.count.reducer';
 import incidentReducer from './incident.reducer'; // reducer to hold onto all incident data from all users
 import activeIncidentReducer from './active.incident.reducer'; // reducer to hold the count of all active incidents
+import allUsersReducer from './all.users.reducer'; // reducer storing all user data, not just the user logged in
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   patrolCountReducer,
   incidentReducer, // reducer storing history of all incidents
   activeIncidentReducer, // reducer storing count of all active incidents
+  allUsersReducer, // reducer storing all users
 });
 
 export default rootReducer;

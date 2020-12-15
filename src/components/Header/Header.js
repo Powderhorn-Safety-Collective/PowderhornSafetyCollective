@@ -25,13 +25,13 @@ class Header extends Component {
           </div>
 
           <div className="patrolDisplay">
-            {this.props.reduxStore.patrolCountReducer === 1 && 
+            {Number(this.props.reduxStore.patrolCountReducer) === 1 && 
               <h2> {this.props.reduxStore.patrolCountReducer} person is on patrol</h2>
             }
-            {this.props.reduxStore.patrolCountReducer === 0 &&
+            {Number(this.props.reduxStore.patrolCountReducer) === 0 &&
               <h2>No One is on Patrol</h2>
             }
-            {this.props.reduxStore.patrolCountReducer > 1 &&
+            {Number(this.props.reduxStore.patrolCountReducer) > 1 &&
               <h2> {this.props.reduxStore.patrolCountReducer} people are on patrol</h2>
             }
             <h2>### people are on call</h2>

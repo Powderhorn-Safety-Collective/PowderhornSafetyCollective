@@ -121,7 +121,7 @@ function* incidentSaga() {
     yield takeLatest("SORT_NOTES", sortNotes);
     yield takeLatest("SORT_LOCATION", sortLocation);
     yield takeLatest("SORT_TIME", sortTime);
-    yield takeLatest("SORT_LOCATION", sortStatus);
+    yield takeLatest("SORT_STATUS", sortStatus);
     yield takeLatest("SORT_PUBLIC", sortPublic);
     yield takeLatest("SORT_RESPONDER", sortResponder);
     yield takeLatest("SORT_DUPLICATE", sortDuplicate);

@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const patrolRouter = require('./routes/patrol.router');
+const onCallRouter = require('./routes/on.call.router');
 const incidentRouter = require('./routes/incident.router'); // route to handle incident data table
 
 // Body parser middleware
@@ -27,6 +28,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/patrol', patrolRouter);
+app.use('/api/oncall', onCallRouter)
 app.use('/api/incident', incidentRouter); // route to handle incident data table
 
 // Serve static files

@@ -23,7 +23,7 @@ class TemplateClass extends Component {
         this.props.dispatch( {type:'SORT_TYPE'} );
       }
       sortByNotes = () => {
-        this.props.dispatch( {type:'SORT_TYPE'} );
+        this.props.dispatch( {type:'SORT_NOTES'} );
       }
       sortByLocation = () => {
         this.props.dispatch( {type:'SORT_LOCATION'} );

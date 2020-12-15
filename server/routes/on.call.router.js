@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   pool.query(queryText).then((result) => {
     res.send(result.rows)
   }).catch((error) => {
-    console.log('Error in get patrolCount', error);
+    console.log('Error in get patrol', error);
     res.sendStatus(500);
   })
 })

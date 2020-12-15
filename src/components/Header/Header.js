@@ -9,7 +9,7 @@ class Header extends Component {
 
 
   componentDidMount = () => {
-    this.props.dispatch({type: 'FETCH_PATROL_COUNT'});
+    this.props.dispatch({type: 'FETCH_PATROL'});
     this.props.dispatch({type: 'FETCH_ONCALL'});
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
     // this.onCallCount();
@@ -28,14 +28,14 @@ class Header extends Component {
           </div>
 
           <div className="patrolDisplay">
-            {Number(this.props.reduxStore.patrolCountReducer) === 1 && 
-              <h2> {this.props.reduxStore.patrolCountReducer} person is on patrol</h2>
+            {Number(this.props.reduxStore.patrolReducer.length) === 1 && 
+              <h2> {this.props.reduxStore.patrolReducer.length} person is on patrol</h2>
             }
-            {Number(this.props.reduxStore.patrolCountReducer) === 0 &&
+            {Number(this.props.reduxStore.patrolReducer.length) === 0 &&
               <h2>No One is on Patrol</h2>
               }
-            {Number(this.props.reduxStore.patrolCountReducer) > 1 &&
-              <h2> {this.props.reduxStore.patrolCountReducer} people are on patrol</h2>
+            {Number(this.props.reduxStore.patrolReducer.length) > 1 &&
+              <h2> {this.props.reduxStore.patrolReducer.length} people are on patrol</h2>
             }
             {Number(this.props.reduxStore.onCallReducer.length) === 1 && <h2>{this.props.reduxStore.onCallReducer.length} person is on call</h2>
             }

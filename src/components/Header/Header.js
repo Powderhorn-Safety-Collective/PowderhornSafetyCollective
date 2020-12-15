@@ -9,11 +9,12 @@ class Header extends Component {
 
 
   componentDidMount = () => {
+    //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
     this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
-
   }
+
 
 
   render() {

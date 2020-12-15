@@ -53,4 +53,108 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.get('/all', rejectUnauthenticated, (req, res) => {
+  // data to populate user table
+  // retrieving all data from all users
+  const queryText = `SELECT * FROM "user";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
+// below are all the query functions to sort the incident table by column
+router.get('/username', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "username";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/first', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "first_name";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/last', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "last_name";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/address', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "address";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/email', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "email";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/phone', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "phone";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/adult', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "adult";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/patrol', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "on_patrol";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/oncall', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "on_call";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

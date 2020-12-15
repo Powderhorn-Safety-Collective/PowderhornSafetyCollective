@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import patrolSaga from './patrol.saga';
+import incidentSage from './incident.saga'; // saga used for data relating to incident table
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     patrolSaga(),
+    incidentSage(), // saga for all things relating to incidents
   ]);
 }

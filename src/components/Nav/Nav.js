@@ -28,8 +28,10 @@ const Nav = (props) => {
         </Link>
        
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
-          Community Page Placeholder
+        {/* Changed the route to be the future community page route */}
+
+        <Link className="nav-link" to="/community">
+          Community Page
         </Link>
 
          {/* Show the link to the info page and the logout button if the user is logged in */}

@@ -17,13 +17,12 @@ class AdminPage extends Component {
         <p>Your ID is: {this.props.store.user.id}</p>
 
         <h1> FOR THE INCIDENT COMPONENT
-            WILL ALSO NEED BUTTONS N SUCH
         </h1>
-        <h1>Members on patrol: </h1>
-        <h1>Members on call: </h1>
+        <h2>Members on patrol: </h2>
+        <h2>Members on call: </h2>
         
 
-        <LogOutButton className="log-in" />
+        {/* <LogOutButton className="log-in" /> */}
       </div>
     );
   }

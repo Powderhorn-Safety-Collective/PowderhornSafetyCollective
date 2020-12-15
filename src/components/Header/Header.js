@@ -16,9 +16,14 @@ class Header extends Component {
     return ( 
       <div className="header">
         <div className="titleContainer">
+
           <Link to="/home">
             <h2 className="nav-title">Powderhorn Safety Collective</h2>
           </Link>
+          <div className="headerBtns">
+            <button> Report an Incident</button>
+          </div>
+
           <div className="patrolDisplay">
             {this.props.reduxStore.patrolCountReducer === 1 && 
               <h2> {this.props.reduxStore.patrolCountReducer} person is on patrol</h2>

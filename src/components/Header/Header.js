@@ -9,10 +9,10 @@ class Header extends Component {
 
 
   componentDidMount = () => {
-    this.props.dispatch({type: 'FETCH_PATROL'});
-    this.props.dispatch({type: 'FETCH_ONCALL'});
+    this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
+    this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
-    // this.onCallCount();
+
   }
 
 
@@ -26,7 +26,6 @@ class Header extends Component {
           <div className="headerBtns">
             <button> Report an Incident</button>
           </div>
-
           <div className="patrolDisplay">
             {Number(this.props.reduxStore.patrolReducer.length) === 1 && 
               <h2> {this.props.reduxStore.patrolReducer.length} person is on patrol</h2>

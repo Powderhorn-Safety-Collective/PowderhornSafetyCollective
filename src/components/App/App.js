@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Header from '../Header/Header.js';
+import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component to display incident table data
 
 import './App.css';
 
@@ -93,6 +94,13 @@ class App extends Component {
               path="/home"
               component={LandingPage}
               authRedirect="/user"
+            />
+
+            {/* route leading to incident history page */}
+            <ProtectedRoute
+              exact 
+              path="/history" 
+              component={History} 
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

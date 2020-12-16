@@ -1,19 +1,19 @@
 .column {
-    flex: 30%;
-    border: 1px solid blue;
+  flex: 30%;
+  border: 1px solid blue;
 }
 
 .row {
-    display: flex;
+  display: flex;
 }
 
 .box {
-    border: 3px solid black;
-    margin: 5px;
-    padding: 5px;
+  border: 3px solid black;
+  margin: 5px;
+  padding: 5px;
 }
 
 .scrollable {
-    height: 600px;
-    overflow-y: auto;
+  height: 600px;
+  overflow-y: auto;
 }

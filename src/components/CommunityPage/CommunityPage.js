@@ -71,16 +71,11 @@ class CommunityPage extends Component {
               Incidents
             </h2>
               {/* incident card components will go here */}
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
-              <IncidentModule/>
+              {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
+                return(
+                  <IncidentModule incident={publicIncident} key={index}/>
+                );
+              })}
           </div>
         </div>
         {/* right column stuff / login and search */}

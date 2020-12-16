@@ -11,6 +11,10 @@ class EditUser extends Component {
         this.getUsers();
       }
 
+      componentDidUpdate = () => {
+        this.props.dispatch( {type: 'EDIT_USER', payload: this.props.store.allUsersReducer} );
+      }
+
     // function to fetch all incident data
     getUsers = () => {
         this.props.dispatch( {type: 'GET_ALL_USERS'});
@@ -46,6 +50,12 @@ class EditUser extends Component {
       }
       // end of sorting functions
 
+      editUser = (id) => {
+        console.log('editing user', id);
+        // this.props.dispatch( {type: 'EDIT_USER', payload: id} );
+        this.props.history.push('/user-modal');
+      }
+
   render() {
     return (
       <div>
@@ -63,6 +73,7 @@ class EditUser extends Component {
                         <th onClick={this.sortByAdult}>Adult</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
+                        <th onClick={() => this.editUser(this.props.user)}>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -76,10 +87,28 @@ class EditUser extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="11"></td>
+                        <td colSpan="12"></td>
                     </tr>
                 </tfoot>
             </table>
+
+                    {this.props.store.editUserReducer ? 
+                    <div>
+                    <input value={this.props.store.editUserReducer.username} type="text"></input>
+                    <input value={this.props.store.editUserReducer.first_name} type="text"></input>
+                    <input value={this.props.store.editUserReducer.last_name} type="text"></input>
+                    <input value={this.props.store.editUserReducer.address} type="text"></input>
+                    <input value={this.props.store.editUserReducer.email} type="text"></input>
+                    <input value={this.props.store.editUserReducer.adult} type="text"></input>
+                    <input value={this.props.store.editUserReducer.on_patrol} type="text"></input>
+                    <input value={this.props.store.editUserReducer.on_call} type="text"></input>
+                    <input value='role' type="text"></input>
+                    </div>
+                  :
+                  <></>
+                  }
+            
+           
       </div>
     );
   }

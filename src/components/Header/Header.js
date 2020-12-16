@@ -39,6 +39,8 @@ class Header extends Component {
       type: 'ADD_STATUS',
       payload: param
     })
+    this.props.dispatch({type: 'FETCH_PATROL'});
+    this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
 

@@ -13,9 +13,35 @@ const Nav = (props) => {
     text: 'Login / Register',
   };
 
-  if (props.store.user.id != null) {
+  if (props.store.user.role === 1) {
     loginLinkData.path = '/user';
     loginLinkData.text = 'My Dashboard';
+  } else if (props.store.user.role === 2) {
+    loginLinkData.path = '/member';
+    loginLinkData.text = 'My Dashboard';
+  } else if (props.store.user.role === 3) {
+    loginLinkData.path = '/admin';
+    loginLinkData.text = 'Dashboard';
+    return (     
+      <>
+    <div className="nav-right">
+    <Link className="nav-link" to={loginLinkData.path}>
+          {loginLinkData.text}
+        </Link>
+    <Link className="nav-link" to="/community"> Community Page</Link>
+    <Link className="nav-link" to="/history">Incident History</Link>
+    <Link className="nav-link" to="/edit">Edit User</Link>
+    {props.store.user.id && (
+          <>
+            {/* <Link className="nav-link" to="/info">
+              Info Page
+            </Link> */}
+            <LogOutButton className="nav-link" />
+          </>
+        )}
+    </div>
+    </>
+    )
   }
 
   return (
@@ -34,9 +60,9 @@ const Nav = (props) => {
           Community Page
         </Link>
 
-        <Link className="nav-link" to="/history">Incident History</Link>
+        {/* <Link className="nav-link" to="/history">Incident History</Link> */}
 
-        <Link className="nav-link" to="/edit">Edit User</Link>
+        {/* <Link className="nav-link" to="/edit">Edit User</Link> */}
 
          {/* Show the link to the info page and the logout button if the user is logged in */}
          {props.store.user.id && (

@@ -18,8 +18,14 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
   }
-  handleToggleFor = () => {
-    console.log('toggled'); 
+  handleToggleFor = (event) => {
+    console.log('toggled', event.target.name);
+    if(event.target.name === 'onPatrolToggle') {
+      console.log('On Patrol');  
+    } else if(event.target.name === 'onCallToggle') {
+      console.log('On Call');
+      
+    }
   }
 
 

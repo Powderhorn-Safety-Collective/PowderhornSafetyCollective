@@ -9,8 +9,6 @@ class IncidentModule extends Component {
 
   // function to render active or inactive on incident card
   renderStatus = (publicDisplayActive, active) => {
-    console.log('publicDisplayActive', publicDisplayActive);
-    console.log('active', active);
     if (publicDisplayActive === true && active === true) {
       return <p className="active">Active</p>
     }

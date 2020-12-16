@@ -1,9 +1,11 @@
+/* border and spacing for incident modules */
 .module {
   border: 2px solid black;  
   padding: 5px;
   margin: 5px;
 }
 
+/* move status text to right side */
 .active {
   float: right;
 }

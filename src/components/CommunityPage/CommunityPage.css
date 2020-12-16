@@ -1,18 +1,22 @@
+/* size for l, c, r columns */
 .column {
   flex: 30%;
   border: 1px solid blue;
 }
 
+/* container for columns */
 .row {
   display: flex;
 }
 
+/* border and spacing for sections on page */
 .box {
   border: 3px solid black;
   margin: 5px;
   padding: 5px;
 }
 
+/* make the center box scrollable */
 .scrollable {
   height: 600px;
   overflow-y: auto;

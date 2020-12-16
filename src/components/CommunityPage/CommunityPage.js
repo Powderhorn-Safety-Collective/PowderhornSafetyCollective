@@ -11,18 +11,18 @@ import IncidentModule from '../IncidentModule/IncidentModule';
 // Community Page component
 // visible to everyone
 // contains organization info and links, a list of incidents, and
-// a section for login and search for an incident
+// a section for login and a ection to search for an incident
 class CommunityPage extends Component {
   state = {
   };
 
-    // GET request is called on page load
-    // to retrieve all incident data
+  // GET request is called on page load
+  // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {
     this.getPublicIncidents();
   }
 
-  // function to fetch all incident data
+  // function to fetch all incident data for public view
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
   }
@@ -58,7 +58,7 @@ class CommunityPage extends Component {
               Subscribe to our mailing list
             </h2>
           </div>
-        </div>
+        </div> {/* end left stuff */}
         {/* middle stuff / incident cards */}
         <div className="column">
           <div className="box">
@@ -70,24 +70,26 @@ class CommunityPage extends Component {
             <h2>
               Incidents
             </h2>
-              {/* incident card components will go here */}
+              {/* incident cards are mapped onto cards for display here */}
               {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
                 return(
                   <IncidentModule incident={publicIncident} key={index}/>
                 );
               })}
           </div>
-        </div>
+        </div>{/* end middle stuff */}
         {/* right column stuff / login and search */}
         <div className="column">
           <div className="box">
+            {/* section to login */}
             <LoginForm/>
           </div>
           <div className="box">
+            {/* section to search for an incident */}
             <IncidentSearch/>
           </div>
-        </div>
-      </div>
+        </div> {/* end right stuff */}
+      </div> // end page
     );
   }
 }

@@ -8,46 +8,32 @@ import './IncidentModule.css'
 class IncidentModule extends Component {
 
   // function to render active or inactive on incident card
-  renderStatus = (publicDisplayStatus, status) => {
-    console.log('publicDisplayStatus', publicDisplayStatus);
-    console.log('status', status);
-    if (publicDisplayStatus === true && status === "active") {
-      return <p className="active">Active: Y</p>
+  renderStatus = (publicDisplayActive, active) => {
+    console.log('publicDisplayActive', publicDisplayActive);
+    console.log('active', active);
+    if (publicDisplayActive === true && active === true) {
+      return <p className="active">Active</p>
     }
-    else if (publicDisplayStatus === true && status === "inactive") {
-      return <p className="active">Active: N</p>
+    else if (publicDisplayActive === true && active === false) {
+      return <p className="active">Inactive</p>
     }
   }
 
   // function to render time associated with incident
   renderTime = (publicDisplayTime, time) => {
     let timeHour = Number(time.slice(11,13));
-    console.log('timeHour', timeHour);
     let timeMorningEvening = 'a.m.';
     if (timeHour > 12) {
       timeHour -= 12;
-      timeMorningEvening = 'p.m.'
+      timeMorningEvening = 'p.m.';
     }
     else if (timeHour == 0) {
       timeHour = 12;
     }
-    console.log('timeHour', timeHour);
-    console.log('timeMorningEvening', timeMorningEvening);
-    
-    
     let timeMinute = time.slice(14, 16);
-    console.log('timeMinute', timeMinute);
-    
-    console.log('publicDisplayTime', publicDisplayTime);
-    console.log('time', time);
-
     let month = Number(time.slice(5,7));
-    console.log('month', month);
-
     let day = Number(time.slice(8,10));
-    console.log('number', day);
     let year = Number(time.slice(0,4));
-    
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     if (publicDisplayTime === true) {
       return <p>{displayTime}</p>
@@ -60,7 +46,7 @@ class IncidentModule extends Component {
         <h3>{this.props.incident.text_for_public_display}</h3>
         <h3>Incident Number: {this.props.incident.client_id}</h3>
         {/* these other functions get called to display the active/inactive status and time*/}
-        {this.renderStatus(this.props.incident.status_public, this.props.incident.status)}
+        {this.renderStatus(this.props.incident.active_public, this.props.incident.active)}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
         {/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&

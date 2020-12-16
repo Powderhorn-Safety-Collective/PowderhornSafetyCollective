@@ -28,6 +28,16 @@ CREATE TABLE "incidents" (
 	"responder_notes" varchar(1000),
 	"duplicate_entry" BOOLEAN,
 	"client_id" varchar(255) NOT NULL,
+    "username" varchar(255),
+    "view_publicly" boolean,
+    "username_public" boolean,
+    "timedate_public" boolean,
+    "location_public" boolean,
+    "type_public" boolean,
+    "user_notes_public" boolean,
+    "active_public" boolean,
+    "text_for_public_display" varchar(2000),
+    "active" boolean,
 	CONSTRAINT "incidents_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

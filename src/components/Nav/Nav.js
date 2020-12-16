@@ -15,7 +15,7 @@ const Nav = (props) => {
 
   if (props.store.user.id != null) {
     loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+    loginLinkData.text = 'My Dashboard';
   }
 
   return (
@@ -26,19 +26,23 @@ const Nav = (props) => {
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
         </Link>
-        {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id && (
+       
+        {/* Always show this link since the about page is not protected */}
+        {/* Changed the route to be the future community page route */}
+
+        <Link className="nav-link" to="/community">
+          Community Page
+        </Link>
+
+         {/* Show the link to the info page and the logout button if the user is logged in */}
+         {props.store.user.id && (
           <>
-            <Link className="nav-link" to="/info">
+            {/* <Link className="nav-link" to="/info">
               Info Page
-            </Link>
+            </Link> */}
             <LogOutButton className="nav-link" />
           </>
         )}
-        {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
-          About
-        </Link>
       </div>
   );
 };

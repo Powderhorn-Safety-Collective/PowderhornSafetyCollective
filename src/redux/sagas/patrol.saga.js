@@ -1,19 +1,19 @@
 import axios from 'axios';
 import {put, takeEvery } from 'redux-saga/effects';
 
-function* fetchPatrolCount() {
+function* fetchPatrol() {
   try{
-    const patrolCount = yield axios.get('/api/patrol');
-    yield console.log('THE COUNT IS', patrolCount.data[0].on_patrol)
-    yield put({type: 'SET_PATROL_COUNT', payload: patrolCount.data[0].on_patrol});
+    const patrol = yield axios.get('/api/patrol');
+    yield console.log('THE COUNT IS', patrol.data)
+    yield put({type: 'SET_PATROL', payload: patrol.data});
   }catch(error){
-    console.log('error in fetch patrol count', error); 
+    console.log('error in fetch patrol', error); 
   }
 }
 
 
 function* patrolSaga() {
-  yield takeEvery('FETCH_PATROL_COUNT', fetchPatrolCount);
+  yield takeEvery('FETCH_PATROL', fetchPatrol);
 }
 
 

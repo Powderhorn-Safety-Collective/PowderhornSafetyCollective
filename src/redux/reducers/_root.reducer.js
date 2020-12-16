@@ -4,6 +4,7 @@ import user from './user.reducer';
 import patrolReducer from './patrol.reducer';//reducer to hold onpatrol count
 import onCallReducer from './on.call.reducer';//reducer to hold onpatrol count
 import incidentReducer from './incident.reducer'; // reducer to hold onto all incident data from all users
+import publicIncidentReducer from './public.incident.reducer';
 import activeIncidentReducer from './active.incident.reducer'; // reducer to hold the count of all active incidents
 import allUsersReducer from './all.users.reducer'; // reducer storing all user data, not just the user logged in
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   patrolReducer,//count of on-patrol volunteers
   onCallReducer,//count of on-call volunteers
   incidentReducer, // reducer storing history of all incidents
+  publicIncidentReducer, // reducer storing all publicly viewed incidents
   activeIncidentReducer, // reducer storing count of all active incidents
   allUsersReducer, // reducer storing all users
 });

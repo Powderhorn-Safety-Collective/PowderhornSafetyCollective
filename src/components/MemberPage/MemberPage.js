@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import PatrolItem from '../PatrolItem/PatrolItem.js';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class MemberPage extends Component {
@@ -13,15 +14,29 @@ class MemberPage extends Component {
         <p>Your ID is: {this.props.store.user.id}</p>
 
         <h1> FOR THE INCIDENT COMPONENT</h1>
-        <h1>WILL INCLUDE # of members out on patrol</h1>
-        <h1>WILL INCLUDE # of members out on call</h1>
-
+        <div class="onPatrolDisplay">
+          <h1>ON PATROL</h1>
+            <ul>  
+            {this.props.store.patrolReducer.map((patroller) => {
+              return <PatrolItem patroller={patroller}/>
+            })}
+            </ul>
+        </div>
+        <div class="onCallDisplay">
+          <h1>ON Call</h1>
+            <ul>  
+              {this.props.store.onCallReducer.map((onCall) => {
+                return <li>{onCall.username}</li>
+              })}
+            </ul>
+        </div>
 
         <LogOutButton className="log-in" />
       </div>
     );
   }
 }
+
 
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(MemberPage);

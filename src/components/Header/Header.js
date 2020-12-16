@@ -8,6 +8,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
   state = {
+    // TODO set this value from the DB
     patrolValue: false,
     onCallValue: false,
   }
@@ -18,20 +19,27 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
   }
-  handleToggleFor = (event) => {
+
+  handleToggle = (event) => {
     if(event.target.name === 'onPatrolToggle') {
       this.setState({
         patrolValue: !this.state.patrolValue
-      })   
+      }) 
+      this.sendStatus(!this.state.patrolValue)  
     }else if(event.target.name === 'onCallToggle') {
-        this.setState({
-          onCallValue: !this.state.onCallValue
-        })
-    }
-    console.log(this.state);
-    
+      this.setState({
+        onCallValue: !this.state.onCallValue
+      })
+      this.sendStatus(!this.state.onCallValue)
+    } 
   }
 
+  sendStatus = (param) => {
+    this.props.dispatch({
+      type: 'ADD_STATUS',
+      payload: param
+    })
+  }
 
 
   render() {
@@ -44,11 +52,11 @@ class Header extends Component {
           <div className="toggleForm">
             <p>On Patrol</p>
             <ToggleSwitch toggleName="onPatrolToggle"
-            handleToggle={this.handleToggleFor}
+            handleToggle={this.handleToggle}
             />
             <p>On Call</p>
             <ToggleSwitch toggleName="onCallToggle"
-            handleToggle={this.handleToggleFor}/>
+            handleToggle={this.handleToggle}/>
           </div>
           <div className="headerBtns">
             <button> Report an Incident</button>

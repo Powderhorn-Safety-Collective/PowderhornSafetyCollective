@@ -8,8 +8,17 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // member page will be what PSC members see when they log in
 class MemberPage extends Component {
 
+  componentDidMount = () => {
+    this.getIncidents();
+  }
+
+  // function to fetch all incident data
+  getIncidents = () => {
+    this.props.dispatch( {type: 'GET_INCIDENTS'});
+  }
+
   render() {
-    return (
+    return ( 
       <div>
         <h1>FOR THE NAV BAR</h1>
         <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
@@ -40,5 +49,4 @@ class MemberPage extends Component {
 }
 
 
-// this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(MemberPage);

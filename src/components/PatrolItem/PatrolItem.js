@@ -5,7 +5,7 @@ class PatrolItem extends Component {
 
   render(){
     return(
-      <li>{this.props.patroller.username}</li>
+      <li key={this.props.patroller.key}>{this.props.patroller.username}</li>
     )
   }
 }

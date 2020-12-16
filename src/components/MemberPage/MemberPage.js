@@ -5,8 +5,9 @@ import PatrolItem from '../PatrolItem/PatrolItem.js';
 import OnCallItem from '../OnCallItem/OnCallItem';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+// member page will be what PSC members see when they log in
 class MemberPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
+
   render() {
     return (
       <div>

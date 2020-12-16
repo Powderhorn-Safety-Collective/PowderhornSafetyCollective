@@ -4,6 +4,7 @@ import {HashRouter as Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
 import "./Header.css";
 import Nav from '../Nav/Nav';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
 
@@ -24,6 +25,12 @@ class Header extends Component {
           <Link to="/home">
             <h2 className="nav-title">Powderhorn Safety Collective</h2>
           </Link>
+          <div className="toggleForm">
+            <p>On Patrol</p>
+            <ToggleSwitch toggleName="onPatrolToggle"/>
+            <p>On Call</p>
+            <ToggleSwitch toggleName="onCallToggle"/>
+          </div>
           <div className="headerBtns">
             <button> Report an Incident</button>
           </div>

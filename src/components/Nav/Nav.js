@@ -34,6 +34,10 @@ const Nav = (props) => {
           Community Page
         </Link>
 
+        <Link className="nav-link" to="/history">Incident History</Link>
+
+        <Link className="nav-link" to="/edit">Edit User</Link>
+
          {/* Show the link to the info page and the logout button if the user is logged in */}
          {props.store.user.id && (
           <>

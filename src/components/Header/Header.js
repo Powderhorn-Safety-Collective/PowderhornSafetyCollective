@@ -7,7 +7,10 @@ import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
-
+  state = {
+    patrolValue: false,
+    onCallValue: false,
+  }
 
   componentDidMount = () => {
     //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
@@ -15,7 +18,9 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
   }
-
+  handleToggleFor = () => {
+    console.log('toggled'); 
+  }
 
 
   render() {
@@ -27,9 +32,12 @@ class Header extends Component {
           </Link>
           <div className="toggleForm">
             <p>On Patrol</p>
-            <ToggleSwitch toggleName="onPatrolToggle"/>
+            <ToggleSwitch toggleName="onPatrolToggle"
+            handleToggle={this.handleToggleFor}
+            />
             <p>On Call</p>
-            <ToggleSwitch toggleName="onCallToggle"/>
+            <ToggleSwitch toggleName="onCallToggle"
+            handleToggle={this.handleToggleFor}/>
           </div>
           <div className="headerBtns">
             <button> Report an Incident</button>

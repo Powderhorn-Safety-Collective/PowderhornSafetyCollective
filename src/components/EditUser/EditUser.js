@@ -5,6 +5,17 @@ import EditUserItem from '../EditUserItem/EditUserItem'; // mapped out user data
 
 class EditUser extends Component {
   
+    state = {
+      username: '',
+      first_name: '',
+      last_name: '',
+      address: '',
+      email: '',
+      adult: '',
+      on_patrol: '',
+      on_call: ''
+    }
+
     // GET request is called on page load
     // to retrieve all incident data
     componentDidMount = () => {
@@ -50,15 +61,15 @@ class EditUser extends Component {
       }
       // end of sorting functions
 
-      editUser = (id) => {
-        console.log('editing user', id);
-        // this.props.dispatch( {type: 'EDIT_USER', payload: id} );
-        this.props.history.push('/user-modal');
+      submitEdit = () => {
+        console.log('editing user');
+        // this.props.dispatch( {type: 'EDIT_USER'} );
       }
 
   render() {
     return (
       <div>
+        {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
         <table>
                 <thead>
@@ -94,7 +105,7 @@ class EditUser extends Component {
 
                     {this.props.store.editUserReducer ? 
                     <div>
-                    <input value={this.props.store.editUserReducer.username} type="text"></input>
+                    <input value={this.props.store.editUserReducer.username} type="text" data=''></input>
                     <input value={this.props.store.editUserReducer.first_name} type="text"></input>
                     <input value={this.props.store.editUserReducer.last_name} type="text"></input>
                     <input value={this.props.store.editUserReducer.address} type="text"></input>
@@ -103,6 +114,7 @@ class EditUser extends Component {
                     <input value={this.props.store.editUserReducer.on_patrol} type="text"></input>
                     <input value={this.props.store.editUserReducer.on_call} type="text"></input>
                     <input value='role' type="text"></input>
+                    <button onClick={this.submitEdit}>Submit Edit</button>
                     </div>
                   :
                   <></>

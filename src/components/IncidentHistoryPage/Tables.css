@@ -34,3 +34,7 @@ background-color: #ffffff;
 .trash:hover {
   background-color: rgb(255, 23, 23);
 }
+
+.edit:hover {
+  background-color: rgb(236, 255, 62);
+}

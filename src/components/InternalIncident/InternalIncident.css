@@ -1,0 +1,11 @@
+.internalModule {
+    background-color: lightgrey;
+    border: 2px solid black;  
+    padding: 5px;
+    margin: 5px;
+}
+
+textarea {
+    width: 500px;
+    height: 100px;
+}

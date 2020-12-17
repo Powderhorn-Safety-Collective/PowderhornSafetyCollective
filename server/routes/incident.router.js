@@ -17,6 +17,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
+router.put('/editIncident/:id', (req, res) => {
+  const id = req.body.id;
+  const type = req.body.type;
+  const notes = req.body.notes;
+  const location = req.body.location;
+  const time_submitted = req.body.time_submitted;
+  const status = req.body.status;
+  const view_publicly = req.body.view_publicly;
+  const responder_notes = req.body.responder_notes;
+  const duplicate_entry = req.body.duplicate_entry;
+  const client_id = req.body.client_id;
+  let queryText= `UPDATE "incidents" 
+                  SET 
+                    "type" = $1, 
+                    "notes" = $2, 
+                    "location" = $3, 
+                    "time_submitted" = $4, 
+                    "status" = $5, 
+                    "view_publicly" = $6, 
+                    "responder_notes" = $7, 
+                    "duplicate_entry" = $8, 
+                    "client_id" = $9 
+                  WHERE 
+                    "id" = $10`;
+  pool.query(queryText, [type, notes, location, time_submitted, status, view_publicly, responder_notes, duplicate_entry, client_id, id])
+  .then((result) => {
+      res.sendStatus(200);
+  }).catch((err) => {
+      console.log('error in PUT user', err);
+      res.sendStatus(500);
+  });
+});
+
 // this one will get only the public incidents to be displayed
 // and sent back to fetchPublicIncidents saga
 router.get('/public', (req, res) => {

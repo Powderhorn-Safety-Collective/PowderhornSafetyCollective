@@ -6,7 +6,7 @@ const publicIncidentReducer = (state = [], action) => {
       return action.payload;
     // UNSET_INCIDENTS can be called to remove all data from reducer
     // unsure if this should stay or go
-    // case 'UNSET_INCIDENTS':
+    // case 'UNSET_PUBLIC_INCIDENTS':
       // return [];
     default:
       return state;

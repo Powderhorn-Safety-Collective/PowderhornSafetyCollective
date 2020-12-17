@@ -12,10 +12,27 @@ class EditUserModal extends Component {
     last_name: '',
     address: '',
     email: '',
+    phone: '',
     adult: '',
     on_patrol: '',
     on_call: '',
     role: ''
+  }
+  
+  componentDidMount = () => {
+    this.setState( {
+      id: this.props.store.editUserReducer.id,
+      username: this.props.store.editUserReducer.username,
+      first_name: this.props.store.editUserReducer.first_name,
+      last_name: this.props.store.editUserReducer.last_name,
+      address: this.props.store.editUserReducer.address,
+      email: this.props.store.editUserReducer.email,
+      phone: this.props.store.editUserReducer.phone,
+      adult: this.props.store.editUserReducer.adult,
+      on_patrol: this.props.store.editUserReducer.on_patrol,
+      on_call: this.props.store.editUserReducer.on_call,
+      role: this.props.store.editUserReducer.role
+    })
   }
 
   handleChange = (event, typeParam) => {
@@ -29,11 +46,16 @@ class EditUserModal extends Component {
   submitEdit = () => {
     console.log('editing user');
     this.props.dispatch( {type: 'SUBMIT_EDIT_USER', payload: this.state} );
+    this.props.history.push('/edit');
   }
 
   render() {
     return (
       <div>
+        <p>editUserReducer:</p>
+        {JSON.stringify(this.props.store.editUserReducer)}
+        <p>state:</p>
+        {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
           <label>Id</label>
@@ -53,6 +75,9 @@ class EditUserModal extends Component {
           <br/>
           <label>Email</label>
           <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
+          <br/>
+          <label>Phone</label>
+          <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
           <br/>
           <label>Adult</label>
           <input defaultValue={this.props.store.editUserReducer.adult} onChange={(event) => this.handleChange(event, 'adult')} type="text"></input>

@@ -1,14 +1,28 @@
 import axios from 'axios';
 import {put, takeEvery } from 'redux-saga/effects';
 
-function* addStatus(action) {
-  console.log('ADDING STATUS', action.payload);
+function* addPStatus(action) {
+  try{
+    yield axios.put('api/patrol/status', action.payload);
+  }catch(error) {
+    console.log('error in edit patrolstatus');
+    
+  }
+}
+
+function* addCStatus(action){
+  try{
+    yield axios.put('api/oncall/status', action.payload);
+  }catch(error) {
+    console.log('error in edit patrolstatus');
+  }
 }
 
 
-function* onCallSaga() {
-  yield takeEvery('ADD_STATUS', addStatus);
+function* statusSaga() {
+  yield takeEvery('ADD_CALL_STATUS', addCStatus);
+  yield takeEvery('ADD_PATROL_STATUS', addPStatus)
 }
 
 
-export default onCallSaga;
+export default statusSaga;

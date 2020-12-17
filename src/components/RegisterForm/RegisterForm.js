@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+// TODO add all DB columns to the payload to clear not-null violation
 class RegisterForm extends Component {
   state = {
     username: '',

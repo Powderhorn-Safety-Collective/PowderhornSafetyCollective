@@ -25,19 +25,28 @@ class Header extends Component {
       this.setState({
         patrolValue: !this.state.patrolValue
       }) 
-      this.sendStatus(!this.state.patrolValue)  
+      this.sendPatrolStatus(!this.state.patrolValue)  
     }else if(event.target.name === 'onCallToggle') {
       this.setState({
         onCallValue: !this.state.onCallValue
       })
-      this.sendStatus(!this.state.onCallValue)
+      this.sendCallStatus(!this.state.onCallValue)
     } 
   }
 
-  sendStatus = (param) => {
+  sendCallStatus = (param) => {
     this.props.dispatch({
-      type: 'ADD_STATUS',
-      payload: param
+      type: 'ADD_CALL_STATUS',
+      payload: {onCallValue: param}
+    })
+    this.props.dispatch({type: 'FETCH_PATROL'});
+    this.props.dispatch({type: 'FETCH_ONCALL'});
+  }
+
+  sendPatrolStatus = (param) => {
+    this.props.dispatch({
+      type: 'ADD_PATROL_STATUS',
+      payload: {patrolValue: param}
     })
     this.props.dispatch({type: 'FETCH_PATROL'});
     this.props.dispatch({type: 'FETCH_ONCALL'});

@@ -28,7 +28,24 @@ router.get('/public', (req, res) => {
     console.log(error);
     res.sendStatus(500);
   });
-});  
+});
+
+  router.put('/publicText', rejectUnauthenticated, (req, res) => {
+    console.log('public text is', req.body);
+    const queryText = `update incidents
+    set text_for_public_display = $1
+    where id = $2;`;
+
+    pool.query(queryText, [req.body.text, req.body.id]).then((result) => {
+      res.send(result.rows)
+    }).catch((error) => {
+      console.log('error in publicText put', error);
+      res.sendStatus(500);
+    });
+  })
+
+
+
 
 
   // route to get count of all active incidents

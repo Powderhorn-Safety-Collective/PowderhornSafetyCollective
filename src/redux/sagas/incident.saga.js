@@ -48,6 +48,19 @@ function* postIncident(action) {
   }
  }
 
+ // function to update text displayed publicly about an incident
+ function* updatePublicText(action) {
+   console.log('updatePublicText action.payload', action.payload);
+   try {
+     yield axios.put('/api/incident/publicText', action.payload);
+     put({type: 'GET_INCIDENTS'});
+     alert('Text has been saved.')
+   }
+   catch (error) {
+     console.log('error from update public text saga', error);
+   }
+ }
+
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
@@ -127,6 +140,7 @@ function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
     yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
+    yield takeEvery('UPDATE_PUBLIC_DISPLAY_TEXT', updatePublicText);
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

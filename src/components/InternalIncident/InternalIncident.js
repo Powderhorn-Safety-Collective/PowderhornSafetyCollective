@@ -47,7 +47,11 @@ class InternalIncident extends Component {
 
   handlePublicTextSave = () => {
     console.log('this.state.publicText', this.state.publicText);
-    
+    // send text to database
+    this.props.dispatch({
+      type: 'UPDATE_PUBLIC_DISPLAY_TEXT',
+      payload: {text: this.state.publicText, id: this.props.incident.id}
+    })
   }
 
   render() {

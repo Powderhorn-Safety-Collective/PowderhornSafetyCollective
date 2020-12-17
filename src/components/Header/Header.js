@@ -63,11 +63,11 @@ class Header extends Component {
           <div className="toggleForm">
             <p>On Patrol</p>
             <ToggleSwitch toggleName="onPatrolToggle"
-            handleToggle={this.handleToggle}
+            handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_patrol}
             />
             <p>On Call</p>
             <ToggleSwitch toggleName="onCallToggle"
-            handleToggle={this.handleToggle}/>
+            handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
           </div>
           <div className="headerBtns">
             <button> Report an Incident</button>

@@ -18,6 +18,22 @@ class EditIncidentModal extends Component {
         client_id: ''
       }
 
+      componentDidMount = () => {
+        this.setState( {
+          id: this.props.store.editIncidentReducer.id,
+          type: this.props.store.editIncidentReducer.type,
+          notes: this.props.store.editIncidentReducer.notes,
+          location: this.props.store.editIncidentReducer.location,
+          time_submitted: this.props.store.editIncidentReducer.time_submitted,
+          status: this.props.store.editIncidentReducer.status,
+          view_publicly: this.props.store.editIncidentReducer.view_publicly,
+          responder_notes: this.props.store.editIncidentReducer.notes,
+          duplicate_entry: this.props.store.editIncidentReducer.duplicate_entry,
+          client_id: this.props.store.editIncidentReducer.client_id
+        })
+      }
+    
+
       handleChange = (event, typeParam) => {
         console.log(event.target.value, typeParam);
     
@@ -27,8 +43,12 @@ class EditIncidentModal extends Component {
       }
 
       submitEdit = () => {
-        console.log('editing incident');
-        // this.props.dispatch( {type: 'EDIT_USER'} );
+        this.props.dispatch( {type: 'SUBMIT_EDIT_INCIDENT', payload: this.state} );
+        this.props.history.push('/history');
+      }
+
+      goBack = () => {
+        this.props.history.push('/history');
       }
     
 
@@ -67,7 +87,9 @@ class EditIncidentModal extends Component {
                 <label>Client Id</label>
                 <input defaultValue={this.props.store.editIncidentReducer.client_id} onChange={(event) => this.handleChange(event, 'client_id')} type="text"></input>
                 <br/>
-                <button onClick={this.submitEdit}>Submit Edit</button>
+                  <button onClick={this.submitEdit}>Submit Edit</button>
+                <br/>
+                  <button onClick={this.goBack}>Back to Data Table</button>
             </div>
             :
             <></>

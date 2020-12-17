@@ -46,7 +46,17 @@ function* postIncident(action) {
   } catch (error) {
     console.log(error);
   }
- }
+}
+
+function* editIncident(action) {
+  try {
+    yield axios.put(`/api/incident/editIncident/${action.payload.id}`, action.payload)
+    yield put({type: 'GET_INCIDENTS'});
+  }
+  catch (error){
+      console.log('user edit failed', error);
+  }
+}
 
 // below are the functions used to sort the incident table by column
 function* sortType() {
@@ -140,6 +150,8 @@ function* incidentSaga() {
     yield takeLatest("SORT_RESPONDER", sortResponder);
     yield takeLatest("SORT_DUPLICATE", sortDuplicate);
     yield takeLatest("SORT_CLIENT", sortClient);
+
+    yield takeLatest("SUBMIT_EDIT_INCIDENT", editIncident); // for edit of incidents
 }
 
 export default incidentSaga;

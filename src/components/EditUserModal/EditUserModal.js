@@ -49,6 +49,10 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  goBack = () => {
+    this.props.history.push('/edit');
+  }
+
   render() {
     return (
       <div>
@@ -91,7 +95,9 @@ class EditUserModal extends Component {
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
           <br/>
-          <button onClick={this.submitEdit}>Submit Edit</button>
+            <button onClick={this.submitEdit}>Submit Edit</button>
+          <br/>
+            <button onClick={this.goBack}>Back to Data Table</button>
           </div>
         :
         <></>

@@ -36,7 +36,6 @@ function* getAllUsers() {
 }
 
 function* editUser(action) {
-  console.log('ITS WORKING?');
   try {
     yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload)
     yield put({type: 'GET_ALL_USERS'});

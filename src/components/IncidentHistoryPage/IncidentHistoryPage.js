@@ -5,7 +5,20 @@ import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
 
 import './Tables.css';
 
-class TemplateClass extends Component {
+class IncidentHistoryPage extends Component {
+
+  state = {
+    type: '',
+    notes: '',
+    location: '',
+    time_submitted: '',
+    status: '',
+    view_publicly: '',
+    responder_notes: '',
+    duplicate_entry: '',
+    client_id: ''
+    
+  }
 
     // GET request is called on page load
     // to retrieve all incident data
@@ -48,11 +61,20 @@ class TemplateClass extends Component {
       }
       // end of sorting functions
 
+      submitEdit = () => {
+        console.log('editing incident');
+        // this.props.dispatch( {type: 'EDIT_USER'} );
+      }
+
     // this component is intended to display the history of all incidents reported by all users
   render() {
     return (
       <div>
+        <p>editIncidentReducer:</p>
+        {JSON.stringify(this.props.store.editIncidentReducer)}
         <h2>Incident Table</h2>
+        <p>state</p>
+        {JSON.stringify(this.state)}
             <table>
                 <thead>
                     <tr>
@@ -66,6 +88,7 @@ class TemplateClass extends Component {
                         <th onClick={this.sortByResponder}>Responder Notes</th>
                         <th onClick={this.sortByDuplicate}>Duplicate</th>
                         <th onClick={this.sortByClient}>User Who Reported Incident</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -79,13 +102,49 @@ class TemplateClass extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="11"></td>
+                        <td colSpan="12"></td>
                     </tr>
                 </tfoot>
             </table>
+            <br/>
+
+                  {this.props.store.editIncidentReducer ? 
+                    <div className="editModal">
+                      <label>Type</label>
+                      <input value={this.props.store.editIncidentReducer.type} type="text"></input>
+                      <br/>
+                      <label>Notes</label>
+                      <input value={this.props.store.editIncidentReducer.notes} type="text"></input>
+                      <br/>
+                      <label>Location</label>
+                      <input value={this.props.store.editIncidentReducer.location} type="text"></input>
+                      <br/>
+                      <label>Time Submitted</label>
+                      <input value={this.props.store.editIncidentReducer.time_submitted} type="text"></input>
+                      <br/>
+                      <label>Status</label>
+                      <input value={this.props.store.editIncidentReducer.status} type="text"></input>
+                      <br/>
+                      <label>View Publicly</label>
+                      <input value={this.props.store.editIncidentReducer.view_publicly} type="text"></input>
+                      <br/>
+                      <label>Responder Notes</label>
+                      <input value={this.props.store.editIncidentReducer.responder_notes} type="text"></input>
+                      <br/>
+                      <label>Duplicate</label>
+                      <input value={this.props.store.editIncidentReducer.duplicate_entry} type="text"></input>
+                      <br/>
+                      <label>Client Id</label>
+                      <input value={this.props.store.editIncidentReducer.client_id} type="text"></input>
+                      <br/>
+                      <button onClick={this.submitEdit}>Submit Edit</button>
+                    </div>
+                  :
+                  <></>
+                  }
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(TemplateClass);
+export default connect(mapStoreToProps)(IncidentHistoryPage);

@@ -13,7 +13,8 @@ class EditUser extends Component {
       email: '',
       adult: '',
       on_patrol: '',
-      on_call: ''
+      on_call: '',
+      role: ''
     }
 
     // GET request is called on page load
@@ -22,9 +23,10 @@ class EditUser extends Component {
         this.getUsers();
       }
 
-      componentDidUpdate = () => {
-        this.props.dispatch( {type: 'EDIT_USER', payload: this.props.store.allUsersReducer} );
-      }
+      // keep this commented out for now
+      // componentDidUpdate = () => {
+      //   this.props.dispatch( {type: 'EDIT_USER', payload: this.props.store.allUsersReducer} );
+      // }
 
     // function to fetch all incident data
     getUsers = () => {
@@ -69,6 +71,7 @@ class EditUser extends Component {
   render() {
     return (
       <div>
+        <p>editUserReducer:</p>
         {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
         <table>
@@ -102,18 +105,37 @@ class EditUser extends Component {
                     </tr>
                 </tfoot>
             </table>
+            <br/>
 
                     {this.props.store.editUserReducer ? 
-                    <div>
-                    <input value={this.props.store.editUserReducer.username} type="text" data=''></input>
+                    <div className="editModal">
+                    <label>Username</label>
+                    <input value={this.props.store.editUserReducer.username} type="text"></input>
+                    <br/>
+                    <label>First Name</label>
                     <input value={this.props.store.editUserReducer.first_name} type="text"></input>
+                    <br/>
+                    <label>Last Name</label>
                     <input value={this.props.store.editUserReducer.last_name} type="text"></input>
+                    <br/>
+                    <label>Address</label>
                     <input value={this.props.store.editUserReducer.address} type="text"></input>
+                    <br/>
+                    <label>Email</label>
                     <input value={this.props.store.editUserReducer.email} type="text"></input>
+                    <br/>
+                    <label>Adult</label>
                     <input value={this.props.store.editUserReducer.adult} type="text"></input>
+                    <br/>
+                    <label>On Patrol</label>
                     <input value={this.props.store.editUserReducer.on_patrol} type="text"></input>
+                    <br/>
+                    <label>On Call</label>
                     <input value={this.props.store.editUserReducer.on_call} type="text"></input>
+                    <br/>
+                    <label>Role</label>
                     <input value='role' type="text"></input>
+                    <br/>
                     <button onClick={this.submitEdit}>Submit Edit</button>
                     </div>
                   :

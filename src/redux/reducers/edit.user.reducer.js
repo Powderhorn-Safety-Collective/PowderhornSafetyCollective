@@ -1,13 +1,16 @@
-// reducer to store all users data, rather than just the data of the logged in user
+// reducer to store data for the user being edited
 const editUserReducer = (state = {}, action) => {
     switch (action.type) {
       case 'EDIT_USER':
         return action.payload;
+    // UNSET_EDIT can be called to remove all data from reducer
+      case 'UNSET_EDIT':
+        return [];
       default:
         return state;
     }
   };
   
   // user will be on the redux state at:
-  // state.allUsersReducer
+  // state.editUserReducer
   export default editUserReducer;

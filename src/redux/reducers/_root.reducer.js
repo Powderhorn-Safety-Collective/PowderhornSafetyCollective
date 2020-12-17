@@ -8,6 +8,7 @@ import publicIncidentReducer from './public.incident.reducer';
 import activeIncidentReducer from './active.incident.reducer'; // reducer to hold the count of all active incidents
 import allUsersReducer from './all.users.reducer'; // reducer storing all user data, not just the user logged in
 import editUserReducer from './edit.user.reducer'; // reducer to help with edit user
+import editIncidentReducer from './edit.incident.reducer'; // reducer to help with edit incident
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   activeIncidentReducer, // reducer storing count of all active incidents
   allUsersReducer, // reducer storing all users
   editUserReducer, // reducer used to edit user
+  editIncidentReducer, // reducer used to edit incident
 });
 
 export default rootReducer;

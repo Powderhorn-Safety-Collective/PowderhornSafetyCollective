@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-class TemplateClass extends Component {
+class IncidentHistoryItem extends Component {
+
+  editIncident = (id) => {
+    console.log('editing incident', id);
+    this.props.dispatch( {type: 'EDIT_INCIDENT', payload: id} );
+  }
     
   render() {
     return (
@@ -20,10 +25,11 @@ class TemplateClass extends Component {
             <td>{this.props.incident.client_id}</td>
 
             {/* trash can row to delete incident? */}
+            <td className="edit" onClick={() => this.editIncident(this.props.incident)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>
             <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️ </span></td>
         </tr>
     );
   }
 }
 
-export default connect(mapStoreToProps)(TemplateClass);
+export default connect(mapStoreToProps)(IncidentHistoryItem);

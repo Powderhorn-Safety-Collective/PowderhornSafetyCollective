@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import EditUserItem from '../EditUserItem/EditUserItem'; // mapped out user data for the table
 
 class EditUser extends Component {
-  
+
     // GET request is called on page load
     // to retrieve all incident data
     componentDidMount = () => {
@@ -38,6 +38,9 @@ class EditUser extends Component {
       sortByAdult = () => {
         this.props.dispatch( {type:'SORT_ADULT'} );
       }
+      sortByRole = () => {
+        this.props.dispatch( {type:'SORT_ROLE'} );
+      }
       sortByOnPatrol = () => {
         this.props.dispatch( {type:'SORT_ON_PATROL'} );
       }
@@ -49,7 +52,11 @@ class EditUser extends Component {
   render() {
     return (
       <div>
+        <p>editUserReducer:</p>
+        {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
+        <p>state:</p>
+        {JSON.stringify(this.state)}
         <table>
                 <thead>
                     <tr>
@@ -61,8 +68,10 @@ class EditUser extends Component {
                         <th onClick={this.sortByEmail}>Email</th>
                         <th onClick={this.sortByPhone}>Phone</th>
                         <th onClick={this.sortByAdult}>Adult</th>
+                        <th onClick={this.sortByRole}>Role</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
+                        <th onClick={() => this.editUser(this.props.user)}>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -76,10 +85,11 @@ class EditUser extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="11"></td>
+                        <td colSpan="13"></td>
                     </tr>
                 </tfoot>
             </table>
+            <br/>  
       </div>
     );
   }

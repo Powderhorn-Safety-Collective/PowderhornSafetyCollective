@@ -5,7 +5,7 @@ import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
 
 import './Tables.css';
 
-class TemplateClass extends Component {
+class IncidentHistoryPage extends Component {
 
     // GET request is called on page load
     // to retrieve all incident data
@@ -52,7 +52,11 @@ class TemplateClass extends Component {
   render() {
     return (
       <div>
+        <p>editIncidentReducer:</p>
+        {JSON.stringify(this.props.store.editIncidentReducer)}
         <h2>Incident Table</h2>
+        <p>state</p>
+        {JSON.stringify(this.state)}
             <table>
                 <thead>
                     <tr>
@@ -66,6 +70,7 @@ class TemplateClass extends Component {
                         <th onClick={this.sortByResponder}>Responder Notes</th>
                         <th onClick={this.sortByDuplicate}>Duplicate</th>
                         <th onClick={this.sortByClient}>User Who Reported Incident</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -79,13 +84,16 @@ class TemplateClass extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="11"></td>
+                        <td colSpan="12"></td>
                     </tr>
                 </tfoot>
             </table>
+            <br/>
+
+
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(TemplateClass);
+export default connect(mapStoreToProps)(IncidentHistoryPage);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import PatrolItem from '../PatrolItem/PatrolItem.js';
 import OnCallItem from '../OnCallItem/OnCallItem';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -10,11 +9,10 @@ class MemberPage extends Component {
   render() {
     return (
       <div>
-        <h1>FOR THE NAV BAR</h1>
         <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
         <p>Your ID is: {this.props.store.user.id}</p>
 
-        <h1> FOR THE INCIDENT COMPONENT</h1>
+        <h2> FOR THE INCIDENT COMPONENT</h2>
         <div class="onPatrolDisplay">
           <h2>Members on patrol: </h2>
           <ul>  
@@ -32,7 +30,7 @@ class MemberPage extends Component {
             </ul>
         </div>
 
-        <LogOutButton className="log-in" />
+        
       </div>
     );
   }

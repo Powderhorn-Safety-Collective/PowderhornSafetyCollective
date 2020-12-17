@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 class IncidentHistoryItem extends Component {
 
   editIncident = (id) => {
-    console.log('editing incident', id);
     this.props.dispatch( {type: 'EDIT_INCIDENT', payload: id} );
+    this.props.history.push("/editIncidentModal");
   }
     
   render() {
@@ -32,4 +33,4 @@ class IncidentHistoryItem extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(IncidentHistoryItem);
+export default withRouter(connect(mapStoreToProps)(IncidentHistoryItem));

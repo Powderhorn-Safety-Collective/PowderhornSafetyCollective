@@ -7,27 +7,6 @@ import './Tables.css';
 
 class IncidentHistoryPage extends Component {
 
-  state = {
-    type: '',
-    notes: '',
-    location: '',
-    time_submitted: '',
-    status: '',
-    view_publicly: '',
-    responder_notes: '',
-    duplicate_entry: '',
-    client_id: ''
-    
-  }
-
-  handleChange = (event, typeParam) => {
-    console.log(event.target.value, typeParam);
-
-    this.setState( {
-        [typeParam]: event.target.value
-    })
-  }
-
     // GET request is called on page load
     // to retrieve all incident data
     componentDidMount = () => {
@@ -68,11 +47,6 @@ class IncidentHistoryPage extends Component {
         this.props.dispatch( {type:'SORT_CLIENT'} );
       }
       // end of sorting functions
-
-      submitEdit = () => {
-        console.log('editing incident');
-        // this.props.dispatch( {type: 'EDIT_USER'} );
-      }
 
     // this component is intended to display the history of all incidents reported by all users
   render() {
@@ -116,40 +90,7 @@ class IncidentHistoryPage extends Component {
             </table>
             <br/>
 
-                  {this.props.store.editIncidentReducer ? 
-                    <div className="editModal">
-                      <label>Type</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.type} onChange={(event) => this.handleChange(event, 'type')} type="text"></input>
-                      <br/>
-                      <label>Notes</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.notes} onChange={(event) => this.handleChange(event, 'notes')} type="text"></input>
-                      <br/>
-                      <label>Location</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.location} onChange={(event) => this.handleChange(event, 'location')} type="text"></input>
-                      <br/>
-                      <label>Time Submitted</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.time_submitted} onChange={(event) => this.handleChange(event, 'time_submitted')} type="text"></input>
-                      <br/>
-                      <label>Status</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.status} onChange={(event) => this.handleChange(event, 'status')} type="text"></input>
-                      <br/>
-                      <label>View Publicly</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.view_publicly} onChange={(event) => this.handleChange(event, 'view_publicly')} type="text"></input>
-                      <br/>
-                      <label>Responder Notes</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.responder_notes} onChange={(event) => this.handleChange(event, 'responder_notes')} type="text"></input>
-                      <br/>
-                      <label>Duplicate</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.duplicate_entry} onChange={(event) => this.handleChange(event, 'duplicate_entry')} type="text"></input>
-                      <br/>
-                      <label>Client Id</label>
-                      <input defaultValue={this.props.store.editIncidentReducer.client_id} onChange={(event) => this.handleChange(event, 'client_id')} type="text"></input>
-                      <br/>
-                      <button onClick={this.submitEdit}>Submit Edit</button>
-                    </div>
-                  :
-                  <></>
-                  }
+
       </div>
     );
   }

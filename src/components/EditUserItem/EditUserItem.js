@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 class EditUserItem extends Component {
 
   editUser = (id) => {
-    console.log('editing user', id);
     this.props.dispatch( {type: 'EDIT_USER', payload: id} );
+    this.props.history.push("/editUserModal");
   }
     
   render() {
@@ -32,4 +33,4 @@ class EditUserItem extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(EditUserItem);
+export default withRouter(connect(mapStoreToProps)(EditUserItem));

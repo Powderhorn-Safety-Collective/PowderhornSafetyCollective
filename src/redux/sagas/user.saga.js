@@ -35,6 +35,16 @@ function* getAllUsers() {
   }
 }
 
+function* editUser(action) {
+  try {
+    yield axios.put(`/api/user/${action.payload.id}`, action.payload)
+    yield put({type: 'GET_ALL_USERS'});
+  }
+  catch (error){
+      console.log('user edit failed', error);
+  }
+}
+
 // below are the functions used to sort the incident table by column
 function* sortUsername() {
   try {
@@ -132,6 +142,9 @@ function* userSaga() {
       yield takeLatest("SORT_ROLE", sortRole);
       yield takeLatest("SORT_ON_PATROL", sortOnPatrol);
       yield takeLatest("SORT_ON_CALL", sortOnCall);
+
+
+      yield takeLatest("SUBMIT_EDIT_USER", editUser); // edit user saga
 }
 
 export default userSaga;

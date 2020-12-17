@@ -17,6 +17,20 @@ class EditUser extends Component {
       role: ''
     }
 
+    handleChange = (event, typeParam) => {
+      console.log(event.target.value, typeParam);
+    
+      this.setState( {
+          [typeParam]: event.target.value
+      })
+    }
+    
+    submitEdit = () => {
+      console.log('editing user');
+      // this.props.dispatch( {type: 'EDIT_USER'} );
+    }
+    
+
     // GET request is called on page load
     // to retrieve all incident data
     componentDidMount = () => {
@@ -55,6 +69,9 @@ class EditUser extends Component {
       sortByAdult = () => {
         this.props.dispatch( {type:'SORT_ADULT'} );
       }
+      sortByRole = () => {
+        this.props.dispatch( {type:'SORT_ROLE'} );
+      }
       sortByOnPatrol = () => {
         this.props.dispatch( {type:'SORT_ON_PATROL'} );
       }
@@ -74,6 +91,8 @@ class EditUser extends Component {
         <p>editUserReducer:</p>
         {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
+        <p>state:</p>
+        {JSON.stringify(this.state)}
         <table>
                 <thead>
                     <tr>
@@ -85,6 +104,7 @@ class EditUser extends Component {
                         <th onClick={this.sortByEmail}>Email</th>
                         <th onClick={this.sortByPhone}>Phone</th>
                         <th onClick={this.sortByAdult}>Adult</th>
+                        <th onClick={this.sortByRole}>Role</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
                         <th onClick={() => this.editUser(this.props.user)}>Edit</th>
@@ -110,31 +130,31 @@ class EditUser extends Component {
                     {this.props.store.editUserReducer ? 
                     <div className="editModal">
                     <label>Username</label>
-                    <input value={this.props.store.editUserReducer.username} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.username} onChange={(event) => this.handleChange(event, 'username')} type="text"></input>
                     <br/>
                     <label>First Name</label>
-                    <input value={this.props.store.editUserReducer.first_name} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
                     <br/>
                     <label>Last Name</label>
-                    <input value={this.props.store.editUserReducer.last_name} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
                     <br/>
                     <label>Address</label>
-                    <input value={this.props.store.editUserReducer.address} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
                     <br/>
                     <label>Email</label>
-                    <input value={this.props.store.editUserReducer.email} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
                     <br/>
                     <label>Adult</label>
-                    <input value={this.props.store.editUserReducer.adult} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.adult} onChange={(event) => this.handleChange(event, 'adult')} type="text"></input>
                     <br/>
                     <label>On Patrol</label>
-                    <input value={this.props.store.editUserReducer.on_patrol} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.on_patrol} onChange={(event) => this.handleChange(event, 'on_patrol')} type="text"></input>
                     <br/>
                     <label>On Call</label>
-                    <input value={this.props.store.editUserReducer.on_call} type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
                     <br/>
                     <label>Role</label>
-                    <input value='role' type="text"></input>
+                    <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
                     <br/>
                     <button onClick={this.submitEdit}>Submit Edit</button>
                     </div>

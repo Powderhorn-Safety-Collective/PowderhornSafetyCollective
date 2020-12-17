@@ -136,6 +136,16 @@ router.get('/adult', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+router.get('/role', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "role";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 router.get('/patrol', rejectUnauthenticated, (req, res) => {
   // sort by type
   const queryText = `SELECT * FROM "user" ORDER BY "on_patrol";`

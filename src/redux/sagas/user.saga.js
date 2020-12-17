@@ -92,6 +92,14 @@ function* sortAdult() {
       console.log(error);
     }
 }
+function* sortRole() {
+  try {
+      const response = yield axios.get('/api/user/role');
+      yield put ( {type:'SET_ALL_USERS', payload: response.data} );
+    } catch (error) {
+      console.log(error);
+    }
+}
 function* sortOnPatrol() {
   try {
       const response = yield axios.get('/api/user/patrol');
@@ -121,6 +129,7 @@ function* userSaga() {
       yield takeLatest("SORT_EMAIL", sortEmail);
       yield takeLatest("SORT_PHONE", sortPhone);
       yield takeLatest("SORT_ADULT", sortAdult);
+      yield takeLatest("SORT_ROLE", sortRole);
       yield takeLatest("SORT_ON_PATROL", sortOnPatrol);
       yield takeLatest("SORT_ON_CALL", sortOnCall);
 }

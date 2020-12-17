@@ -20,6 +20,14 @@ class IncidentHistoryPage extends Component {
     
   }
 
+  handleChange = (event, typeParam) => {
+    console.log(event.target.value, typeParam);
+
+    this.setState( {
+        [typeParam]: event.target.value
+    })
+  }
+
     // GET request is called on page load
     // to retrieve all incident data
     componentDidMount = () => {
@@ -111,31 +119,31 @@ class IncidentHistoryPage extends Component {
                   {this.props.store.editIncidentReducer ? 
                     <div className="editModal">
                       <label>Type</label>
-                      <input value={this.props.store.editIncidentReducer.type} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.type} onChange={(event) => this.handleChange(event, 'type')} type="text"></input>
                       <br/>
                       <label>Notes</label>
-                      <input value={this.props.store.editIncidentReducer.notes} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.notes} onChange={(event) => this.handleChange(event, 'notes')} type="text"></input>
                       <br/>
                       <label>Location</label>
-                      <input value={this.props.store.editIncidentReducer.location} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.location} onChange={(event) => this.handleChange(event, 'location')} type="text"></input>
                       <br/>
                       <label>Time Submitted</label>
-                      <input value={this.props.store.editIncidentReducer.time_submitted} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.time_submitted} onChange={(event) => this.handleChange(event, 'time_submitted')} type="text"></input>
                       <br/>
                       <label>Status</label>
-                      <input value={this.props.store.editIncidentReducer.status} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.status} onChange={(event) => this.handleChange(event, 'status')} type="text"></input>
                       <br/>
                       <label>View Publicly</label>
-                      <input value={this.props.store.editIncidentReducer.view_publicly} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.view_publicly} onChange={(event) => this.handleChange(event, 'view_publicly')} type="text"></input>
                       <br/>
                       <label>Responder Notes</label>
-                      <input value={this.props.store.editIncidentReducer.responder_notes} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.responder_notes} onChange={(event) => this.handleChange(event, 'responder_notes')} type="text"></input>
                       <br/>
                       <label>Duplicate</label>
-                      <input value={this.props.store.editIncidentReducer.duplicate_entry} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.duplicate_entry} onChange={(event) => this.handleChange(event, 'duplicate_entry')} type="text"></input>
                       <br/>
                       <label>Client Id</label>
-                      <input value={this.props.store.editIncidentReducer.client_id} type="text"></input>
+                      <input defaultValue={this.props.store.editIncidentReducer.client_id} onChange={(event) => this.handleChange(event, 'client_id')} type="text"></input>
                       <br/>
                       <button onClick={this.submitEdit}>Submit Edit</button>
                     </div>

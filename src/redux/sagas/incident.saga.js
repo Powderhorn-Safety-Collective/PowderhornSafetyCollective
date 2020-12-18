@@ -63,13 +63,25 @@ function* editIncident(action) {
    console.log('updatePublicText action.payload', action.payload);
    try {
      yield axios.put('/api/incident/publicText', action.payload);
-     put({type: 'GET_INCIDENTS'});
+     yield put({type: 'GET_INCIDENTS'});
      alert('Text has been saved.')
    }
    catch (error) {
      console.log('error from update public text saga', error);
    }
  }
+
+  // this function will toggle the active state of the incident
+  function* updateActiveStatus(action) {
+    console.log('updateActiveStatus', action.payload);
+    try {
+      yield axios.put('/api/incident/active', action.payload);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
 
 // below are the functions used to sort the incident table by column
 function* sortType() {
@@ -151,7 +163,7 @@ function* incidentSaga() {
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
     yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
     yield takeEvery('UPDATE_PUBLIC_DISPLAY_TEXT', updatePublicText);
-    yield takeEvery('')
+    yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

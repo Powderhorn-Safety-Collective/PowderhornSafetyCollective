@@ -17,8 +17,7 @@ class InternalIncident extends Component {
     timedate_public: this.props.incident.timedate_public,
     location_public: this.props.incident.location_public,
     type_public: this.props.incident.type_public,
-    user_notes_public: this.props.incident.user_notes_public,
-    active: this.props.incident.active
+    user_notes_public: this.props.incident.user_notes_public
   }
 
   // // function to render active or inactive on incident card
@@ -101,10 +100,11 @@ class InternalIncident extends Component {
   sendActiveStatus = () => {
     console.log('switchtoggled');
     
-    // this.props.dispatch({
-    //   type: 'CHANGE_ACTIVE_STATUS',
-    //   payload: {active: !this.props.incident.active}
-    // })
+    this.props.dispatch({
+      type: 'UPDATE_ACTIVE_STATUS',
+      payload: {active: !this.props.incident.active,
+      id: this.props.incident.id}
+    })
   }
 
   // need function here to dispatch, I guess

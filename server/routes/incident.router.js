@@ -8,11 +8,14 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   // data to populate incident table
   // retrieving all data from all users
-  const queryText = `SELECT * FROM "incidents"
-  left join "user" on "user".username = incidents.username;
+  const queryText = `SELECT *, incidents.id FROM "incidents"
+  left join "user" on "user".username = incidents.username
+  order by time_submitted;
   ;`
   pool.query(queryText)
-  .then((results) => res.send(results.rows))
+  .then((results) => {res.send(results.rows)
+  console.log('results.rows', results.rows);
+  })
   .catch((error) => {
     console.log(error);
     res.sendStatus(500);
@@ -79,7 +82,21 @@ router.get('/public', (req, res) => {
     });
   })
 
+  // this route will toggle the status of the active boolean
+  router.put('/active', rejectUnauthenticated, (req, res) => {
+    console.log('in active toggle router with payload ', req.body);
+    const queryText = `UPDATE "incidents" 
+    SET "active" = $1
+    WHERE "id" = $2;`;
 
+    pool.query(queryText, [req.body.active, req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((err0r) => {
+      console.log('error in active toggle route', error);
+      res.sendStatus(500);
+    });
+    
+  });
 
 
 

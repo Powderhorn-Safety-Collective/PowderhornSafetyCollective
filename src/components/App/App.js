@@ -29,6 +29,7 @@ import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component t
 import EditUser from '../EditUser/EditUser'; // Component to display all user data in a table
 import EditUserModal from '../EditUserModal/EditUserModal' // modal to finalize edits
 import EditIncidentModal from '../EditIncidentModal/EditIncidentModal' // modal to finalize edits
+import ReportIncident from '../ReportIncident/ReportIncident'; // for users to report new incidents
 
 import './App.css';
 
@@ -148,6 +149,13 @@ class App extends Component {
               exact 
               path="/editIncidentModal" 
               component={EditIncidentModal} 
+            />
+
+            {/* route leading to incident history page */}
+            <ProtectedRoute
+              exact 
+              path="/report" 
+              component={ReportIncident} 
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

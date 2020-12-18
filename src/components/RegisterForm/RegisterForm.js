@@ -41,6 +41,7 @@ class RegisterForm extends Component {
 
   render() {
     return (
+      <div className="editModal">
       <form className="formPanel" onSubmit={this.registerUser}>
         <h2>Register User</h2>
         {this.props.store.errors.registrationMessage && (
@@ -174,6 +175,7 @@ class RegisterForm extends Component {
           <input className="btn" type="submit" name="submit" value="Register" />
         </div>
       </form>
+      </div>
     );
   }
 }

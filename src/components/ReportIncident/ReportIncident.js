@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import swal from 'sweetalert';
 
 class ReportIncident extends Component {
 
@@ -9,7 +10,8 @@ class ReportIncident extends Component {
         type: '',
         notes: '',
         location: '',
-        time_submitted: ''
+        time_submitted: '',
+        client_id: Math.floor(Math.random() * 1010101)
     }
 
     componentDidMount = () => {
@@ -43,12 +45,20 @@ class ReportIncident extends Component {
           showReport: false
       });
       this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      this.props.history.push('/');
-    }
+      swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this to search for any updates on your incident`, 
+          {
+            button: "Ok!",
+            icon: "warning"
+      });
+        this.props.history.push('/');
+      }
 
   render() {
     return (
     <>
+        {JSON.stringify(this.state)}
         {this.state.showReport === true ? 
         <div className="editModal">
             <h2>IS THIS CORRECT?</h2>
@@ -66,7 +76,6 @@ class ReportIncident extends Component {
         </div>
     :
     <div className="editModal">
-    {JSON.stringify(this.state)}
     <p>Current Time: <br/>
     {this.state.time_submitted}</p>
     <br/>

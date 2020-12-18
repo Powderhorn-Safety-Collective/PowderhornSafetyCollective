@@ -80,7 +80,7 @@ router.get('/public', (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('POST incident', req.body);
-  const client_id = req.body.id;
+  const client_id = req.body.client_id;
   const type = req.body.type;
   const notes = req.body.notes;
   const location = req.body.location;

@@ -151,6 +151,7 @@ function* incidentSaga() {
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
     yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
     yield takeEvery('UPDATE_PUBLIC_DISPLAY_TEXT', updatePublicText);
+    yield takeEvery('')
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

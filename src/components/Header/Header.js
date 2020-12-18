@@ -7,13 +7,18 @@ import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
-
+  // componentDidUpdate = (previousProps) => {
+  //   if(this.props.reduxStore.user.on_patrol !==  previousProps) {
+  //     this.props.dispatch({type: 'FETCH_PATROL'})
+  //   }
+  // }
 
   componentDidMount = () => {
     //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
     this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
+
   }
 
   handleToggle = (event) => {
@@ -29,8 +34,8 @@ class Header extends Component {
       type: 'ADD_CALL_STATUS',
       payload: {onCallValue: !this.props.reduxStore.user.on_call}
     })
-    this.props.dispatch({type: 'FETCH_PATROL'});
-    this.props.dispatch({type: 'FETCH_ONCALL'});
+    // this.props.dispatch({type: 'FETCH_PATROL'});
+    // this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
   sendPatrolStatus = (param) => {
@@ -38,10 +43,13 @@ class Header extends Component {
       type: 'ADD_PATROL_STATUS',
       payload: {patrolValue: !this.props.reduxStore.user.on_patrol}
     })
-    this.props.dispatch({type: 'FETCH_PATROL'});
-    this.props.dispatch({type: 'FETCH_ONCALL'});
+    // this.props.dispatch({type: 'FETCH_PATROL'});
+    // this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
+  reportIncident = () => {
+    this.props.history.push('/report');
+  }
 
   render() {
     return ( 
@@ -63,9 +71,6 @@ class Header extends Component {
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
             }
           </div>
-          <div className="headerBtns">
-            <button> Report an Incident</button>
-          </div>
           <div className="patrolDisplay">
             {Number(this.props.reduxStore.patrolReducer.length) === 1 && 
               <h2> {this.props.reduxStore.patrolReducer.length} person is on patrol</h2>
@@ -86,6 +91,9 @@ class Header extends Component {
               <h2> {this.props.reduxStore.activeIncidentReducer} active incidents</h2>
           </div>
         </div>
+        <div className="headerBtns">
+            <button onClick={this.reportIncident}> Report an Incident</button>
+          </div>
         <Nav/>
       </div>
     )

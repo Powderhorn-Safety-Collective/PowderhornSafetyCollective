@@ -66,7 +66,7 @@ class ReportIncident extends Component {
     :
     <></>
     }
-      <div>
+      <div className="editModal">
         {JSON.stringify(this.state)}
         <p>Current Time: <br/>
         {this.state.time_submitted}</p>

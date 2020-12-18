@@ -7,11 +7,7 @@ import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
-  // componentDidUpdate = (previousProps) => {
-  //   if(this.props.reduxStore.user.on_patrol !==  previousProps) {
-  //     this.props.dispatch({type: 'FETCH_PATROL'})
-  //   }
-  // }
+
 
   componentDidMount = () => {
     //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
@@ -34,8 +30,6 @@ class Header extends Component {
       type: 'ADD_CALL_STATUS',
       payload: {onCallValue: !this.props.reduxStore.user.on_call}
     })
-    // this.props.dispatch({type: 'FETCH_PATROL'});
-    // this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
   sendPatrolStatus = (param) => {
@@ -43,8 +37,6 @@ class Header extends Component {
       type: 'ADD_PATROL_STATUS',
       payload: {patrolValue: !this.props.reduxStore.user.on_patrol}
     })
-    // this.props.dispatch({type: 'FETCH_PATROL'});
-    // this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
   reportIncident = () => {

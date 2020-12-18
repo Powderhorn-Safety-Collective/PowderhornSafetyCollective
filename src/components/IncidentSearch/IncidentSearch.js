@@ -18,28 +18,30 @@ class IncidentSearch extends Component {
   }; // end 
 
   // handle change function for search input box
-  handleInputChangeFor = () => (event) => {
+  handleInputChangeFor = (event) => {
     this.setState({
       searchNumber: event.target.value,
     });
+    console.log('SEARCH', this.state.searchNumber);
+    
   };
 
 
   render() {
     return (
       <form onSubmit={this.search}>
-        <h2>Search</h2>
-        <h4>Search for an incident by Incident ID</h4>
+        <h2>Search for an Incident</h2>
         <div>
           <label htmlFor="username">
-            Incident ID:
+            Enter the 6 Digit Incident ID:
           </label>
           <input
-            type="text"
+            type="number"
+            placeholder="######"
             name="searchNumber"
             required
-            value={this.state.searchNumber}
-            onChange={this.handleInputChangeFor()}
+            // value={this.state.searchNumber}
+            onChange={(event) => this.handleInputChangeFor(event)}
           />
         </div>
         <div>

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-// This component will be displayed on and is consumed by the Connunity 
+// This component will be displayed on and is consumed by the Comunity 
 // Page component.  It will allow the user to search for an incident 
-// by and id string that for that incident
+// by their 6 digit auto-generated incident ID
 class IncidentSearch extends Component {
   state = {
-    searchNumber: '',
+    searchNumber: 0,
   };
 
   // this will need to be changed to search for the text entered

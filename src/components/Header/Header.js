@@ -9,7 +9,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 class Header extends Component {
   state = {
     // TODO set this value from the DB
-    patrolValue: false,
+    // patrolValue: false,
     onCallValue: false,
   }
 
@@ -22,10 +22,10 @@ class Header extends Component {
 
   handleToggle = (event) => {
     if(event.target.name === 'onPatrolToggle') {
-      this.setState({
-        patrolValue: !this.state.patrolValue
-      }) 
-      this.sendPatrolStatus(!this.state.patrolValue)  
+      // this.setState({
+      //   patrolValue: !this.state.patrolValue
+      // }) 
+      this.sendPatrolStatus()  
     }else if(event.target.name === 'onCallToggle') {
       this.setState({
         onCallValue: !this.state.onCallValue
@@ -46,7 +46,7 @@ class Header extends Component {
   sendPatrolStatus = (param) => {
     this.props.dispatch({
       type: 'ADD_PATROL_STATUS',
-      payload: {patrolValue: param}
+      payload: {patrolValue: !this.props.reduxStore.user.on_patrol}
     })
     this.props.dispatch({type: 'FETCH_PATROL'});
     this.props.dispatch({type: 'FETCH_ONCALL'});
@@ -62,9 +62,11 @@ class Header extends Component {
           </Link>
           <div className="toggleForm">
             <p>On Patrol</p>
+            {this.props.reduxStore.user.on_patrol !== undefined &&
             <ToggleSwitch toggleName="onPatrolToggle"
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_patrol}
             />
+            }
             <p>On Call</p>
             <ToggleSwitch toggleName="onCallToggle"
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>

@@ -42,6 +42,9 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
+  reportIncident = () => {
+    this.props.history.push('/report');
+  }
 
   render() {
     return ( 
@@ -63,9 +66,6 @@ class Header extends Component {
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
             }
           </div>
-          <div className="headerBtns">
-            <button> Report an Incident</button>
-          </div>
           <div className="patrolDisplay">
             {Number(this.props.reduxStore.patrolReducer.length) === 1 && 
               <h2> {this.props.reduxStore.patrolReducer.length} person is on patrol</h2>
@@ -86,6 +86,9 @@ class Header extends Component {
               <h2> {this.props.reduxStore.activeIncidentReducer} active incidents</h2>
           </div>
         </div>
+        <div className="headerBtns">
+            <button onClick={this.reportIncident}> Report an Incident</button>
+          </div>
         <Nav/>
       </div>
     )

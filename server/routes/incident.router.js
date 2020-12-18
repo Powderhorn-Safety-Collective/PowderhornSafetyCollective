@@ -80,26 +80,24 @@ router.get('/public', (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('POST incident', req.body);
+  const client_id = req.body.id;
   const type = req.body.type;
   const notes = req.body.notes;
   const location = req.body.location;
   // const time_submitted = req.body.time_submitted; // below, we use a function built into SQL to timestamp the current time on submission
-  const status = req.body.status;
-  const view_publicly = req.body.view_publicly;
-  const responder_notes = req.body.responder_notes;
-  const duplicate_entry = req.body.duplicate_entry;
+  // const status = req.body.status;
+  // const view_publicly = req.body.view_publicly;
+  // const responder_notes = req.body.responder_notes;
+  // const duplicate_entry = req.body.duplicate_entry;
   // const client_id = req.user.id; // user id is used to cross reference new incident post id just use [$8 = client_id]
   const queryText = `INSERT INTO "incidents" (
                                               "type", 
                                               "notes", 
                                               "location", 
-                                              "time_submitted", 
-                                              "status", 
-                                              "view_publicly", 
-                                              "responder_notes", 
-                                              "duplicate_entry"
-                                              ) VALUES ($1, $2, $3, NOW(), $4, $5, $6, $7);`;
-  pool.query(queryText, [type, notes, location, status, view_publicly, responder_notes, duplicate_entry])
+                                              "time_submitted",
+                                              "client_id"
+                                              ) VALUES ($1, $2, $3, NOW(), $4);`;
+  pool.query(queryText, [type, notes, location, client_id])
     .then(() => { res.sendStatus(201)})
     .catch((error) => {
         console.log('Error', error);

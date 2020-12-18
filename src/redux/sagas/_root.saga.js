@@ -19,9 +19,9 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    patrolSaga(),//saga for onPatrol count
+    // patrolSaga(),//saga for onPatrol count
     incidentSaga(), // saga for all things relating to incidents
-    onCallSaga(),//saga for onCall count
+    // onCallSaga(),//saga for onCall count
     statusSaga(),
   ]);
 }

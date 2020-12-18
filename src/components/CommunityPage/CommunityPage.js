@@ -88,6 +88,7 @@ class CommunityPage extends Component {
           <div className="box">
             {/* section to search for an incident */}
             <IncidentSearch/>
+            {JSON.stringify(this.props.store.searchIncidentReducer)}
           </div>
         </div> {/* end right stuff */}
       </div> // end page

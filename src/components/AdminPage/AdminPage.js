@@ -12,7 +12,7 @@ class AdminPage extends Component {
       <>
       <div className="row">
         <div className="column">
-          <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+          <p>Contact info for reporter</p>
         </div>
         <div className="column">
           <div className="box">

@@ -2,8 +2,6 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import patrolSaga from './patrol.saga';
-import onCallSaga from './on.call.saga';
 import statusSaga from './status.saga';
 import incidentSaga from './incident.saga'; // saga used for data relating to incident table
 
@@ -19,9 +17,7 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    // patrolSaga(),//saga for onPatrol count
     incidentSaga(), // saga for all things relating to incidents
-    // onCallSaga(),//saga for onCall count
     statusSaga(),
   ]);
 }

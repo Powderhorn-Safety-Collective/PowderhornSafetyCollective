@@ -12,8 +12,9 @@ class IncidentSearch extends Component {
 
   // this will need to be changed to search for the text entered
   search = () => {
+    console.log('SEARCHING', this.state);
     this.props.dispatch({
-      type: 'FETCH_INCIDENT',
+      type: 'FETCH_SEARCHED_INCIDENT',
       payload: this.state
     }) 
     document.getElementById('searchNum').reset();
@@ -32,14 +33,14 @@ class IncidentSearch extends Component {
 
   render() {
     return (
-      <form onSubmit={this.search}>
+      <form id="searchNum">
         <h2>Search for an Incident</h2>
         <div>
           <label htmlFor="searchNum">
             Enter the 6 Digit Incident ID:
           </label>
           <input
-            type="number"
+            type="text"
             placeholder="######"
             name="searchNum"
             required

@@ -16,6 +16,7 @@ class CommunityPage extends Component {
   state = {
   };
 
+
   // GET request is called on page load
   // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {

@@ -20,3 +20,7 @@ textarea {
     width: 40%;
     border: 1px solid blue;
 }
+
+.bottomButtons {
+    display: block;
+}

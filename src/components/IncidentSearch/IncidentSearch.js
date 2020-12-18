@@ -11,10 +11,15 @@ class IncidentSearch extends Component {
   };
 
   // this will need to be changed to search for the text entered
-  search = (event) => {
-    event.preventDefault();
-    console.log('the search string is', this.state.searchNumber);
-    
+  search = () => {
+    this.props.dispatch({
+      type: 'FETCH_INCIDENT',
+      payload: this.state
+    }) 
+    document.getElementById('searchNum').reset();
+    this.setState({
+      searchNumber: 0
+    })
   }; // end 
 
   // handle change function for search input box
@@ -22,8 +27,6 @@ class IncidentSearch extends Component {
     this.setState({
       searchNumber: event.target.value,
     });
-    console.log('SEARCH', this.state.searchNumber);
-    
   };
 
 
@@ -32,13 +35,13 @@ class IncidentSearch extends Component {
       <form onSubmit={this.search}>
         <h2>Search for an Incident</h2>
         <div>
-          <label htmlFor="username">
+          <label htmlFor="searchNum">
             Enter the 6 Digit Incident ID:
           </label>
           <input
             type="number"
             placeholder="######"
-            name="searchNumber"
+            name="searchNum"
             required
             // value={this.state.searchNumber}
             onChange={(event) => this.handleInputChangeFor(event)}

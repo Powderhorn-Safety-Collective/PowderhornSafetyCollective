@@ -14,4 +14,17 @@ router.get('/', (req, res) => {
   })
 })
 
+router.put('/status', (req,res) => {
+  console.log('REQ IS', req.body.patrolValue);
+  let queryText = `UPDATE "user" 
+  SET "on_patrol" = $1
+  WHERE "id" = $2;`;
+  pool.query(queryText, [req.body.patrolValue, req.user.id]).then((result) => {
+    res.sendStatus(202)
+  }).catch(error => {
+    console.log('error in patrol status router', error);
+    res.sendStatus(500)
+  })
+})
+
 module.exports = router;

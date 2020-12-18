@@ -16,6 +16,31 @@ class Header extends Component {
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
   }
 
+  handleToggle = (event) => {
+    if(event.target.name === 'onPatrolToggle') {
+      this.sendPatrolStatus()  
+    }else if(event.target.name === 'onCallToggle') {
+      this.sendCallStatus()
+    } 
+  }
+
+  sendCallStatus = (param) => {
+    this.props.dispatch({
+      type: 'ADD_CALL_STATUS',
+      payload: {onCallValue: !this.props.reduxStore.user.on_call}
+    })
+    this.props.dispatch({type: 'FETCH_PATROL'});
+    this.props.dispatch({type: 'FETCH_ONCALL'});
+  }
+
+  sendPatrolStatus = (param) => {
+    this.props.dispatch({
+      type: 'ADD_PATROL_STATUS',
+      payload: {patrolValue: !this.props.reduxStore.user.on_patrol}
+    })
+    this.props.dispatch({type: 'FETCH_PATROL'});
+    this.props.dispatch({type: 'FETCH_ONCALL'});
+  }
 
 
   render() {
@@ -27,9 +52,16 @@ class Header extends Component {
           </Link>
           <div className="toggleForm">
             <p>On Patrol</p>
-            <ToggleSwitch toggleName="onPatrolToggle"/>
+            {this.props.reduxStore.user.on_patrol !== undefined &&
+            <ToggleSwitch toggleName="onPatrolToggle"
+            handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_patrol}
+            />
+            }
             <p>On Call</p>
-            <ToggleSwitch toggleName="onCallToggle"/>
+            {this.props.reduxStore.user.on_call !== undefined &&
+            <ToggleSwitch toggleName="onCallToggle"
+            handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
+            }
           </div>
           <div className="headerBtns">
             <button> Report an Incident</button>

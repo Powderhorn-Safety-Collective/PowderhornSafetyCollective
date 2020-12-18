@@ -10,7 +10,7 @@ CREATE TABLE "user" (
 	"adult" BOOLEAN NOT NULL,
 	"on_patrol" BOOLEAN NOT NULL DEFAULT false,
 	"on_call" BOOLEAN NOT NULL DEFAULT false,
-    "role" integer not null default 1, 
+  "role" integer not null default 1, 
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

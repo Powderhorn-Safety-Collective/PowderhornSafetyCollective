@@ -14,6 +14,7 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
+
   }
 
   handleToggle = (event) => {
@@ -29,8 +30,6 @@ class Header extends Component {
       type: 'ADD_CALL_STATUS',
       payload: {onCallValue: !this.props.reduxStore.user.on_call}
     })
-    this.props.dispatch({type: 'FETCH_PATROL'});
-    this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
   sendPatrolStatus = (param) => {
@@ -38,8 +37,6 @@ class Header extends Component {
       type: 'ADD_PATROL_STATUS',
       payload: {patrolValue: !this.props.reduxStore.user.on_patrol}
     })
-    this.props.dispatch({type: 'FETCH_PATROL'});
-    this.props.dispatch({type: 'FETCH_ONCALL'});
   }
 
   reportIncident = () => {

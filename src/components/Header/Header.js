@@ -7,11 +7,7 @@ import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class Header extends Component {
-  state = {
-    // TODO set this value from the DB
-    // patrolValue: false,
-    onCallValue: false,
-  }
+
 
   componentDidMount = () => {
     //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
@@ -22,22 +18,16 @@ class Header extends Component {
 
   handleToggle = (event) => {
     if(event.target.name === 'onPatrolToggle') {
-      // this.setState({
-      //   patrolValue: !this.state.patrolValue
-      // }) 
       this.sendPatrolStatus()  
     }else if(event.target.name === 'onCallToggle') {
-      this.setState({
-        onCallValue: !this.state.onCallValue
-      })
-      this.sendCallStatus(!this.state.onCallValue)
+      this.sendCallStatus()
     } 
   }
 
   sendCallStatus = (param) => {
     this.props.dispatch({
       type: 'ADD_CALL_STATUS',
-      payload: {onCallValue: param}
+      payload: {onCallValue: !this.props.reduxStore.user.on_call}
     })
     this.props.dispatch({type: 'FETCH_PATROL'});
     this.props.dispatch({type: 'FETCH_ONCALL'});
@@ -68,8 +58,10 @@ class Header extends Component {
             />
             }
             <p>On Call</p>
+            {this.props.reduxStore.user.on_call !== undefined &&
             <ToggleSwitch toggleName="onCallToggle"
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
+            }
           </div>
           <div className="headerBtns">
             <button> Report an Incident</button>

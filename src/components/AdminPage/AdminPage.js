@@ -10,9 +10,6 @@ class AdminPage extends Component {
     return (
       <div>
           
-        <button onClick= {() => this.props.history.push(`/history`)}>Incident History Page</button>
-        <button>Edit Users</button>
-        <button>Community Page</button>
 
         <h1 id="welcome">Welcome ADMIN, {this.props.store.user.username}!</h1>
         <h1> FOR THE INCIDENT COMPONENT</h1>

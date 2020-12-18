@@ -38,6 +38,42 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+// PUT route to edit user
+router.put('/editUser/:id', (req, res) => {
+  const id = req.body.id
+  const username = req.body.username;
+  const first_name = req.body.first_name;
+  const last_name = req.body.last_name;
+  const address = req.body.address;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const adult = req.body.adult;
+  const on_patrol = req.body.on_patrol;
+  const on_call = req.body.on_call;
+  const role = req.body.role;
+  let queryText= `UPDATE "user" 
+                  SET 
+                    "username" = $1, 
+                    "first_name" = $2, 
+                    "last_name" = $3, 
+                    "address" = $4, 
+                    "email" = $5, 
+                    "phone" = $6, 
+                    "adult" = $7, 
+                    "on_patrol" = $8, 
+                    "on_call" = $9, 
+                    "role" = $10 
+                  WHERE 
+                    "id" = $11`;
+  pool.query(queryText, [username, first_name, last_name, address, email, phone, adult, on_patrol, on_call, role, id])
+  .then((result) => {
+      res.sendStatus(200);
+  }).catch((err) => {
+      console.log('error in PUT user', err);
+      res.sendStatus(500);
+  });
+});
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
@@ -129,6 +165,16 @@ router.get('/phone', rejectUnauthenticated, (req, res) => {
 router.get('/adult', rejectUnauthenticated, (req, res) => {
   // sort by type
   const queryText = `SELECT * FROM "user" ORDER BY "adult";`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+router.get('/role', rejectUnauthenticated, (req, res) => {
+  // sort by type
+  const queryText = `SELECT * FROM "user" ORDER BY "role";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

@@ -21,7 +21,6 @@ class MemberPage extends Component {
   render() {
     return ( 
       <div>
-        <h1>FOR THE NAV BAR</h1>
         <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
         <p>Your ID is: {this.props.store.user.id}</p>
         <main className="row">

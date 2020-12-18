@@ -43,6 +43,7 @@ class ReportIncident extends Component {
           showReport: false
       });
       this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+      this.props.history.push('/');
     }
 
   render() {
@@ -61,41 +62,41 @@ class ReportIncident extends Component {
             <button>Edit Submission</button>
             <br/>
             <br/>
-            <button className="btn" onClick={this.confirmIncident}>Submit Incident</button>
+            <button className="btn" onClick={this.confirmIncident}>Confirm Submission</button>
         </div>
     :
-    <></>
+    <div className="editModal">
+    {JSON.stringify(this.state)}
+    <p>Current Time: <br/>
+    {this.state.time_submitted}</p>
+    <br/>
+    <input type="text" placeholder="Location" onChange={(event) => this.handleChange(event, 'location')}></input>
+    <br/>
+    <input type="checkbox" value="gunshot" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <label>Gun shots heard</label>
+    <br/>
+    <input type="checkbox" value="stray pet" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <label>Stray Pet</label>
+    <br/>
+    <input type="checkbox" value="fire" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <label>Fire</label>
+    <br/>
+    <input type="checkbox" value="vehicle" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <label>Vehicle incident</label>
+    <br/>
+    <input type="checkbox" value="mental health crisis" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <label>Mental health crisis</label>
+    <br/>
+    <input type="checkbox"></input>
+    <label>Other</label>
+    <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
+    <br/>
+    <textarea placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
+    <br/>
+    <button className="btn" onClick={this.submitReport}>Submit Incident</button>
+  </div>
     }
-      <div className="editModal">
-        {JSON.stringify(this.state)}
-        <p>Current Time: <br/>
-        {this.state.time_submitted}</p>
-        <br/>
-        <input type="text" placeholder="Location" onChange={(event) => this.handleChange(event, 'location')}></input>
-        <br/>
-        <input type="checkbox" value="gunshot" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <label>Gun shots heard</label>
-        <br/>
-        <input type="checkbox" value="stray pet" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <label>Stray Pet</label>
-        <br/>
-        <input type="checkbox" value="fire" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <label>Fire</label>
-        <br/>
-        <input type="checkbox" value="vehicle" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <label>Vehicle incident</label>
-        <br/>
-        <input type="checkbox" value="mental health crisis" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <label>Mental health crisis</label>
-        <br/>
-        <input type="checkbox"></input>
-        <label>Other</label>
-        <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
-        <br/>
-        <textarea placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
-        <br/>
-        <button className="btn" onClick={this.submitReport}>Submit Incident</button>
-      </div>
+
     </>
     );
   }

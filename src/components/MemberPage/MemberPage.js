@@ -8,30 +8,42 @@ class MemberPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     return (
-      <div>
-        <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
-
-        <h2> FOR THE INCIDENT COMPONENT</h2>
-        <div class="onPatrolDisplay">
-          <h2>Members on patrol: </h2>
-          <ul>  
-            {this.props.store.patrolReducer.map((patroller) => {
-              return <PatrolItem patroller={patroller}/>
-            })}
-          </ul>
+<>
+      <div className="row">
+        <div className="column">
+          <p>Contact info for reporter</p>
         </div>
-        <div class="onCallDisplay">
-          <h2>Members on call: </h2>
-            <ul>  
-            {this.props.store.onCallReducer.map((onCall) => {
-              return <OnCallItem onCall={onCall}/>
-            })}
-            </ul>
+        <div className="column">
+          <div className="box">
+            <h1> FOR THE INCIDENT COMPONENT</h1>
+          </div>
         </div>
-
+          <div className="column">
+            <div className="onPatrolDisplay" className="box scrollable">
+              <h2>Members on patrol: </h2>
+              {this.props.store.patrolReducer &&
+              <ul>  
+                {this.props.store.patrolReducer.map((patroller) => {
+                  return <PatrolItem patroller={patroller} key={patroller.id}/>
+                })}
+              </ul>
+              }
+            </div> 
+            <div className="onCallDisplay" className="box scrollable">
+              <h2>Members on call: </h2>
+              {this.props.store.onCallReducer &&
+                <ul>  
+                {this.props.store.onCallReducer.map((onCall) => {
+                  return <OnCallItem onCall={onCall} key={onCall.id}/>
+                })}
+                </ul>
+              }
+            </div>
+            </div>
+          </div>
         
-      </div>
+        {/* <LogOutButton className="log-in" /> */}
+    </>
     );
   }
 }

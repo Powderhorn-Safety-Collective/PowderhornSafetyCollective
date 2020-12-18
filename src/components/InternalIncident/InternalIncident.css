@@ -1,11 +1,22 @@
 .internalModule {
     background-color: lightgrey;
     border: 2px solid black;  
-    padding: 5px;
+    padding: 15px;
     margin: 5px;
 }
 
 textarea {
     width: 500px;
     height: 100px;
+}
+
+.internalLine {
+    display: inline-block;
+    padding: 0 10px;
+
+}
+
+.columnLeft {
+    width: 40%;
+    border: 1px solid blue;
 }

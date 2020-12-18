@@ -8,7 +8,11 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   // data to populate incident table
   // retrieving all data from all users
-  const queryText = `SELECT * FROM "incidents";`
+  // const queryText = `SELECT * FROM "incidents"
+  // left join "user" on "user".username = incidents.username;
+  // ;`
+  const queryText = `SELECT * FROM "incidents"
+  ;`
   pool.query(queryText)
   .then((results) => res.send(results.rows))
   .catch((error) => {

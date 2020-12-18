@@ -17,15 +17,15 @@ class InternalIncident extends Component {
     user_notes_public: this.props.incident.user_notes_public
   }
 
-  // function to render active or inactive on incident card
-  renderStatus = ( active) => {
-    if ( active === true) {
-      return <p className="active">Active</p>
-    }
-    else if ( active === false) {
-      return <p className="active">Inactive</p>
-    }
-  }
+  // // function to render active or inactive on incident card
+  // renderStatus = ( active) => {
+  //   if ( active === true) {
+  //     return <p className="active">Active</p>
+  //   }
+  //   else if ( active === false) {
+  //     return <p className="active">Inactive</p>
+  //   }
+  // }
 
   // function to render time associated with incident
   renderTime = ( time) => {
@@ -43,7 +43,7 @@ class InternalIncident extends Component {
     let day = Number(time.slice(8,10));
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
-    return <p>{displayTime}</p>
+    return <p className="internalLine">{displayTime}</p>
   }
 
   handleChange = (event) => {
@@ -93,63 +93,89 @@ class InternalIncident extends Component {
 
   render() {
     return (
-      <div className="internalModule">
-        <h3>Incident Number: {this.props.incident.client_id}</h3>
-        {JSON.stringify(this.props.incident)}
-        {JSON.stringify(this.state)}
-        {this.renderStatus( this.props.incident.active)}
-        {/* username toggle here */}
-        {this.props.incident.username_public !== undefined &&
-          <ToggleSwitch toggleName="usernameToggle"
-            handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
-          />
+      <div className="internalSection row">
+        {/* left stuff */}
+        <div className="contactInfo columnLeft">
+          {this.props.incident.username ?
+          <p></p>
+          :
+          <p></p>
         }
-        <p>Submitted by: {this.props.incident.username}</p>
-        {/* time/date toggle here */}
-        {this.props.incident.timedate_public !== undefined &&
-          <ToggleSwitch toggleName="timedateToggle"
-            handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
+        </div>
+        <div className="internalModule">
+          <h3>Incident Number: {this.props.incident.client_id}</h3>
+          {/* {JSON.stringify(this.props.incident)} */}
+          {JSON.stringify(this.state)}
+          {/* {this.renderStatus( this.props.incident.active)} */}
+          {/* username toggle here */}
+          {this.props.incident.username_public !== undefined &&
+            <ToggleSwitch toggleName="usernameToggle"
+              className="internalLine"
+              handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
+            />
+          }
+          <p className="internalLine">Submitted by: {this.props.incident.username}</p>
+          <br/>
+
+
+          {/* time/date toggle here */}
+          {this.props.incident.timedate_public !== undefined &&
+            <ToggleSwitch toggleName="timedateToggle"
+              className="internaLine"
+              handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
+            />
+          }
+          {this.renderTime( this.props.incident.time_submitted)}
+          <br/>
+
+          {/* location toggle goes here */}
+          {this.props.incident.location_public !== undefined &&
+            <ToggleSwitch toggleName="locationToggle"
+              className="internalLine"
+              handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
+            />
+          }
+          <p className="internalLine"> Location: {this.props.incident.location}</p>
+          <br/>
+
+          {/* type toggle goes here */}
+          {this.props.incident.type_public !== undefined &&
+            <ToggleSwitch toggleName="typeToggle"
+              className="internalLine"
+              handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
+            />
+          }
+          <p className="internalLine">Type: {this.props.incident.type}</p>
+          <br/>
+
+          {/* toggle for user notes goes here */}
+          {this.props.incident.user_notes_public !== undefined &&
+            <ToggleSwitch toggleName="userNotesToggle"
+              className="internalLine"
+              handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
+            />
+          }
+          <p className="internalLine">User Notes: {this.props.incident.notes}</p>
+          <br/>
+
+          <label htmlFor="publicText">
+            Text to be displayed at beginning of public post:
+          </label>
+          <br/>
+          <textarea 
+            id="publicText"
+            placeholder="Text for public post"
+            onChange={(event) => this.handleChange(event)}
+            value={this.state.publicText}
           />
-        }
-        {this.renderTime( this.props.incident.time_submitted)}
-        {/* location toggle goes here */}
-        {this.props.incident.location_public !== undefined &&
-          <ToggleSwitch toggleName="locationToggle"
-            handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
-          />
-        }
-        <p>Location: {this.props.incident.location}</p>
-        {/* type toggle goes here */}
-        {this.props.incident.type_public !== undefined &&
-          <ToggleSwitch toggleName="typeToggle"
-            handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
-          />
-        }
-        <p>Type: {this.props.incident.type}</p>
-        {/* toggle for user notes goes here */}
-        {this.props.incident.user_notes_public !== undefined &&
-          <ToggleSwitch toggleName="userNotesToggle"
-            handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
-          />
-        }
-        <p>User Notes: {this.props.incident.notes}</p>
-        <label htmlFor="publicText">
-          Text to be displayed at beginning of public post:
-        </label>
-        <br/>
-        <textarea 
-          id="publicText"
-          placeholder="Text for public post"
-          onChange={(event) => this.handleChange(event)}
-          value={this.state.publicText}
-        />
-        <br/>
-        <button 
-          onClick={this.handlePublicTextSave} 
-          className="btn"
-        >
-          Save Public Display Text
-        </button>
+          <br/>
+          <button 
+            onClick={this.handlePublicTextSave} 
+            className="btn"
+          >
+            Save Public Display Text
+          </button>
+        </div>
       </div>
     );
   }

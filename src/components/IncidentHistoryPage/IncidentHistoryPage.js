@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
 
-import './Tables.css';
+import './IncidentHistoryPage.css';
 
 class IncidentHistoryPage extends Component {
 

@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import swal from 'sweetalert';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 class ReportIncident extends Component {
 
     state = {
         showReport: false,
+        follow_incident: false,
+        register: false,
         type: '',
         notes: '',
         location: '',
@@ -41,19 +44,68 @@ class ReportIncident extends Component {
     }
 
     confirmIncident = () => {
-      this.setState( {
-          showReport: false
-      });
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
+      if(this.state.register === false && this.state.follow_incident === true) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
           `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this to search for any updates on your incident`, 
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
           {
             button: "Ok!",
-            icon: "warning"
-      });
+        });
         this.props.history.push('/');
       }
+      else if(this.state.register === true && this.state.follow_incident === false) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `Welcome!`,
+          `Please input your information to register a new account.`, 
+          {
+            button: "Ok!",
+        });
+        this.props.history.push('/registration');
+      }
+      else if(this.state.register === false && this.state.follow_incident === false) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `Thank you!`,
+          `We will respond to your reported incident.`, 
+          {
+            button: "Ok!",
+        });
+        this.props.history.push('/');
+      }
+      else if(this.state.register === true && this.state.follow_incident === true) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+          Please input your information to register a new account.`, 
+          {
+            button: "Ok!",
+        });
+        this.props.history.push('/registration');
+      }
+      }
+      
+
+      editSubmission = () => {
+        this.setState( {
+          showReport: false
+        });
+      }
+
+
+  handleToggle = (event) => {
+    if(event.target.name === 'followToggle') {
+      this.setState( {
+        follow_incident: !this.state.follow_incident
+      });
+    }else if(event.target.name === 'registerToggle') {
+      this.setState( {
+        register: !this.state.register
+      });
+    } 
+  }
 
   render() {
     return (
@@ -68,8 +120,16 @@ class ReportIncident extends Component {
             <p>Notes: {this.state.notes}</p>
             <br/>
             <p>Updates on the incident? Y/N</p>
+            <ToggleSwitch toggleName="followToggle"
+            handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
+            />
             <p>Sign up for an account Y/N (ANON)</p>
-            <button>Edit Submission</button>
+            <ToggleSwitch toggleName="registerToggle"
+            handleToggle={this.handleToggle} toggleOn={this.state.register}
+            />
+            <br/>
+            <br/>
+            <button className="btn" onClick={this.editSubmission}>Edit Submission</button>
             <br/>
             <br/>
             <button className="btn" onClick={this.confirmIncident}>Confirm Submission</button>

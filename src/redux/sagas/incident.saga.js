@@ -28,8 +28,6 @@ function* fetchPublicIncidents() {
 
 //fetches the searched incident based on the 6 digit incident ID
 function* fetchSearchedIncident(action) {
-  console.log(action.payload.searchNumber);
-  
   try{
     const incidentResponse = yield axios.get(`/api/incident/search/${action.payload.searchNumber}`)
     yield put({type: 'SET_SEARCHED_INCIDENT', payload: incidentResponse.data});

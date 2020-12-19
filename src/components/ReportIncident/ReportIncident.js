@@ -30,13 +30,6 @@ class ReportIncident extends Component {
       }, 1000)
     }
 
-    submitReport = () => {
-        console.log('clicked on report incident');
-        this.setState( {
-            showReport: true
-        });
-    }
-
     handleChange = (event, typeParam) => {
       console.log(event.target.value, typeParam);
       this.setState( {
@@ -44,6 +37,20 @@ class ReportIncident extends Component {
       });
     }
 
+    submitReport = () => {
+        console.log('clicked on report incident');
+        this.setState( {
+            showReport: true
+        });
+    }
+   
+    editSubmission = () => {
+      this.setState( {
+        showReport: false
+      });
+    }
+
+    // this long function checks to see if the user wants to register an account or follow the incident, or both
     confirmIncident = () => {
       if(this.state.register === false && this.state.follow_incident === true) {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
@@ -87,14 +94,6 @@ class ReportIncident extends Component {
         this.props.history.push('/registration');
       }
       }
-      
-
-      editSubmission = () => {
-        this.setState( {
-          showReport: false
-        });
-      }
-
 
   handleToggle = (event) => {
     if(event.target.name === 'followToggle') {
@@ -111,62 +110,61 @@ class ReportIncident extends Component {
   render() {
     return (
     <>
-        {JSON.stringify(this.state)}
-        {this.state.showReport === true ? 
-        <div className="registerForm">
-            <h2>IS THIS CORRECT?</h2>
-            <p>Time/Date: {this.state.time_submitted}</p>
-            <p>Location: {this.state.location}</p>
-            <p>Incident type: {this.state.type}</p>
-            <p>Notes: {this.state.notes}</p>
-            <br/>
-            <p>Updates on the incident? Y/N</p>
-            <ToggleSwitch toggleName="followToggle"
-            handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
-            />
-            <p>Sign up for an account Y/N (ANON)</p>
-            <ToggleSwitch toggleName="registerToggle"
-            handleToggle={this.handleToggle} toggleOn={this.state.register}
-            />
-            <br/>
-            <br/>
-            <button className="btn" onClick={this.editSubmission}>Edit Submission</button>
-            <br/>
-            <br/>
-            <button className="btn" onClick={this.confirmIncident}>Confirm Submission</button>
-        </div>
+    {JSON.stringify(this.state)}
+    {this.state.showReport === true ? 
+    <div className="registerForm">
+        <h2>IS THIS CORRECT?</h2>
+          <p>Time/Date: {this.state.time_submitted}</p>
+          <p>Location: {this.state.location}</p>
+          <p>Incident type: {this.state.type}</p>
+          <p>Notes: {this.state.notes}</p>
+        <br/>
+          <p>Updates on the incident? Y/N</p>
+          <ToggleSwitch toggleName="followToggle"
+          handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
+          />
+          <p>Sign up for an account Y/N (ANON)</p>
+          <ToggleSwitch toggleName="registerToggle"
+          handleToggle={this.handleToggle} toggleOn={this.state.register}
+          />
+        <br/>
+        <br/>
+          <button className="btn" onClick={this.editSubmission}>Edit Submission</button>
+        <br/>
+        <br/>
+          <button className="btn" onClick={this.confirmIncident}>Confirm Submission</button>
+    </div>
     :
     <div className="registerForm">
-    <p>Current Time: <br/>
-    {this.state.time_submitted}</p>
+      <p>Current Time: <br/>
+      {this.state.time_submitted}</p>
     <br/>
-    <input defaultValue={this.state.notes} type="text" placeholder="Location" onChange={(event) => this.handleChange(event, 'location')}></input>
+      <input defaultValue={this.state.notes} type="text" placeholder="Location" onChange={(event) => this.handleChange(event, 'location')}></input>
     <br/>
-    <input className="radio" type="radio" value="gunshot" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-    <label>Gun shots heard</label>
+      <input className="radio" type="radio" value="gunshot" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
+      <label>Gun shots heard</label>
     <br/>
-    <input className="radio" type="radio" value="stray pet" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-    <label>Stray Pet</label>
+      <input className="radio" type="radio" value="stray pet" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
+      <label>Stray Pet</label>
     <br/>
-    <input className="radio" type="radio"  value="fire" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-    <label>Fire</label>
+      <input className="radio" type="radio"  value="fire" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
+      <label>Fire</label>
     <br/>
-    <input className="radio" type="radio"  value="vehicle" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-    <label>Vehicle incident</label>
+      <input className="radio" type="radio"  value="vehicle" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
+      <label>Vehicle incident</label>
     <br/>
-    <input className="radio" type="radio"  value="mental health crisis" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-    <label>Mental health crisis</label>
+      <input className="radio" type="radio"  value="mental health crisis" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
+      <label>Mental health crisis</label>
     <br/>
-    <input className="radio" type="radio" name="type"></input>
-    <label>Other</label>
-    <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
+      <input className="radio" type="radio" name="type"></input>
+      <label>Other</label>
+      <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
     <br/>
-    <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
+      <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
     <br/>
-    <button className="btn" onClick={this.submitReport}>Submit Incident</button>
-  </div>
+      <button className="btn" onClick={this.submitReport}>Submit Incident</button>
+    </div>
     }
-
     </>
     );
   }

@@ -30,11 +30,17 @@ class IncidentSearch extends Component {
     });
   };
 
+  noResults = () => {
+    console.log('There are no results');
+    // TODO ADD NO RESULTS ALERT
+  }
+
 
   render() {
     return (
       <form id="searchNum">
         <h2>Search for an Incident</h2>
+        {JSON.stringify(this.props.store.searchIncidentReducer)}
         <div>
           <label htmlFor="searchNum">
             Enter the 6 Digit Incident ID:

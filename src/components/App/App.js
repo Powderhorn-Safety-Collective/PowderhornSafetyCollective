@@ -61,6 +61,12 @@ class App extends Component {
             path="/community"
             component={CommunityPage}
             />
+            {/* route leading to incident history page */}
+            <Route
+              exact 
+              path="/report" 
+              component={ReportIncident} 
+            />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -150,13 +156,6 @@ class App extends Component {
               exact 
               path="/editIncidentModal" 
               component={EditIncidentModal} 
-            />
-
-            {/* route leading to incident history page */}
-            <ProtectedRoute
-              exact 
-              path="/report" 
-              component={ReportIncident} 
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

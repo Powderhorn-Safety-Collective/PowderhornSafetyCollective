@@ -28,6 +28,10 @@ class CommunityPage extends Component {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
   }
 
+  contactRequest = () => {
+    console.log('REQUESTING CONTACT');
+  }
+
   render() {
     return (
       <div className="row">
@@ -88,7 +92,16 @@ class CommunityPage extends Component {
           <div className="box">
             {/* section to search for an incident */}
             <IncidentSearch/>
-            {JSON.stringify(this.props.store.searchIncidentReducer)}
+            {this.props.store.searchIncidentReducer.client_id &&
+            <div>
+              <p>Incident ID: {this.props.store.searchIncidentReducer.client_id}</p>
+              <p>Incident Type: {this.props.store.searchIncidentReducer.type}</p>
+              <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
+              {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
+              <button onClick={this.contactRequest}>Request Contact</button>
+            </div>
+            }
+            
           </div>
         </div> {/* end right stuff */}
       </div> // end page

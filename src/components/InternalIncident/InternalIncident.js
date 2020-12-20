@@ -156,8 +156,8 @@ class InternalIncident extends Component {
           <Row>
             <div className="internalModule">
               <h3>Incident Number: {this.props.incident.client_id}</h3>
-              {/* {JSON.stringify(this.props.incident)} */}
-              {/* {JSON.stringify(this.state)} */}
+              {JSON.stringify(this.props.incident)}
+              {JSON.stringify(this.state)}
               {/* {this.renderStatus( this.props.incident.active)} */}
               {/* username toggle here */}
               {this.props.incident.username_public !== undefined &&

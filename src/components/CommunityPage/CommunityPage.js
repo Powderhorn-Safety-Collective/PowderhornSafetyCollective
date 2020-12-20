@@ -120,6 +120,10 @@ class CommunityPage extends Component {
               <button onClick={this.contactRequest}>Request Contact</button>
             </div>
             }
+            {/* TODO add sweet alert for no-results */}
+            {this.props.store.searchIncidentReducer === "" &&
+              <p>No Incident with that ID was found, please try again.</p>
+            }
             
           </div>
         </div> {/* end right stuff */}

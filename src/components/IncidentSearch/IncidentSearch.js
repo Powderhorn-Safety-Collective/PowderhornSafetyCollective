@@ -10,7 +10,7 @@ class IncidentSearch extends Component {
     searchNumber: 0,
   };
 
-  // this will need to be changed to search for the text entered
+  // sends searched ID to incident SAGA
   search = () => {
     console.log('SEARCHING', this.state);
     this.props.dispatch({
@@ -40,7 +40,6 @@ class IncidentSearch extends Component {
     return (
       <form id="searchNum">
         <h2>Search for an Incident</h2>
-        {JSON.stringify(this.props.store.searchIncidentReducer)}
         <div>
           <label htmlFor="searchNum">
             Enter the 6 Digit Incident ID:

@@ -30,7 +30,11 @@ function* fetchPublicIncidents() {
 function* fetchSearchedIncident(action) {
   try{
     const incidentResponse = yield axios.get(`/api/incident/search/${action.payload.searchNumber}`)
-    yield put({type: 'SET_SEARCHED_INCIDENT', payload: incidentResponse.data});
+    if(incidentResponse.data === "") {
+      yield put({type: 'SET_SEARCHED_INCIDENT', payload: ""}) 
+    }else {
+      yield put({type: 'SET_SEARCHED_INCIDENT', payload: incidentResponse.data});
+    }
   }catch(error){
     console.log('error in search incident saga');
   }

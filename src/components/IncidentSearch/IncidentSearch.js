@@ -43,7 +43,7 @@ class IncidentSearch extends Component {
             type="text"
             placeholder="######"
             name="searchNum"
-            required
+            // required
             // value={this.state.searchNumber}
             onChange={(event) => this.handleInputChangeFor(event)}
           />

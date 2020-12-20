@@ -27,9 +27,9 @@ class CommunityPage extends Component {
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
   }
-
+  // User can click this button to request a follow up from PSC on an incident
   contactRequest = () => {
-    console.log('REQUESTING CONTACT');
+    console.log('REQUESTING CONTACT TODO- ADD TWILIO');
   }
 
   render() {

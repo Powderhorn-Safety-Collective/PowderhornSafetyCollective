@@ -88,6 +88,7 @@ function* editIncident(action) {
     try {
       yield axios.put('api/incident/publicPost', action.payload);
       yield put({type: 'GET_INCIDENTS'})
+      alert('Post updated');
     }
     catch (error) {
 

@@ -1,13 +1,13 @@
 /* size for l, c, r columns */
-.column {
+/* .column {
   flex: 30%;
   border: 1px solid blue;
-}
+} */
 
 /* container for columns */
-.row {
+/* .row {
   display: flex;
-}
+} */
 
 /* border and spacing for sections on page */
 .box {

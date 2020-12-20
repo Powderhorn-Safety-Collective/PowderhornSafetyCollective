@@ -3,6 +3,7 @@
     border: 2px solid black;  
     padding: 15px;
     margin: 5px;
+    width: 100%;
 }
 
 textarea {
@@ -16,10 +17,10 @@ textarea {
 
 }
 
-.columnLeft {
+/* .columnLeft {
     width: 40%;
     border: 1px solid blue;
-}
+} */
 
 .bottomButtons {
     display: inline-block;

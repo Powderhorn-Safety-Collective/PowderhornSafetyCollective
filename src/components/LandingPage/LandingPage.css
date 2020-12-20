@@ -2,16 +2,16 @@
 Grid
 -------------------------------------------------------------------------------- */
 
-.grid {
-  display: flex;
-  flex: 0 1 auto;
+/* .grid { */
+  /* display: flex; */
+  /* flex: 0 1 auto; */
   /* defaults to 'row' */
-  flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-direction: row; */
+  /* flex-wrap: wrap; */
   /* defaults to 'flex-start' */
-  justify-content: flex-start;
-  align-items: flex-start;
-}
+  /* justify-content: flex-start; */
+  /* align-items: flex-start; */
+/* } */
 
 .grid-col {
   flex: 0 0 auto;

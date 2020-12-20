@@ -127,9 +127,9 @@ class InternalIncident extends Component {
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Row>
-          <Col>
+          <Col lg={3}>
             {/* left stuff */}
             {/* <div className="contactInfo columnLeft"> */}
               {this.props.incident.username ?
@@ -151,13 +151,13 @@ class InternalIncident extends Component {
             {/* </div> */}
           </Col>
 
-          <Col>
+          <Col lg={9}>
           {/* div for all right stuff */}
           <Row>
             <div className="internalModule">
               <h3>Incident Number: {this.props.incident.client_id}</h3>
-              {JSON.stringify(this.props.incident)}
-              {JSON.stringify(this.state)}
+              {/* {JSON.stringify(this.props.incident)} */}
+              {/* {JSON.stringify(this.state)} */}
               {/* {this.renderStatus( this.props.incident.active)} */}
               {/* username toggle here */}
               {this.props.incident.username_public !== undefined &&

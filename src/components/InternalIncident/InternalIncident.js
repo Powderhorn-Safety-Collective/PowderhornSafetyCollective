@@ -58,9 +58,9 @@ class InternalIncident extends Component {
     })
   }
 
+  // handleToggles takes in the toggle and decides what to do with it depending on
+  // which switch it is
   handleToggle = (event) => {
-      console.log('toggled', event.target.name);
-      
     if(event.target.name.slice(0,14) === 'usernameToggle') {
         console.log('username toggle');
         
@@ -68,30 +68,36 @@ class InternalIncident extends Component {
         username_public: !this.state.username_public
       });  
     }
-    else if (event.target.name === 'timedateToggle') {
+    else if (event.target.name.slice(0,14) === 'timedateToggle') {
+      console.log('timedate toggle');
+      
       this.setState({
         timedate_public: !this.state.timedate_public
       });
     }
-    else if (event.target.name === 'locationToggle') {
+    else if (event.target.name.slice(0,14) === 'locationToggle') {
+      console.log('location toggle');
+      
       this.setState({
         location_public: !this.state.location_public
       });
     }
-    else if (event.target.name === 'typeToggle') {
+    else if (event.target.name.slice(0, 10) === 'typeToggle') {
+      console.log('type toggle');
+      
       this.setState({
         type_public: !this.state.type_public
       });
     }
-    else if (event.target.name === 'userNotesToggle') {
+    else if (event.target.name.slice(0, 15) === 'userNotesToggle') {
+      console.log('usernotes toggle');
       this.setState({
         user_notes_public: !this.state.user_notes_public
       });
     }
-    else if (event.target.name === 'activeToggle') {
-        this.sendActiveStatus();
-        
-      }
+    else if (event.target.name.slice(0, 12) === 'activeToggle') {
+      this.sendActiveStatus();
+    }
   }
 
     // this function will change the state of the 'active' boolean in the incidents table
@@ -133,134 +139,136 @@ class InternalIncident extends Component {
     let activeToggle = `activeToggle${this.props.incident.id}`
     return (
       <Container fluid>
+          {/* Row for all the stuff inside of the container */}
           <Row>
-          <Col lg={3}>
-        {/* left stuff */}
-          {this.props.incident.username ?
-          <>
-            <p>Submitted by: {this.props.incident.username}</p>
-            <p>Name: {this.props.incident.first_name} {this.props.incident.last_name}</p>
-            {this.props.incident.address && 
-              <p>Address: {this.props.incident.address}</p>
-            }
-            <p>Phone: {this.props.incident.phone}</p>
-            {this.props.incident.email && 
-            <p>email: {this.props.incident.email}</p>}
-          </>
-          :
-          <p></p>
-        }
-        </Col>
-        <Col lg={9}>
-        {/* div for all right stuff */}
-        <Row>
-          <div className="internalModule">
-            <h3>Incident Number: {this.props.incident.client_id}</h3>
-            {JSON.stringify(this.props.incident)}
-            {JSON.stringify(this.state)}
-            {/* {this.renderStatus( this.props.incident.active)} */}
-            {/* username toggle here */}
-            {this.props.incident.username_public !== undefined &&
-              <ToggleSwitch toggleName={usernameToggle}
-                className="internalLine"
-                handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
-              />
-            }
-            <p className="internalLine">Submitted by: {this.props.incident.username}</p>
-            <br/>
+            {/* left stuff for user info for person who submitted incident, if available*/}
+            <Col lg={3}>
+              {this.props.incident.username ?
+                <>
+                  <p>Submitted by: {this.props.incident.username}</p>
+                  <p>Name: {this.props.incident.first_name} {this.props.incident.last_name}</p>
+                  {this.props.incident.address && 
+                    <p>Address: {this.props.incident.address}</p>
+                  }
+                  <p>Phone: {this.props.incident.phone}</p>
+                  {this.props.incident.email && 
+                  <p>email: {this.props.incident.email}</p>}
+                </>
+              :
+                <p>
+                  The user who submittedis not registered
+                </p>
+              }
+            </Col>
+            <Col lg={9}>
+            {/* Row for all the stuff inside the box */}
+              <Row>
+                <div className="internalModule">
+                <h3>Incident Number: {this.props.incident.client_id}</h3>
+                {JSON.stringify(this.props.incident)}
+                {JSON.stringify(this.state)}
 
+                {/* username toggle here to select if username is viewable on the public post*/}
+                {this.props.incident.username_public !== undefined &&
+                  <ToggleSwitch toggleName={usernameToggle}
+                    className="internalLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
+                  />
+                }
+                <p className="internalLine">Submitted by: {this.props.incident.username}</p>
+                <br/>
 
-            {/* time/date toggle here */}
-            {this.props.incident.timedate_public !== undefined &&
-              <ToggleSwitch toggleName={timedateToggle}
-                className="internaLine"
-                handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
-              />
-            }
-            {this.renderTime( this.props.incident.time_submitted)}
-            <br/>
+                {/* timedate toggle here to select if timedate is viewable on the public post */}
+                {this.props.incident.timedate_public !== undefined &&
+                  <ToggleSwitch toggleName={timedateToggle}
+                    className="internaLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
+                  />
+                }
+                {this.renderTime( this.props.incident.time_submitted)}
+                <br/>
 
-            {/* location toggle goes here */}
-            {this.props.incident.location_public !== undefined &&
-              <ToggleSwitch toggleName={locationToggle}
-                className="internalLine"
-                handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
-              />
-            }
-            <p className="internalLine"> Location: {this.props.incident.location}</p>
-            <br/>
+                {/* location toggle here to select if location is viewable on the public post */}
+                {this.props.incident.location_public !== undefined &&
+                  <ToggleSwitch toggleName={locationToggle}
+                    className="internalLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
+                  />
+                }
+                <p className="internalLine"> Location: {this.props.incident.location}</p>
+                <br/>
 
-            {/* type toggle goes here */}
-            {this.props.incident.type_public !== undefined &&
-              <ToggleSwitch toggleName={typeToggle}
-                className="internalLine"
-                handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
-              />
-            }
-            <p className="internalLine">Type: {this.props.incident.type}</p>
-            <br/>
+                {/* type toggle here to select if type is viewable on the public post */}
+                {this.props.incident.type_public !== undefined &&
+                  <ToggleSwitch toggleName={typeToggle}
+                    className="internalLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
+                  />
+                }
+                <p className="internalLine">Type: {this.props.incident.type}</p>
+                <br/>
 
-            {/* toggle for user notes goes here */}
-            {this.props.incident.user_notes_public !== undefined &&
-              <ToggleSwitch toggleName={userNotesToggle}
-                className="internalLine"
-                handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
-              />
-            }
-            <p className="internalLine">User Notes: {this.props.incident.notes}</p>
-            <br/>
+                {/* user notes toggle here to select if user notes are viewable on the public post */}
+                {this.props.incident.user_notes_public !== undefined &&
+                  <ToggleSwitch toggleName={userNotesToggle}
+                    className="internalLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
+                  />
+                }
+                <p className="internalLine">User Notes: {this.props.incident.notes}</p>
+                <br/>
 
-            <label htmlFor="publicText">
-              Text to be displayed at beginning of public post:
-            </label>
+                <label htmlFor="publicText">
+                  Text to be displayed at beginning of public post:
+                </label>
+                <br/>
+                <textarea 
+                  id="publicText"
+                  placeholder="Text for public post"
+                  onChange={(event) => this.handleChange(event)}
+                  value={this.state.publicText}
+                />
+                <br/>
+                <button 
+                  onClick={this.handlePublicTextSave} 
+                  className="btn"
+                >
+                  Save Public Display Text
+                </button>
+              </div>
+            </Row>
             <br/>
-            <textarea 
-              id="publicText"
-              placeholder="Text for public post"
-              onChange={(event) => this.handleChange(event)}
-              value={this.state.publicText}
-            />
-            <br/>
-            <button 
-              onClick={this.handlePublicTextSave} 
-              className="btn"
-            >
-              Save Public Display Text
-            </button>
-          </div>
-        </Row>
-        <br/>
-        <Row className="bottomButtons">
-          {/* toggle for active/inactive goes here 
-          This will change the data directly in the database */}
-          {this.props.incident.active !== undefined &&
-            <ToggleSwitch toggleName={activeToggle}
-              className="internalLine"
-              handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
-            />
-          }
-          <p className="internalLine">Active Incident? </p>
-          <button 
-              onClick={this.handleDuplicate} 
-              className="btn"
-            >
-              Mark as Duplicate
-            </button>
-            <button 
-              onClick={this.handleAssignClaim} 
-              className="btn"            
-            >
-              Assign/Claim
-            </button>
-            <button 
-              onClick={this.handlePostNotice} 
-              className="btn"
-            >
-              Post Public Notice
-            </button>
+            <Row className="bottomButtons">
+              {/* toggle for active/inactive goes here 
+              This will change the data directly in the database */}
+              {this.props.incident.active !== undefined &&
+                <ToggleSwitch toggleName={activeToggle}
+                  className="internalLine"
+                  handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
+                />
+              }
+              <p className="internalLine">Active Incident? </p>
+              <button 
+                onClick={this.handleDuplicate} 
+                className="btn"
+              >
+                Mark as Duplicate
+              </button>
+              <button 
+                onClick={this.handleAssignClaim} 
+                className="btn"            
+              >
+                Assign/Claim
+              </button>
+              <button 
+                onClick={this.handlePostNotice} 
+                className="btn"
+              >
+                Post Public Notice
+              </button>
 
-        </Row>
-        </Col>
+            </Row>
+          </Col>
         </Row>
       </Container>
     );

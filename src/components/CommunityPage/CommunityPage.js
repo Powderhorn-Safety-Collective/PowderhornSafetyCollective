@@ -16,6 +16,24 @@ class CommunityPage extends Component {
   state = {
   };
 
+  renderTime = (time) => {
+    let timeHour = Number(time.slice(11,13));
+    let timeMorningEvening = 'a.m.';
+    if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
+    }
+    else if (timeHour == 0) {
+      timeHour = 12;
+    }
+    let timeMinute = time.slice(14, 16);
+    let month = Number(time.slice(5,7));
+    let day = Number(time.slice(8,10));
+    let year = Number(time.slice(0,4));
+    let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
+    return displayTime
+  }
+
   // GET request is called on page load
   // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {
@@ -25,6 +43,10 @@ class CommunityPage extends Component {
   // function to fetch all incident data for public view
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
+  }
+  // User can click this button to request a follow up from PSC on an incident
+  contactRequest = () => {
+    console.log('REQUESTING CONTACT TODO- ADD TWILIO');
   }
 
   render() {
@@ -87,6 +109,22 @@ class CommunityPage extends Component {
           <div className="box">
             {/* section to search for an incident */}
             <IncidentSearch/>
+            {/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
+            {this.props.store.searchIncidentReducer.client_id &&
+            <div>
+              <p>Incident ID: {this.props.store.searchIncidentReducer.client_id}</p>
+              <p>Incident Type: {this.props.store.searchIncidentReducer.type}</p>
+              <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
+              <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
+              {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
+              <button onClick={this.contactRequest}>Request Contact</button>
+            </div>
+            }
+            {/* TODO add sweet alert for no-results */}
+            {this.props.store.searchIncidentReducer === "" &&
+              <p>No Incident with that ID was found, please try again.</p>
+            }
+            
           </div>
         </div> {/* end right stuff */}
       </div> // end page

@@ -83,6 +83,8 @@ function* editIncident(action) {
     }
   }
 
+  // This function toggles booleans for values that select which items are displayed in 
+  // incident public postings
   function* updatePublicPost(action) {
     console.log('updatePublicPost', action.payload);
     try {
@@ -91,7 +93,7 @@ function* editIncident(action) {
       alert('Post updated');
     }
     catch (error) {
-
+      console.log('error in updatePublicPost fn', error);      
     }
   }
 // below are the functions used to sort the incident table by column

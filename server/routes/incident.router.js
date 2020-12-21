@@ -68,64 +68,67 @@ router.get('/public', (req, res) => {
   });
 });
 
-  router.put('/publicText', rejectUnauthenticated, (req, res) => {
-    console.log('public text is', req.body);
-    const queryText = `update incidents
-    set text_for_public_display = $1
-    where id = $2;`;
+// This route will update public text for the incident
+router.put('/publicText', rejectUnauthenticated, (req, res) => {
+  console.log('public text is', req.body);
+  const queryText = `update incidents
+  set text_for_public_display = $1
+  where id = $2;`;
 
-    pool.query(queryText, [req.body.text, req.body.id]).then((result) => {
-      res.send(result.rows)
-    }).catch((error) => {
-      console.log('error in publicText put', error);
-      res.sendStatus(500);
-    });
-  })
-
-  // this route will toggle the status of the active boolean
-  router.put('/active', rejectUnauthenticated, (req, res) => {
-    console.log('in active toggle router with req.body', req.body);
-    const queryText = `UPDATE "incidents" 
-    SET "active" = $1
-    WHERE "id" = $2;`;
-
-    pool.query(queryText, [req.body.active, req.body.id]).then((result) => {
-      res.sendStatus(200);
-    }).catch((error) => {
-      console.log('error in active toggle route', error);
-      res.sendStatus(500);
-    });
-    
+  pool.query(queryText, [req.body.text, req.body.id]).then((result) => {
+    res.send(result.rows)
+  }).catch((error) => {
+    console.log('error in publicText put', error);
+    res.sendStatus(500);
   });
+})
 
-  // this route will adjust the boolean values for whether certain portions of an incident
-  // should be displayed on the public incident display
-  router.put('/publicPost', rejectUnauthenticated, (req, res) => {
-    console.log('in public post route with req.body', req.body);
-    const queryText=`update incidents
-    set username_public = $1,
-    timedate_public = $2,
-    location_public = $3,
-    type_public = $4,
-    user_notes_public = $5,
-    view_publicly = true
-    where id = $6;
-    `;
+// this route will toggle the status of the active boolean
+router.put('/active', rejectUnauthenticated, (req, res) => {
+  console.log('in active toggle router with req.body', req.body);
+  const queryText = `UPDATE "incidents" 
+  SET "active" = $1
+  WHERE "id" = $2;`;
 
-    pool.query(queryText, [
-      req.body.username_public,
-      req.body.timedate_public,
-      req.body.location_public,
-      req.body.type_public,
-      req.body.user_notes_public,
-      req.body.id
-    ]).then((result) => {
-      res.sendStatus(200);
-    }).catch((error) => {
-      console.log('error in publicPost route', error);
-      res.sendStatus(500);
-    });
+  pool.query(queryText, [req.body.active, req.body.id]).then((result) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in active toggle route', error);
+    res.sendStatus(500);
   });
+  
+});
+
+// this route will adjust the boolean values for whether certain portions of an incident
+// should be displayed on the public incident display
+router.put('/publicPost', rejectUnauthenticated, (req, res) => {
+  console.log('in public post route with req.body', req.body);
+  const queryText=`update incidents
+  set username_public = $1,
+  timedate_public = $2,
+  location_public = $3,
+  type_public = $4,
+  user_notes_public = $5,
+  view_publicly = true,
+  active_public = $6
+  where id = $7;
+  `;
+
+  pool.query(queryText, [
+    req.body.username_public,
+    req.body.timedate_public,
+    req.body.location_public,
+    req.body.type_public,
+    req.body.user_notes_public,
+    req.body.active_public,
+    req.body.id
+  ]).then((result) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in publicPost route', error);
+    res.sendStatus(500);
+  });
+});
 
   // route to get count of all active incidents
   router.get('/active', rejectUnauthenticated, (req, res) => {

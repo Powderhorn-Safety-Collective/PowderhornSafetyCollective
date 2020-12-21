@@ -130,6 +130,22 @@ router.put('/publicPost', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// This route will mark an incident submitted as duplicate if it has already been submitted by somebody else
+router.put('/duplicate', rejectUnauthenticated, (req, res) => {
+  console.log('duplicate route', req.body);
+  
+  const queryText = `update incidents
+  set duplicate_entry = true
+  where id = $1;`;
+
+  pool.query(queryText, [req.body.id]).then((result) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in duplicate route', error);
+    res.sendStatus(500);
+  });
+});
+
   // route to get count of all active incidents
   router.get('/active', rejectUnauthenticated, (req, res) => {
     // query to count the number of active incidents

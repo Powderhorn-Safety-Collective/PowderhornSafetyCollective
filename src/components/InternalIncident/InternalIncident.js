@@ -136,7 +136,15 @@ class InternalIncident extends Component {
         })
       }
 
-  // need function here to dispatch, I guess
+    handleDuplicate = () => {
+      console.log('duplicate button clicked');
+      this.props.dispatch({
+        type: 'MARK_DUPLICATE',
+        payload: {
+          id: this.props.incident.id
+        }
+      });
+    }
   
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;

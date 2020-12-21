@@ -96,6 +96,19 @@ function* editIncident(action) {
       console.log('error in updatePublicPost fn', error);      
     }
   }
+
+  function* updateDuplicate(action) {
+    console.log('updateDuplicate', action.payload);
+    try {
+      yield axios.put('api/incident/duplicate', action.payload);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error){
+      console.log('error in updateDuplicate fn', error);
+      
+    }
+  }
+
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
@@ -178,6 +191,7 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_PUBLIC_DISPLAY_TEXT', updatePublicText);
     yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
+    yield takeEvery('MARK_DUPLICATE', updateDuplicate);
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

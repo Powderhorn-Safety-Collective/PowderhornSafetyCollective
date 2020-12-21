@@ -107,44 +107,49 @@ class InternalIncident extends Component {
     }
   }
 
-    // this function will change the state of the 'active' boolean in the incidents table
-    sendActiveStatus = () => {
-        console.log('switchtoggled');
-        
-        this.props.dispatch({
-            type: 'UPDATE_ACTIVE_STATUS',
-            payload: {active: !this.props.incident.active,
-            id: this.props.incident.id}
-        })
-    }
-
-    handlePostNotice = () => {
-        console.log('post button clicked');
-        console.log('this.state in handlePostNotice', this.state);
-        this.props.dispatch({
-          type: 'UPDATE_PUBLIC_POST',
-          payload: {
-            view_publicly: true,
-            username_public: this.state.username_public,
-            timedate_public: this.state.timedate_public,
-            location_public: this.state.location_public,
-            type_public: this.state.type_public,
-            user_notes_public: this.state.user_notes_public,
-            active_public: this.state.active_public,
-            id: this.props.incident.id
-          }
-        })
-      }
-
-    handleDuplicate = () => {
-      console.log('duplicate button clicked');
+  // this function will change the state of the 'active' boolean in the incidents table
+  sendActiveStatus = () => {
+      console.log('switchtoggled');
+      
       this.props.dispatch({
-        type: 'MARK_DUPLICATE',
+          type: 'UPDATE_ACTIVE_STATUS',
+          payload: {active: !this.props.incident.active,
+          id: this.props.incident.id}
+      })
+  }
+
+  handlePostNotice = () => {
+      console.log('post button clicked');
+      console.log('this.state in handlePostNotice', this.state);
+      this.props.dispatch({
+        type: 'UPDATE_PUBLIC_POST',
         payload: {
+          view_publicly: true,
+          username_public: this.state.username_public,
+          timedate_public: this.state.timedate_public,
+          location_public: this.state.location_public,
+          type_public: this.state.type_public,
+          user_notes_public: this.state.user_notes_public,
+          active_public: this.state.active_public,
           id: this.props.incident.id
         }
-      });
+      })
     }
+
+  handleDuplicate = () => {
+    console.log('duplicate button clicked');
+    this.props.dispatch({
+      type: 'MARK_DUPLICATE',
+      payload: {
+        id: this.props.incident.id
+      }
+    });
+  }
+
+  handleAssignClaim = () => {
+    console.log('assign/claim button clicked');
+    
+  }
   
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;
@@ -157,7 +162,7 @@ class InternalIncident extends Component {
     return (
       <Container fluid>
           {/* Row for all the stuff inside of the container */}
-          <Row>
+          <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={3}>
               {this.props.incident.username ?
@@ -182,8 +187,8 @@ class InternalIncident extends Component {
               <Row>
                 <div className="internalModule">
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
-                {JSON.stringify(this.props.incident)}
-                {JSON.stringify(this.state)}
+                {/* {JSON.stringify(this.props.incident)} */}
+                {/* {JSON.stringify(this.state)} */}
 
                 {/* username toggle here to select if username is viewable on the public post*/}
                 {this.props.incident.username_public !== undefined &&
@@ -264,9 +269,9 @@ class InternalIncident extends Component {
               </div>
             </Row>
             <br/>
-            <Row className="bottomButtons">
+            <Row>
               {/* toggle for active/inactive goes here 
-              This will change the data directly in the database */}
+              This will change the data directly in the database when toggled*/}
               {this.props.incident.active !== undefined &&
                 <ToggleSwitch toggleName={activeToggle}
                   className="internalLine"

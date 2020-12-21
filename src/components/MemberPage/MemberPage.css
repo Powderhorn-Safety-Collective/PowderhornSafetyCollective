@@ -1,12 +1,3 @@
-/* .memberLeft {
-    flex: 70%;
-    border: 1px solid black;
-    background-color: lightblue;
-    height: 700px;
-    overflow-y: auto;
-    padding: 10px;
-} */
-
 .memberLeft {
     border: 1px solid black;
     height: 700px;
@@ -14,21 +5,16 @@
     padding: 10px;
 }
 
-/* .memberRight {
-    flex: 40%;
-    background-color: lightpink;
-} */
-
 .onPatrolDisplay {
     height: 350px;
     overflow-y: auto;
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 5px;
 }
 
 .onCallDisplay {
     height: 350px;
     overflow-y: auto;
-    border: 2px solid black;
+    border: 21x solid black;
     padding: 5px;
 }

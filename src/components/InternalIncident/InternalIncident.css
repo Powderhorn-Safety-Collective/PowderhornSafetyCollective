@@ -11,16 +11,16 @@ textarea {
     height: 100px;
 }
 
+.internalRow {
+    border-bottom: 2px solid blue;
+    margin-top: 5px;
+}
+
 .internalLine {
     display: inline-block;
     padding: 0 10px;
 
 }
-
-/* .columnLeft {
-    width: 40%;
-    border: 1px solid blue;
-} */
 
 .bottomButtons {
     display: inline-block;

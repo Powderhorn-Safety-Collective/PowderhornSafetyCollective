@@ -111,6 +111,15 @@ function* editIncident(action) {
     }
   }
 
+  // function to assign a PSC member to an incident
+  function* addAssigned(action) {
+    try {
+      yield axios.put('api/incident/assign', action.payload)
+    }catch (error) {
+      console.log('error in assign saga', error);
+    }
+  }
+
   function* updateDuplicate(action) {
     console.log('updateDuplicate', action.payload);
     try {
@@ -206,6 +215,7 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
+    yield takeEvery('ADD_ASSIGNED', addAssigned)
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

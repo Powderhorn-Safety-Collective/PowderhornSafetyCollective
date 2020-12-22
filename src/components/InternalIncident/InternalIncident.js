@@ -140,10 +140,6 @@ class InternalIncident extends Component {
     });
   }
 
-  handleAssignClaim = () => {
-    console.log('assign/claim button clicked');
-    
-  }
   
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;
@@ -269,7 +265,7 @@ class InternalIncident extends Component {
               >
                 Mark as Duplicate
               </button>
-              <AssignClaimComponent/>
+              <AssignClaimComponent incidentId={this.props.incident.id}/>
               <button 
                 onClick={this.handlePostNotice} 
                 className="btn"

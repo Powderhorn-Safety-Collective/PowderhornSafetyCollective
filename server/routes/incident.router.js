@@ -145,6 +145,16 @@ router.put('/duplicate', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// this route will mark an incident with it's assigned PSC Member
+router.put('/assign', (req, res) => {
+  const queryText = `UPDATE "incidents"
+  SET "assigned_user" = ${req.body.assigned}
+  WHERE "incidents"."id" = ${req.body.incident};
+  `
+  console.log('queryText', queryText);
+  
+})
+
   // route to get count of all active incidents
   router.get('/active', rejectUnauthenticated, (req, res) => {
     // query to count the number of active incidents

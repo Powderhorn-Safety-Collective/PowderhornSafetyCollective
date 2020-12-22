@@ -4,7 +4,10 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class AssignClaimComponent extends Component {
   state= {
-    assigned: 0,
+    assigning: {
+      assigned: 0,
+      incident: 0,
+    },
     activeMemArray: []
   }
   componentDidMount = () => {
@@ -27,13 +30,16 @@ class AssignClaimComponent extends Component {
 
   handleChange = (event, param) => {
     this.setState ({
-      assigned: event.target.value
+      assigning:{
+        assigned: event.target.value,
+        incident: param
+      }
     })
   }
 
   submitAssign = () => {
-    console.log('ASSIGNING*******', this.state.assigned);
-    
+    console.log('SENDING*****', this.state.assigning);
+    this.props.dispatch({type: 'ADD_ASSIGNED', payload: this.state.assigning})
   }
 
   render() {
@@ -41,13 +47,13 @@ class AssignClaimComponent extends Component {
       <>
       {this.props.store.patrolReducer &&
       <>
-        <select id="assignClaim" onChange={(event) => this.handleChange(event)}>
+        <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
+          <option key="0">select</option>
           {this.state.activeMemArray.map((person) => {
             return(
               <option key={person.id} value={person.id}>{person.first_name}</option>
             )
           })}
-          <option key="0">select</option>
         </select>
         <button onClick={this.submitAssign}>Assign/Claim</button>
       </>  

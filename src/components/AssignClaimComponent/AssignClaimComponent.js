@@ -13,7 +13,7 @@ class AssignClaimComponent extends Component {
   componentDidMount = () => {
     this.populateArray()
   }
-  
+  // sets local state to an array with all patrolling or oncall members
   populateArray = () => {
     let tempArray = []
     this.props.store.patrolReducer.map((person) => {
@@ -28,6 +28,7 @@ class AssignClaimComponent extends Component {
     })
   }
 
+  // sets local state to selected PSC member and incident id
   handleChange = (event, param) => {
     this.setState ({
       assigning:{
@@ -36,9 +37,8 @@ class AssignClaimComponent extends Component {
       }
     })
   }
-
+  // dispatches request to add assigned PSC member to the incident
   submitAssign = () => {
-    console.log('SENDING*****', this.state.assigning);
     this.props.dispatch({type: 'ADD_ASSIGNED', payload: this.state.assigning})
   }
 

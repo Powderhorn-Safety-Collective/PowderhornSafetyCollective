@@ -148,11 +148,13 @@ router.put('/duplicate', rejectUnauthenticated, (req, res) => {
 // this route will mark an incident with it's assigned PSC Member
 router.put('/assign', (req, res) => {
   const queryText = `UPDATE "incidents"
-  SET "assigned_user" = ${req.body.assigned}
-  WHERE "incidents"."id" = ${req.body.incident};
-  `
-  console.log('queryText', queryText);
-  
+  SET "assigned_user" = $1
+  WHERE "incidents"."id" = $2;`;
+  pool.query(queryText, [req.body.assigned, req.body.incident]).then((result) => {res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in assign router', error);
+    res.sendStatus(500);
+  })
 })
 
   // route to get count of all active incidents

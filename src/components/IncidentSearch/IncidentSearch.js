@@ -2,44 +2,55 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-// This component will be displayed on and is consumed by the Connunity 
+// This component will be displayed on and is consumed by the Comunity 
 // Page component.  It will allow the user to search for an incident 
-// by and id string that for that incident
+// by their 6 digit auto-generated incident ID
 class IncidentSearch extends Component {
   state = {
-    searchNumber: '',
+    searchNumber: 0,
   };
 
-  // this will need to be changed to search for the text entered
-  search = (event) => {
-    event.preventDefault();
-    console.log('the search string is', this.state.searchNumber);
-    
+  // sends searched ID to incident SAGA
+  search = () => {
+    console.log('SEARCHING', this.state);
+    this.props.dispatch({
+      type: 'FETCH_SEARCHED_INCIDENT',
+      payload: this.state
+    }) 
+    document.getElementById('searchNum').reset();
+    this.setState({
+      searchNumber: 0
+    })
   }; // end 
 
   // handle change function for search input box
-  handleInputChangeFor = () => (event) => {
+  handleInputChangeFor = (event) => {
     this.setState({
       searchNumber: event.target.value,
     });
   };
 
+  noResults = () => {
+    console.log('There are no results');
+    // TODO ADD NO RESULTS ALERT
+  }
+
 
   render() {
     return (
-      <form onSubmit={this.search}>
-        <h2>Search</h2>
-        <h4>Search for an incident by Incident ID</h4>
+      <form id="searchNum">
+        <h2>Search for an Incident</h2>
         <div>
-          <label htmlFor="username">
-            Incident ID:
+          <label htmlFor="searchNum">
+            Enter the 6 Digit Incident ID:
           </label>
           <input
             type="text"
-            name="searchNumber"
-            required
-            value={this.state.searchNumber}
-            onChange={this.handleInputChangeFor()}
+            placeholder="######"
+            name="searchNum"
+            // required
+            // value={this.state.searchNumber}
+            onChange={(event) => this.handleInputChangeFor(event)}
           />
         </div>
         <div>

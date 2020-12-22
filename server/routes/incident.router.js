@@ -158,6 +158,18 @@ router.put('/duplicate', rejectUnauthenticated, (req, res) => {
       });
   });
 
+  //get all incident data for searched incident
+  router.get('/search/:num', (req, res) => {
+    let queryText = `SELECT * FROM "incidents"
+    WHERE "client_id" = '${req.params.num}';`;
+    pool.query(queryText).then((result) => {
+      res.send(result.rows[0])
+    }).catch((error) => {
+      console.log('error in get searched incident', error);
+      res.sendStatus(500)      
+    })
+  })
+
 // POST route to save new incident data
 router.post('/', (req, res) => {
   // POST route code here

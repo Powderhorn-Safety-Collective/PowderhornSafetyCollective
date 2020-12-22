@@ -19,6 +19,24 @@ class CommunityPage extends Component {
   state = {
   };
 
+  renderTime = (time) => {
+    let timeHour = Number(time.slice(11,13));
+    let timeMorningEvening = 'a.m.';
+    if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
+    }
+    else if (timeHour == 0) {
+      timeHour = 12;
+    }
+    let timeMinute = time.slice(14, 16);
+    let month = Number(time.slice(5,7));
+    let day = Number(time.slice(8,10));
+    let year = Number(time.slice(0,4));
+    let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
+    return displayTime
+  }
+
   // GET request is called on page load
   // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {
@@ -28,6 +46,10 @@ class CommunityPage extends Component {
   // function to fetch all incident data for public view
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
+  }
+  // User can click this button to request a follow up from PSC on an incident
+  contactRequest = () => {
+    console.log('REQUESTING CONTACT TODO- ADD TWILIO');
   }
 
   render() {

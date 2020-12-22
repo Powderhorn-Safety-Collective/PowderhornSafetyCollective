@@ -26,6 +26,20 @@ function* fetchPublicIncidents() {
   }
 }
 
+//fetches the searched incident based on the 6 digit incident ID
+function* fetchSearchedIncident(action) {
+  try{
+    const incidentResponse = yield axios.get(`/api/incident/search/${action.payload.searchNumber}`)
+    if(incidentResponse.data === "") {
+      yield put({type: 'SET_SEARCHED_INCIDENT', payload: ""}) 
+    }else {
+      yield put({type: 'SET_SEARCHED_INCIDENT', payload: incidentResponse.data});
+    }
+  }catch(error){
+    console.log('error in search incident saga');
+  }
+}
+
 // function to fetch the count of all active incidents
 function* fetchActive() {
   try {
@@ -194,6 +208,8 @@ function* incidentSaga() {
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
+
+    yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
 
     // below are all the yields to sort incident table by column
     yield takeLatest("SORT_TYPE", sortType);

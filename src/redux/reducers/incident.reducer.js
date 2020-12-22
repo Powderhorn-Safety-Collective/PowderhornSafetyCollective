@@ -12,6 +12,8 @@ const incidentReducer = (state = [], action) => {
     }
 }
 
+
+
   // admin will be on the redux state at:
   // state.incident
   export default incidentReducer;

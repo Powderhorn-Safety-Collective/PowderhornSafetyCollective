@@ -7,16 +7,6 @@ import './IncidentModule.css'
 // that appears and is consumed by the Community Page Component
 class IncidentModule extends Component {
 
-  // function to render active or inactive on incident card
-  renderStatus = (publicDisplayActive, active) => {
-    if (publicDisplayActive === true && active === true) {
-      return <p className="active">Active</p>
-    }
-    else if (publicDisplayActive === true && active === false) {
-      return <p className="active">Inactive</p>
-    }
-  }
-
   // function to render time associated with incident
   renderTime = (publicDisplayTime, time) => {
     let timeHour = Number(time.slice(11,13));
@@ -43,8 +33,13 @@ class IncidentModule extends Component {
       <div className="module">
         <h5>{this.props.incident.text_for_public_display}</h5>
         <h5>Incident Number: {this.props.incident.client_id}</h5>
-        {/* these other functions get called to display the active/inactive status and time*/}
-        {this.renderStatus(this.props.incident.active_public, this.props.incident.active)}
+        {/* active/inactive status will always be shown for incident */}
+        {this.props.incident.active ?
+          <p className="active">Active</p>
+          :
+          <p className="active">Inactive</p>
+        }
+        {/* this function gets called to display time submitted*/}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
         {/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&

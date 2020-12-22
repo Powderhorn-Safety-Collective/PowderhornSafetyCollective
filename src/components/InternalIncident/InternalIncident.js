@@ -6,6 +6,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.
@@ -285,12 +286,7 @@ class InternalIncident extends Component {
               >
                 Mark as Duplicate
               </button>
-              <button 
-                onClick={this.handleAssignClaim} 
-                className="btn"            
-              >
-                Assign/Claim
-              </button>
+              <AssignClaimComponent/>
               <button 
                 onClick={this.handlePostNotice} 
                 className="btn"

@@ -19,9 +19,5 @@ textarea {
 .internalLine {
     display: inline-block;
     padding: 0 10px;
-
 }
 
-.bottomButtons {
-    display: inline-block;
-}

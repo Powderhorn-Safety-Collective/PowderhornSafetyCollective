@@ -10,6 +10,7 @@ import allUsersReducer from './all.users.reducer'; // reducer storing all user d
 import editUserReducer from './edit.user.reducer'; // reducer to help with edit user
 import editIncidentReducer from './edit.incident.reducer'; // reducer to help with edit incident
 import searchIncidentReducer from './search.incident.reducer';
+import personalIncidentReducer from './personal.incident.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   editUserReducer, // reducer used to edit user
   editIncidentReducer, // reducer used to edit incident
   searchIncidentReducer,
+  personalIncidentReducer, // reducer to hold incidents submitted or followed by user
 });
 
 export default rootReducer;

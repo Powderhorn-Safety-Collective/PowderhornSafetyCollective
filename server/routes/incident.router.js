@@ -69,6 +69,37 @@ router.get('/public', (req, res) => {
   });
 });
 
+// this route will get incidents associated with this user
+router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
+  console.log('personal incidents', req.params.id);
+
+  let personId = 2;
+  const queryText = `select username from "user"
+  where id = $1;`;
+
+  pool.query(queryText, [personId]).then((result) => {
+    const username = result.rows[0].username;
+    
+    const queryText2 = `select * from incidents 
+    left join incident_followers
+    on incident_id = incidents.id
+    where username = $1
+    or user_id = $2;`;
+
+    pool.query(queryText2, [username, personId]).then((result2) => {
+      console.log('result2.rows', result2.rows);
+      
+      res.send(result2.rows);
+    }).catch((error) => {
+      console.log('error in get personal incidents route', error);
+      res.sendStatus(500);
+    })
+  }).catch((error) => {
+    console.log('error in get personal incidents route', error);
+    res.sendStatus(500);    
+  });
+});
+
 // This route will update public text for the incident
 router.put('/publicText', rejectUnauthenticated, (req, res) => {
   console.log('public text is', req.body);

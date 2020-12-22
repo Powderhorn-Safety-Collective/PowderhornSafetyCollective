@@ -15,11 +15,17 @@ class UserPage extends Component {
   // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {
     this.getPublicIncidents();
+    this.getPersonalIncidents();
   }
 
   // function to fetch all incident data for public view
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
+  }
+
+  // function to fetch incidents this user submitted or is following
+  getPersonalIncidents = () => {
+    this.props.dispatch({type: 'GET_PERSONAL_INCIDENTS', payload: {id: this.props.store.user.id}});
   }
 
   render() {

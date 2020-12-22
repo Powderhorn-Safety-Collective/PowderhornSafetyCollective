@@ -72,6 +72,57 @@ function* editIncident(action) {
   }
 }
 
+ // function to update text displayed publicly about an incident
+ function* updatePublicText(action) {
+   console.log('updatePublicText action.payload', action.payload);
+   try {
+     yield axios.put('/api/incident/publicText', action.payload);
+     yield put({type: 'GET_INCIDENTS'});
+     alert('Text has been saved.')
+   }
+   catch (error) {
+     console.log('error from update public text saga', error);
+   }
+ }
+
+  // this function will toggle the active state of the incident
+  function* updateActiveStatus(action) {
+    console.log('updateActiveStatus', action.payload);
+    try {
+      yield axios.put('/api/incident/active', action.payload);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+
+  // This function toggles booleans for values that select which items are displayed in 
+  // incident public postings
+  function* updatePublicPost(action) {
+    console.log('updatePublicPost', action.payload);
+    try {
+      yield axios.put('api/incident/publicPost', action.payload);
+      yield put({type: 'GET_INCIDENTS'})
+      alert('Post updated');
+    }
+    catch (error) {
+      console.log('error in updatePublicPost fn', error);      
+    }
+  }
+
+  function* updateDuplicate(action) {
+    console.log('updateDuplicate', action.payload);
+    try {
+      yield axios.put('api/incident/duplicate', action.payload);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error){
+      console.log('error in updateDuplicate fn', error);
+      
+    }
+  }
+
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
@@ -151,6 +202,10 @@ function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
     yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
+    yield takeEvery('UPDATE_PUBLIC_DISPLAY_TEXT', updatePublicText);
+    yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
+    yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
+    yield takeEvery('MARK_DUPLICATE', updateDuplicate);
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

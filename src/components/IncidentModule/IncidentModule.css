@@ -3,6 +3,7 @@
   border: 2px solid black;  
   padding: 5px;
   margin: 5px;
+  width: 100%;
 }
 
 /* move status text to right side */

@@ -62,7 +62,7 @@ class RegisterForm extends Component {
           </div>
           <div>
             <input 
-              type="text" 
+              type="password" 
               placeholder="Password" 
               value={this.state.password}
               required

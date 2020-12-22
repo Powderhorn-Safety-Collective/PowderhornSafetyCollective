@@ -3,51 +3,68 @@ import { connect } from 'react-redux';
 import PatrolItem from '../PatrolItem/PatrolItem.js';
 import OnCallItem from '../OnCallItem/OnCallItem';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './MemberPage.css';
+import InternalIncident from '../InternalIncident/InternalIncident';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
+// member page will be what PSC members see when they log in
+// This page consumes the InternalIncident component that is mapped to display the incidents submitted
 class MemberPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
+
+  componentDidMount = () => {
+    this.getIncidents();
+  }
+
+  // function to fetch all incident data
+  getIncidents = () => {
+    this.props.dispatch( {type: 'GET_INCIDENTS'});
+  }
+
   render() {
-    return (
-<>
-      <div className="row">
-        <div className="column">
-          <p>Contact info for reporter</p>
-        </div>
-        <div className="column">
-          <div className="box">
-            <h1> FOR THE INCIDENT COMPONENT</h1>
-          </div>
-        </div>
-          <div className="column">
-            <div className="onPatrolDisplay" className="box scrollable">
+    return ( 
+      <Container fluid>
+        <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
+        <p>Your ID is: {this.props.store.user.id}</p>
+        {/* Row to go across entire page */}
+        <Row>
+          {/* left stuff for incidents */}
+          <Col md={9} xs={12} className="memberLeft">  
+            <h1> All Incidents</h1>
+
+            {this.props.store.incidentReducer.map((incident) => {
+              return <InternalIncident incident = {incident} />
+            })}
+          </Col>{/* end of left section for incident cards */}
+
+          {/* right on patrol / on call display */}
+          <Col md={3} xs={12}>
+            {/* on patrol display */}
+            <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
-              {this.props.store.patrolReducer &&
               <ul>  
                 {this.props.store.patrolReducer.map((patroller) => {
-                  return <PatrolItem patroller={patroller} key={patroller.id}/>
+                  return <PatrolItem patroller={patroller}/>
                 })}
               </ul>
-              }
-            </div> 
-            <div className="onCallDisplay" className="box scrollable">
+            </Row>
+            {/* on call display */}
+            <Row className="onCallDisplay">
               <h2>Members on call: </h2>
-              {this.props.store.onCallReducer &&
-                <ul>  
+              <ul>  
                 {this.props.store.onCallReducer.map((onCall) => {
-                  return <OnCallItem onCall={onCall} key={onCall.id}/>
+                  return <OnCallItem onCall={onCall}/>
                 })}
-                </ul>
-              }
-            </div>
-            </div>
-          </div>
-        
-        {/* <LogOutButton className="log-in" /> */}
-    </>
+              </ul>
+            </Row> {/* end on call */}
+          </Col>
+          {/* </div> end of right on patrol / on call display */}
+        </Row>
+      </Container> // end of page
     );
   }
 }
 
 
-// this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(MemberPage);

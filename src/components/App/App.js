@@ -32,6 +32,7 @@ import EditIncidentModal from '../EditIncidentModal/EditIncidentModal' // modal 
 import ReportIncident from '../ReportIncident/ReportIncident'; // for users to report new incidents
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   componentDidMount() {

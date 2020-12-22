@@ -41,8 +41,8 @@ class IncidentModule extends Component {
   render() {
     return (
       <div className="module">
-        <h3>{this.props.incident.text_for_public_display}</h3>
-        <h3>Incident Number: {this.props.incident.client_id}</h3>
+        <h5>{this.props.incident.text_for_public_display}</h5>
+        <h5>Incident Number: {this.props.incident.client_id}</h5>
         {/* these other functions get called to display the active/inactive status and time*/}
         {this.renderStatus(this.props.incident.active_public, this.props.incident.active)}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}

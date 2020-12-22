@@ -182,7 +182,7 @@ class InternalIncident extends Component {
                 </p>
               }
             </Col>
-            <Col lg={9}>
+            <Col lg={9} xs={12}>
             {/* Row for all the stuff inside the box */}
               <Row>
                 <div className="internalModule">

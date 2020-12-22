@@ -97,12 +97,6 @@ class InternalIncident extends Component {
         user_notes_public: !this.state.user_notes_public
       });
     }
-    else if (event.target.name.slice(0, 19) === 'activeDisplayToggle') {
-      console.log('active display toggle');
-      this.setState({
-        active_public: !this.state.active_public
-      });
-    }
     else if (event.target.name.slice(0, 12) === 'activeToggle') {
       this.sendActiveStatus();
     }
@@ -131,7 +125,6 @@ class InternalIncident extends Component {
           location_public: this.state.location_public,
           type_public: this.state.type_public,
           user_notes_public: this.state.user_notes_public,
-          active_public: this.state.active_public,
           id: this.props.incident.id
         }
       })
@@ -158,7 +151,6 @@ class InternalIncident extends Component {
     let locationToggle = `locationToggle${this.props.incident.id}`;
     let typeToggle = `typeToggle${this.props.incident.id}`;
     let userNotesToggle = `userNotesToggle${this.props.incident.id}`;
-    let activeDisplayToggle = `activeDisplayToggle${this.props.incident.id}`;
     let activeToggle = `activeToggle${this.props.incident.id}`;
     return (
       <Container fluid>
@@ -239,16 +231,7 @@ class InternalIncident extends Component {
                   />
                 }
                 <p className="internalLine">User Notes: {this.props.incident.notes}</p>
-                <br/>
 
-                {/* active display toggle here to select if active status is viewable on the public post */}
-                {this.props.incident.active_public !== undefined &&
-                  <ToggleSwitch toggleName={activeDisplayToggle}
-                    className="internalLine"
-                    handleToggle={this.handleToggle} toggleOn={this.props.incident.active_public}
-                  />
-                }
-                <p className="internalLine">Active Status of Incident</p>
                 <br/>
                 <label htmlFor="publicText">
                   Text to be displayed at beginning of public post:

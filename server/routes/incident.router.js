@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // retrieving all data from all users
   const queryText = `SELECT *, incidents.id FROM "incidents"
   left join "user" on "user".username = incidents.username
-  order by time_submitted;
+  order by time_submitted desc;
   ;`
   pool.query(queryText)
   .then((results) => {res.send(results.rows)
@@ -59,7 +59,8 @@ router.put('/editIncident/:id', (req, res) => {
 // and sent back to fetchPublicIncidents saga
 router.get('/public', (req, res) => {
   const queryText = `SELECT * FROM "incidents"
-  where view_publicly = true;`
+  where view_publicly = true
+  order by time_submitted desc;`
   pool.query(queryText)
   .then((results) => res.send(results.rows))
   .catch((error) => {
@@ -109,9 +110,8 @@ router.put('/publicPost', rejectUnauthenticated, (req, res) => {
   location_public = $3,
   type_public = $4,
   user_notes_public = $5,
-  view_publicly = true,
-  active_public = $6
-  where id = $7;
+  view_publicly = true
+  where id = $6;
   `;
 
   pool.query(queryText, [
@@ -120,7 +120,6 @@ router.put('/publicPost', rejectUnauthenticated, (req, res) => {
     req.body.location_public,
     req.body.type_public,
     req.body.user_notes_public,
-    req.body.active_public,
     req.body.id
   ]).then((result) => {
     res.sendStatus(200);

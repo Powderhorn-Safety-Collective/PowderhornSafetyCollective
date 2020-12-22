@@ -13,7 +13,7 @@ textarea {
 
 .internalRow {
     border-bottom: 2px solid blue;
-    margin-top: 5px;
+    padding: 15px 0;
 }
 
 .internalLine {

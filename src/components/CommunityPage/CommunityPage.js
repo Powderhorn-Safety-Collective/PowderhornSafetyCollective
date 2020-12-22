@@ -6,6 +6,9 @@ import LoginForm from '../LoginForm/LoginForm';
 import './CommunityPage.css';
 import IncidentSearch from '../IncidentSearch/IncidentSearch';
 import IncidentModule from '../IncidentModule/IncidentModule';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 
 // Community Page component
@@ -29,67 +32,69 @@ class CommunityPage extends Component {
 
   render() {
     return (
-      <div className="row">
-        {/* This div should have the left stuff */}
-        <div className="column">
-          <div className="box">
-            {/* we can put whatever site they want here later */}
-            <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+      <Container fluid>
+        <Row>
+          {/* This div should have the left stuff */}
+          <Col md={6} lg={4}>
+            <Row className="box">
+              {/* we can put whatever site they want here later */}
+              <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+                <h2>
+                  Community Resources
+                </h2>
+              </a>
+            </Row>
+            <Row className="box">
+              {/* we will change link later */}
+              <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+                <h2>
+                  Community Events
+                </h2>
+              </a>
+            </Row>
+            <Row className="box">
               <h2>
-                Community Resources
+                PSC Contact Info
               </h2>
-            </a>
-          </div>
-          <div className="box">
-            {/* we will change link later */}
-            <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+            </Row>
+            <Row className="box">
               <h2>
-                Community Events
+                Subscribe to our mailing list
               </h2>
-            </a>
-          </div>
-          <div className="box">
-            <h2>
-              PSC Contact Info
-            </h2>
-          </div>
-          <div className="box">
-            <h2>
-              Subscribe to our mailing list
-            </h2>
-          </div>
-        </div> {/* end left stuff */}
-        {/* middle stuff / incident cards */}
-        <div className="column">
-          <div className="box">
-            <h2>
-              About Us
-            </h2>
-          </div>
-          <div className="box scrollable" >
-            <h2>
-              Incidents
-            </h2>
-              {/* incident cards are mapped onto cards for display here */}
-              {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
-                return(
-                  <IncidentModule incident={publicIncident} key={index}/>
-                );
-              })}
-          </div>
-        </div>{/* end middle stuff */}
-        {/* right column stuff / login and search */}
-        <div className="column">
-          <div className="box">
-            {/* section to login */}
-            <LoginForm/>
-          </div>
-          <div className="box">
-            {/* section to search for an incident */}
-            <IncidentSearch/>
-          </div>
-        </div> {/* end right stuff */}
-      </div> // end page
+            </Row>
+          </Col> {/* end left stuff */}
+          {/* middle stuff / incident cards */}
+          <Col md={6} lg={4}>
+            <Row className="box">
+              <h2>
+                About Us
+              </h2>
+            </Row>
+            <Row className="box scrollable" >
+              <h2>
+                Incidents
+              </h2>
+                {/* incident cards are mapped onto cards for display here */}
+                {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
+                  return(
+                    <IncidentModule incident={publicIncident} key={index}/>
+                  );
+                })}
+            </Row>
+          </Col>{/* end middle stuff */}
+          {/* right column stuff / login and search */}
+          <Col md={6} lg={4}>
+            <Row className="box">
+              {/* section to login */}
+              <LoginForm/>
+            </Row>
+            <Row className="box">
+              {/* section to search for an incident */}
+              <IncidentSearch/>
+            </Row>
+          </Col> {/* end right stuff */}
+        </Row> 
+      </Container>
     );
   }
 }

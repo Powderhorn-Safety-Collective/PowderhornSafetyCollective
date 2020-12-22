@@ -15,28 +15,41 @@ class AssignClaimComponent extends Component {
     let tempArray = []
     this.props.store.patrolReducer.map((person) => {
       tempArray.push(person)
-      console.log("%%%%%%",tempArray);
       })
+    this.props.store.onCallReducer.map((oCPerson) => {
+      tempArray.push(oCPerson)
+    })
     this.setState ({
       ...this.state,
       activeMemArray: tempArray
     })
   }
 
+  handleChange = (event, param) => {
+    this.setState ({
+      assigned: event.target.value
+    })
+  }
+
+  submitAssign = () => {
+    console.log('ASSIGNING*******', this.state.assigned);
+    
+  }
+
   render() {
     return(
       <>
-
       {this.props.store.patrolReducer &&
       <>
-        <label htmlFor="assignClaim">Assign or Claim</label>
-        <select id="assignClaim" onChange={(event) => this.handleChangeFor(event, 'assignedMember')}>
+        <select id="assignClaim" onChange={(event) => this.handleChange(event)}>
           {this.state.activeMemArray.map((person) => {
             return(
               <option key={person.id} value={person.id}>{person.first_name}</option>
             )
           })}
+          <option key="0">select</option>
         </select>
+        <button onClick={this.submitAssign}>Assign/Claim</button>
       </>  
       }
       </>

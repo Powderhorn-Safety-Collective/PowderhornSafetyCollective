@@ -8,10 +8,13 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   // data to populate incident table
   // retrieving all data from all users
-  const queryText = `SELECT *, incidents.id FROM "incidents"
-  left join "user" on "user".username = incidents.username
-  order by time_submitted desc;
-  ;`
+  // const queryText = `SELECT *, incidents.id FROM "incidents"
+  // left join "user" on "user".username = incidents.username
+  // order by time_submitted desc;
+  // ;`
+  const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "responder_notes", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+  JOIN "user" on "user"."id" = "incidents"."assigned_user"
+  ORDER BY "time_submitted" DESC;`
   pool.query(queryText)
   .then((results) => {res.send(results.rows)
   console.log('results.rows', results.rows);

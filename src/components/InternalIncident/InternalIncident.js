@@ -177,7 +177,7 @@ class InternalIncident extends Component {
                 <div className="internalModule">
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
                 {/* Need to display name   */}
-                <h4>This incident is assigned to: {this.props.incident.assigned_user}</h4>
+                <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 {this.props.incident.username_public !== undefined &&
                   <ToggleSwitch toggleName={usernameToggle}

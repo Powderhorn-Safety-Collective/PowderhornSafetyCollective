@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
+import InternalNotes from '../InternalNotes/InternalNotes';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.

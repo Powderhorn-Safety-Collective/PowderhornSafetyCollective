@@ -16,9 +16,11 @@ class AssignClaimComponent extends Component {
   // sets local state to an array with all patrolling or oncall members
   populateArray = () => {
     let tempArray = []
-    this.props.store.patrolReducer.map((person) => {
+    if(this.props.store.patrolReducer !== null) {
+      this.props.store.patrolReducer.map((person) => {
       tempArray.push(person)
       })
+    }
     this.props.store.onCallReducer.map((oCPerson) => {
       tempArray.push(oCPerson)
     })

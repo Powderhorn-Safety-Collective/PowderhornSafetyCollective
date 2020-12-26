@@ -7,14 +7,18 @@ class InternalNotes extends Component {
     noteText: ''
   }
 
-  handleChange = () => {
-    console.log('Handling change');
-    
+  handleChange = (event) => {
+    this.setState({
+      noteText: event.target.value
+    })
   }
 
   handleSubmit = () => {
-    console.log('CLICKED');
-    
+    this.props.dispatch({
+      type: 'ADD_NOTE',
+      payload: {noteText: this.state.noteText,
+      id: this.props.incidentId}
+    })
   }
 
   render (){

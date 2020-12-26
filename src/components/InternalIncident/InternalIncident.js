@@ -6,6 +6,8 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
+import InternalNotes from '../InternalNotes/InternalNotes';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.
@@ -139,10 +141,6 @@ class InternalIncident extends Component {
     });
   }
 
-  handleAssignClaim = () => {
-    console.log('assign/claim button clicked');
-    
-  }
   
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;
@@ -179,9 +177,8 @@ class InternalIncident extends Component {
               <Row>
                 <div className="internalModule">
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
-                {/* {JSON.stringify(this.props.incident)} */}
-                {/* {JSON.stringify(this.state)} */}
-
+                {/* Need to display name   */}
+                <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 {this.props.incident.username_public !== undefined &&
                   <ToggleSwitch toggleName={usernameToggle}
@@ -268,12 +265,7 @@ class InternalIncident extends Component {
               >
                 Mark as Duplicate
               </button>
-              <button 
-                onClick={this.handleAssignClaim} 
-                className="btn"            
-              >
-                Assign/Claim
-              </button>
+              <AssignClaimComponent incidentId={this.props.incident.id}/>
               <button 
                 onClick={this.handlePostNotice} 
                 className="btn"

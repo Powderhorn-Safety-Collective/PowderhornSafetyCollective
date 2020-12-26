@@ -22,6 +22,9 @@ class InternalNotes extends Component {
       payload: {noteText: this.state.noteText,
       id: this.props.incidentId}
     })
+    this.setState({
+      noteText: ''
+    })
   }
 
 
@@ -30,7 +33,8 @@ class InternalNotes extends Component {
       <>
         <div className="noteForm">
         <label htmlFor="internalNoteInput">Notes/Updates</label>
-        <input className="internalNoteInput" type="text" placeholder="add an update or note on this incident" onChange={this.handleChange}></input> 
+        <input className="internalNoteInput" type="text" placeholder="add an update or note on this incident" 
+        value={this.state.noteText} onChange={this.handleChange}></input> 
         <button className="noteSubmit" onClick={this.handleSubmit}>Submit Note</button>
         </div>
         <div>

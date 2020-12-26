@@ -97,17 +97,7 @@ function* editIncident(action) {
     }
   }
 
-  // this function will add internal PSC Notes to the internal_notes table for a specific incident
-  function* addNote(action) {
-    console.log('ADDING', action.payload)
-    try {
-      yield axios.post('api/notes', action.payload);
-    }
-    catch(error) {
-      console.log('error in add note incidentSaga', error);    
-    }
-  }
-
+  
   // This function toggles booleans for values that select which items are displayed in 
   // incident public postings
   function* updatePublicPost(action) {
@@ -227,7 +217,7 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
     yield takeEvery('ADD_ASSIGNED', addAssigned);
-    yield takeEvery('ADD_NOTE', addNote);
+    
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

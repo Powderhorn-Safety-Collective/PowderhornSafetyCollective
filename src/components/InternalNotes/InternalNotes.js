@@ -6,6 +6,9 @@ class InternalNotes extends Component {
   state = {
     noteText: ''
   }
+  componentDidMount = () => {
+    this.props.dispatch({type: 'GET_NOTES'});
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -21,12 +24,26 @@ class InternalNotes extends Component {
     })
   }
 
+
   render (){
     return(
       <>
-      <label htmlFor="internalNoteInput">Notes/Updates</label>
-      <input className="internalNoteInput" type="text" placeholder="add an update or note on this incident" onChange={this.handleChange}></input> 
-      <button className="noteSubmit" onClick={this.handleSubmit}>Submit Note</button>
+        <div className="noteForm">
+        <label htmlFor="internalNoteInput">Notes/Updates</label>
+        <input className="internalNoteInput" type="text" placeholder="add an update or note on this incident" onChange={this.handleChange}></input> 
+        <button className="noteSubmit" onClick={this.handleSubmit}>Submit Note</button>
+        </div>
+        <div>
+          <h3>Internal Notes</h3>
+            <ul>
+              {this.props.store.internalNoteReducer.map((note) => {
+                return(
+                  note.incident_id === this.props.incidentId &&
+                    <li key={note.id}>{note.text}</li>
+                )
+              })}
+            </ul>
+        </div>
       </>
     )
 

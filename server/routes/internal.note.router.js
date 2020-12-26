@@ -16,10 +16,10 @@ const {
         res.sendStatus(500);
       });
   });
-  
+
   // this route gets the notes from the database
   router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM "internal_notes";`;
+    const queryText = `SELECT * FROM "internal_notes" ORDER BY "id" DESC;`;
     pool.query(queryText)
       .then((result) => {res.send(result.rows)})
       .catch((error) => {

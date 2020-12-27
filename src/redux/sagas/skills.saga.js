@@ -9,7 +9,6 @@ function* fetchSkills() {
     yield console.log('ALL THE USERS SKILLS ARE', skillsResults);
   }catch(error) {
     console.log('error in fetch skills', error);
-    
   }
 }
 

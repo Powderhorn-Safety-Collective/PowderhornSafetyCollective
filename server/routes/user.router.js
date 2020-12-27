@@ -92,7 +92,8 @@ router.post('/logout', (req, res) => {
 router.get('/all', rejectUnauthenticated, (req, res) => {
   // data to populate user table
   // retrieving all data from all users
-  const queryText = `SELECT * FROM "user";`
+  const queryText = `SELECT * FROM "user"
+  order by id;`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

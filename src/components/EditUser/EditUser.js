@@ -9,6 +9,7 @@ class EditUser extends Component {
     // to retrieve all incident data
     componentDidMount = () => {
         this.getUsers();
+        this.getSkills();
       }
 
     // function to fetch all incident data
@@ -16,8 +17,12 @@ class EditUser extends Component {
         this.props.dispatch( {type: 'GET_ALL_USERS'});
     }
 
+    getSkills = () => {
+      this.props.dispatch({type: 'FETCH_SKILLS'});
+    }
+
        // below are functions used to sort user table by column
-       sortByUsername = () => {
+      sortByUsername = () => {
         this.props.dispatch( {type:'SORT_USERNAME'} );
       }
       sortByFirstName = () => {
@@ -52,6 +57,8 @@ class EditUser extends Component {
   render() {
     return (
       <div>
+        <p>user_skills reducer:</p>
+        {JSON.stringify(this.props.store.userSkillsReducer)}
         <p>editUserReducer:</p>
         {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>

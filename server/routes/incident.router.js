@@ -186,30 +186,40 @@ router.put('/publicPost', rejectUnauthenticated, (req, res) => {
 
 // This route will mark an incident submitted as duplicate if it has already been submitted by somebody else
 router.put('/duplicate', rejectUnauthenticated, (req, res) => {
-  console.log('duplicate route', req.body);
+  if (req.user.role > 1) {
+    console.log('duplicate route', req.body);
   
-  const queryText = `update incidents
-  set duplicate_entry = true
-  where id = $1;`;
+    const queryText = `update incidents
+    set duplicate_entry = true
+    where id = $1;`;
 
-  pool.query(queryText, [req.body.id]).then((result) => {
-    res.sendStatus(200);
-  }).catch((error) => {
-    console.log('error in duplicate route', error);
-    res.sendStatus(500);
-  });
+    pool.query(queryText, [req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in duplicate route', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
-// this route will mark an incident with it's assigned PSC Member
+// this route will mark an incident with its assigned PSC Member
 router.put('/assign', (req, res) => {
-  const queryText = `UPDATE "incidents"
-  SET "assigned_user" = $1
-  WHERE "incidents"."id" = $2;`;
-  pool.query(queryText, [req.body.assigned, req.body.incident]).then((result) => {res.sendStatus(200);
-  }).catch((error) => {
-    console.log('error in assign router', error);
-    res.sendStatus(500);
-  })
+  if (req.user.role > 1) {
+    const queryText = `UPDATE "incidents"
+    SET "assigned_user" = $1
+    WHERE "incidents"."id" = $2;`;
+    pool.query(queryText, [req.body.assigned, req.body.incident]).then((result) => {res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in assign router', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 })
 
   // route to get count of all active incidents

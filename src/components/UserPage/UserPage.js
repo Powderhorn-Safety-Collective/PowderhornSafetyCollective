@@ -77,7 +77,11 @@ class UserPage extends Component {
           {/* right column with incidents user submitted or is following */}
           <Col lg={4} className="userModule">
             <h3>Incidents that you submitted or are following will show up here</h3>
-            
+            {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {
+                  return(
+                    <IncidentModule incident={personalIncident} key={index}/>
+                  );
+                })}
           </Col>
         </Row>
       </Container>

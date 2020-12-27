@@ -97,6 +97,7 @@ function* editIncident(action) {
     }
   }
 
+  
   // This function toggles booleans for values that select which items are displayed in 
   // incident public postings
   function* updatePublicPost(action) {
@@ -108,6 +109,15 @@ function* editIncident(action) {
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      
+    }
+  }
+
+  // function to assign a PSC member to an incident
+  function* addAssigned(action) {
+    try {
+      yield axios.put('api/incident/assign', action.payload)
+    }catch (error) {
+      console.log('error in assign saga', error);
     }
   }
 
@@ -220,6 +230,8 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
     yield takeEvery('GET_PERSONAL_INCIDENTS', fetchPersonalIncidents);
+    yield takeEvery('ADD_ASSIGNED', addAssigned);
+    
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

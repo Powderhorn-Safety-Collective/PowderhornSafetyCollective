@@ -41,6 +41,7 @@ class MemberPage extends Component {
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
+            {this.props.store.patrolReducer && 
             <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
               <ul>  
@@ -49,6 +50,7 @@ class MemberPage extends Component {
                 })}
               </ul>
             </Row>
+            }
             {/* on call display */}
             <Row className="onCallDisplay">
               <h2>Members on call: </h2>

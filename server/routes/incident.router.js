@@ -69,7 +69,9 @@ router.get('/public', (req, res) => {
   });
 });
 
-// this route will get incidents associated with this user
+// this route will get incidents associated with this user, either submitted
+// by the user or followed by the user.  The user id is used to get those in 
+// in the joined table with the user id.
 router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   console.log('personal incidents', req.params.id);
     

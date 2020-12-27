@@ -133,6 +133,19 @@ function* editIncident(action) {
     }
   }
 
+  // function to get incidents submitted by user or followed by user
+function* fetchPersonalIncidents(action) {
+  console.log('fetch Personal Incidents fn with payload', action.payload);
+  try {
+    const personalResponse = yield axios.get(`api/incident/personal/${action.payload.id}`);
+    console.log('personal incidents', personalResponse.data);
+    yield put({type: 'SET_PERSONAL_INCIDENTS', payload: personalResponse.data});
+  }
+  catch (error) {
+    console.log('error in fetch Personal Incidents fn', error);
+  }
+}
+
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
@@ -216,6 +229,7 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
+    yield takeEvery('GET_PERSONAL_INCIDENTS', fetchPersonalIncidents);
     yield takeEvery('ADD_ASSIGNED', addAssigned);
     
 

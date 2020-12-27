@@ -72,6 +72,32 @@ router.get('/public', (req, res) => {
   });
 });
 
+// this route will get incidents associated with this user, either submitted
+// by the user or followed by the user.  The user id is used to get those in 
+// in the joined table with the user id.
+router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
+  console.log('personal incidents', req.params.id);
+    
+  const queryText = `select distinct incidents.id, type, notes, location, 
+  time_submitted, view_publicly, responder_notes, duplicate_entry, client_id, 
+  username, timedate_public, location_public, type_public, user_notes_public, 
+  text_for_public_display, 
+  active, assigned_user, submitted_user, incident_id from incidents
+  left join incident_followers
+  on incident_id = incidents.id
+  where submitted_user = $1
+  or incident_followers.user_id = $1;`;
+
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log('results.rows', result.rows);
+    
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log('error in get personal incidents route', error);
+    res.sendStatus(500);
+  });
+});
+
 // This route will update public text for the incident
 router.put('/publicText', rejectUnauthenticated, (req, res) => {
   console.log('public text is', req.body);

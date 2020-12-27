@@ -97,6 +97,7 @@ function* editIncident(action) {
     }
   }
 
+  
   // This function toggles booleans for values that select which items are displayed in 
   // incident public postings
   function* updatePublicPost(action) {
@@ -215,7 +216,8 @@ function* incidentSaga() {
     yield takeEvery('UPDATE_ACTIVE_STATUS', updateActiveStatus);
     yield takeEvery('UPDATE_PUBLIC_POST', updatePublicPost);
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
-    yield takeEvery('ADD_ASSIGNED', addAssigned)
+    yield takeEvery('ADD_ASSIGNED', addAssigned);
+    
 
     yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

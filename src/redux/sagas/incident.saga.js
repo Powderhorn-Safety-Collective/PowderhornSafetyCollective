@@ -44,8 +44,7 @@ function* fetchSearchedIncident(action) {
 function* fetchActive() {
   try {
     const response = yield axios.get('/api/incident/active');
-    console.log(response.data);
-    yield put ( {type:'SET_ACTIVE_INCIDENTS', payload: response.data[0].status} );
+    yield put ( {type:'SET_ACTIVE_INCIDENTS', payload: response.data[0].active} );
   } catch (error) {
     console.log(error);
   }

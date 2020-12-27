@@ -16,6 +16,12 @@ CREATE TABLE "user" (
   OIDS=FALSE
 );
 
+CREATE TABLE "internal_notes" (
+	"id" serial PRIMARY KEY,
+	"text" varchar(500) NOT NULL
+	);
+
+
 
 CREATE TABLE "incidents" (
 	"id" serial NOT NULL,

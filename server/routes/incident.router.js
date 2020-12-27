@@ -31,7 +31,7 @@ router.put('/editIncident/:id', (req, res) => {
   const notes = req.body.notes;
   const location = req.body.location;
   const time_submitted = req.body.time_submitted;
-  const status = req.body.status;
+  const active = req.body.status;
   const view_publicly = req.body.view_publicly;
   const responder_notes = req.body.responder_notes;
   const duplicate_entry = req.body.duplicate_entry;
@@ -42,14 +42,14 @@ router.put('/editIncident/:id', (req, res) => {
                     "notes" = $2, 
                     "location" = $3, 
                     "time_submitted" = $4, 
-                    "status" = $5, 
+                    "active" = $5, 
                     "view_publicly" = $6, 
                     "responder_notes" = $7, 
                     "duplicate_entry" = $8, 
                     "client_id" = $9 
                   WHERE 
                     "id" = $10`;
-  pool.query(queryText, [type, notes, location, time_submitted, status, view_publicly, responder_notes, duplicate_entry, client_id, id])
+  pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, responder_notes, duplicate_entry, client_id, id])
   .then((result) => {
       res.sendStatus(200);
   }).catch((err) => {
@@ -189,7 +189,7 @@ router.put('/assign', (req, res) => {
   // route to get count of all active incidents
   router.get('/active', rejectUnauthenticated, (req, res) => {
     // query to count the number of active incidents
-    const queryText = `SELECT count("status") AS "status" FROM "incidents" WHERE "status" = 'Active';`
+    const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
     pool.query(queryText)
       .then((results) => res.send(results.rows))
       .catch((error) => {
@@ -282,7 +282,7 @@ router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
 });
 router.get('/status', rejectUnauthenticated, (req, res) => {
   // sort by status
-  const queryText = `SELECT * FROM "incidents" ORDER BY "status";`
+  const queryText = `SELECT * FROM "incidents" ORDER BY "active";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

@@ -72,31 +72,24 @@ router.get('/public', (req, res) => {
 // this route will get incidents associated with this user
 router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   console.log('personal incidents', req.params.id);
-
-  let personId = 2;
-  const queryText = `select username from "user"
-  where id = $1;`;
-
-  pool.query(queryText, [personId]).then((result) => {
-    const username = result.rows[0].username;
     
-    const queryText2 = `select * from incidents 
-    left join incident_followers
-    on incident_id = incidents.id
-    where username = $1
-    or user_id = $2;`;
+  const queryText = `select distinct incidents.id, type, notes, location, 
+  time_submitted, view_publicly, responder_notes, duplicate_entry, client_id, 
+  username, timedate_public, location_public, type_public, user_notes_public, 
+  text_for_public_display, 
+  active, assigned_user, submitted_user, incident_id from incidents
+  left join incident_followers
+  on incident_id = incidents.id
+  where submitted_user = $1
+  or incident_followers.user_id = $1;`;
 
-    pool.query(queryText2, [username, personId]).then((result2) => {
-      console.log('result2.rows', result2.rows);
-      
-      res.send(result2.rows);
-    }).catch((error) => {
-      console.log('error in get personal incidents route', error);
-      res.sendStatus(500);
-    })
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log('results.rows', result.rows);
+    
+    res.send(result.rows);
   }).catch((error) => {
     console.log('error in get personal incidents route', error);
-    res.sendStatus(500);    
+    res.sendStatus(500);
   });
 });
 

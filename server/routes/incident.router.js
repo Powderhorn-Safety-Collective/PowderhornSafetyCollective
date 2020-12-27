@@ -112,62 +112,76 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
 
 // This route will update public text for the incident
 router.put('/publicText', rejectUnauthenticated, (req, res) => {
-  console.log('public text is', req.body);
-  const queryText = `update incidents
-  set text_for_public_display = $1
-  where id = $2;`;
+  if (req.user.role > 1) {
+    console.log('public text is', req.body);
+    const queryText = `update incidents
+    set text_for_public_display = $1
+    where id = $2;`;
 
-  pool.query(queryText, [req.body.text, req.body.id]).then((result) => {
-    res.send(result.rows)
-  }).catch((error) => {
-    console.log('error in publicText put', error);
-    res.sendStatus(500);
-  });
-})
+    pool.query(queryText, [req.body.text, req.body.id]).then((result) => {
+      res.send(result.rows)
+    }).catch((error) => {
+      console.log('error in publicText put', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
 
-// this route will toggle the status of the active boolean
+// this route will toggle the status of the active boolean for the incident
 router.put('/active', rejectUnauthenticated, (req, res) => {
-  console.log('in active toggle router with req.body', req.body);
-  const queryText = `UPDATE "incidents" 
-  SET "active" = $1
-  WHERE "id" = $2;`;
+  if (req.user.role > 1) {
+    console.log('in active toggle router with req.body', req.body);
+    const queryText = `UPDATE "incidents" 
+    SET "active" = $1
+    WHERE "id" = $2;`;
 
-  pool.query(queryText, [req.body.active, req.body.id]).then((result) => {
-    res.sendStatus(200);
-  }).catch((error) => {
-    console.log('error in active toggle route', error);
-    res.sendStatus(500);
-  });
-  
+    pool.query(queryText, [req.body.active, req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in active toggle route', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 // this route will adjust the boolean values for whether certain portions of an incident
 // should be displayed on the public incident display
 router.put('/publicPost', rejectUnauthenticated, (req, res) => {
-  console.log('in public post route with req.body', req.body);
-  const queryText=`update incidents
-  set username_public = $1,
-  timedate_public = $2,
-  location_public = $3,
-  type_public = $4,
-  user_notes_public = $5,
-  view_publicly = true
-  where id = $6;
-  `;
+  if (req.user.role > 1) {
+    console.log('in public post route with req.body', req.body);
+    const queryText=`update incidents
+    set username_public = $1,
+    timedate_public = $2,
+    location_public = $3,
+    type_public = $4,
+    user_notes_public = $5,
+    view_publicly = true
+    where id = $6;
+    `;
 
-  pool.query(queryText, [
-    req.body.username_public,
-    req.body.timedate_public,
-    req.body.location_public,
-    req.body.type_public,
-    req.body.user_notes_public,
-    req.body.id
-  ]).then((result) => {
-    res.sendStatus(200);
-  }).catch((error) => {
-    console.log('error in publicPost route', error);
-    res.sendStatus(500);
-  });
+    pool.query(queryText, [
+      req.body.username_public,
+      req.body.timedate_public,
+      req.body.location_public,
+      req.body.type_public,
+      req.body.user_notes_public,
+      req.body.id
+    ]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in publicPost route', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 // This route will mark an incident submitted as duplicate if it has already been submitted by somebody else

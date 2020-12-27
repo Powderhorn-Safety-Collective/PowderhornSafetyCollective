@@ -78,10 +78,10 @@ class UserPage extends Component {
           <Col lg={4} className="userModule">
             <h3>Incidents that you submitted or are following will show up here</h3>
             {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {
-                  return(
-                    <IncidentModule incident={personalIncident} key={index}/>
-                  );
-                })}
+              return(
+                <IncidentModule incident={personalIncident} key={index}/>
+              );
+            })}
           </Col>
         </Row>
       </Container>
@@ -92,14 +92,3 @@ class UserPage extends Component {
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(UserPage);
 
-
-
-{/* <div>
-<h1>FOR THE NAV BAR</h1>
-<h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-<p>Your ID is: {this.props.store.user.id}</p>
-
-<h1> FOR THE INCIDENT COMPONENT</h1>
-<h1>LINKS for resources, etc.</h1>
-<LogOutButton className="log-in" />
-</div> */}

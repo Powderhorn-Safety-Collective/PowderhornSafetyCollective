@@ -12,50 +12,62 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // left join "user" on "user".username = incidents.username
   // order by time_submitted desc;
   // ;`
-  const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
-  JOIN "user" on "user"."id" = "incidents"."assigned_user"
-  ORDER BY "time_submitted" DESC;`
-  pool.query(queryText)
-  .then((results) => {res.send(results.rows)
-  console.log('results.rows', results.rows);
-  })
-  .catch((error) => {
-    console.log(error);
-    res.sendStatus(500);
-  });
+
+  if(req.user.role > 1) {
+    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+    JOIN "user" on "user"."id" = "incidents"."assigned_user"
+    ORDER BY "time_submitted" DESC;`
+    pool.query(queryText)
+    .then((results) => {res.send(results.rows)
+    console.log('results.rows', results.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 router.put('/editIncident/:id', (req, res) => {
-  const id = req.body.id;
-  const type = req.body.type;
-  const notes = req.body.notes;
-  const location = req.body.location;
-  const time_submitted = req.body.time_submitted;
-  const active = req.body.status;
-  const view_publicly = req.body.view_publicly;
-  const responder_notes = req.body.responder_notes;
-  const duplicate_entry = req.body.duplicate_entry;
-  const client_id = req.body.client_id;
-  let queryText= `UPDATE "incidents" 
-                  SET 
-                    "type" = $1, 
-                    "notes" = $2, 
-                    "location" = $3, 
-                    "time_submitted" = $4, 
-                    "active" = $5, 
-                    "view_publicly" = $6, 
-                    "responder_notes" = $7, 
-                    "duplicate_entry" = $8, 
-                    "client_id" = $9 
-                  WHERE 
-                    "id" = $10`;
-  pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, responder_notes, duplicate_entry, client_id, id])
-  .then((result) => {
+
+  if (req.user.role == 3) {
+    const id = req.body.id;
+    const type = req.body.type;
+    const notes = req.body.notes;
+    const location = req.body.location;
+    const time_submitted = req.body.time_submitted;
+    const active = req.body.status;
+    const view_publicly = req.body.view_publicly;
+    const responder_notes = req.body.responder_notes;
+    const duplicate_entry = req.body.duplicate_entry;
+    const client_id = req.body.client_id;
+    let queryText= `UPDATE "incidents" 
+                    SET 
+                      "type" = $1, 
+                      "notes" = $2, 
+                      "location" = $3, 
+                      "time_submitted" = $4, 
+                      "active" = $5, 
+                      "view_publicly" = $6, 
+                      "responder_notes" = $7, 
+                      "duplicate_entry" = $8, 
+                      "client_id" = $9 
+                    WHERE 
+                      "id" = $10`;
+    pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, responder_notes, duplicate_entry, client_id, id])
+    .then((result) => {
       res.sendStatus(200);
-  }).catch((err) => {
+    }).catch((err) => {
       console.log('error in PUT user', err);
       res.sendStatus(500);
-  });
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 // this one will get only the public incidents to be displayed

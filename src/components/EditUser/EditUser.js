@@ -57,6 +57,14 @@ class EditUser extends Component {
   render() {
     return (
       <div>
+        {/* THIS IS PLACEHOLDER TEXT TO SHOW SYNTAX FOR CONDITIONAL RENDERING OF SKILLS IN THE USERTABLE */}
+        {this.props.store.skillsReducer.map((skill) => {
+          return(
+
+            skill.user_id === 2 &&
+            <p>{skill.description}</p>
+          )
+        })}
         <p>user_skills reducer:</p>
         {JSON.stringify(this.props.store.skillsReducer)}
         <p>editUserReducer:</p>

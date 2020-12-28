@@ -148,7 +148,7 @@ function* fetchPersonalIncidents(action) {
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
-      const response = yield axios.get('/api/incident/type');
+      const response = yield axios.get('/api/incident/sort/type');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -156,7 +156,7 @@ function* sortType() {
 }
 function* sortNotes() {
   try {
-      const response = yield axios.get('/api/incident/notes');
+      const response = yield axios.get('/api/incident/sort/notes');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -164,7 +164,7 @@ function* sortNotes() {
 }
 function* sortLocation() {
   try {
-      const response = yield axios.get('/api/incident/location');
+      const response = yield axios.get('/api/incident/sort/location');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -172,7 +172,7 @@ function* sortLocation() {
 }
 function* sortTime() {
   try {
-      const response = yield axios.get('/api/incident/time_submitted');
+      const response = yield axios.get('/api/incident/sort/time_submitted');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -180,7 +180,7 @@ function* sortTime() {
 }
 function* sortStatus() {
   try {
-      const response = yield axios.get('/api/incident/status');
+      const response = yield axios.get('/api/incident/sort/status');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -188,7 +188,7 @@ function* sortStatus() {
 }
 function* sortPublic() {
   try {
-      const response = yield axios.get('/api/incident/view_publicly');
+      const response = yield axios.get('/api/incident/sort/view_publicly');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -196,7 +196,7 @@ function* sortPublic() {
 }
 function* sortResponder() {
   try {
-      const response = yield axios.get('/api/incident/responder_notes');
+      const response = yield axios.get('/api/incident/sort/responder_notes');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);
@@ -204,7 +204,7 @@ function* sortResponder() {
 }
 function* sortDuplicate() {
   try {
-      const response = yield axios.get('/api/incident/duplicate_entry');
+      const response = yield axios.get('/api/incident/sort/duplicate_entry');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);

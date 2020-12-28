@@ -63,9 +63,6 @@ class EditUserModal extends Component {
         {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
-          <label>Id</label>
-          <input defaultValue={this.props.store.editUserReducer.id} type="text"></input>
-          <br/>
           <label>Username</label>
           <input defaultValue={this.props.store.editUserReducer.username} onChange={(event) => this.handleChange(event, 'username')} type="text"></input>
           <br/>

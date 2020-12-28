@@ -12,7 +12,7 @@ class EditIncidentModal extends Component {
         notes: '',
         location: '',
         time_submitted: '',
-        status: '',
+        active: '',
         view_publicly: '',
         responder_notes: '',
         duplicate_entry: '',
@@ -58,9 +58,6 @@ class EditIncidentModal extends Component {
       <div>
             {this.props.store.editIncidentReducer ? 
             <div className="editModal">
-                <label>Id</label>
-                <input defaultValue={this.props.store.editIncidentReducer.id} type="text"></input>
-                <br/>
                 <label>Type</label>
                 <input defaultValue={this.props.store.editIncidentReducer.type} onChange={(event) => this.handleChange(event, 'type')} type="text"></input>
                 <br/>
@@ -79,14 +76,8 @@ class EditIncidentModal extends Component {
                 <label>View Publicly</label>
                 <input defaultValue={this.props.store.editIncidentReducer.view_publicly} onChange={(event) => this.handleChange(event, 'view_publicly')} type="text"></input>
                 <br/>
-                <label>Responder Notes</label>
-                <input defaultValue={this.props.store.editIncidentReducer.responder_notes} onChange={(event) => this.handleChange(event, 'responder_notes')} type="text"></input>
-                <br/>
                 <label>Duplicate</label>
                 <input defaultValue={this.props.store.editIncidentReducer.duplicate_entry} onChange={(event) => this.handleChange(event, 'duplicate_entry')} type="text"></input>
-                <br/>
-                <label>Client Id</label>
-                <input defaultValue={this.props.store.editIncidentReducer.client_id} onChange={(event) => this.handleChange(event, 'client_id')} type="text"></input>
                 <br/>
                   <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
                 <br/>

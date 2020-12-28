@@ -31,7 +31,7 @@ class IncidentHistoryItem extends Component {
             <td>{this.props.incident.notes}</td>
             <td>{this.props.incident.location}</td>
             <td>{this.props.incident.time_submitted.substring(0, 10)}</td> {/* substring method to truncate timestamp data type */}
-            <td>{this.props.incident.active.toString()}</td>
+            <td>{this.props.incident.active}</td>
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>
             <td>{this.props.incident.duplicate_entry.toString()}</td> {/* toString method to convert boolean to string */}

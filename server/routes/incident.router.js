@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // ;`
 
   if(req.user.role > 1) {
-    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
     JOIN "user" on "user"."id" = "incidents"."assigned_user"
     ORDER BY "time_submitted" DESC;`
     pool.query(queryText)
@@ -39,11 +39,9 @@ router.put('/editIncident/:id', (req, res) => {
     const notes = req.body.notes;
     const location = req.body.location;
     const time_submitted = req.body.time_submitted;
-    const active = req.body.status;
+    const active = req.body.active;
     const view_publicly = req.body.view_publicly;
-    const responder_notes = req.body.responder_notes;
     const duplicate_entry = req.body.duplicate_entry;
-    const client_id = req.body.client_id;
     let queryText= `UPDATE "incidents" 
                     SET 
                       "type" = $1, 
@@ -52,12 +50,10 @@ router.put('/editIncident/:id', (req, res) => {
                       "time_submitted" = $4, 
                       "active" = $5, 
                       "view_publicly" = $6, 
-                      "responder_notes" = $7, 
-                      "duplicate_entry" = $8, 
-                      "client_id" = $9 
+                      "duplicate_entry" = $7 
                     WHERE 
-                      "id" = $10`;
-    pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, responder_notes, duplicate_entry, client_id, id])
+                      "id" = $8`;
+    pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, duplicate_entry, id])
     .then((result) => {
       res.sendStatus(200);
     }).catch((err) => {

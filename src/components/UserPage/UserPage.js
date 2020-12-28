@@ -7,6 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import './UserPage.css';
 import IncidentModule from '../IncidentModule/IncidentModule';
+import MailchimpSubscribe from "react-mailchimp-subscribe"
+
 
 // this will be the page a registered user sees when they log in if they are not a volunteer
 class UserPage extends Component {
@@ -57,7 +59,7 @@ class UserPage extends Component {
             </Row>
             <Row className="box">
               <h2>
-                Subscribe to our mailing list
+              <h2><MailchimpSubscribe url={process.env.REACT_APP_MAILCHIMP_URL}/></h2>
               </h2>
             </Row>
 

@@ -60,7 +60,6 @@ class EditUser extends Component {
         {/* THIS IS PLACEHOLDER TEXT TO SHOW SYNTAX FOR CONDITIONAL RENDERING OF SKILLS IN THE USERTABLE */}
         {this.props.store.skillsReducer.map((skill) => {
           return(
-
             skill.user_id === 2 &&
             <p>{skill.description}</p>
           )

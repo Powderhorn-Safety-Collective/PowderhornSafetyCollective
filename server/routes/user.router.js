@@ -40,38 +40,43 @@ router.post('/register', (req, res, next) => {
 
 // PUT route to edit user
 router.put('/editUser/:id', (req, res) => {
-  const id = req.body.id
-  const username = req.body.username;
-  const first_name = req.body.first_name;
-  const last_name = req.body.last_name;
-  const address = req.body.address;
-  const email = req.body.email;
-  const phone = req.body.phone;
-  const adult = req.body.adult;
-  const on_patrol = req.body.on_patrol;
-  const on_call = req.body.on_call;
-  const role = req.body.role;
-  let queryText= `UPDATE "user" 
-                  SET 
-                    "username" = $1, 
-                    "first_name" = $2, 
-                    "last_name" = $3, 
-                    "address" = $4, 
-                    "email" = $5, 
-                    "phone" = $6, 
-                    "adult" = $7, 
-                    "on_patrol" = $8, 
-                    "on_call" = $9, 
-                    "role" = $10 
-                  WHERE 
-                    "id" = $11`;
-  pool.query(queryText, [username, first_name, last_name, address, email, phone, adult, on_patrol, on_call, role, id])
-  .then((result) => {
+  if (req.user.role == 3) {
+    const id = req.body.id
+    const username = req.body.username;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const address = req.body.address;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const adult = req.body.adult;
+    const on_patrol = req.body.on_patrol;
+    const on_call = req.body.on_call;
+    const role = req.body.role;
+    let queryText= `UPDATE "user" 
+                    SET 
+                      "username" = $1, 
+                      "first_name" = $2, 
+                      "last_name" = $3, 
+                      "address" = $4, 
+                      "email" = $5, 
+                      "phone" = $6, 
+                      "adult" = $7, 
+                      "on_patrol" = $8, 
+                      "on_call" = $9, 
+                      "role" = $10 
+                    WHERE 
+                      "id" = $11`;
+    pool.query(queryText, [username, first_name, last_name, address, email, phone, adult, on_patrol, on_call, role, id])
+    .then((result) => {
       res.sendStatus(200);
-  }).catch((err) => {
+    }).catch((err) => {
       console.log('error in PUT user', err);
       res.sendStatus(500);
-  });
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 // Handles login form authenticate/login POST
@@ -90,100 +95,146 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/all', rejectUnauthenticated, (req, res) => {
-  // data to populate user table
-  // retrieving all data from all users
-  const queryText = `SELECT * FROM "user";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // data to populate user table
+    // retrieving all data from all users
+    const queryText = `SELECT * FROM "user"
+    order by id;`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 
-// below are all the query functions to sort the incident table by column
+// below are all the query functions to sort the user table by column
 router.get('/username', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "username";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by username
+    const queryText = `SELECT * FROM "user" ORDER BY "username";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/first', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "first_name";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by first name
+    const queryText = `SELECT * FROM "user" ORDER BY "first_name";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/last', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "last_name";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by last name
+    const queryText = `SELECT * FROM "user" ORDER BY "last_name";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/address', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "address";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by address
+    const queryText = `SELECT * FROM "user" ORDER BY "address";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/email', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "email";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by email
+    const queryText = `SELECT * FROM "user" ORDER BY "email";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/phone', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "phone";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by phone
+    const queryText = `SELECT * FROM "user" ORDER BY "phone";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/adult', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "adult";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by adult / minor
+    const queryText = `SELECT * FROM "user" ORDER BY "adult";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/role', rejectUnauthenticated, (req, res) => {
-  // sort by type
-  const queryText = `SELECT * FROM "user" ORDER BY "role";`
-  pool.query(queryText)
+  if (req.user.role == 3) {
+    // sort by role
+    const queryText = `SELECT * FROM "user" ORDER BY "role";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/patrol', rejectUnauthenticated, (req, res) => {
-  // sort by type
+  // sort by patrol status
   const queryText = `SELECT * FROM "user" ORDER BY "on_patrol";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
@@ -193,7 +244,7 @@ router.get('/patrol', rejectUnauthenticated, (req, res) => {
     });
 });
 router.get('/oncall', rejectUnauthenticated, (req, res) => {
-  // sort by type
+  // sort by on call status
   const queryText = `SELECT * FROM "user" ORDER BY "on_call";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))

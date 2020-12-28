@@ -130,7 +130,7 @@ router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
 router.get('/client_id', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by client_id
-    const queryText = `SELECT * FROM "incidents" ORDER BY "client_id";`
+    const queryText = `SELECT * FROM "incidents" ORDER BY "username";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

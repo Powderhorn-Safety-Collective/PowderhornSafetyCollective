@@ -212,7 +212,7 @@ function* sortDuplicate() {
 }
 function* sortClient() {
   try {
-      const response = yield axios.get('/api/incident/client_id');
+      const response = yield axios.get('/api/incident/sort/client_id');
       yield put ( {type:'SET_INCIDENTS', payload: response.data} );
     } catch (error) {
       console.log(error);

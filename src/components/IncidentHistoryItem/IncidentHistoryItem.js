@@ -35,7 +35,7 @@ class IncidentHistoryItem extends Component {
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>
             <td>{this.props.incident.duplicate_entry.toString()}</td> {/* toString method to convert boolean to string */}
-            <td>{this.props.incident.client_id}</td>
+            <td>{this.props.incident.username}</td> {/* Fix this line*/}
 
             {/* trash can row to delete incident? */}
             <td className="edit" onClick={() => this.editIncident(this.props.incident)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>

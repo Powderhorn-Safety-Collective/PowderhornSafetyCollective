@@ -26,7 +26,7 @@ class IncidentHistoryItem extends Component {
     return (
         // table displaying all incident data from all users
         <tr>
-            <td>{this.props.incident.id}</td>
+            <td>{this.props.incident.client_id}</td>
             <td>{this.props.incident.type}</td>
             <td>{this.props.incident.notes}</td>
             <td>{this.props.incident.location}</td>

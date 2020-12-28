@@ -43,6 +43,9 @@ class EditUser extends Component {
       sortByAdult = () => {
         this.props.dispatch( {type:'SORT_ADULT'} );
       }
+      // sortBySkills = () => {
+      //   this.props.dispatch({ type: 'SORT_SKILLS'});
+      // } THIS NEEDS tweaking because it's a many-many
       sortByRole = () => {
         this.props.dispatch( {type:'SORT_ROLE'} );
       }
@@ -82,6 +85,8 @@ class EditUser extends Component {
                         <th onClick={this.sortByEmail}>Email</th>
                         <th onClick={this.sortByPhone}>Phone</th>
                         <th onClick={this.sortByAdult}>Adult</th>
+                        <th>Skills</th> 
+                        {/* This is the onClick function for sorting the table by skills when it is working onClick={this.sortBySkills} */}
                         <th onClick={this.sortByRole}>Role</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
@@ -92,8 +97,9 @@ class EditUser extends Component {
                 <tbody>
                     {/* map through allUsersReducer data and passing it along to EditUserItem */}
                     {this.props.store.allUsersReducer.map( (user, index) => {
+                      const skills = this.props.store.skillsReducer.description
                         return(
-                            <EditUserItem user={user} key={index}/>
+                            <EditUserItem user={user} key={index} skills={skills}/>
                         );
                     })}
                 </tbody>

@@ -65,7 +65,7 @@ class IncidentHistoryPage extends Component {
                     <tr>
                         <th onClick={this.sortByClient}>Id</th>
                         <th onClick={this.sortByType}>Type</th>
-                        <th onClick={this.sortByNotes}>Notes</th>
+                        <th onClick={this.sortByNotes}>Reporter Notes</th>
                         <th onClick={this.sortByLocation}>Location</th>
                         <th onClick={this.sortByTime}>Time Submitted</th>
                         <th onClick={this.sortByStatus}>Status</th>

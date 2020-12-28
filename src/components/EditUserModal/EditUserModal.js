@@ -39,10 +39,10 @@ class EditUserModal extends Component {
       skills: this.skillList()
     })
   }
-
+  // creates a list of all the skills for the user in that row
   skillList = () => {
     const skillArray=[];
-    this.props.store.skillsReducer.map((skill) => {
+    this.props.store.userSkillsReducer.map((skill) => {
       if(skill.user_id === this.props.store.editUserReducer.id) {
         skillArray.push(skill)
       }

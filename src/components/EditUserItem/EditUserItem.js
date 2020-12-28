@@ -13,9 +13,9 @@ class EditUserItem extends Component {
   // this function grabs all skills tied to a specific user and adds them to an array
   skillsFunction = () => {
     let array = '';
-    for(let i = 0; i < this.props.store.skillsReducer.length; i++) {
-      if(this.props.store.skillsReducer[i].user_id === this.props.user.id) {
-        array= array += `•` + this.props.store.skillsReducer[i].description + '\n';
+    for(let i = 0; i < this.props.store.userSkillsReducer.length; i++) {
+      if(this.props.store.userSkillsReducer[i].user_id === this.props.user.id) {
+        array= array += `•` + this.props.store.userSkillsReducer[i].description + '\n';
       }
     }
     return array;

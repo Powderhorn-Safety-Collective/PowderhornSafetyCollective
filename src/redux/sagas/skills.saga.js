@@ -7,7 +7,7 @@ function* fetchUserSkills() {
   try{
     const skillsResults = yield axios.get('/api/skills/user');
     yield console.log('ALL THE USERS SKILLS ARE', skillsResults.data);
-    yield put ({type: 'SET_SKILLS', payload: skillsResults.data})
+    yield put ({type: 'SET_USER_SKILLS', payload: skillsResults.data})
   }catch(error) {
     console.log('error in fetch skills', error);
   }

@@ -1,10 +1,10 @@
-const skillsReducer = (state= [], action) => {
+const userSkillsReducer = (state= [], action) => {
   switch (action.type) {
-    case 'SET_SKILLS':
+    case 'SET_USER_SKILLS':
       return action.payload;
     default: 
       return state;
   }
 }
 
-export default skillsReducer
+export default userSkillsReducer

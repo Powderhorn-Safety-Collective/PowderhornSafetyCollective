@@ -8,7 +8,7 @@ class SkillsForm extends Component {
   }
 
   getSkills = () => {
-    // this.props.dispatch('GET_ALL_SKILLS');
+    this.props.dispatch('FETCH_ALL_SKILLS');
   }
 
   render() {

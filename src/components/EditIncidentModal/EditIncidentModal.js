@@ -26,7 +26,7 @@ class EditIncidentModal extends Component {
           notes: this.props.store.editIncidentReducer.notes,
           location: this.props.store.editIncidentReducer.location,
           time_submitted: this.props.store.editIncidentReducer.time_submitted,
-          status: this.props.store.editIncidentReducer.status,
+          active: this.props.store.editIncidentReducer.active,
           view_publicly: this.props.store.editIncidentReducer.view_publicly,
           responder_notes: this.props.store.editIncidentReducer.notes,
           duplicate_entry: this.props.store.editIncidentReducer.duplicate_entry,
@@ -73,8 +73,8 @@ class EditIncidentModal extends Component {
                 <label>Time Submitted</label>
                 <input defaultValue={this.props.store.editIncidentReducer.time_submitted} onChange={(event) => this.handleChange(event, 'time_submitted')} type="text"></input>
                 <br/>
-                <label>Status</label>
-                <input defaultValue={this.props.store.editIncidentReducer.status} onChange={(event) => this.handleChange(event, 'status')} type="text"></input>
+                <label>Active</label>
+                <input defaultValue={this.props.store.editIncidentReducer.active} onChange={(event) => this.handleChange(event, 'active')} type="text"></input>
                 <br/>
                 <label>View Publicly</label>
                 <input defaultValue={this.props.store.editIncidentReducer.view_publicly} onChange={(event) => this.handleChange(event, 'view_publicly')} type="text"></input>

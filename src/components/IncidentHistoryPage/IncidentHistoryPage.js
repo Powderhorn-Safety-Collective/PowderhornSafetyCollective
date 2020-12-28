@@ -11,6 +11,7 @@ class IncidentHistoryPage extends Component {
     // to retrieve all incident data
     componentDidMount = () => {
         this.getIncidents();
+        this.props.dispatch( {type: 'GET_NOTES'}); // need this to access reducer
       }
 
     // function to fetch all incident data
@@ -55,8 +56,7 @@ class IncidentHistoryPage extends Component {
         <p>editIncidentReducer:</p>
         {JSON.stringify(this.props.store.editIncidentReducer)}
         <h2>Incident Table</h2>
-        <p>state</p>
-        {JSON.stringify(this.state)}
+        <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p>
             <table>
                 <thead>
                     <tr>
@@ -77,8 +77,9 @@ class IncidentHistoryPage extends Component {
                 <tbody>
                     {/* map through incidentReducer data and passing it along to HistoryItem */}
                     {this.props.store.incidentReducer.map( (incident, index) => {
+                        const notes = this.props.store.internalNoteReducer.text
                         return(
-                            <IncidentHistoryItem incident={incident} key={index}/>
+                            <IncidentHistoryItem incident={incident} key={index} notes={notes}/>
                         );
                     })}
                 </tbody>

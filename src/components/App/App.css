@@ -103,3 +103,8 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+/* for if we want to change colors of bootstrap buttons */
+/* .btn-warning {
+  background-color: red !important;
+  border-color: red !important;
+} */

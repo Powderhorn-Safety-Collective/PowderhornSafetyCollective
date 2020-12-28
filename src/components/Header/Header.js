@@ -5,6 +5,8 @@ import {withRouter} from 'react-router';
 import "./Header.css";
 import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
+import Button from "react-bootstrap/Button";
+ 
 
 class Header extends Component {
 
@@ -48,7 +50,7 @@ class Header extends Component {
       <div className="header">
         <div className="titleContainer">
           <Link to="/home">
-            <h2 className="nav-title">Powderhorn Safety Collective</h2>
+            <img src="/logo.png" alt="PSC Logo" height="100px"/>
           </Link>
           <div className="toggleForm">
             <p>On Patrol</p>
@@ -84,7 +86,7 @@ class Header extends Component {
           </div>
         </div>
         <div className="headerBtns">
-            <button onClick={this.reportIncident}> Report an Incident</button>
+            <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
           </div>
         <Nav/>
       </div>

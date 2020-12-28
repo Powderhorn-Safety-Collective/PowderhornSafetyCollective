@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 class LoginForm extends Component {
   state = {
@@ -73,13 +74,14 @@ class LoginForm extends Component {
         </div>
         <h4>New to PSC?</h4>
         {/* button to get registration modal */}
-        <button
+        <Button
+            variant="primary"
             type="button"
             className="btn"
             onClick={() => {this.register()}}
           >
             Register Here
-        </button>
+        </Button>
       </form>
     );
   }

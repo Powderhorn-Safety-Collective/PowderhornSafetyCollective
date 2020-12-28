@@ -91,7 +91,7 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   console.log('personal incidents', req.params.id);
     
   const queryText = `select distinct incidents.id, type, notes, location, 
-  time_submitted, view_publicly, responder_notes, duplicate_entry, client_id, 
+  time_submitted, view_publicly, duplicate_entry, client_id, 
   username, timedate_public, location_public, type_public, user_notes_public, 
   text_for_public_display, 
   active, assigned_user, submitted_user, incident_id from incidents
@@ -254,25 +254,41 @@ router.post('/', (req, res) => {
   const type = req.body.type;
   const notes = req.body.notes;
   const location = req.body.location;
-  // const time_submitted = req.body.time_submitted; // below, we use a function built into SQL to timestamp the current time on submission
-  // const status = req.body.status;
-  // const view_publicly = req.body.view_publicly;
-  // const responder_notes = req.body.responder_notes;
-  // const duplicate_entry = req.body.duplicate_entry;
-  // const client_id = req.user.id; // user id is used to cross reference new incident post id just use [$8 = client_id]
-  const queryText = `INSERT INTO "incidents" (
-                                              "type", 
-                                              "notes", 
-                                              "location", 
-                                              "time_submitted",
-                                              "client_id"
-                                              ) VALUES ($1, $2, $3, NOW(), $4);`;
-  pool.query(queryText, [type, notes, location, client_id])
+  if (req.user) {
+    const username = req.user.username;
+    const user_id = req.user.id;
+    const queryText = `INSERT INTO "incidents" (
+      "type", 
+      "notes", 
+      "location", 
+      "time_submitted",
+      "client_id",
+      "username",
+      "submitted_user"
+      ) VALUES ($1, $2, $3, NOW(), $4, $5, $6);`;
+    pool.query(queryText, [type, notes, location, client_id, username, user_id])
     .then(() => { res.sendStatus(201)})
     .catch((error) => {
-        console.log('Error', error);
-        res.sendStatus(500);
+      console.log('Error', error);
+      res.sendStatus(500);
     });
+  }
+  else {
+  
+    const queryText = `INSERT INTO "incidents" (
+                                                "type", 
+                                                "notes", 
+                                                "location", 
+                                                "time_submitted",
+                                                "client_id"
+                                                ) VALUES ($1, $2, $3, NOW(), $4);`;
+    pool.query(queryText, [type, notes, location, client_id])
+    .then(() => { res.sendStatus(201)})
+    .catch((error) => {
+      console.log('Error', error);
+      res.sendStatus(500);
+    });
+  }
 });
 
 // below are all the query functions to sort the incident table by column

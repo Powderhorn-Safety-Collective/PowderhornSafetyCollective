@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 class InternalNotes extends Component {
   state = {
@@ -35,7 +36,7 @@ class InternalNotes extends Component {
         <label htmlFor="internalNoteInput">Notes/Updates</label>
         <input className="internalNoteInput" type="text" placeholder="add an update or note on this incident" 
         value={this.state.noteText} onChange={this.handleChange}></input> 
-        <button className="noteSubmit" onClick={this.handleSubmit}>Submit Note</button>
+        <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
         </div>
         <div>
           <h3>Internal Notes</h3>

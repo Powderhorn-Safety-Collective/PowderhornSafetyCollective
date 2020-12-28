@@ -8,6 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
 import InternalNotes from '../InternalNotes/InternalNotes';
+import Button from 'react-bootstrap/Button';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.
@@ -243,12 +244,13 @@ class InternalIncident extends Component {
                   value={this.state.publicText}
                 />
                 <br/>
-                <button 
+                <Button
+                  variant="success" 
                   onClick={this.handlePublicTextSave} 
                   className="btn"
                 >
                   Save Public Display Text
-                </button>
+                </Button>
               </div>
             </Row>
             <br/>
@@ -262,12 +264,13 @@ class InternalIncident extends Component {
                 />
               }
               <p className="internalLine">Active Incident? </p>
-              <button 
+              <Button
+                variant="warning" 
                 onClick={this.handleDuplicate} 
                 className="btn"
               >
                 Mark as Duplicate
-              </button>
+              </Button>
               <AssignClaimComponent incidentId={this.props.incident.id}/>
               <button 
                 onClick={this.handlePostNotice} 

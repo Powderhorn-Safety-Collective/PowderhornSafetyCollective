@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 class AssignClaimComponent extends Component {
   state= {
@@ -57,7 +58,12 @@ class AssignClaimComponent extends Component {
             )
           })}
         </select>
-        <button onClick={this.submitAssign}>Assign/Claim</button>
+        <Button 
+          variant="primary"
+          onClick={this.submitAssign}
+        >
+          Assign/Claim
+        </Button>
       </>  
       }
       </>

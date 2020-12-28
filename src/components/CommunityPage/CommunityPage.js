@@ -9,6 +9,10 @@ import IncidentModule from '../IncidentModule/IncidentModule';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import MailchimpSubscribe from "react-mailchimp-subscribe"
+
+
+
 
 
 // Community Page component
@@ -18,6 +22,8 @@ import Col from "react-bootstrap/Col";
 class CommunityPage extends Component {
   state = {
   };
+
+  
 
   renderTime = (time) => {
     let timeHour = Number(time.slice(11,13));
@@ -80,9 +86,7 @@ class CommunityPage extends Component {
               </h2>
             </Row>
             <Row className="box">
-              <h2>
-                Subscribe to our mailing list
-              </h2>
+              <h2><MailchimpSubscribe url={process.env.REACT_APP_MAILCHIMP_URL}/></h2>
             </Row>
           </Col> {/* end left stuff */}
           {/* middle stuff / incident cards */}
@@ -137,3 +141,5 @@ class CommunityPage extends Component {
 }
 
 export default connect(mapStoreToProps)(CommunityPage);
+
+

@@ -26,7 +26,6 @@ class MemberPage extends Component {
     return ( 
       <Container fluid>
         <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
         {/* Row to go across entire page */}
         <Row>
           {/* left stuff for incidents */}

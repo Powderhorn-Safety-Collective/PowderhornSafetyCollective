@@ -17,7 +17,7 @@ function * fetchAllSkills() {
   try{
     const results = yield axios.get('/api/skills');
     yield console.log('ALL THE SKILLS ARE', results.data);
-    
+    yield put ({type: 'SET_ALL_SKILLS', payload: results.data})
   }catch(error) {
     console.log('Error is fetching all skills');
   }

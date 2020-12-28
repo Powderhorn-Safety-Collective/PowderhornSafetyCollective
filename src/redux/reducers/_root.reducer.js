@@ -12,7 +12,8 @@ import editIncidentReducer from './edit.incident.reducer'; // reducer to help wi
 import searchIncidentReducer from './search.incident.reducer';
 import personalIncidentReducer from './personal.incident.reducer';
 import internalNoteReducer from './internal.note.reducer';
-import userSkillsReducer from './skills.reducer';
+import userSkillsReducer from './user.skills.reducer';
+import allSkillsReducer from './all.skills.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
   personalIncidentReducer, // reducer to hold incidents submitted or followed by user
   searchIncidentReducer,//reducer that holds a searched incident
   internalNoteReducer, //reducer that holds all PSC internal notes
-  userSkillsReducer
+  userSkillsReducer,
+  allSkillsReducer,
 
 });
 

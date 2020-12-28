@@ -113,6 +113,21 @@ class CommunityPage extends Component {
             <Row className="box">
               {/* section to search for an incident */}
               <IncidentSearch/>
+              {/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
+            {this.props.store.searchIncidentReducer.client_id &&
+            <div>
+              <p>Incident ID: {this.props.store.searchIncidentReducer.client_id}</p>
+              <p>Incident Type: {this.props.store.searchIncidentReducer.type}</p>
+              <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
+              <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
+              {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
+              <button onClick={this.contactRequest}>Request Contact</button>
+            </div>
+            }
+            {/* TODO add sweet alert for no-results */}
+            {this.props.store.searchIncidentReducer === "" &&
+              <p>No Incident with that ID was found, please try again.</p>
+            }
             </Row>
           </Col> {/* end right stuff */}
         </Row> 

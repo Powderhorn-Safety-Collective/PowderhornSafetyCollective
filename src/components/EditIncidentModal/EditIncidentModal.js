@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 
 class EditIncidentModal extends Component {
@@ -87,9 +88,9 @@ class EditIncidentModal extends Component {
                 <label>Client Id</label>
                 <input defaultValue={this.props.store.editIncidentReducer.client_id} onChange={(event) => this.handleChange(event, 'client_id')} type="text"></input>
                 <br/>
-                  <button onClick={this.submitEdit}>Submit Edit</button>
+                  <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
                 <br/>
-                  <button onClick={this.goBack}>Back to Data Table</button>
+                  <Button onClick={this.goBack} variant="warning">Back to Data Table</Button>
             </div>
             :
             <></>

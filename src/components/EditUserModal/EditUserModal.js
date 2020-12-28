@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 
 class EditUserModal extends Component {
@@ -95,9 +96,9 @@ class EditUserModal extends Component {
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
           <br/>
-            <button onClick={this.submitEdit}>Submit Edit</button>
+            <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>
-            <button onClick={this.goBack}>Back to Data Table</button>
+            <Button onClick={this.goBack} variant="warning">Back to Data Table</Button>
           </div>
         :
         <></>

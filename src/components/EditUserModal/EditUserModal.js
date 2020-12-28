@@ -114,6 +114,7 @@ class EditUserModal extends Component {
               return <li>{skill.description}</li>
             })}
           </ul> */}
+          <br></br>
           <SkillsForm/>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>

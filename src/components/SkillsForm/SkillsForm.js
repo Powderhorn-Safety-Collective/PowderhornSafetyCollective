@@ -13,7 +13,17 @@ class SkillsForm extends Component {
 
   render() {
     return(
-      <p>THIS IS A SKILLS FORM</p>
+      <>
+      {this.props.store.allSkillsReducer.map((skill) => {
+        return(
+          <label>
+            <input type="checkbox"/>
+            <span>{skill.description}</span>
+          </label>
+
+        )
+      })}
+      </>
     )
   }
 }

@@ -6,6 +6,21 @@ const {
   } = require('../modules/authentication-middleware');
 
   // below are all the query functions to sort the incident table by column
+  router.get('/client_id', rejectUnauthenticated, (req, res) => {
+    if (req.user.role == 3) {
+      // sort by client_id
+      const queryText = `SELECT * FROM "incidents" ORDER BY "client_id";`
+      pool.query(queryText)
+      .then((results) => res.send(results.rows))
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+      });
+    }
+    else {
+      res.sendStatus(403);
+    }
+  });
 router.get('/type', rejectUnauthenticated, (req, res) => {
   console.log('hello sort type');
   if (req.user.role == 3) {
@@ -127,9 +142,9 @@ router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
-router.get('/client_id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by client_id
+router.get('/submitted_user', rejectUnauthenticated, (req, res) => {
+  if(req.user.role == 3) {
+    // sort by user who submitted incident
     const queryText = `SELECT * FROM "incidents" ORDER BY "username";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
@@ -142,6 +157,7 @@ router.get('/client_id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+
 // end of table sorting routes
 
 

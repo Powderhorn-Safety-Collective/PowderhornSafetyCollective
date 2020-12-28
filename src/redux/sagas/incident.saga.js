@@ -218,6 +218,14 @@ function* sortClient() {
       console.log(error);
     }
 }
+function* sortSubmittedUser() {
+  try {
+      const response = yield axios.get('/api/incident/sort/submitted_user');
+      yield put ( {type:'SET_INCIDENTS', payload: response.data} );
+    } catch (error) {
+      console.log(error);
+    }
+}
 // end of sorting sagas
 
 function* incidentSaga() {
@@ -237,6 +245,7 @@ function* incidentSaga() {
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
 
     // below are all the yields to sort incident table by column
+    yield takeLatest("SORT_CLIENT", sortClient);
     yield takeLatest("SORT_TYPE", sortType);
     yield takeLatest("SORT_NOTES", sortNotes);
     yield takeLatest("SORT_LOCATION", sortLocation);
@@ -245,7 +254,7 @@ function* incidentSaga() {
     yield takeLatest("SORT_PUBLIC", sortPublic);
     yield takeLatest("SORT_RESPONDER", sortResponder);
     yield takeLatest("SORT_DUPLICATE", sortDuplicate);
-    yield takeLatest("SORT_CLIENT", sortClient);
+    yield takeEvery('SORT_SUBMITTED_USER', sortSubmittedUser);
 
     yield takeLatest("SUBMIT_EDIT_INCIDENT", editIncident); // for edit of incidents
 }

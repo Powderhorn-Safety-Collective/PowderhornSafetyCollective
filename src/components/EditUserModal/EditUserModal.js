@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
+import SkillsForm from '../SkillsForm/SkillsForm';
 
 
 class EditUserModal extends Component {
@@ -17,10 +18,12 @@ class EditUserModal extends Component {
     adult: '',
     on_patrol: '',
     on_call: '',
-    role: ''
+    role: '',
+    skills: []
   }
   
   componentDidMount = () => {
+    this.skillList()
     this.setState( {
       id: this.props.store.editUserReducer.id,
       username: this.props.store.editUserReducer.username,
@@ -32,8 +35,19 @@ class EditUserModal extends Component {
       adult: this.props.store.editUserReducer.adult,
       on_patrol: this.props.store.editUserReducer.on_patrol,
       on_call: this.props.store.editUserReducer.on_call,
-      role: this.props.store.editUserReducer.role
+      role: this.props.store.editUserReducer.role,
+      skills: this.skillList()
     })
+  }
+
+  skillList = () => {
+    const skillArray=[];
+    this.props.store.skillsReducer.map((skill) => {
+      if(skill.user_id === this.props.store.editUserReducer.id) {
+        skillArray.push(skill)
+      }
+    })
+    return skillArray;
   }
 
   handleChange = (event, typeParam) => {
@@ -95,6 +109,12 @@ class EditUserModal extends Component {
           <br/>
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
+          {/* <ul>
+            {this.state.skills.map((skill) => {
+              return <li>{skill.description}</li>
+            })}
+          </ul> */}
+          <SkillsForm/>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

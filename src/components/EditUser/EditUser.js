@@ -18,7 +18,7 @@ class EditUser extends Component {
     }
 
     getSkills = () => {
-      this.props.dispatch({type: 'FETCH_SKILLS'});
+      this.props.dispatch({type: 'FETCH_USER_SKILLS'});
     }
 
        // below are functions used to sort user table by column

@@ -54,7 +54,7 @@ class IncidentHistoryItem extends Component {
             <td>{this.props.incident.type}</td>
             <td>{this.props.incident.notes}</td>
             <td>{this.props.incident.location}</td>
-            {this.renderTime(this.props.incident.time_submitted)} {/* This calls the function to print the time for the incident */}
+            <td>{this.renderTime(this.props.incident.time_submitted)}</td> {/* This calls the function to print the time for the incident */}
             <td>{this.props.incident.active.toString()}</td>
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>

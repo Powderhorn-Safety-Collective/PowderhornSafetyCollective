@@ -5,27 +5,28 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-  // below are all the query functions to sort the incident table by column
-  router.get('/client_id', rejectUnauthenticated, (req, res) => {
-    if (req.user.role == 3) {
-      // sort by client_id
-      // this one might be a problem, we'll have to test
-      // const queryText = `select * from incidents order by client_id;`;
-      const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
-      text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
-      timedate_public, type, user_notes_public, username, username_public, view_publicly
-      FROM "incidents" ORDER BY "client_id";`;
-      pool.query(queryText)
-      .then((results) => res.send(results.rows))
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-      });
-    }
-    else {
-      res.sendStatus(403);
-    }
-  });
+// below are all the query functions to sort the incident table by column
+// route for getting incidents sorted by client id
+router.get('/client_id', rejectUnauthenticated, (req, res) => {
+  if (req.user.role == 3) {
+    // sort by client_id
+    // const queryText = `select * from incidents order by client_id;`;
+    const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
+    text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
+    timedate_public, type, user_notes_public, username, username_public, view_publicly
+    FROM "incidents" ORDER BY "client_id";`;
+    pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
+// route for getting incidents sorted by type  
 router.get('/type', rejectUnauthenticated, (req, res) => {
   console.log('hello sort type');
   if (req.user.role == 3) {
@@ -45,6 +46,7 @@ router.get('/type', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by notes
 router.get('/notes', rejectUnauthenticated, (req, res) => {
   if(req.user.role == 3) {
     // sort by notes
@@ -63,6 +65,7 @@ router.get('/notes', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by location
 router.get('/location', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by notes
@@ -81,6 +84,7 @@ router.get('/location', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by time
 router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by time_submitted
@@ -99,13 +103,14 @@ router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by active status
 router.get('/status', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by status
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
     timedate_public, type, user_notes_public, username, username_public, view_publicly
-    FROM "incidents" ORDER BY "active";`;
+    FROM "incidents" ORDER BY "active" desc;`;
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -117,6 +122,7 @@ router.get('/status', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by view_publicly
 router.get('/view_publicly', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by view_publicly
@@ -135,6 +141,7 @@ router.get('/view_publicly', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by responder notes
 router.get('/responder_notes', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by responder_notes
@@ -153,6 +160,7 @@ router.get('/responder_notes', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by duplicate_entry
 router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
   if(req.user.role == 3) {
     // sort by duplicate_entry
@@ -171,6 +179,7 @@ router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// route for getting incidents sorted by submitted_user
 router.get('/submitted_user', rejectUnauthenticated, (req, res) => {
   if(req.user.role == 3) {
     // sort by user who submitted incident

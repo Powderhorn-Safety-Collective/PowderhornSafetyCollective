@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // ;`
 
   if(req.user.role > 1) {
-    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+    const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
     left JOIN "user" on "user"."id" = "incidents"."assigned_user"
     ORDER BY "time_submitted" DESC;`
     pool.query(queryText)

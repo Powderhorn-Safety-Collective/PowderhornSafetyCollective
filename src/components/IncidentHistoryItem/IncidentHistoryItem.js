@@ -20,17 +20,22 @@ class IncidentHistoryItem extends Component {
     }
     return array;
   }
-
+  
   // function to render time associated with incident
   renderTime = (time) => {
     let timeHour = Number(time.slice(11,13));
+    console.log('timeHour', timeHour);
+    
     let timeMorningEvening = 'a.m.';
-    if (timeHour > 12) {
-      timeHour -= 12;
+    if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
     }
     else if (timeHour == 0) {
       timeHour = 12;
+    }
+    else if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
     }
     let timeMinute = time.slice(14, 16);
     let month = Number(time.slice(5,7));
@@ -38,6 +43,7 @@ class IncidentHistoryItem extends Component {
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     return <p>{displayTime}</p>
+    
   }
     
   render() {
@@ -48,7 +54,7 @@ class IncidentHistoryItem extends Component {
             <td>{this.props.incident.type}</td>
             <td>{this.props.incident.notes}</td>
             <td>{this.props.incident.location}</td>
-            {this.renderTime(this.props.incident.time_submitted)}
+            {this.renderTime(this.props.incident.time_submitted)} {/* This calls the function to print the time for the incident */}
             <td>{this.props.incident.active.toString()}</td>
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>

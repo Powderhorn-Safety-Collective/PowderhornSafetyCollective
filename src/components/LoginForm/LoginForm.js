@@ -31,11 +31,6 @@ class LoginForm extends Component {
     });
   };
 
-  // this will need to the thing to bring up the modal to register
-  register = () => {
-
-  };
-
   render() {
     return (
       <form className="loginForm" onSubmit={this.login}>
@@ -72,16 +67,6 @@ class LoginForm extends Component {
         <div>
           <input className="btn" type="submit" name="submit" value="Log In" />
         </div>
-        <h4>New to PSC?</h4>
-        {/* button to get registration modal */}
-        <Button
-            variant="primary"
-            type="button"
-            className="btn"
-            onClick={() => {this.register()}}
-          >
-            Register Here
-        </Button>
       </form>
     );
   }

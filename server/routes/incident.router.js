@@ -73,9 +73,14 @@ router.put('/editIncident/:id', (req, res) => {
 // this one will get only the public incidents to be displayed
 // and sent back to fetchPublicIncidents saga
 router.get('/public', (req, res) => {
-  const queryText = `SELECT * FROM "incidents"
-  where view_publicly = true
-  order by time_submitted desc;`
+  // const queryText = `SELECT * FROM "incidents"
+  // where view_publicly = true
+  // order by time_submitted desc;`
+  const queryText = `select active, client_id, id, location, location_public, notes, submitted_user,
+                    text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
+                    timedate_public, user_notes_public, username, username_public from incidents
+                    where view_publicly = true
+                    order by time_submitted desc;`
   pool.query(queryText)
   .then((results) => res.send(results.rows))
   .catch((error) => {

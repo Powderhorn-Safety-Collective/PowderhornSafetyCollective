@@ -96,7 +96,7 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   console.log('personal incidents', req.params.id);
     
   const queryText = `select distinct incidents.id, type, notes, location, 
-  time_submitted, view_publicly, duplicate_entry, client_id, 
+  time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, view_publicly, duplicate_entry, client_id, 
   username, timedate_public, location_public, type_public, user_notes_public, 
   text_for_public_display, 
   active, assigned_user, submitted_user, incident_id from incidents

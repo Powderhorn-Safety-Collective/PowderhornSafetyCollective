@@ -14,6 +14,7 @@ const patrolRouter = require('./routes/patrol.router');
 const onCallRouter = require('./routes/on.call.router');
 const internalNoteRouter = require('./routes/internal.note.router');
 const incidentRouter = require('./routes/incident.router'); // route to handle incident data table
+const incidentSortRouter = require('./routes/incident.sort.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/patrol', patrolRouter);
 app.use('/api/oncall', onCallRouter);
 app.use('/api/notes', internalNoteRouter);
 app.use('/api/incident', incidentRouter); // route to handle incident data table
+app.use('/api/incident/sort', incidentSortRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -22,9 +22,18 @@ function * fetchAllSkills() {
     console.log('Error is fetching all skills');
   }
 }
+// adds a new row to the user_skills table
+function* addSkill(action) {
+  try{
+    yield axios.post('/api/skills/user', action.payload);
+  }catch(error) {
+    console.log('error adding new userskill', error);
+  }
+}
 
 function* skillsSaga(){
   yield takeEvery('FETCH_USER_SKILLS', fetchUserSkills);
-  yield takeEvery('FETCH_ALL_SKILLS', fetchAllSkills)
+  yield takeEvery('FETCH_ALL_SKILLS', fetchAllSkills);
+  yield takeEvery('ADD_SKILL', addSkill)
 }
 export default skillsSaga;

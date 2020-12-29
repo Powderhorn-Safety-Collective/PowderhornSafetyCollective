@@ -73,12 +73,11 @@ class EditUserModal extends Component {
   }
 
   // sends a new skill row to the user_skill table
-  handleSkill = (event, type) => {
+  addSkill = (event, type) => {
     const newSkill = {
       userId: this.props.store.editUserReducer.id,
       skillId: Number(event.target.value)
     }
-    console.log('sending:', newSkill);
     this.props.dispatch({
       type: 'ADD_SKILL',
       payload: newSkill
@@ -131,7 +130,7 @@ class EditUserModal extends Component {
           <br></br>
           {this.props.store.allSkillsReducer.map((skill) => {
             return(
-              <SkillsForm skill={skill} handleSkill={this.handleSkill} key={skill.description}/>
+              <SkillsForm skill={skill} addSkill={this.addSkill} key={skill.description}/>
             )
           })}
           <br/>

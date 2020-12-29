@@ -12,7 +12,7 @@ class SkillsForm extends Component {
       <label key={this.props.key}>
         <input 
           type="checkbox"
-          onChange={(event) => this.props.handleSkill(event, skill.description) }
+          onChange={(event) => this.props.addSkill(event, skill.description) }
           value={skill.id}
         />
         <span>{skill.description}</span>

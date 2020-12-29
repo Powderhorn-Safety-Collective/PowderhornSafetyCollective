@@ -277,12 +277,13 @@ class InternalIncident extends Component {
                 Mark as Duplicate
               </Button>
               <AssignClaimComponent incidentId={this.props.incident.id}/>
-              <button 
+              <Button
+                variant="success" 
                 onClick={this.handlePostNotice} 
                 className="btn"
               >
                 Post Public Notice
-              </button>
+              </Button>
 
             </Row>
           </Col>

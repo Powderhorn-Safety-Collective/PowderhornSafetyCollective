@@ -8,10 +8,6 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   // data to populate incident table
   // retrieving all data from all users
-  // const queryText = `SELECT *, incidents.id FROM "incidents"
-  // left join "user" on "user".username = incidents.username
-  // order by time_submitted desc;
-  // ;`
 
   if(req.user.role > 1) {
     const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
@@ -73,9 +69,6 @@ router.put('/editIncident/:id', (req, res) => {
 // this one will get only the public incidents to be displayed
 // and sent back to fetchPublicIncidents saga
 router.get('/public', (req, res) => {
-  // const queryText = `SELECT * FROM "incidents"
-  // where view_publicly = true
-  // order by time_submitted desc;`
   const queryText = `select active, client_id, id, location, location_public, notes, submitted_user,
                     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
                     timedate_public, user_notes_public, username, username_public from incidents

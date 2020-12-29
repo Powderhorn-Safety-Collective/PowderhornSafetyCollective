@@ -23,7 +23,8 @@ class EditUserModal extends Component {
   }
   
   componentDidMount = () => {
-    this.skillList()
+    this.skillList();
+    this.getSkills();
     this.setState( {
       id: this.props.store.editUserReducer.id,
       username: this.props.store.editUserReducer.username,
@@ -39,6 +40,10 @@ class EditUserModal extends Component {
       skills: this.skillList()
     })
   }
+  // fetches all the skills from the skills list in the DB
+  getSkills = () => {
+    this.props.dispatch({type:'FETCH_ALL_SKILLS'});
+  }
   // creates a list of all the skills for the user in that row
   skillList = () => {
     const skillArray=[];
@@ -52,7 +57,6 @@ class EditUserModal extends Component {
 
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
-  
     this.setState( {
         [typeParam]: event.target.value
     })
@@ -68,11 +72,26 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  // sends a new skill row to the user_skill table
+  handleSkill = (event, type) => {
+    const newSkill = {
+      userId: this.props.store.editUserReducer.id,
+      skillId: Number(event.target.value)
+    }
+    console.log('sending:', newSkill);
+    this.props.dispatch({
+      type: 'ADD_SKILL',
+      payload: newSkill
+    })
+  }
+
   render() {
     return (
       <div>
         <p>editUserReducer:</p>
         {JSON.stringify(this.props.store.editUserReducer)}
+        <p>userSkillsReducer:</p>
+        {JSON.stringify(this.props.store.userSkillsReducer)}
         <p>state:</p>
         {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
@@ -109,13 +128,12 @@ class EditUserModal extends Component {
           <br/>
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
-          {/* <ul>
-            {this.state.skills.map((skill) => {
-              return <li>{skill.description}</li>
-            })}
-          </ul> */}
           <br></br>
-          <SkillsForm/>
+          {this.props.store.allSkillsReducer.map((skill) => {
+            return(
+              <SkillsForm skill={skill} handleSkill={this.handleSkill} key={skill.description}/>
+            )
+          })}
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

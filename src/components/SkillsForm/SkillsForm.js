@@ -3,26 +3,20 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class SkillsForm extends Component {
-  componentDidMount = () => {
-    this.getSkills();
-  }
 
-  getSkills = () => {
-    this.props.dispatch({type:'FETCH_ALL_SKILLS'});
-  }
 
   render() {
+    const skill = this.props.skill
     return(
       <>
-      {this.props.store.allSkillsReducer.map((skill) => {
-        return(
-          <label>
-            <input type="checkbox"/>
-            <span>{skill.description}</span>
-          </label>
-
-        )
-      })}
+      <label key={this.props.key}>
+        <input 
+          type="checkbox"
+          onChange={(event) => this.props.handleSkill(event, skill.description) }
+          value={skill.id}
+        />
+        <span>{skill.description}</span>
+      </label>
       </>
     )
   }

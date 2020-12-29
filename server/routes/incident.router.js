@@ -8,14 +8,10 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   // data to populate incident table
   // retrieving all data from all users
-  // const queryText = `SELECT *, incidents.id FROM "incidents"
-  // left join "user" on "user".username = incidents.username
-  // order by time_submitted desc;
-  // ;`
 
   if(req.user.role > 1) {
-    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
-    JOIN "user" on "user"."id" = "incidents"."assigned_user"
+    const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+    left JOIN "user" on "user"."id" = "incidents"."assigned_user"
     ORDER BY "time_submitted" DESC;`
     pool.query(queryText)
     .then((results) => {res.send(results.rows)
@@ -73,9 +69,11 @@ router.put('/editIncident/:id', (req, res) => {
 // this one will get only the public incidents to be displayed
 // and sent back to fetchPublicIncidents saga
 router.get('/public', (req, res) => {
-  const queryText = `SELECT * FROM "incidents"
-  where view_publicly = true
-  order by time_submitted desc;`
+  const queryText = `select active, client_id, id, location, location_public, notes, submitted_user,
+                    text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
+                    timedate_public, user_notes_public, username, username_public from incidents
+                    where view_publicly = true
+                    order by time_submitted desc;`
   pool.query(queryText)
   .then((results) => res.send(results.rows))
   .catch((error) => {
@@ -91,7 +89,7 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   console.log('personal incidents', req.params.id);
     
   const queryText = `select distinct incidents.id, type, notes, location, 
-  time_submitted, view_publicly, duplicate_entry, client_id, 
+  time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, view_publicly, duplicate_entry, client_id, 
   username, timedate_public, location_public, type_public, user_notes_public, 
   text_for_public_display, 
   active, assigned_user, submitted_user, incident_id from incidents
@@ -236,7 +234,9 @@ router.put('/assign', (req, res) => {
 
   // get all incident data for searched incident
   router.get('/search/:num', (req, res) => {
-    let queryText = `SELECT * FROM "incidents"
+    let queryText = `SELECT active, client_id, id, location, location_public, notes, submitted_user,
+    text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
+    timedate_public, user_notes_public, username, username_public view_publiclyfrom incidents
     WHERE "client_id" = '${req.params.num}';`;
     pool.query(queryText).then((result) => {
       res.send(result.rows[0])
@@ -291,142 +291,6 @@ router.post('/', (req, res) => {
   }
 });
 
-// below are all the query functions to sort the incident table by column
-router.get('/type', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by type
-    const queryText = `SELECT * FROM "incidents" ORDER BY "type";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/notes', rejectUnauthenticated, (req, res) => {
-  if(req.user.role == 3) {
-    // sort by notes
-    const queryText = `SELECT * FROM "incidents" ORDER BY "notes";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    }); 
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/location', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by notes
-    const queryText = `SELECT * FROM "incidents" ORDER BY "location";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by time_submitted
-    const queryText = `SELECT * FROM "incidents" ORDER BY "time_submitted";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/status', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by status
-    const queryText = `SELECT * FROM "incidents" ORDER BY "active";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/view_publicly', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by view_publicly
-    const queryText = `SELECT * FROM "incidents" ORDER BY "view_publicly";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/responder_notes', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by responder_notes
-    const queryText = `SELECT * FROM "incidents" ORDER BY "responder_notes";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
-  if(req.user.role == 3) {
-    // sort by duplicate_entry
-    const queryText = `SELECT * FROM "incidents" ORDER BY "duplicate_entry";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-router.get('/client_id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
-    // sort by client_id
-    const queryText = `SELECT * FROM "incidents" ORDER BY "client_id";`
-    pool.query(queryText)
-    .then((results) => res.send(results.rows))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
-  }
-  else {
-    res.sendStatus(403);
-  }
-});
-// end of table sorting routes
+
 
 module.exports = router;

@@ -20,22 +20,46 @@ class IncidentHistoryItem extends Component {
     }
     return array;
   }
-
+  
+  // function to render time associated with incident
+  renderTime = (time) => {
+    let timeHour = Number(time.slice(11,13));
+    console.log('timeHour', timeHour);
+    
+    let timeMorningEvening = 'a.m.';
+    if (timeHour == 12) {
+      timeMorningEvening = 'p.m.';
+    }
+    else if (timeHour == 0) {
+      timeHour = 12;
+    }
+    else if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
+    }
+    let timeMinute = time.slice(14, 16);
+    let month = Number(time.slice(5,7));
+    let day = Number(time.slice(8,10));
+    let year = Number(time.slice(0,4));
+    let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
+    return <p>{displayTime}</p>
+    
+  }
     
   render() {
     return (
         // table displaying all incident data from all users
         <tr>
-            <td>{this.props.incident.id}</td>
+            <td>{this.props.incident.client_id}</td>
             <td>{this.props.incident.type}</td>
             <td>{this.props.incident.notes}</td>
             <td>{this.props.incident.location}</td>
-            <td>{this.props.incident.time_submitted.substring(0, 10)}</td> {/* substring method to truncate timestamp data type */}
+            {this.renderTime(this.props.incident.time_submitted)} {/* This calls the function to print the time for the incident */}
             <td>{this.props.incident.active.toString()}</td>
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>
             <td>{this.props.incident.duplicate_entry.toString()}</td> {/* toString method to convert boolean to string */}
-            <td>{this.props.incident.client_id}</td>
+            <td>{this.props.incident.username}</td> {/* Fix this line*/}
 
             {/* trash can row to delete incident? */}
             <td className="edit" onClick={() => this.editIncident(this.props.incident)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>

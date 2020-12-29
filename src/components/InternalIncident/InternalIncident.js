@@ -31,20 +31,25 @@ class InternalIncident extends Component {
   // function to render time associated with incident
   renderTime = ( time) => {
     let timeHour = Number(time.slice(11,13));
+    console.log('timeHour', timeHour);
+    
     let timeMorningEvening = 'a.m.';
-    if (timeHour > 12) {
-      timeHour -= 12;
+    if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
     }
     else if (timeHour == 0) {
       timeHour = 12;
+    }
+    else if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
     }
     let timeMinute = time.slice(14, 16);
     let month = Number(time.slice(5,7));
     let day = Number(time.slice(8,10));
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
-    return <p className="internalLine">{displayTime}</p>
+    return <p>{displayTime}</p>
   }
 
   handleChange = (event) => {
@@ -272,12 +277,13 @@ class InternalIncident extends Component {
                 Mark as Duplicate
               </Button>
               <AssignClaimComponent incidentId={this.props.incident.id}/>
-              <button 
+              <Button
+                variant="success" 
                 onClick={this.handlePostNotice} 
                 className="btn"
               >
                 Post Public Notice
-              </button>
+              </Button>
 
             </Row>
           </Col>

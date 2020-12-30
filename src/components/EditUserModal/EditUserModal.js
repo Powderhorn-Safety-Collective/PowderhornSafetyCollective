@@ -56,6 +56,11 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  handlOptionChange = (event) => {
+    this.setState({
+      role: event.target.value
+    });
+  };
   
   render() {
     return (
@@ -66,7 +71,7 @@ class EditUserModal extends Component {
         {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
-          <label>Id</label>
+          <label>Id:</label>
           <input defaultValue={this.props.store.editUserReducer.id} type="text"></input>
           <br/>
           <label>Username</label>
@@ -96,47 +101,47 @@ class EditUserModal extends Component {
           <label>On Call</label>
           <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
           <br/>
-          <label>Role</label>
-          <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
+          <label>Role:</label>
           {/* use radio buttons here for user, volunteer, and admin */}
-          <form>
-            <div className="form-check">
-              <label>
-                <input 
-                  type="radio"
-                  name="role"
-                  value={1}
-                  checked={this.state.role == 1}
-                  className="form-check-input"
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="role"
+                value={1}
+                checked={this.state.role == 1}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
                 />
-                PSC Registered User
-              </label>
-            </div>
-            <div className="form-check">
-              <label>
-                <input 
-                  type="radio"
-                  name="role"
-                  value={2}
-                  checked={this.state.role == 2}
-                  className="form-check-input"
+              PSC User
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="role"
+                value={2}
+                checked={this.state.role == 2}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
                 />
-                PSC Volunteer
-              </label>
-            </div>
-            <div className="form-check">
-              <label>
-                <input 
-                  type="radio"
-                  name="role"
-                  value={3}
-                  checked={this.state.role == 3}
-                  className="form-check-input"
-                />
-                PSC Administrator
-              </label>
-            </div>
-          </form>
+              PSC Volunteer
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="role"
+                value={3}
+                checked={this.state.role == 3}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+              />
+              PSC Administrator
+            </label>
+          </div>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

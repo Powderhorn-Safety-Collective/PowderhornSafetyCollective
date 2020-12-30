@@ -91,7 +91,7 @@ class EditUserModal extends Component {
           <label>Phone*:</label>
           <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
           <br/>
-          <label>Adult*:</label>
+          <label>Is the user an adult?*:</label>
           <div className="form-check">
             <label>
               <input 

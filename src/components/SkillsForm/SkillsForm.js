@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './SkillsForm.css';
 
 class SkillsForm extends Component {
 
 
   render() {
-    const skill = this.props.skill
+    let skill = this.props.skill
     return(
       <>
-      <label key={this.props.key}>
-        <input 
-          type="checkbox"
-          onChange={(event) => this.props.addSkill(event, skill.description) }
+        <button 
+          className={this.props.className}
+          onClick={this.props.onClick}  
           value={skill.id}
-        />
-        <span>{skill.description}</span>
-      </label>
+        >
+          {skill.description}
+        </button>
       </>
     )
   }

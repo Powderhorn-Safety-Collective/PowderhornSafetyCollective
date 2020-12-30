@@ -23,7 +23,6 @@ class EditUserModal extends Component {
   }
   
   componentDidMount = () => {
-    this.skillList();
     this.getSkills();
     this.setState( {
       id: this.props.store.editUserReducer.id,
@@ -37,23 +36,32 @@ class EditUserModal extends Component {
       on_patrol: this.props.store.editUserReducer.on_patrol,
       on_call: this.props.store.editUserReducer.on_call,
       role: this.props.store.editUserReducer.role,
-      skills: this.skillList()
     })
   }
+
   // fetches all the skills from the skills list in the DB
   getSkills = () => {
     this.props.dispatch({type:'FETCH_ALL_SKILLS'});
   }
-  // creates a list of all the skills for the user in that row
-  skillList = () => {
-    const skillArray=[];
+
+  renderSkills = (taco) => {
+    const thisUserSkillArray = [];
     this.props.store.userSkillsReducer.map((skill) => {
       if(skill.user_id === this.props.store.editUserReducer.id) {
-        skillArray.push(skill)
+        thisUserSkillArray.push({id: skill.skill_id, description: skill.description, active: 'true'})
       }
     })
-    return skillArray;
+    if(thisUserSkillArray.some(skill => skill.id === taco.id)){
+      return(
+        <SkillsForm skill={taco} className="checked" onClick={this.removeSkill}/>
+      )
+    } else {
+      return (
+        <SkillsForm skill={taco} className="unchecked" onClick={this.addSkill}/>
+      )
+    }
   }
+
 
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
@@ -82,17 +90,26 @@ class EditUserModal extends Component {
       type: 'ADD_SKILL',
       payload: newSkill
     })
+    this.props.history.push('/edit')
+  }
+  // removes a skill from the user_skill table
+  removeSkill = (event) => {
+    const deleteSkill = {
+      userId: this.props.store.editUserReducer.id,
+      skillId: Number(event.target.value)
+    }
+    this.props.dispatch({
+      type: 'REMOVE_SKILL',
+      payload: deleteSkill
+    })
+    this.props.history.push('/edit')
   }
 
   render() {
     return (
       <div>
-        <p>editUserReducer:</p>
-        {JSON.stringify(this.props.store.editUserReducer)}
-        <p>userSkillsReducer:</p>
-        {JSON.stringify(this.props.store.userSkillsReducer)}
-        <p>state:</p>
-        {JSON.stringify(this.state)}
+        <p>SkillsLIST:</p>
+        {JSON.stringify(this.state.skills)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
           <label>Id</label>
@@ -129,10 +146,8 @@ class EditUserModal extends Component {
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
           <br></br>
           {this.props.store.allSkillsReducer.map((skill) => {
-            return(
-              <SkillsForm skill={skill} addSkill={this.addSkill} key={skill.description}/>
-            )
-          })}
+            return this.renderSkills(skill)
+          })}       
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

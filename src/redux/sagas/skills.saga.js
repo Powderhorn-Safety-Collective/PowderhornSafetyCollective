@@ -31,9 +31,20 @@ function* addSkill(action) {
   }
 }
 
+// removes a user's skill from the user_skill saga
+function* removeSkill(action) {
+  console.log(action.payload, 'skill remove');
+  try{
+    yield axios.delete(`api/skills/user/${action.payload.userId}/${action.payload.skillId}`);
+  }catch(error) {
+    console.log('error removing userskill', error);
+  }
+}
+
 function* skillsSaga(){
   yield takeEvery('FETCH_USER_SKILLS', fetchUserSkills);
   yield takeEvery('FETCH_ALL_SKILLS', fetchAllSkills);
-  yield takeEvery('ADD_SKILL', addSkill)
+  yield takeEvery('ADD_SKILL', addSkill);
+  yield takeEvery('REMOVE_SKILL', removeSkill);
 }
 export default skillsSaga;

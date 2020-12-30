@@ -81,7 +81,7 @@ class EditUserModal extends Component {
   }
 
   // sends a new skill row to the user_skill table
-  addSkill = (event, type) => {
+  addSkill = (event) => {
     const newSkill = {
       userId: this.props.store.editUserReducer.id,
       skillId: Number(event.target.value)
@@ -108,8 +108,6 @@ class EditUserModal extends Component {
   render() {
     return (
       <div>
-        <p>SkillsLIST:</p>
-        {JSON.stringify(this.state.skills)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
           <label>Id</label>

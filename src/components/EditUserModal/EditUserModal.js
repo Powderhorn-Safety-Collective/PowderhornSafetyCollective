@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
-
+import Form from 'react-bootstrap/Form';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormCheckInput from 'react-bootstrap/FormCheckInput';
 
 class EditUserModal extends Component {
 
@@ -54,6 +56,7 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  
   render() {
     return (
       <div>
@@ -95,6 +98,45 @@ class EditUserModal extends Component {
           <br/>
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
+          {/* use radio buttons here for user, volunteer, and admin */}
+          <form>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={1}
+                  checked={this.state.role == 1}
+                  className="form-check-input"
+                />
+                PSC Registered User
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={2}
+                  checked={this.state.role == 2}
+                  className="form-check-input"
+                />
+                PSC Volunteer
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={3}
+                  checked={this.state.role == 3}
+                  className="form-check-input"
+                />
+                PSC Administrator
+              </label>
+            </div>
+          </form>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

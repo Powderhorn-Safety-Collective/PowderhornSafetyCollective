@@ -57,8 +57,11 @@ class EditUserModal extends Component {
   }
 
   handlOptionChange = (event) => {
+    console.log("name", event.target.name);
+    console.log("value", event.target.value);
+    
     this.setState({
-      role: event.target.value
+      [event.target.name]: event.target.value
     });
   };
   
@@ -71,37 +74,57 @@ class EditUserModal extends Component {
         {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
-          <label>Id:</label>
-          <input defaultValue={this.props.store.editUserReducer.id} type="text"></input>
-          <br/>
-          <label>Username</label>
-          <input defaultValue={this.props.store.editUserReducer.username} onChange={(event) => this.handleChange(event, 'username')} type="text"></input>
-          <br/>
-          <label>First Name</label>
+          <p>Id: {this.state.id}</p>
+          <p>Username: {this.state.username}</p>
+          <label>First Name*:</label>
           <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
           <br/>
-          <label>Last Name</label>
+          <label>Last Name*:</label>
           <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
           <br/>
-          <label>Address</label>
+          <label>Address:</label>
           <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
           <br/>
-          <label>Email</label>
+          <label>Email*:</label>
           <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
           <br/>
-          <label>Phone</label>
+          <label>Phone*:</label>
           <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
           <br/>
-          <label>Adult</label>
-          <input defaultValue={this.props.store.editUserReducer.adult} onChange={(event) => this.handleChange(event, 'adult')} type="text"></input>
-          <br/>
-          <label>On Patrol</label>
+          <label>Adult*:</label>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="adult"
+                value={"true"}
+                checked={this.state.adult == true || this.state.adult == "true"}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+                />
+              Yes
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="adult"
+                value={"false"}
+                checked={this.state.adult == false || this.state.adult == "false"}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+                />
+              No
+            </label>
+          </div>
+          <label>On Patrol*:</label>
           <input defaultValue={this.props.store.editUserReducer.on_patrol} onChange={(event) => this.handleChange(event, 'on_patrol')} type="text"></input>
           <br/>
-          <label>On Call</label>
+          <label>On Call*:</label>
           <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
           <br/>
-          <label>Role:</label>
+          <label>Role*:</label>
           {/* use radio buttons here for user, volunteer, and admin */}
           <div className="form-check">
             <label>

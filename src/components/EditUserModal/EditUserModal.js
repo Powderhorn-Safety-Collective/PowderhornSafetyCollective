@@ -97,7 +97,7 @@ class EditUserModal extends Component {
               <input 
                 type="radio"
                 name="adult"
-                value={"true"}
+                value={true}
                 checked={this.state.adult == true || this.state.adult == "true"}
                 onChange={this.handlOptionChange}
                 className="form-check-input"
@@ -110,7 +110,7 @@ class EditUserModal extends Component {
               <input 
                 type="radio"
                 name="adult"
-                value={"false"}
+                value={false}
                 checked={this.state.adult == false || this.state.adult == "false"}
                 onChange={this.handlOptionChange}
                 className="form-check-input"

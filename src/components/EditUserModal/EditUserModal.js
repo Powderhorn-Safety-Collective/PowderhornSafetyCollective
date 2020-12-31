@@ -20,13 +20,7 @@ class EditUserModal extends Component {
     on_patrol: '',
     on_call: '',
     role: '',
-    skills: {
-      1: false,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-    }
+    skills: [],
   }
   
   componentDidMount = () => {
@@ -60,7 +54,6 @@ class EditUserModal extends Component {
     })
     if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
       return(
-        // <SkillsForm skill={taco} boxId="flexCheckChecked" onClick={this.removeSkill} render={this.getSkills} checked="checked"/>
         <div  className="form-check">
           <input
             type="checkbox"
@@ -79,7 +72,6 @@ class EditUserModal extends Component {
       )
     } else {
       return (
-        // <SkillsForm skill={taco} id="flexCheckDefault" onClick={this.addSkill} render={this.getSkills}/>
         <div  className="form-check">
           <input
             type="checkbox"

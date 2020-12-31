@@ -20,7 +20,13 @@ class EditUserModal extends Component {
     on_patrol: '',
     on_call: '',
     role: '',
-    skills: []
+    skills: {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+    }
   }
   
   componentDidMount = () => {
@@ -45,20 +51,49 @@ class EditUserModal extends Component {
     this.props.dispatch({type:'FETCH_ALL_SKILLS'});
   }
 
-  renderSkills = (taco) => {
+  renderSkills = (skillItem) => {
     const thisUserSkillArray = [];
     this.props.store.userSkillsReducer.map((skill) => {
       if(skill.user_id === this.props.store.editUserReducer.id) {
-        thisUserSkillArray.push({id: skill.skill_id, description: skill.description, active: 'true'})
+        thisUserSkillArray.push({id: skill.skill_id, description: skill.description})
       }
     })
-    if(thisUserSkillArray.some(skill => skill.id === taco.id)){
+    if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
       return(
-        <SkillsForm skill={taco} className="checked" onClick={this.removeSkill}/>
+        // <SkillsForm skill={taco} boxId="flexCheckChecked" onClick={this.removeSkill} render={this.getSkills} checked="checked"/>
+        <div  className="form-check">
+          <input
+            type="checkbox"
+            value={skillItem.id}
+            onChange={this.removeSkill}
+            className="form-check-input"
+            id="flexCheckChecked"
+            defaultChecked
+            />
+          <label 
+            className="form-check-label"
+            for="flexCheckChecked">
+            {skillItem.description}
+          </label>
+        </div>
       )
     } else {
       return (
-        <SkillsForm skill={taco} className="unchecked" onClick={this.addSkill}/>
+        // <SkillsForm skill={taco} id="flexCheckDefault" onClick={this.addSkill} render={this.getSkills}/>
+        <div  className="form-check">
+          <input
+            type="checkbox"
+            value={skillItem.id}
+            onChange={this.addSkill}
+            className="form-check-input"
+            id="flexCheckDefault"   
+            />
+          <label 
+            className="form-check-label"
+            for="flexCheckDefault">
+            {skillItem.description}
+          </label>
+        </div>
       )
     }
   }
@@ -112,7 +147,6 @@ class EditUserModal extends Component {
       type: 'ADD_SKILL',
       payload: newSkill
     })
-    this.props.history.push('/edit')
   }
   // removes a skill from the user_skill table
   removeSkill = (event) => {
@@ -124,7 +158,6 @@ class EditUserModal extends Component {
       type: 'REMOVE_SKILL',
       payload: deleteSkill
     })
-    this.props.history.push('/edit')
   }
 
   // This function handles the changes for the radio buttons
@@ -233,7 +266,7 @@ class EditUserModal extends Component {
               PSC Administrator
             </label>
           </div>
-          <div className="skills">
+          <div>
             {this.props.store.allSkillsReducer.map((skill) => {
               return this.renderSkills(skill)
             })}

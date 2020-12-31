@@ -52,6 +52,7 @@ router.put('/editUser/:id', (req, res) => {
     const on_patrol = req.body.on_patrol;
     const on_call = req.body.on_call;
     const role = req.body.role;
+    const skills = req.body.skills;
     let queryText= `UPDATE "user" 
                     SET 
                       "username" = $1, 
@@ -63,10 +64,11 @@ router.put('/editUser/:id', (req, res) => {
                       "adult" = $7, 
                       "on_patrol" = $8, 
                       "on_call" = $9, 
-                      "role" = $10 
+                      "role" = $10,
+                      "skills" = $11
                     WHERE 
-                      "id" = $11`;
-    pool.query(queryText, [username, first_name, last_name, address, email, phone, adult, on_patrol, on_call, role, id])
+                      "id" = $12`;
+    pool.query(queryText, [username, first_name, last_name, address, email, phone, adult, on_patrol, on_call, role, skills, id])
     .then((result) => {
       res.sendStatus(200);
     }).catch((err) => {
@@ -100,7 +102,7 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
     // retrieving all data from all users
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by id;`
+    on_call, role, skills from "user" order by id;`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -119,7 +121,7 @@ router.get('/username', rejectUnauthenticated, (req, res) => {
     // sort by username
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "username";`
+    on_call, role, skills from "user" order by "username";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -136,7 +138,7 @@ router.get('/first', rejectUnauthenticated, (req, res) => {
     // sort by first name
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "first_name";`
+    on_call, role, skills from "user" order by "first_name";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -153,7 +155,7 @@ router.get('/last', rejectUnauthenticated, (req, res) => {
     // sort by last name
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "last_name";`
+    on_call, role, skills from "user" order by "last_name";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -170,7 +172,7 @@ router.get('/address', rejectUnauthenticated, (req, res) => {
     // sort by address
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "address";`
+    on_call, role, skills from "user" order by "address";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -187,7 +189,7 @@ router.get('/email', rejectUnauthenticated, (req, res) => {
     // sort by email
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "email";`
+    on_call, role, skills from "user" order by "email";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -204,7 +206,7 @@ router.get('/phone', rejectUnauthenticated, (req, res) => {
     // sort by phone
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "phone";`
+    on_call, role, skills from "user" order by "phone";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -221,7 +223,7 @@ router.get('/adult', rejectUnauthenticated, (req, res) => {
     // sort by adult / minor
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "adult";`
+    on_call, role, skills from "user" order by "adult";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -238,7 +240,24 @@ router.get('/role', rejectUnauthenticated, (req, res) => {
     // sort by role
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
-    on_call, role from "user" order by "role";`
+    on_call, role, skills from "user" order by "role";`
+    pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
+router.get('/skills', rejectUnauthenticated, (req, res) => {
+  if (req.user.role == 3) {
+    // sort by role
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role, skills from "user" order by "role";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -254,7 +273,7 @@ router.get('/patrol', rejectUnauthenticated, (req, res) => {
   // sort by patrol status
   const queryText = `select id, username, first_name, 
   last_name, address, email, phone, adult, on_patrol, 
-  on_call, role from "user" order by "on_patrol";`
+  on_call, role, skills from "user" order by "on_patrol";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -266,7 +285,7 @@ router.get('/oncall', rejectUnauthenticated, (req, res) => {
   // sort by on call status
   const queryText = `select id, username, first_name, 
   last_name, address, email, phone, adult, on_patrol, 
-  on_call, role from "user" order by "on_call";`
+  on_call, role, skills from "user" order by "on_call";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

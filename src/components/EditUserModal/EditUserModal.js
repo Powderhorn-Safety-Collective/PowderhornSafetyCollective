@@ -17,15 +17,20 @@ class EditUserModal extends Component {
     adult: this.props.store.editUserReducer.adult,
     on_patrol: this.props.store.editUserReducer.on_patrol,
     on_call: this.props.store.editUserReducer.on_call,
-    role: this.props.store.editUserReducer.role
+    role: this.props.store.editUserReducer.role,
+    skills: ''
   }
 
   handleChange = (event, typeParam) => {
-    console.log(event.target.value, typeParam);
-  
     this.setState( {
         [typeParam]: event.target.value
-    })
+    });
+  }
+
+  handleCheckbox = (event, typeParam) => {
+      this.setState( {
+        [typeParam]: [...this.state.skills, event.target.value]
+    });
   }
 
   // This function checks to make sure there is text in the required inputs
@@ -132,34 +137,34 @@ class EditUserModal extends Component {
           <div>
             <label>User's Skills</label>
             <br/>
-            <input type="checkbox" value="Patrolling"></input>
+            <input type="checkbox" value='Patrolling' onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Patrolling</label>
             <br/>
-            <input type="checkbox" value="Dispatch"></input>
+            <input type="checkbox" value="Dispatch" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Dispatch</label>
             <br/>
-            <input type="checkbox" value="Nutrition"></input>
+            <input type="checkbox" value="Nutrition" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Nutrition</label>
             <br/>
-            <input type="checkbox" value="First Aid"></input>
+            <input type="checkbox" value="First_Aid" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>First Aid</label>
             <br/>
-            <input type="checkbox" value="Mental Health Training"></input>
+            <input type="checkbox"value="Mental_Health_Training" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Mental Health Training</label>
             <br/>
-            <input type="checkbox" value="De-escalation"></input>
+            <input type="checkbox" value="De_escalation'" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>De-escalation</label>
             <br/>
-            <input type="checkbox" value="Biking"></input>
+            <input type="checkbox" value="Biking" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Biking</label>
             <br/>
-            <input type="checkbox" value="Multilinguistic"></input>
+            <input type="checkbox" value="Multilinguistic" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Multilinguistic</label>
             <br/>
-            <input type="checkbox" value="Hnady-person"></input>
+            <input type="checkbox" value="Handy_Person" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Handy-person</label>
             <br/>
-            <input type="checkbox" value="Dog Walking"></input>
+            <input type="checkbox" value="Dog_Walking" onChange={(event) => this.handleCheckbox(event, 'skills')}></input>
             <label>Dog Walking</label>
           </div>
 

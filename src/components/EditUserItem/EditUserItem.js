@@ -36,6 +36,7 @@ class EditUserItem extends Component {
             <td>{this.props.user.phone}</td>
             <td>{this.props.user.adult.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.renderRole(this.props.user.role)}</td>
+            <td>{this.props.user.skills}</td>
             <td>{this.props.user.on_patrol.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.props.user.on_call.toString()}</td> {/* toString method to convert boolean to string */}
 

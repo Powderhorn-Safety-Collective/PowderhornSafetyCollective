@@ -41,6 +41,9 @@ class EditUser extends Component {
       sortByRole = () => {
         this.props.dispatch( {type:'SORT_ROLE'} );
       }
+      sortBySkills = () => {
+        this.props.dispatch( {type:'SORT_SKILLS'} );
+      }
       sortByOnPatrol = () => {
         this.props.dispatch( {type:'SORT_ON_PATROL'} );
       }
@@ -69,6 +72,7 @@ class EditUser extends Component {
                         <th onClick={this.sortByPhone}>Phone</th>
                         <th onClick={this.sortByAdult}>Adult</th>
                         <th onClick={this.sortByRole}>Role</th>
+                        <th onClick={this.sortBySkills}>Skills</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
                         <th onClick={() => this.editUser(this.props.user)}>Edit</th>
@@ -85,7 +89,7 @@ class EditUser extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="13"></td>
+                        <td colSpan="14"></td>
                     </tr>
                 </tfoot>
             </table>

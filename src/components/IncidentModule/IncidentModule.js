@@ -10,13 +10,18 @@ class IncidentModule extends Component {
   // function to render time associated with incident
   renderTime = (publicDisplayTime, time) => {
     let timeHour = Number(time.slice(11,13));
+    console.log('timeHour', timeHour);
+    
     let timeMorningEvening = 'a.m.';
-    if (timeHour > 12) {
-      timeHour -= 12;
+    if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
     }
     else if (timeHour == 0) {
       timeHour = 12;
+    }
+    else if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
     }
     let timeMinute = time.slice(14, 16);
     let month = Number(time.slice(5,7));

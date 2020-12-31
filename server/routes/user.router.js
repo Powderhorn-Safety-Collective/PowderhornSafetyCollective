@@ -98,8 +98,9 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // data to populate user table
     // retrieving all data from all users
-    const queryText = `SELECT * FROM "user"
-    order by id;`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by id;`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -116,7 +117,9 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 router.get('/username', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by username
-    const queryText = `SELECT * FROM "user" ORDER BY "username";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "username";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -131,7 +134,9 @@ router.get('/username', rejectUnauthenticated, (req, res) => {
 router.get('/first', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by first name
-    const queryText = `SELECT * FROM "user" ORDER BY "first_name";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "first_name";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -146,7 +151,9 @@ router.get('/first', rejectUnauthenticated, (req, res) => {
 router.get('/last', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by last name
-    const queryText = `SELECT * FROM "user" ORDER BY "last_name";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "last_name";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -161,7 +168,9 @@ router.get('/last', rejectUnauthenticated, (req, res) => {
 router.get('/address', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by address
-    const queryText = `SELECT * FROM "user" ORDER BY "address";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "address";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -176,7 +185,9 @@ router.get('/address', rejectUnauthenticated, (req, res) => {
 router.get('/email', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by email
-    const queryText = `SELECT * FROM "user" ORDER BY "email";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "email";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -191,7 +202,9 @@ router.get('/email', rejectUnauthenticated, (req, res) => {
 router.get('/phone', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by phone
-    const queryText = `SELECT * FROM "user" ORDER BY "phone";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "phone";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -206,7 +219,9 @@ router.get('/phone', rejectUnauthenticated, (req, res) => {
 router.get('/adult', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by adult / minor
-    const queryText = `SELECT * FROM "user" ORDER BY "adult";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "adult";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -239,7 +254,9 @@ router.get('/adult', rejectUnauthenticated, (req, res) => {
 router.get('/role', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by role
-    const queryText = `SELECT * FROM "user" ORDER BY "role";`
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "role";`
     pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -253,7 +270,9 @@ router.get('/role', rejectUnauthenticated, (req, res) => {
 });
 router.get('/patrol', rejectUnauthenticated, (req, res) => {
   // sort by patrol status
-  const queryText = `SELECT * FROM "user" ORDER BY "on_patrol";`
+  const queryText = `select id, username, first_name, 
+  last_name, address, email, phone, adult, on_patrol, 
+  on_call, role from "user" order by "on_patrol";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
@@ -263,7 +282,9 @@ router.get('/patrol', rejectUnauthenticated, (req, res) => {
 });
 router.get('/oncall', rejectUnauthenticated, (req, res) => {
   // sort by on call status
-  const queryText = `SELECT * FROM "user" ORDER BY "on_call";`
+  const queryText = `select id, username, first_name, 
+  last_name, address, email, phone, adult, on_patrol, 
+  on_call, role from "user" order by "on_call";`
   pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {

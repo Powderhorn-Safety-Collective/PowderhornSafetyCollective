@@ -20,6 +20,9 @@ class IncidentHistoryPage extends Component {
     }
 
     // below are functions used to sort incident table by column
+    sortByClient = () => {
+      this.props.dispatch( {type:'SORT_CLIENT'} );
+    }
     sortByType = () => {
         this.props.dispatch( {type:'SORT_TYPE'} );
       }
@@ -44,8 +47,8 @@ class IncidentHistoryPage extends Component {
       sortByDuplicate = () => {
         this.props.dispatch( {type:'SORT_DUPLICATE'} );
       }
-      sortByClient = () => {
-        this.props.dispatch( {type:'SORT_CLIENT'} );
+      sortBySubmittedUser = () => {
+        this.props.dispatch( {type:'SORT_SUBMITTED_USER'} );
       }
       // end of sorting functions
 
@@ -60,16 +63,16 @@ class IncidentHistoryPage extends Component {
             <table>
                 <thead>
                     <tr>
-                        <th onClick={this.getIncidents}>Id</th>
+                        <th onClick={this.sortByClient}>Id</th>
                         <th onClick={this.sortByType}>Type</th>
-                        <th onClick={this.sortByNotes}>Notes</th>
+                        <th onClick={this.sortByNotes}>Reporter Notes</th>
                         <th onClick={this.sortByLocation}>Location</th>
                         <th onClick={this.sortByTime}>Time Submitted</th>
                         <th onClick={this.sortByStatus}>Status</th>
                         <th onClick={this.sortByPublic}>Public</th>
                         <th onClick={this.sortByResponder}>Responder Notes</th>
                         <th onClick={this.sortByDuplicate}>Duplicate</th>
-                        <th onClick={this.sortByClient}>User Who Reported Incident</th>
+                        <th onClick={this.sortBySubmittedUser}>User Who Reported Incident</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>

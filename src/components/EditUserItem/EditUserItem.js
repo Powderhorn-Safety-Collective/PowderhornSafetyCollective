@@ -21,6 +21,21 @@ class EditUserItem extends Component {
     return array;
   }
     
+  
+  // This function creates the text that is rendered for each role in the table
+  renderRole = (roleNumber) => {
+    console.log('roleNumber', roleNumber);
+    if (roleNumber == 1) {
+      return 'User'
+    }
+    else if (roleNumber == 2) {
+      return 'Volunteer'
+    }
+    else if (roleNumber == 3) {
+      return 'Administrator'
+    }
+  }
+
   render() {
     return (
         <tr>
@@ -32,8 +47,12 @@ class EditUserItem extends Component {
             <td>{this.props.user.email}</td>
             <td>{this.props.user.phone}</td>
             <td>{this.props.user.adult.toString()}</td> {/* toString method to convert boolean to string */}
+<<<<<<< HEAD
             <td>{this.skillsFunction()}</td>
             <td>{this.props.user.role}</td>
+=======
+            <td>{this.renderRole(this.props.user.role)}</td>
+>>>>>>> main
             <td>{this.props.user.on_patrol.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.props.user.on_call.toString()}</td> {/* toString method to convert boolean to string */}
 

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FormGroup from 'react-bootstrap/FormGroup';
-import FormCheckInput from 'react-bootstrap/FormCheckInput';
+import swal from 'sweetalert';
 
 class EditUserModal extends Component {
 
@@ -46,16 +44,39 @@ class EditUserModal extends Component {
     })
   }
 
+  // This function checks to make sure there is text in the required inputs
+  // and returns true if there is and false if not
+  inputCheck = () => {
+    if (this.state.first_name && this.state.last_name && this.state.email 
+    && this.state.phone) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   submitEdit = () => {
-    console.log('editing user');
-    this.props.dispatch( {type: 'SUBMIT_EDIT_USER', payload: this.state} );
-    this.props.history.push('/edit');
+    // check for all the required fields filled out
+    // returns true if inputs are ok
+    let inputCheckResult = this.inputCheck();
+    if (!inputCheckResult) {
+      // alert('Please make sure all of the required fields are filled out.')
+      swal('Please make sure all of the required fields are filled out.');
+      return
+    }
+    else {
+      console.log('editing user');
+      this.props.dispatch( {type: 'SUBMIT_EDIT_USER', payload: this.state} );
+      this.props.history.push('/edit');
+    }
   }
 
   goBack = () => {
     this.props.history.push('/edit');
   }
 
+  // This function handles the changes for the radio buttons
   handlOptionChange = (event) => {
     console.log("name", event.target.name);
     console.log("value", event.target.value);

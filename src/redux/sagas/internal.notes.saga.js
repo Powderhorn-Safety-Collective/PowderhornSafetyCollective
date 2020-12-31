@@ -4,7 +4,6 @@ import axios from 'axios';
 
 // this function will add internal PSC Notes to the internal_notes table for a specific incident
 function* addNote(action) {
-  console.log('ADDING', action.payload)
   try {
     yield axios.post('/api/notes', action.payload);
     yield put({type: 'GET_NOTES'})

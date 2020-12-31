@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import statusSaga from './status.saga';
 import internalNoteSaga from './internal.notes.saga';
+import skillsSaga from './skills.saga';
 import incidentSaga from './incident.saga'; // saga used for data relating to incident table
 
 // rootSaga is the primary saga.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     incidentSaga(), // saga for all things relating to incidents
     statusSaga(),
     internalNoteSaga(),
+    skillsSaga(),
   ]);
 }

@@ -233,6 +233,24 @@ router.get('/adult', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+// router.get('/skills', rejectUnauthenticated, (req, res) => {
+//   if (req.user.role == 3) {
+//     // sort by skills
+//     const queryText = `SELECT * FROM "user"
+//     JOIN "user_skills" on "user_skills"."user_id" = "user"."id"
+//     JOIN "skills" on "skills"."id" = "user_skills"."skill_id"
+//     ORDER BY "skill_id";`
+//     pool.query(queryText)
+//     .then((results) => res.send(results.rows))
+//     .catch((error) => {
+//       console.log(error);
+//       res.sendStatus(500);
+//     });
+//   }
+//   else {
+//     res.sendStatus(403);
+//   }
+// });
 router.get('/role', rejectUnauthenticated, (req, res) => {
   if (req.user.role == 3) {
     // sort by role

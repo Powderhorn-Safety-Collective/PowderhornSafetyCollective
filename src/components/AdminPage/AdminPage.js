@@ -17,6 +17,7 @@ class AdminPage extends Component {
   // function to fetch all incident data
   getIncidents = () => {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
+    console.log('GETTING INCIDENTS');
   }
 
   
@@ -24,6 +25,7 @@ class AdminPage extends Component {
   render() {
     return (
       <Container fluid>
+        {JSON.stringify(this.props.store.incidentReducer)}
         <h1 id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
         {/* Row to go across entire page */}
         <Row>

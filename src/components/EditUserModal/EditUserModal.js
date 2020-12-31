@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
+import SkillsForm from '../SkillsForm/SkillsForm';
+
 import swal from 'sweetalert';
 
 class EditUserModal extends Component {
@@ -17,10 +19,12 @@ class EditUserModal extends Component {
     adult: '',
     on_patrol: '',
     on_call: '',
-    role: ''
+    role: '',
+    skills: [],
   }
   
   componentDidMount = () => {
+    this.getSkills();
     this.setState( {
       id: this.props.store.editUserReducer.id,
       username: this.props.store.editUserReducer.username,
@@ -32,13 +36,63 @@ class EditUserModal extends Component {
       adult: this.props.store.editUserReducer.adult,
       on_patrol: this.props.store.editUserReducer.on_patrol,
       on_call: this.props.store.editUserReducer.on_call,
-      role: this.props.store.editUserReducer.role
+      role: this.props.store.editUserReducer.role,
     })
   }
 
+  // fetches all the skills from the skills list in the DB
+  getSkills = () => {
+    this.props.dispatch({type:'FETCH_ALL_SKILLS'});
+  }
+
+  renderSkills = (skillItem) => {
+    const thisUserSkillArray = [];
+    this.props.store.userSkillsReducer.map((skill) => {
+      if(skill.user_id === this.props.store.editUserReducer.id) {
+        thisUserSkillArray.push({id: skill.skill_id, description: skill.description})
+      }
+    })
+    if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
+      return(
+        <div  className="form-check">
+          <input
+            type="checkbox"
+            value={skillItem.id}
+            onChange={this.removeSkill}
+            className="form-check-input"
+            id="flexCheckChecked"
+            defaultChecked
+            />
+          <label 
+            className="form-check-label"
+            for="flexCheckChecked">
+            {skillItem.description}
+          </label>
+        </div>
+      )
+    } else {
+      return (
+        <div  className="form-check">
+          <input
+            type="checkbox"
+            value={skillItem.id}
+            onChange={this.addSkill}
+            className="form-check-input"
+            id="flexCheckDefault"   
+            />
+          <label 
+            className="form-check-label"
+            for="flexCheckDefault">
+            {skillItem.description}
+          </label>
+        </div>
+      )
+    }
+  }
+
+
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
-  
     this.setState( {
         [typeParam]: event.target.value
     })
@@ -75,6 +129,29 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  // sends a new skill row to the user_skill table
+  addSkill = (event) => {
+    const newSkill = {
+      userId: this.props.store.editUserReducer.id,
+      skillId: Number(event.target.value)
+    }
+    this.props.dispatch({
+      type: 'ADD_SKILL',
+      payload: newSkill
+    })
+  }
+  // removes a skill from the user_skill table
+  removeSkill = (event) => {
+    const deleteSkill = {
+      userId: this.props.store.editUserReducer.id,
+      skillId: Number(event.target.value)
+    }
+    this.props.dispatch({
+      type: 'REMOVE_SKILL',
+      payload: deleteSkill
+    })
+  }
+
   // This function handles the changes for the radio buttons
   handlOptionChange = (event) => {
     console.log("name", event.target.name);
@@ -88,10 +165,6 @@ class EditUserModal extends Component {
   render() {
     return (
       <div>
-        <p>editUserReducer:</p>
-        {JSON.stringify(this.props.store.editUserReducer)}
-        <p>state:</p>
-        {JSON.stringify(this.state)}
           {this.props.store.editUserReducer ? 
           <div className="editModal">
           <p>Id: {this.state.id}</p>
@@ -184,6 +257,11 @@ class EditUserModal extends Component {
               />
               PSC Administrator
             </label>
+          </div>
+          <div>
+            {this.props.store.allSkillsReducer.map((skill) => {
+              return this.renderSkills(skill)
+            })}
           </div>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>

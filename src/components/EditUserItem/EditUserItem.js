@@ -10,6 +10,7 @@ class EditUserItem extends Component {
     this.props.history.push("/editUserModal");
   }
   
+  // This function creates the text that is rendered for each role in the table
   renderRole = (roleNumber) => {
     console.log('roleNumber', roleNumber);
     if (roleNumber == 1) {

@@ -78,7 +78,6 @@ function* editIncident(action) {
    try {
     yield axios.put('/api/incident/publicText', action.payload);
     yield put({type: 'GET_INCIDENTS'});
-    //  alert('Text has been saved.')
     swal('Text has been saved', "", "success");
    }
    catch (error) {
@@ -106,7 +105,7 @@ function* editIncident(action) {
     try {
       yield axios.put('api/incident/publicPost', action.payload);
       yield put({type: 'GET_INCIDENTS'})
-      alert('Post updated');
+      swal('Post updated.', '', "success");
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      

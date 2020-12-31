@@ -34,11 +34,8 @@ app.use('/api/patrol', patrolRouter);
 app.use('/api/oncall', onCallRouter);
 app.use('/api/notes', internalNoteRouter);
 app.use('/api/incident', incidentRouter); // route to handle incident data table
-<<<<<<< HEAD
 app.use('/api/skills', skillsRouter);
-=======
 app.use('/api/incident/sort', incidentSortRouter);
->>>>>>> main
 
 // Serve static files
 app.use(express.static('build'));

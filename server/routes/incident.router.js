@@ -10,15 +10,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // retrieving all data from all users
 
   if(req.user.role > 1) {
-<<<<<<< HEAD
-    const queryText = `SELECT "incidents"."id", "type", "notes", "location", "time_submitted", "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
-    LEFT JOIN "user" on "user"."id" = "incidents"."assigned_user"
-    ORDER BY "time_submitted" DESC;`;
-=======
     const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
     left JOIN "user" on "user"."id" = "incidents"."assigned_user"
     ORDER BY "time_submitted" DESC;`
->>>>>>> main
     pool.query(queryText)
     .then((results) => {res.send(results.rows)
     console.log('results.rows', results.rows);

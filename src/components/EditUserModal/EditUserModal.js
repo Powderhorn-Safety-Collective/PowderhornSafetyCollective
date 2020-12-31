@@ -233,6 +233,11 @@ class EditUserModal extends Component {
               PSC Administrator
             </label>
           </div>
+          <div className="skills">
+            {this.props.store.allSkillsReducer.map((skill) => {
+              return this.renderSkills(skill)
+            })}
+          </div>
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

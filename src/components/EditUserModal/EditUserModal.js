@@ -105,7 +105,6 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
-<<<<<<< HEAD
   // sends a new skill row to the user_skill table
   addSkill = (event) => {
     const newSkill = {
@@ -131,7 +130,6 @@ class EditUserModal extends Component {
     this.props.history.push('/edit')
   }
 
-=======
   // This function handles the changes for the radio buttons
   handlOptionChange = (event) => {
     console.log("name", event.target.name);
@@ -142,7 +140,6 @@ class EditUserModal extends Component {
     });
   };
   
->>>>>>> main
   render() {
     return (
       <div>

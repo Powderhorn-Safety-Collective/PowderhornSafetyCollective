@@ -61,7 +61,6 @@ class EditUserModal extends Component {
     // returns true if inputs are ok
     let inputCheckResult = this.inputCheck();
     if (!inputCheckResult) {
-      // alert('Please make sure all of the required fields are filled out.')
       swal('Please make sure all of the required fields are filled out.');
       return
     }

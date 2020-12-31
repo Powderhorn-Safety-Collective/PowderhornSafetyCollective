@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
-<<<<<<< HEAD
 import SkillsForm from '../SkillsForm/SkillsForm';
 
-=======
 import swal from 'sweetalert';
->>>>>>> main
 
 class EditUserModal extends Component {
 
@@ -195,14 +192,6 @@ class EditUserModal extends Component {
           <label>On Call*:</label>
           <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
           <br/>
-<<<<<<< HEAD
-          <label>Role</label>
-          <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
-          <br></br>
-          {this.props.store.allSkillsReducer.map((skill) => {
-            return this.renderSkills(skill)
-          })}       
-=======
           <label>Role*:</label>
           {/* use radio buttons here for user, volunteer, and admin */}
           <div className="form-check">
@@ -244,7 +233,6 @@ class EditUserModal extends Component {
               PSC Administrator
             </label>
           </div>
->>>>>>> main
           <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
           <br/>

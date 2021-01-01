@@ -9,6 +9,7 @@ class EditUser extends Component {
     // to retrieve all incident data
     componentDidMount = () => {
         this.getUsers();
+        this.getUserSkills();
       }
 
     // function to fetch all incident data
@@ -16,8 +17,12 @@ class EditUser extends Component {
         this.props.dispatch( {type: 'GET_ALL_USERS'});
     }
 
+    getUserSkills = () => {
+      this.props.dispatch({type: 'FETCH_USER_SKILLS'});
+    }
+
        // below are functions used to sort user table by column
-       sortByUsername = () => {
+      sortByUsername = () => {
         this.props.dispatch( {type:'SORT_USERNAME'} );
       }
       sortByFirstName = () => {
@@ -38,6 +43,9 @@ class EditUser extends Component {
       sortByAdult = () => {
         this.props.dispatch( {type:'SORT_ADULT'} );
       }
+      // sortBySkills = () => {
+      //   this.props.dispatch({ type: 'SORT_SKILLS'});
+      // } THIS NEEDS tweaking because it's a many-many
       sortByRole = () => {
         this.props.dispatch( {type:'SORT_ROLE'} );
       }
@@ -52,6 +60,15 @@ class EditUser extends Component {
   render() {
     return (
       <div>
+        {/* THIS IS PLACEHOLDER TEXT TO SHOW SYNTAX FOR CONDITIONAL RENDERING OF SKILLS IN THE USERTABLE */}
+        {this.props.store.userSkillsReducer.map((skill) => {
+          return(
+            skill.user_id === 2 &&
+            <p>{skill.description}</p>
+          )
+        })}
+        <p>user_skills reducer:</p>
+        {JSON.stringify(this.props.store.userSkillsReducer)}
         <p>editUserReducer:</p>
         {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
@@ -68,6 +85,8 @@ class EditUser extends Component {
                         <th onClick={this.sortByEmail}>Email</th>
                         <th onClick={this.sortByPhone}>Phone</th>
                         <th onClick={this.sortByAdult}>Adult</th>
+                        <th>Skills</th> 
+                        {/* This is the onClick function for sorting the table by skills when it is working onClick={this.sortBySkills} */}
                         <th onClick={this.sortByRole}>Role</th>
                         <th onClick={this.sortByOnPatrol}>On Patrol</th>
                         <th onClick={this.sortByOnCall}>On Call</th>
@@ -78,8 +97,9 @@ class EditUser extends Component {
                 <tbody>
                     {/* map through allUsersReducer data and passing it along to EditUserItem */}
                     {this.props.store.allUsersReducer.map( (user, index) => {
+                      const skills = this.props.store.userSkillsReducer.description
                         return(
-                            <EditUserItem user={user} key={index}/>
+                            <EditUserItem user={user} key={index} skills={skills}/>
                         );
                     })}
                 </tbody>

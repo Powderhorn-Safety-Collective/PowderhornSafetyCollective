@@ -8,7 +8,6 @@ const {
 // This route sends a new note to the database
 router.post('/', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
-    console.log('POST NOTES', req.body);
     const queryText = `INSERT INTO "internal_notes" ("text", "incident_id") VALUES($1, $2)`;
     pool.query(queryText, [req.body.noteText, req.body.id])
     .then(() => res.sendStatus(201))

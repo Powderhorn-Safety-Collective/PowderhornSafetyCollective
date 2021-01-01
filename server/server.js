@@ -9,6 +9,7 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 // Route includes
+const skillsRouter = require('./routes/skills.router');
 const userRouter = require('./routes/user.router');
 const patrolRouter = require('./routes/patrol.router');
 const onCallRouter = require('./routes/on.call.router');
@@ -33,6 +34,7 @@ app.use('/api/patrol', patrolRouter);
 app.use('/api/oncall', onCallRouter);
 app.use('/api/notes', internalNoteRouter);
 app.use('/api/incident', incidentRouter); // route to handle incident data table
+app.use('/api/skills', skillsRouter);
 app.use('/api/incident/sort', incidentSortRouter);
 
 // Serve static files

@@ -8,7 +8,7 @@ const {
 // below are all the query functions to sort the incident table by column
 // route for getting incidents sorted by client id
 router.get('/client_id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by client_id
     // const queryText = `select * from incidents order by client_id;`;
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
@@ -29,7 +29,7 @@ router.get('/client_id', rejectUnauthenticated, (req, res) => {
 // route for getting incidents sorted by type  
 router.get('/type', rejectUnauthenticated, (req, res) => {
   console.log('hello sort type');
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by type
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -48,7 +48,7 @@ router.get('/type', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by notes
 router.get('/notes', rejectUnauthenticated, (req, res) => {
-  if(req.user.role == 3) {
+  if(Number(req.user.role) ===3) {
     // sort by notes
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -67,7 +67,7 @@ router.get('/notes', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by location
 router.get('/location', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by notes
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -86,7 +86,7 @@ router.get('/location', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by time
 router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) ===3) {
     // sort by time_submitted
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -105,7 +105,7 @@ router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by active status
 router.get('/status', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) ===3) {
     // sort by status
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -124,7 +124,7 @@ router.get('/status', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by view_publicly
 router.get('/view_publicly', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) ===3) {
     // sort by view_publicly
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -143,7 +143,7 @@ router.get('/view_publicly', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by responder notes
 router.get('/responder_notes', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (req.user.role === 3) {
     // sort by responder_notes
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
       text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -162,7 +162,7 @@ router.get('/responder_notes', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by duplicate_entry
 router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
-  if(req.user.role == 3) {
+  if(Number(req.user.role) ===3) {
     // sort by duplicate_entry
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
       text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
@@ -181,7 +181,7 @@ router.get('/duplicate_entry', rejectUnauthenticated, (req, res) => {
 });
 // route for getting incidents sorted by submitted_user
 router.get('/submitted_user', rejectUnauthenticated, (req, res) => {
-  if(req.user.role == 3) {
+  if(Number(req.user.role) ===3) {
     // sort by user who submitted incident
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,
       text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,

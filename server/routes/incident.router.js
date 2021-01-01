@@ -29,7 +29,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/editIncident/:id', (req, res) => {
 
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     console.log('REQ IS', req.body);
     
     const id = req.body.id;

@@ -63,7 +63,7 @@ class IncidentHistoryItem extends Component {
 
             {/* trash can row to delete incident? */}
             <td className="edit" onClick={() => this.editIncident(this.props.incident)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>
-            <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️ </span></td>
+            <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️</span></td>
         </tr>
     );
   }

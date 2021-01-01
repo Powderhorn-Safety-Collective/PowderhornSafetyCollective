@@ -63,6 +63,8 @@ function* postIncident(action) {
 }
 
 function* editIncident(action) {
+  console.log('SAGA', action.payload);
+  
   try {
     yield axios.put(`/api/incident/editIncident/${action.payload.id}`, action.payload)
     yield put({type: 'GET_INCIDENTS'});

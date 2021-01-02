@@ -40,6 +40,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('this.props in app', this.props);
+    
     return (
       <Router>
         <div>

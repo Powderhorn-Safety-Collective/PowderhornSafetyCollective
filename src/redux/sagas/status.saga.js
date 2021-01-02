@@ -2,10 +2,13 @@ import axios from 'axios';
 import {put, takeEvery } from 'redux-saga/effects';
 
 function* addPStatus(action) {
+  console.log('action.payload', action.payload);
+  
   try{
     yield axios.put('api/patrol/status', action.payload);
     yield put({type: 'FETCH_USER'});
     yield put({type: 'FETCH_PATROL'});
+    
   }catch(error) {
     console.log('error in edit patrolstatus');
   }
@@ -15,6 +18,7 @@ function* addCStatus(action){
   try{
     yield axios.put('api/oncall/status', action.payload);
     yield put({type: 'FETCH_USER'});
+    // yield put({type: 'FETCH_PATROL'});
     yield put({type: 'FETCH_ONCALL'});
   }catch(error) {
     console.log('error in edit patrolstatus');

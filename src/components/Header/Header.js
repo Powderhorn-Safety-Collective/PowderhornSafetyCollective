@@ -27,19 +27,22 @@ class Header extends Component {
   // for 'on patrol' or 'on call'
   handleToggle = (event) => {
     // if 'on patrol' is switched from on to off
-    if(event.target.name === 'onPatrolToggle' && this.props.store.user.on_patrol == true) {
+    if(event.target.name === 'onPatrolToggle' && 
+      this.props.store.user.on_patrol == true) {
       console.log('option 1');
       // for this one, we want to only turn off the 'on patrol' boolean
       this.sendPatrolStatus();
     }
     // if 'on call' is switched from on to off
-    else if (event.target.name ==='onCallToggle' && this.props.store.user.on_call == true) {
+    else if (event.target.name ==='onCallToggle' && 
+      this.props.store.user.on_call == true) {
       console.log('option 2');
       // for this one, we want to only turn off the 'on call' boolean
       this.sendCallStatus();
     }
     // if 'on patrol' is switched from off to on
-    else if(event.target.name === 'onPatrolToggle' && this.props.store.user.on_patrol == false) {
+    else if(event.target.name === 'onPatrolToggle' && 
+      this.props.store.user.on_patrol == false) {
       if (this.props.store.user.on_call == true) {
         console.log('option 3');
         // want to turn 'on call' off here
@@ -50,7 +53,8 @@ class Header extends Component {
         this.sendPatrolStatus();
     } 
     // if 'on call' is switched from off to on
-    else if (event.target.name === 'onCallToggle' && this.props.store.user.on_call == false) {
+    else if (event.target.name === 'onCallToggle' && 
+      this.props.store.user.on_call == false) {
       if (this.props.store.user.on_patrol == true) {
         console.log('option 5');
         // want to turn 'on patrol' off here
@@ -63,7 +67,7 @@ class Header extends Component {
   }
   
   // This function toggles the value for on_patrol for the user
-  sendPatrolStatus = (param) => {
+  sendPatrolStatus = () => {
     this.props.dispatch({
       type: 'ADD_PATROL_STATUS',
       payload: {patrolValue: !this.props.store.user.on_patrol}

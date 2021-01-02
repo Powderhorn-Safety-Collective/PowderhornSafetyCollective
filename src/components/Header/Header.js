@@ -21,71 +21,63 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
-    // this.props.dispatch({type: 'FETCH_USER'});
-    // this.setState({
-    //   onPatrol: this.props.store.user.on_patrol,
-    //   onCall: false
-    // });
-    console.log('this.props.store.user', this.props.store.user);
   }
 
-  
   // This function is called whenever either one of the toggles is switched
-  // for on patrol or on call
+  // for 'on patrol' or 'on call'
   handleToggle = (event) => {
-    // if on patrol is switched from on to off
+    // if 'on patrol' is switched from on to off
     if(event.target.name === 'onPatrolToggle' && this.props.store.user.on_patrol == true) {
       console.log('option 1');
-      // for this one, we want to only turn off the on patrol boolean
+      // for this one, we want to only turn off the 'on patrol' boolean
       this.sendPatrolStatus();
     }
-    // if on call is switched from on to off
+    // if 'on call' is switched from on to off
     else if (event.target.name ==='onCallToggle' && this.props.store.user.on_call == true) {
       console.log('option 2');
-      // for this one, we want to only turn off the on call boolean
+      // for this one, we want to only turn off the 'on call' boolean
       this.sendCallStatus();
     }
-    // if on patrol is switched from off to on
+    // if 'on patrol' is switched from off to on
     else if(event.target.name === 'onPatrolToggle' && this.props.store.user.on_patrol == false) {
       if (this.props.store.user.on_call == true) {
         console.log('option 3');
-        // want to turn on call off here
+        // want to turn 'on call' off here
         this.sendCallStatus(true);
       }
         console.log('option 4');
-        // want to turn on patrol on here
+        // want to turn 'on patrol' on here
         this.sendPatrolStatus();
     } 
-    // if on call is switched from off to on
+    // if 'on call' is switched from off to on
     else if (event.target.name === 'onCallToggle' && this.props.store.user.on_call == false) {
       if (this.props.store.user.on_patrol == true) {
         console.log('option 5');
-        // want to turn on patrol off here
+        // want to turn 'on patrol' off here
         this.sendPatrolStatus();
       }
         console.log('option 6');
-        // want to turn on call on here
+        // want to turn 'on call' on here
         this.sendCallStatus(); 
     }
   }
+  
+  // This function toggles the value for on_patrol for the user
+  sendPatrolStatus = (param) => {
+    this.props.dispatch({
+      type: 'ADD_PATROL_STATUS',
+      payload: {patrolValue: !this.props.store.user.on_patrol}
+    })
+  }
 
+  // This function toggles the value for on_call for the user
   sendCallStatus = () => {
-    console.log('call');
     this.props.dispatch({
       type: 'ADD_CALL_STATUS',
       payload: {onCallValue: !this.props.store.user.on_call}
     })
   }
 
-  sendPatrolStatus = (param) => {
-  console.log('patrol');
-  
-    this.props.dispatch({
-      type: 'ADD_PATROL_STATUS',
-      payload: {patrolValue: !this.props.store.user.on_patrol}
-    })
-  }
-  
   reportIncident = () => {
     this.props.history.push('/report');
   }
@@ -94,61 +86,59 @@ class Header extends Component {
     return ( 
       <div className="header">
         <div className="titleContainer">
-        {/* {JSON.stringify(this.props.store.user)} */}
-        <p> state</p>
-        {/* {JSON.stringify(this.state)} */}
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>
           </Link>
           <div className="toggleForm">
-            <p>On Patrol</p>
+            <label for="onPatrolToggle">On Patrol:</label>
             {this.props.store.user.on_patrol !== undefined &&
-            <ToggleSwitch toggleName="onPatrolToggle"
-            handleToggle={this.handleToggle} 
-            toggleOn={this.props.store.user.on_patrol}
-            />
+              <ToggleSwitch 
+                toggleName="onPatrolToggle"
+                handleToggle={this.handleToggle} 
+                toggleOn={this.props.store.user.on_patrol}
+                name="onPatrolToggle"
+              />
             }
-            <p>On Call</p>
+            <label for="onCallToggle">On Call:</label>
             {this.props.store.user.on_call !== undefined &&
-            <ToggleSwitch toggleName="onCallToggle"
-            handleToggle={this.handleToggle} 
-            toggleOn={this.props.store.user.on_call}
-            />
+              <ToggleSwitch 
+                toggleName="onCallToggle"
+                handleToggle={this.handleToggle} 
+                toggleOn={this.props.store.user.on_call}
+                name="onCallToggle"
+              />
             }
           </div>
           <div className="patrolDisplay">
             {Number(this.props.store.patrolReducer.length) === 1 && 
-              <h2> {this.props.store.patrolReducer.length} person is on patrol</h2>
+              <h3> {this.props.store.patrolReducer.length} person is on patrol</h3>
             }
             {Number(this.props.store.patrolReducer.length) === 0 &&
-              <h2>No One is on Patrol</h2>
+              <h3>No One is on Patrol</h3>
               }
             {Number(this.props.store.patrolReducer.length) > 1 &&
-              <h2> {this.props.store.patrolReducer.length} people are on patrol</h2>
+              <h3>{this.props.store.patrolReducer.length} people are on patrol</h3>
             }
-            {Number(this.props.store.onCallReducer.length) === 1 && <h2>{this.props.store.onCallReducer.length} person is on call</h2>
+            {Number(this.props.store.onCallReducer.length) === 1 && 
+              <h3>{this.props.store.onCallReducer.length} person is on call</h3>
             }
-            {Number(this.props.store.onCallReducer.length) === 0 && <h2>No One is On Call</h2>
+            {Number(this.props.store.onCallReducer.length) === 0 && 
+              <h3>No One is On Call</h3>
             }
-            {Number(this.props.store.onCallReducer.length) > 1 && <h2>{this.props.store.onCallReducer.length} people are on call</h2>
+            {Number(this.props.store.onCallReducer.length) > 1 && 
+              <h3>{this.props.store.onCallReducer.length} people are on call</h3>
             }
             
-              <h2> {this.props.store.activeIncidentReducer} active incidents</h2>
+            <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
           </div>
         </div>
         <div className="headerBtns">
-            <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
-          </div>
+          <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
+        </div>
         <Nav/>
-        {JSON.stringify(this.props.store.user)}
-        {JSON.stringify(this.state)}
       </div>
     )
   }
 }
-
-// const mapStoreToProps = reduxStore=> ({
-//   reduxStore
-// })
 
 export default withRouter(connect(mapStoreToProps)(Header));

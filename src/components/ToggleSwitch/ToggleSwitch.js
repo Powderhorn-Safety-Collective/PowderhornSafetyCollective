@@ -10,7 +10,6 @@ class ToggleSwitch extends (Component) {
       <div className="toggle-switch">
         <input 
           type="checkbox"
-          // defaultChecked={this.props.toggleOn}
           checked={this.props.toggleOn}
           onChange={this.props.handleToggle}
           className="toggle-switch-checkbox"  

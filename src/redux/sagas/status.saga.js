@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {put, takeEvery } from 'redux-saga/effects';
 
+// saga function for toggling the state of the boolean for 'on patrol' for the user
 function* addPStatus(action) {
   console.log('action.payload', action.payload);
   
@@ -14,11 +15,11 @@ function* addPStatus(action) {
   }
 }
 
+// saga function for toggling the state of the boolean for 'on call' for the user
 function* addCStatus(action){
   try{
     yield axios.put('api/oncall/status', action.payload);
     yield put({type: 'FETCH_USER'});
-    // yield put({type: 'FETCH_PATROL'});
     yield put({type: 'FETCH_ONCALL'});
   }catch(error) {
     console.log('error in edit patrolstatus');

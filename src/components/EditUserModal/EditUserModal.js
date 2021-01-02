@@ -54,6 +54,39 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
+  // This function handles the changes for the radio buttons
+  handlOptionChange = (event) => {
+    console.log("name", event.target.name);
+    console.log("value", event.target.value);
+    
+    if (event.target.name === "patrol_call") {
+      if (event.target.value == 1) {
+        this.setState({
+          on_patrol: true,
+          on_call: false
+        })
+      }
+      else if (event.target.value == 2) {
+        this.setState({
+          on_patrol: false,
+          on_call: true
+        })
+      }
+      else if (event.target.value == 3) {
+        this.setState({
+          on_patrol: false,
+          on_call: false
+        })
+      }
+    }
+    // if either of the radios besides 'on patrol' / 'on call'
+    else {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -87,12 +120,47 @@ class EditUserModal extends Component {
           <label>Adult</label>
           <input defaultValue={this.props.store.editUserReducer.adult} onChange={(event) => this.handleChange(event, 'adult')} type="text"></input>
           <br/>
-          <label>On Patrol</label>
-          <input defaultValue={this.props.store.editUserReducer.on_patrol} onChange={(event) => this.handleChange(event, 'on_patrol')} type="text"></input>
-          <br/>
-          <label>On Call</label>
-          <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
-          <br/>
+          <label htmlFor="patrolRadios">Current Status</label>
+          <div className="form-check" id="patrolRadios">
+            <label>
+              <input 
+                type="radio"
+                name="patrol_call"
+                value={1}
+                checked={this.state.on_patrol == true || this.state.on_patrol == "true"}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+                />
+              On Patrol
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="patrol_call"
+                value={2}
+                checked={this.state.on_call == true || this.state.on_call == "true"}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+              />
+              On Call
+            </label>
+          </div>
+          <div className="form-check">
+            <label>
+              <input 
+                type="radio"
+                name="patrol_call"
+                value={3}
+                checked={(this.state.on_patrol == false || this.state.on_patrol == "false") && 
+                (this.state.on_call == false || this.state.on_call == "false")}
+                onChange={this.handlOptionChange}
+                className="form-check-input"
+              />
+              Off Duty
+            </label>
+          </div>
           <label>Role</label>
           <input defaultValue={this.props.store.editUserReducer.role} onChange={(event) => this.handleChange(event, 'role')} type="text"></input>
           <br/>

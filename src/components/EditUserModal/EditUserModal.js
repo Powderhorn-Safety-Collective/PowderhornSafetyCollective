@@ -22,17 +22,17 @@ class EditUserModal extends Component {
   
   componentDidMount = () => {
     this.setState( {
-    //   id: this.props.store.editUserReducer.id,
-    //   username: this.props.store.editUserReducer.username,
-    //   first_name: this.props.store.editUserReducer.first_name,
-    //   last_name: this.props.store.editUserReducer.last_name,
-    //   address: this.props.store.editUserReducer.address,
-    //   email: this.props.store.editUserReducer.email,
-    //   phone: this.props.store.editUserReducer.phone,
-    //   adult: this.props.store.editUserReducer.adult,
-    //   on_patrol: this.props.store.editUserReducer.on_patrol,
-    //   on_call: this.props.store.editUserReducer.on_call,
-    //   role: this.props.store.editUserReducer.role
+      id: this.props.store.editUserReducer.id,
+      username: this.props.store.editUserReducer.username,
+      first_name: this.props.store.editUserReducer.first_name,
+      last_name: this.props.store.editUserReducer.last_name,
+      address: this.props.store.editUserReducer.address,
+      email: this.props.store.editUserReducer.email,
+      phone: this.props.store.editUserReducer.phone,
+      adult: this.props.store.editUserReducer.adult,
+      on_patrol: this.props.store.editUserReducer.on_patrol,
+      on_call: this.props.store.editUserReducer.on_call,
+      role: this.props.store.editUserReducer.role
     })
   }
 

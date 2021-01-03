@@ -15,7 +15,7 @@ class RegisterForm extends Component {
     phone: '',
     adult: '',
     terms: '',
-    volunteer: '',
+    role: 1,
   };
 
   // function to register new user

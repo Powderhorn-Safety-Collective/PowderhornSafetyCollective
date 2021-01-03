@@ -56,7 +56,7 @@ function* logoutUser(action) {
     yield put({ type: 'UNSET_EDIT' });
     yield put({ type: 'UNSET_INCIDENTS' });
     yield put({ type: 'UNSET_ALL_USERS' });
-    yield put({ type: 'UNSET_ACTIVE_INCIDENTS' });
+    // yield put({ type: 'UNSET_ACTIVE_INCIDENTS' });
     yield put({ type: 'UNSET_EDIT_INCIDENT' });
   } catch (error) {
     console.log('Error with user logout:', error);

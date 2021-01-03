@@ -12,8 +12,8 @@ class EditIncidentModal extends Component {
         notes: '',
         location: '',
         time_submitted: '',
-        status: '',
         view_publicly: '',
+        active: '',
         responder_notes: '',
         duplicate_entry: '',
         client_id: ''

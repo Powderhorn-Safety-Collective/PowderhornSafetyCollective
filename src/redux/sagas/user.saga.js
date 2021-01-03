@@ -37,7 +37,9 @@ function* getAllUsers() {
 
 function* editUser(action) {
   try {
-    yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload)
+    yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload);
+    console.log('*******', action.payload);
+    
     yield put({type: 'GET_ALL_USERS'});
   }
   catch (error){
@@ -102,6 +104,14 @@ function* sortAdult() {
       console.log(error);
     }
 }
+// function* sortSkills() {
+//   try {
+//     const response = yield axios.get('api/user/skills');
+//     yield put({ type: 'SET_ALL_USERS', payload: response.data});
+//   }catch (error) {
+//     console.log(error);
+//   }
+// }
 function* sortRole() {
   try {
       const response = yield axios.get('/api/user/role');
@@ -139,6 +149,7 @@ function* userSaga() {
       yield takeLatest("SORT_EMAIL", sortEmail);
       yield takeLatest("SORT_PHONE", sortPhone);
       yield takeLatest("SORT_ADULT", sortAdult);
+      // yield takeLatest("SORT_SKILLS", sortSkills);
       yield takeLatest("SORT_ROLE", sortRole);
       yield takeLatest("SORT_ON_PATROL", sortOnPatrol);
       yield takeLatest("SORT_ON_CALL", sortOnCall);

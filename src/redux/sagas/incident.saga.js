@@ -1,5 +1,6 @@
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 // this function grabs all incidents data from the incident table
 // then passes all data along to incidentReducer
@@ -62,9 +63,12 @@ function* postIncident(action) {
 }
 
 function* editIncident(action) {
+  console.log('SAGA', action.payload);
+  
   try {
     yield axios.put(`/api/incident/editIncident/${action.payload.id}`, action.payload)
     yield put({type: 'GET_INCIDENTS'});
+    yield put({type: 'GET_ACTIVE'});
   }
   catch (error){
       console.log('user edit failed', error);
@@ -75,9 +79,9 @@ function* editIncident(action) {
  function* updatePublicText(action) {
    console.log('updatePublicText action.payload', action.payload);
    try {
-     yield axios.put('/api/incident/publicText', action.payload);
-     yield put({type: 'GET_INCIDENTS'});
-     alert('Text has been saved.')
+    yield axios.put('/api/incident/publicText', action.payload);
+    yield put({type: 'GET_INCIDENTS'});
+    swal('Text has been saved', "", "success");
    }
    catch (error) {
      console.log('error from update public text saga', error);
@@ -104,7 +108,7 @@ function* editIncident(action) {
     try {
       yield axios.put('api/incident/publicPost', action.payload);
       yield put({type: 'GET_INCIDENTS'})
-      alert('Post updated');
+      swal('Post updated.', '', "success");
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      
@@ -240,7 +244,7 @@ function* incidentSaga() {
     yield takeEvery('ADD_ASSIGNED', addAssigned);
     
 
-    yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
+    yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
 

@@ -119,11 +119,11 @@ class ReportIncident extends Component {
           <p>Incident type: {this.state.type}</p>
           <p>Notes: {this.state.notes}</p>
         <br/>
-          <p>Updates on the incident? Y/N</p>
+          <p>Would you like to receive updates on this incident?</p>
           <ToggleSwitch toggleName="followToggle"
           handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
           />
-          <p>Sign up for an account Y/N (ANON)</p>
+          <p>Register with PSC and see all of your submitted incidents in one place?</p>
           <ToggleSwitch toggleName="registerToggle"
           handleToggle={this.handleToggle} toggleOn={this.state.register}
           />

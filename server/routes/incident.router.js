@@ -29,15 +29,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/editIncident/:id', (req, res) => {
 
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
+    console.log('REQ IS', req.body);
+    
     const id = req.body.id;
     const type = req.body.type;
     const notes = req.body.notes;
     const location = req.body.location;
     const time_submitted = req.body.time_submitted;
-    const active = req.body.status;
+    const active = req.body.active;
     const view_publicly = req.body.view_publicly;
-    const responder_notes = req.body.responder_notes;
     const duplicate_entry = req.body.duplicate_entry;
     const client_id = req.body.client_id;
     let queryText= `UPDATE "incidents" 
@@ -48,16 +49,15 @@ router.put('/editIncident/:id', (req, res) => {
                       "time_submitted" = $4, 
                       "active" = $5, 
                       "view_publicly" = $6, 
-                      "responder_notes" = $7, 
-                      "duplicate_entry" = $8, 
-                      "client_id" = $9 
+                      "duplicate_entry" = $7, 
+                      "client_id" = $8 
                     WHERE 
-                      "id" = $10`;
-    pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, responder_notes, duplicate_entry, client_id, id])
+                      "id" = $9`;
+    pool.query(queryText, [type, notes, location, time_submitted, active, view_publicly, duplicate_entry, client_id, id])
     .then((result) => {
       res.sendStatus(200);
     }).catch((err) => {
-      console.log('error in PUT user', err);
+      console.log('error in PUT incident', err);
       res.sendStatus(500);
     });
   }
@@ -221,7 +221,7 @@ router.put('/assign', (req, res) => {
 })
 
   // route to get count of all active incidents
-  router.get('/active', rejectUnauthenticated, (req, res) => {
+  router.get('/active', (req, res) => {
     // query to count the number of active incidents
     const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
     pool.query(queryText)
@@ -236,7 +236,7 @@ router.put('/assign', (req, res) => {
   router.get('/search/:num', (req, res) => {
     let queryText = `SELECT active, client_id, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
-    timedate_public, user_notes_public, username, username_public view_publiclyfrom incidents
+    timedate_public, user_notes_public, username, username_public view_publicly FROM "incidents"
     WHERE "client_id" = '${req.params.num}';`;
     pool.query(queryText).then((result) => {
       res.send(result.rows[0])

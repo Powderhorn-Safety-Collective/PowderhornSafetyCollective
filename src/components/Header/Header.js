@@ -48,21 +48,26 @@ class Header extends Component {
   render() {
     return ( 
       <div className="header">
+        {JSON.stringify(this.props.reduxStore.activeIncidentReducer)}
         <div className="titleContainer">
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>
           </Link>
           <div className="toggleForm">
-            <p>On Patrol</p>
             {this.props.reduxStore.user.on_patrol !== undefined &&
+            <div>
+            <p>On Patrol</p>
             <ToggleSwitch toggleName="onPatrolToggle"
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_patrol}
             />
+            </div>
             }
-            <p>On Call</p>
             {this.props.reduxStore.user.on_call !== undefined &&
+            <div>
+            <p>On Call</p>
             <ToggleSwitch toggleName="onCallToggle"
             handleToggle={this.handleToggle} toggleOn={this.props.reduxStore.user.on_call}/>
+            </div>
             }
           </div>
           <div className="patrolDisplay">

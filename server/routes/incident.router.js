@@ -221,7 +221,7 @@ router.put('/assign', (req, res) => {
 })
 
   // route to get count of all active incidents
-  router.get('/active', rejectUnauthenticated, (req, res) => {
+  router.get('/active', (req, res) => {
     // query to count the number of active incidents
     const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
     pool.query(queryText)

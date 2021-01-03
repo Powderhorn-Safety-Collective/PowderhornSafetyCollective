@@ -243,7 +243,7 @@ function* incidentSaga() {
     yield takeEvery('ADD_ASSIGNED', addAssigned);
     
 
-    yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
+    yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
 

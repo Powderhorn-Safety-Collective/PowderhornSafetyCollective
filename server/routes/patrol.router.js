@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 router.put('/status', (req,res) => {
   if (req.user.role > 1) {
-    console.log('REQ IS', req.body.patrolValue);
+    console.log('patrol route REQ IS', req.body.patrolValue);
     let queryText = `UPDATE "user" 
     SET "on_patrol" = $1
     WHERE "id" = $2;`;

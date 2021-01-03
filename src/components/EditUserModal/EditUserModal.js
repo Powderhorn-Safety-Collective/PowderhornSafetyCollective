@@ -110,6 +110,7 @@ class EditUserModal extends Component {
     }
   }
 
+  // check values and send to database if valid
   submitEdit = () => {
     // check for all the required fields filled out
     // returns true if inputs are ok
@@ -129,147 +130,206 @@ class EditUserModal extends Component {
     this.props.history.push('/edit');
   }
 
-  // sends a new skill row to the user_skill table
-  addSkill = (event) => {
-    const newSkill = {
-      userId: this.props.store.editUserReducer.id,
-      skillId: Number(event.target.value)
-    }
-    this.props.dispatch({
-      type: 'ADD_SKILL',
-      payload: newSkill
-    })
-  }
-  // removes a skill from the user_skill table
-  removeSkill = (event) => {
-    const deleteSkill = {
-      userId: this.props.store.editUserReducer.id,
-      skillId: Number(event.target.value)
-    }
-    this.props.dispatch({
-      type: 'REMOVE_SKILL',
-      payload: deleteSkill
-    })
-  }
-
   // This function handles the changes for the radio buttons
   handlOptionChange = (event) => {
     console.log("name", event.target.name);
     console.log("value", event.target.value);
-    
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    // The values are adjusted slightly here for if a user's on patrol 
+    // on call status is adjusted
+    if (event.target.name === "patrol_call") {
+      if (event.target.value == 1) {
+        this.setState({
+          on_patrol: true,
+          on_call: false
+        })
+      }
+      else if (event.target.value == 2) {
+        this.setState({
+          on_patrol: false,
+          on_call: true
+        })
+      }
+      else if (event.target.value == 3) {
+        this.setState({
+          on_patrol: false,
+          on_call: false
+        })
+      }
+    }
+    // if either of the radios besides 'on patrol' / 'on call'
+    else {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
   };
-  
+
   render() {
     return (
       <div>
-          {this.props.store.editUserReducer ? 
+        {this.props.store.editUserReducer ? 
           <div className="editModal">
-          <p>Id: {this.state.id}</p>
-          <p>Username: {this.state.username}</p>
-          <label>First Name*:</label>
-          <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
-          <br/>
-          <label>Last Name*:</label>
-          <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
-          <br/>
-          <label>Address:</label>
-          <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
-          <br/>
-          <label>Email*:</label>
-          <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
-          <br/>
-          <label>Phone*:</label>
-          <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
-          <br/>
-          <label>Is the user an adult?*:</label>
-          <div className="form-check">
-            <label>
-              <input 
-                type="radio"
-                name="adult"
-                value={true}
-                checked={this.state.adult == true || this.state.adult == "true"}
-                onChange={this.handlOptionChange}
-                className="form-check-input"
+            <p>Id: {this.state.id}</p>
+            <p>Username: {this.state.username}</p>
+            <label>First Name*:</label>
+            <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
+            <br/>
+            <label>Last Name*:</label>
+            <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
+            <br/>
+            <label>Address:</label>
+            <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
+            <br/>
+            <label>Email*:</label>
+            <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
+            <br/>
+            <label>Phone*:</label>
+            <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
+            <br/>
+            {/* Adult Section */}
+            <label>Is the user an adult?*:</label>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="adult"
+                  value={true}
+                  checked={this.state.adult == true || this.state.adult == "true"}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
                 />
-              Yes
-            </label>
-          </div>
-          <div className="form-check">
-            <label>
-              <input 
-                type="radio"
-                name="adult"
-                value={false}
-                checked={this.state.adult == false || this.state.adult == "false"}
-                onChange={this.handlOptionChange}
-                className="form-check-input"
+                Yes
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="adult"
+                  value={false}
+                  checked={this.state.adult == false || this.state.adult == "false"}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
                 />
-              No
-            </label>
-          </div>
-          <label>On Patrol*:</label>
-          <input defaultValue={this.props.store.editUserReducer.on_patrol} onChange={(event) => this.handleChange(event, 'on_patrol')} type="text"></input>
-          <br/>
-          <label>On Call*:</label>
-          <input defaultValue={this.props.store.editUserReducer.on_call} onChange={(event) => this.handleChange(event, 'on_call')} type="text"></input>
-          <br/>
-          <label>Role*:</label>
-          {/* use radio buttons here for user, volunteer, and admin */}
-          <div className="form-check">
-            <label>
-              <input 
-                type="radio"
-                name="role"
-                value={1}
-                checked={this.state.role === 1}
-                onChange={this.handlOptionChange}
-                className="form-check-input"
+                No
+              </label>
+            </div>
+            <br/>
+
+            {/* On Patrol / On Call Section */}
+            <label htmlFor="patrolRadios">Current Status</label>
+            <div className="form-check" id="patrolRadios">
+              <label>
+                <input 
+                  type="radio"
+                  name="patrol_call"
+                  value={1}
+                  checked={this.state.on_patrol == true || this.state.on_patrol == "true"}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
                 />
-              PSC User
-            </label>
-          </div>
-          <div className="form-check">
-            <label>
-              <input 
-                type="radio"
-                name="role"
-                value={2}
-                checked={this.state.role === 2}
-                onChange={this.handlOptionChange}
-                className="form-check-input"
+                On Patrol
+              </label>
+            </div>
+            <div className="form-check" id="patrolRadios">
+              <label>
+                <input 
+                  type="radio"
+                  name="patrol_call"
+                  value={2}
+                  checked={this.state.on_call == true || this.state.on_call == "true"}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
                 />
-              PSC Volunteer
-            </label>
-          </div>
-          <div className="form-check">
-            <label>
-              <input 
-                type="radio"
-                name="role"
-                value={3}
-                checked={this.state.role === 3}
-                onChange={this.handlOptionChange}
-                className="form-check-input"
-              />
-              PSC Administrator
-            </label>
-          </div>
-          <div>
-            {this.props.store.allSkillsReducer.map((skill) => {
-              return this.renderSkills(skill)
-            })}
-          </div>
-          <br/>
+                On Call
+              </label>
+            </div>
+            <div className="form-check" id="patrolRadios">
+              <label>
+                <input 
+                  type="radio"
+                  name="patrol_call"
+                  value={3}
+                  checked={(this.state.on_patrol == false || this.state.on_patrol == "false") && 
+                  (this.state.on_call == false || this.state.on_call == "false")}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                Off Duty
+              </label>
+            </div>
+            <br/>
+
+            <label>User's Skills</label>
+            {/* Skills section */}
+            <div>
+              {this.props.store.allSkillsReducer.map((skill) => {
+                return this.renderSkills(skill)
+              })}
+            </div>
+
+            {/* Role Section */}
+            <label>Role*:</label>
+            {/* use radio buttons here for user, volunteer, and admin */}
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={0}
+                  checked={this.state.role == 0}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                Interested in Volunteering for PSC
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={1}
+                  checked={this.state.role == 1}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                PSC User
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={2}
+                  checked={this.state.role == 2}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                PSC Volunteer
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={3}
+                  checked={this.state.role == 3}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                PSC Administrator
+              </label>
+            </div>
+            <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
-          <br/>
+            <br/>
             <Button onClick={this.goBack} variant="warning">Back to Data Table</Button>
           </div>
-        :
-        <></>
+          :
+          <></>
         }
       </div>
     );

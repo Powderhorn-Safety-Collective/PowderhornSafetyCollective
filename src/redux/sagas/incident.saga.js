@@ -63,9 +63,12 @@ function* postIncident(action) {
 }
 
 function* editIncident(action) {
+  console.log('SAGA', action.payload);
+  
   try {
     yield axios.put(`/api/incident/editIncident/${action.payload.id}`, action.payload)
     yield put({type: 'GET_INCIDENTS'});
+    yield put({type: 'GET_ACTIVE'});
   }
   catch (error){
       console.log('user edit failed', error);
@@ -241,7 +244,7 @@ function* incidentSaga() {
     yield takeEvery('ADD_ASSIGNED', addAssigned);
     
 
-    yield takeLatest('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
+    yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
 

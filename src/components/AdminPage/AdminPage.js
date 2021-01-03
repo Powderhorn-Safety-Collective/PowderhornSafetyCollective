@@ -25,7 +25,6 @@ class AdminPage extends Component {
   render() {
     return (
       <Container fluid>
-        {JSON.stringify(this.props.store.incidentReducer)}
         <h1 id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
         {/* Row to go across entire page */}
         <Row>
@@ -40,7 +39,7 @@ class AdminPage extends Component {
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
-            {this.props.store.patrolReducer && 
+            {this.props.store.patrolReducer !== null && 
             <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
               <ul>  

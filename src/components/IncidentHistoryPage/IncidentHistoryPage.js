@@ -68,7 +68,7 @@ class IncidentHistoryPage extends Component {
                         <th onClick={this.sortByNotes}>Reporter Notes</th>
                         <th onClick={this.sortByLocation}>Location</th>
                         <th onClick={this.sortByTime}>Time Submitted</th>
-                        <th onClick={this.sortByStatus}>Status</th>
+                        <th onClick={this.sortByStatus}>Active</th>
                         <th onClick={this.sortByPublic}>Public</th>
                         <th onClick={this.sortByResponder}>Responder Notes</th>
                         <th onClick={this.sortByDuplicate}>Duplicate</th>

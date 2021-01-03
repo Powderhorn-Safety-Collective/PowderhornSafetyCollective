@@ -25,13 +25,13 @@ class EditUserItem extends Component {
   // This function creates the text that is rendered for each role in the table
   renderRole = (roleNumber) => {
     console.log('roleNumber', roleNumber);
-    if (roleNumber == 1) {
+    if (roleNumber === 1) {
       return 'User'
     }
-    else if (roleNumber == 2) {
+    else if (roleNumber === 2) {
       return 'Volunteer'
     }
-    else if (roleNumber == 3) {
+    else if (roleNumber === 3) {
       return 'Administrator'
     }
   }

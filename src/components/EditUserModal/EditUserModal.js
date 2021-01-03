@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
-import SkillsForm from '../SkillsForm/SkillsForm';
+
 
 import swal from 'sweetalert';
 
@@ -225,7 +225,7 @@ class EditUserModal extends Component {
                 type="radio"
                 name="role"
                 value={1}
-                checked={this.state.role == 1}
+                checked={this.state.role === 1}
                 onChange={this.handlOptionChange}
                 className="form-check-input"
                 />
@@ -238,7 +238,7 @@ class EditUserModal extends Component {
                 type="radio"
                 name="role"
                 value={2}
-                checked={this.state.role == 2}
+                checked={this.state.role === 2}
                 onChange={this.handlOptionChange}
                 className="form-check-input"
                 />
@@ -251,7 +251,7 @@ class EditUserModal extends Component {
                 type="radio"
                 name="role"
                 value={3}
-                checked={this.state.role == 3}
+                checked={this.state.role === 3}
                 onChange={this.handlOptionChange}
                 className="form-check-input"
               />

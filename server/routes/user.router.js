@@ -40,7 +40,7 @@ router.post('/register', (req, res, next) => {
 
 // PUT route to edit user
 router.put('/editUser/:id', (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     const id = req.body.id
     const username = req.body.username;
     const first_name = req.body.first_name;
@@ -95,7 +95,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/all', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) ===3) {
     // data to populate user table
     // retrieving all data from all users
     const queryText = `select id, username, first_name, 
@@ -115,7 +115,7 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 
 // below are all the query functions to sort the user table by column
 router.get('/username', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by username
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -132,7 +132,7 @@ router.get('/username', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/first', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by first name
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -149,7 +149,7 @@ router.get('/first', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/last', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by last name
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -166,7 +166,7 @@ router.get('/last', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/address', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by address
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -183,7 +183,7 @@ router.get('/address', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/email', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by email
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -200,7 +200,7 @@ router.get('/email', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/phone', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by phone
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -217,7 +217,7 @@ router.get('/phone', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/adult', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by adult / minor
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 
@@ -233,26 +233,9 @@ router.get('/adult', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
-// router.get('/skills', rejectUnauthenticated, (req, res) => {
-//   if (req.user.role == 3) {
-//     // sort by skills
-//     const queryText = `SELECT * FROM "user"
-//     JOIN "user_skills" on "user_skills"."user_id" = "user"."id"
-//     JOIN "skills" on "skills"."id" = "user_skills"."skill_id"
-//     ORDER BY "skill_id";`
-//     pool.query(queryText)
-//     .then((results) => res.send(results.rows))
-//     .catch((error) => {
-//       console.log(error);
-//       res.sendStatus(500);
-//     });
-//   }
-//   else {
-//     res.sendStatus(403);
-//   }
-// });
+
 router.get('/role', rejectUnauthenticated, (req, res) => {
-  if (req.user.role == 3) {
+  if (Number(req.user.role) === 3) {
     // sort by role
     const queryText = `select id, username, first_name, 
     last_name, address, email, phone, adult, on_patrol, 

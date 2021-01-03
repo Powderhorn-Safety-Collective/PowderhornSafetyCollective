@@ -32,7 +32,7 @@ class CommunityPage extends Component {
       timeHour -= 12;
       timeMorningEvening = 'p.m.';
     }
-    else if (timeHour == 0) {
+    else if (timeHour === 0) {
       timeHour = 12;
     }
     let timeMinute = time.slice(14, 16);

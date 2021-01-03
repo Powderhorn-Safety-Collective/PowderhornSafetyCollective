@@ -48,7 +48,6 @@ class Header extends Component {
   render() {
     return ( 
       <div className="header">
-        {JSON.stringify(this.props.reduxStore.activeIncidentReducer)}
         <div className="titleContainer">
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>

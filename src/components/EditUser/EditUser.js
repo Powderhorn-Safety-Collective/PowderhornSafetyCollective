@@ -67,13 +67,7 @@ class EditUser extends Component {
             <p>{skill.description}</p>
           )
         })}
-        <p>user_skills reducer:</p>
-        {JSON.stringify(this.props.store.userSkillsReducer)}
-        <p>editUserReducer:</p>
-        {JSON.stringify(this.props.store.editUserReducer)}
         <h2>Edit User Page</h2>
-        <p>state:</p>
-        {JSON.stringify(this.state)}
         <table>
                 <thead>
                     <tr>

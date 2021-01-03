@@ -74,14 +74,14 @@ class LoginForm extends Component {
         </div>
         <h4>New to PSC?</h4>
         {/* button to get registration modal */}
-        <Button
+        {/* <Button
             variant="primary"
             type="button"
             className="btn"
             onClick={() => {this.register()}}
           >
             Register Here
-        </Button>
+        </Button> */}
       </form>
     );
   }

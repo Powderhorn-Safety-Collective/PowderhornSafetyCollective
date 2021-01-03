@@ -22,7 +22,6 @@ class RegisterForm extends Component {
   registerUser = (event) => {
     event.preventDefault();
     if(this.state.terms === 'yes') {
-      console.log('user agreed to terms');
       this.props.dispatch({
       type: 'REGISTER',
       payload: this.state
@@ -162,9 +161,9 @@ class RegisterForm extends Component {
               type="checkbox" 
               id="volunteer" 
               name="volunteer"
-              value="yes" 
-              onChange={this.handleInputChangeFor('volunteer')}/>
-            <label htmlFor="volunteer">I would like to learn more about how to volunteer</label>
+              value= '0' 
+              onChange={this.handleInputChangeFor('role')}/>
+            <label htmlFor="role">I would like to learn more about how to volunteer</label>
           </div>
         </div>
         <div>

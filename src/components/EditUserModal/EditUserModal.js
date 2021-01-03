@@ -110,6 +110,7 @@ class EditUserModal extends Component {
     }
   }
 
+  // check values and send to database if valid
   submitEdit = () => {
     // check for all the required fields filled out
     // returns true if inputs are ok
@@ -133,7 +134,8 @@ class EditUserModal extends Component {
   handlOptionChange = (event) => {
     console.log("name", event.target.name);
     console.log("value", event.target.value);
-    
+    // The values are adjusted slightly here for if a user's on patrol 
+    // on call status is adjusted
     if (event.target.name === "patrol_call") {
       if (event.target.value == 1) {
         this.setState({
@@ -184,6 +186,7 @@ class EditUserModal extends Component {
             <label>Phone*:</label>
             <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
             <br/>
+            {/* Adult Section */}
             <label>Is the user an adult?*:</label>
             <div className="form-check">
               <label>
@@ -212,6 +215,8 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
+
+            {/* On Patrol / On Call Section */}
             <label htmlFor="patrolRadios">Current Status</label>
             <div className="form-check" id="patrolRadios">
               <label>
@@ -266,6 +271,19 @@ class EditUserModal extends Component {
             {/* Role Section */}
             <label>Role*:</label>
             {/* use radio buttons here for user, volunteer, and admin */}
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={0}
+                  checked={this.state.role == 0}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                Interested in Volunteering for PSC
+              </label>
+            </div>
             <div className="form-check">
               <label>
                 <input 

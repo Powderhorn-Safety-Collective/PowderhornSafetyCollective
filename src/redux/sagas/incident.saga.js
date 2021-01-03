@@ -68,6 +68,7 @@ function* editIncident(action) {
   try {
     yield axios.put(`/api/incident/editIncident/${action.payload.id}`, action.payload)
     yield put({type: 'GET_INCIDENTS'});
+    yield put({type: 'GET_ACTIVE'});
   }
   catch (error){
       console.log('user edit failed', error);

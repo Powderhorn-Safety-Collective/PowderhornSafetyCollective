@@ -109,6 +109,29 @@ class EditUserModal extends Component {
     }
   }
 
+    // sends a new skill row to the user_skill table
+    addSkill = (event) => {
+      const newSkill = {
+        userId: this.props.store.editUserReducer.id,
+        skillId: Number(event.target.value)
+      }
+      this.props.dispatch({
+        type: 'ADD_SKILL',
+        payload: newSkill
+      })
+    }
+    // removes a skill from the user_skill table
+    removeSkill = (event) => {
+      const deleteSkill = {
+        userId: this.props.store.editUserReducer.id,
+        skillId: Number(event.target.value)
+      }
+      this.props.dispatch({
+        type: 'REMOVE_SKILL',
+        payload: deleteSkill
+      })
+    }
+
   goBack = () => {
     this.props.history.push('/edit');
   }

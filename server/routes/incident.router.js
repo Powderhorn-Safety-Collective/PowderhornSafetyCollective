@@ -344,6 +344,8 @@ router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   else {
     res.sendStatus(403);
   }
+});
+
 router.get('/client_id/:client_id', (req,res) => {
   console.log('client id', req.params.client_id);
   const queryText = `select client_id from incidents where client_id = $1;`;

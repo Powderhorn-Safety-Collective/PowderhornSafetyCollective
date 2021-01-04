@@ -291,6 +291,60 @@ router.post('/', (req, res) => {
   }
 });
 
+// routes to edit things from incident table
+router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.role > 1) {
+    const queryText = `UPDATE "incidents" 
+    SET "active" = $1
+    WHERE "id" = $2;`;
+
+    pool.query(queryText, [req.body.payload, req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in edit active', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
+
+router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.role > 1) {
+    const queryText = `UPDATE "incidents" 
+    SET "view_publicly" = $1
+    WHERE "id" = $2;`;
+
+    pool.query(queryText, [req.body.payload, req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in edit public', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
+
+router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
+  if (req.user.role > 1) {
+    const queryText = `UPDATE "incidents" 
+    SET "duplicate_entry" = $1
+    WHERE "id" = $2;`;
+
+    pool.query(queryText, [req.body.payload, req.body.id]).then((result) => {
+      res.sendStatus(200);
+    }).catch((error) => {
+      console.log('error in edit duplicate', error);
+      res.sendStatus(500);
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
 
 
 module.exports = router;

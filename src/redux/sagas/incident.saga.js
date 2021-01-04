@@ -232,6 +232,38 @@ function* sortSubmittedUser() {
 }
 // end of sorting sagas
 
+  // functions to edit incidents
+  function* editActiveStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editactive/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+  function* editPublicStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editpublic/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+  function* editDuplicateStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editduplicate/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
@@ -261,6 +293,10 @@ function* incidentSaga() {
     yield takeEvery('SORT_SUBMITTED_USER', sortSubmittedUser);
 
     yield takeLatest("SUBMIT_EDIT_INCIDENT", editIncident); // for edit of incidents
+
+    yield takeLatest("EDIT_ACTIVE", editActiveStatus); // edit incident collapse table
+    yield takeLatest("EDIT_PUBLIC", editPublicStatus); // edit incident collapse table
+    yield takeLatest("EDIT_DUPLICATE", editDuplicateStatus); // edit incident collapse table
 }
 
 export default incidentSaga;

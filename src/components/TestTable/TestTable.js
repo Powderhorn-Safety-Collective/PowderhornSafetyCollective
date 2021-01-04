@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { useDispatch } from 'react-redux';
 
 const useRowStyles = makeStyles({
   root: {
@@ -31,6 +32,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
@@ -69,20 +71,20 @@ function Row(props) {
                 <TableBody>
                     <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                        <label><input type="radio" name="active" value="true" defaultChecked={row.active === true}></input> True</label>
+                        <label><input type="radio" name="active" value="true" defaultChecked={row.active === true} onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}></input> True</label>
                         <br/>
-                        <label><input type="radio" name="active" value="false" defaultChecked={row.active === false}></input> False</label>
+                        <label><input type="radio" name="active" value="false" defaultChecked={row.active === false} onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}></input> False</label>
                       </TableCell>
                       <TableCell>
-                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === true}></input> True</label>
+                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === true} onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}></input> True</label>
                         <br/>
-                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === false}></input> False</label>
+                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === false} onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}></input> False</label>
                       </TableCell>
                       {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
-                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === true}></input> True</label>
+                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === true} onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}></input> True</label>
                         <br/>
-                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === false}></input> False</label>
+                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === false} onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}></input> False</label>
                       </TableCell>
                       <TableCell>
                         {row.username}

@@ -57,10 +57,10 @@ class IncidentHistoryPage extends Component {
   render() {
     return (
       <div>
-        <p>editIncidentReducer:</p>
-        {JSON.stringify(this.props.store.editIncidentReducer)}
+        {/* <p>editIncidentReducer:</p> */}
+        {/* {JSON.stringify(this.props.store.editIncidentReducer)} */}
         <h2>Incident Table</h2>
-        <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p>
+        {/* <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p> */}
         <div className="EditIncidentTableHeader">
                                   <div>SORT BY:</div>
                         <div onClick={this.sortByClient}>Id</div>

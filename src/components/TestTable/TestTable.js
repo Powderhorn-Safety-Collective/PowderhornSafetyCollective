@@ -22,6 +22,11 @@ const useRowStyles = makeStyles({
   },
 });
 
+function sortByClient() {
+    this.props.dispatch( {type:'SORT_CLIENT'} );
+    console.log('HELLO!');
+  }
+
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -36,7 +41,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" onClick={() => sortByClient()}>
           {row.client_id}
         </TableCell>
         <TableCell align="right">{row.type}</TableCell>
@@ -66,10 +71,12 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         <input defaultValue={row.active.toString()} placeholder={row.active.toString()}></input>
                       </TableCell>
-                      <TableCell>{row.view_publicly.toString()}</TableCell>
+                      <TableCell>
+                      <input defaultValue={row.view_publicly.toString()} placeholder={row.view_publicly.toString()}></input>
+                      </TableCell>
                       {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
-                        {row.duplicate_entry.toString()}
+                      <input defaultValue={row.duplicate_entry.toString()} placeholder={row.duplicate_entry.toString()}></input>
                       </TableCell>
                       <TableCell>
                         {row.username}

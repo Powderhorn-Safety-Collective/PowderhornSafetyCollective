@@ -61,38 +61,16 @@ class IncidentHistoryPage extends Component {
         {JSON.stringify(this.props.store.editIncidentReducer)}
         <h2>Incident Table</h2>
         <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th onClick={this.sortByClient}>Id</th>
-                        <th onClick={this.sortByType}>Type</th>
-                        <th onClick={this.sortByNotes}>Reporter Notes</th>
-                        <th onClick={this.sortByLocation}>Location</th>
-                        <th onClick={this.sortByTime}>Time Submitted</th>
-                        <th onClick={this.sortByStatus}>Active</th>
-                        <th onClick={this.sortByPublic}>Public</th>
-                        <th onClick={this.sortByResponder}>Responder Notes</th>
-                        <th onClick={this.sortByDuplicate}>Duplicate</th>
-                        <th onClick={this.sortBySubmittedUser}>User Who Reported Incident</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* map through incidentReducer data and passing it along to HistoryItem */}
-                    {this.props.store.incidentReducer.map( (incident, index) => {
-                        const notes = this.props.store.internalNoteReducer.text
-                        return(
-                            <IncidentHistoryItem incident={incident} key={index} notes={notes}/>
-                        );
-                    })}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan="12"></td>
-                    </tr>
-                </tfoot>
-            </table>
+        <div className="EditIncidentTableHeader">
+                                  <div>SORT BY:</div>
+                        <p onClick={this.sortByClient}>Id</p>
+                        <br/>
+                        <p onClick={this.sortByType}>Type</p>
+                        <div onClick={this.sortByNotes}>Reporter Notes</div>
+                        <div onClick={this.sortByLocation}>Location</div>
+                        <div onClick={this.sortByTime}>Time Submitted</div>
+        </div>
+
             <br/>
                             <TestTable incident={this.props.store.incidentReducer}/>
 

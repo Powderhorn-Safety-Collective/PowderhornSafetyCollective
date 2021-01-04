@@ -99,7 +99,7 @@ class EditUser extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="13"></td>
+                        <td colSpan="14"></td>
                     </tr>
                 </tfoot>
             </table>

@@ -21,6 +21,7 @@ class Header extends Component {
     this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
     this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
+    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});//dispatch to GET all active incidents
   }
 
   // This function is called whenever either one of the toggles is switched
@@ -85,6 +86,16 @@ class Header extends Component {
   reportIncident = () => {
     this.props.history.push('/report');
   }
+
+  viewIncidents= () => {
+    if (!this.props.store.user.role || this.props.store.user.role < 2){
+      this.props.history.push('/community');
+    }else if(this.props.store.user.role === 2) {
+      this.props.history.push('/member');
+    }else if (this.props.store.user.role === 3) {
+      this.props.history.push('/admin');
+    }
+   }
   
   render() {
     return ( 
@@ -113,11 +124,13 @@ class Header extends Component {
             {Number(this.props.store.onCallReducer.length) > 1 && 
               <h3>{this.props.store.onCallReducer.length} people are on call</h3>
             }
+            <div className="incidents" onClick={this.viewIncidents}>
             {this.props.store.user.role > 1 ?
               <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
               :
-              <h3> {this.props.store.publicIncidentReducer.length} Incidents</h3>
+              <h3>{this.props.store.publicIncidentReducer.length} Public Incidents</h3>
             }
+            </div>
           </div>
         </div>
         <div className="headerBtns">

@@ -291,6 +291,19 @@ router.post('/', (req, res) => {
   }
 });
 
+router.get('/client_id/:client_id', (req,res) => {
+  console.log('client id', req.params.client_id);
+  const queryText = `select client_id from incidents where client_id = $1;`;
+
+  pool.query(queryText, [req.params.client_id]).then((response) => {
+    console.log('response.data', response.rows);
+    
+    res.send(response.rows);
+  }).catch((error) => {
+    console.log('error in get client id');
+    res.sendStatus(500);
+  });
+});
 
 
 module.exports = router;

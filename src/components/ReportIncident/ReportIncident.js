@@ -136,25 +136,141 @@ class ReportIncident extends Component {
     </div>
     :
     <div className="registerForm">
-      <p>Current Time: <br/>
+       <p>Current Time: <br/>
       {this.state.time_submitted}</p>
     <br/>
-      <input defaultValue={this.state.notes} type="text" placeholder="Location" onChange={(event) => this.handleChange(event, 'location')}></input>
+      <input defaultValue={this.state.location} 
+            type="text" 
+            placeholder="Location" 
+            onChange={(event) => this.handleChange(event, 'location')}></input>
     <br/>
-      <input className="radio" type="radio" value="gunshot" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-      <label>Gun shots heard</label>
+    <label>Gunfire
+      <input className="radio" 
+            type="radio" 
+            value="Gunfire" 
+            onChange={(event) => this.handleChange(event, 'type')} 
+            name="type"></input>
+    </label>
     <br/>
-      <input className="radio" type="radio" value="stray pet" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-      <label>Stray Pet</label>
+    <label>Armed Assault/Robbery
+      <input className="radio" 
+            type="radio" 
+            value="Armed Assault/Robbery" 
+            onChange={(event) => this.handleChange(event, 'type')} 
+            name="type"></input>
+      </label>
     <br/>
-      <input className="radio" type="radio"  value="fire" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-      <label>Fire</label>
+    <label>Assualt/Fighting
+      <input className="radio" 
+            type="radio"  
+            value="Assualt/Fighting" 
+            onChange={(event) => this.handleChange(event, 'type')} 
+            name="type"></input>
+      </label>
     <br/>
-      <input className="radio" type="radio"  value="vehicle" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-      <label>Vehicle incident</label>
+    <label>Fire (Please call 911 first)
+      <input className="radio" 
+            type="radio"  
+            value="Fire (Please call 911 first)" 
+            onChange={(event) => this.handleChange(event, 'type')} 
+            name="type"></input>
+      </label>
     <br/>
-      <input className="radio" type="radio"  value="mental health crisis" onChange={(event) => this.handleChange(event, 'type')} name="type"></input>
-      <label>Mental health crisis</label>
+    <label>Medical Emergency
+      <input className="radio" 
+            type="radio"  
+            value="Medical Emergency" 
+            onChange={(event) => this.handleChange(event, 'type')} 
+            name="type"></input>
+      </label>
+    <br/>
+    <label>Mental Health Emergency
+    <input className="radio" 
+          type="radio"  
+          value="Mental Health Emergency" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Drug Overdose
+    <input className="radio" 
+          type="radio"  
+          value="Drug Overdose" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Break In/Theft
+    <input className="radio" 
+          type="radio"  
+          value="Break In/Theft" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Vandalism
+    <input className="radio" 
+          type="radio"  
+          value="Vandalism" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Car Accident
+    <input className="radio" 
+          type="radio"  
+          value="Car Accident" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Vehicle Problem
+    <input className="radio" 
+          type="radio"  
+          value="Vehicle Problem" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Police Activity
+    <input className="radio" 
+          type="radio"  
+          value="Police Activity" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Suspicious Behavior
+    <input className="radio" 
+          type="radio"  
+          value="Suspicious Behavior" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Unsafe Behavior
+    <input className="radio" 
+          type="radio"  
+          value="Unsafe Behavior" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>Safety Escort
+    <input className="radio" 
+          type="radio"  
+          value="Safety Escort" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
+    <br/>
+    <label>In need of neighborly help
+    <input className="radio" 
+          type="radio"  
+          value="In need of neighborly help" 
+          onChange={(event) => this.handleChange(event, 'type')} 
+          name="type"></input>
+      </label>
     <br/>
       <input className="radio" type="radio" name="type"></input>
       <label>Other</label>
@@ -171,3 +287,4 @@ class ReportIncident extends Component {
 }
 
 export default connect(mapStoreToProps)(ReportIncident);
+

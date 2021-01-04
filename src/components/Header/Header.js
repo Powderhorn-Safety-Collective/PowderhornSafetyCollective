@@ -140,7 +140,7 @@ class Header extends Component {
           <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
         </div>
         <div id="greeting">
-            <h2>Hello {this.props.store.user.first_name}</h2>
+            <p>Hello {this.props.store.user.first_name}</p>
         </div>
         <Nav/>
       </div>

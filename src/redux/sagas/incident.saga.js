@@ -232,6 +232,37 @@ function* sortSubmittedUser() {
 }
 // end of sorting sagas
 
+  // functions to edit incidents
+  function* editActiveStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editactive/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+  function* editPublicStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editpublic/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
+  function* editDuplicateStatus(action) {
+    console.log('updateActiveStatus', action.payload, action.id);
+    try {
+      yield axios.put(`/api/incident/editduplicate/${action.id}`, action);
+      yield put({type: 'GET_INCIDENTS'});
+    }
+    catch (error) {
+      console.log('error in updateActiveStatus fn', error);
+    }
+  }
 // this function sends the client_id to the database and it is returned
 // if it exists in the database already, otherwise, an empty array is returned
 // and the reducer remains the same, with -1 as its state
@@ -277,6 +308,10 @@ function* incidentSaga() {
     yield takeEvery('SORT_SUBMITTED_USER', sortSubmittedUser);
 
     yield takeLatest("SUBMIT_EDIT_INCIDENT", editIncident); // for edit of incidents
+
+    yield takeLatest("EDIT_ACTIVE", editActiveStatus); // edit incident collapse table
+    yield takeLatest("EDIT_PUBLIC", editPublicStatus); // edit incident collapse table
+    yield takeLatest("EDIT_DUPLICATE", editDuplicateStatus); // edit incident collapse table
     yield takeEvery('GET_CLIENT', getClient);
 }
 

@@ -10,8 +10,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     console.log('REQ', req.body);
     
-    const queryText = `INSERT INTO "internal_notes" ("text", "incident_id", "time") VALUES($1, $2, $3)`;
-    pool.query(queryText, [req.body.noteText, req.body.id, req.body.time_submitted])
+    const queryText = `INSERT INTO "internal_notes" ("text", "incident_id", "time") VALUES($1, $2, NOW())`;
+    pool.query(queryText, [req.body.noteText, req.body.id])
     .then(() => res.sendStatus(201))
     .catch((error) => {
       console.log('error in post notes', error);
@@ -26,7 +26,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 // this route gets the notes from the database
 router.get('/', (req, res) => {
   if (req.user.role > 1) {
-    const queryText = `SELECT * FROM "internal_notes" ORDER BY "id" DESC;`;
+    const queryText = `SELECT "id", "text", "incident_id", "time" AT TIME ZONE 'utc' AT TIME ZONE 'america/chicago' as "time" 
+    FROM "internal_notes" ORDER BY "id" DESC;`;
     pool.query(queryText)
     .then((result) => {res.send(result.rows)})
     .catch((error) => {

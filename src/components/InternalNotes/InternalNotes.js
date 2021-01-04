@@ -5,10 +5,19 @@ import Button from 'react-bootstrap/Button';
 
 class InternalNotes extends Component {
   state = {
-    noteText: ''
+    noteText: '',
+    time_submitted: ''
   }
   componentDidMount = () => {
     this.props.dispatch({type: 'GET_NOTES'});
+  }
+
+  clock = () => {
+    setInterval(() => {
+      this.setState({
+        time_submitted : new Date().toLocaleString()
+      })
+    }, 1000)
   }
 
   handleChange = (event) => {
@@ -20,7 +29,7 @@ class InternalNotes extends Component {
   handleSubmit = () => {
     this.props.dispatch({
       type: 'ADD_NOTE',
-      payload: {noteText: this.state.noteText,
+      payload: {noteText: this.state.noteText, time_submitted: this.state.time_submitted,
       id: this.props.incidentId}
     })
     this.setState({

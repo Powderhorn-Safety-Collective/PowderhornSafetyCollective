@@ -55,8 +55,8 @@ function* fetchActive() {
 function* postIncident(action) {
   console.log(action.payload);
   try {
-    // yield axios.post('/api/incident', action.payload);
-    // yield put( {type: 'GET_INCIDENTS'} );
+    yield axios.post('/api/incident', action.payload);
+    yield put( {type: 'GET_INCIDENTS'} );
   } catch (error) {
     console.log(error);
   }

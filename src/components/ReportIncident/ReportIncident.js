@@ -21,7 +21,7 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
-      this.clock();
+      // this.clock();
       this.clientCheck();
     }
 
@@ -50,13 +50,13 @@ class ReportIncident extends Component {
       }, 500);
     }
 
-    clock = () => {
-      setInterval(() => {
-        this.setState({
-          time_submitted : new Date().toLocaleString()
-        })
-      }, 1000)
-    }
+    // clock = () => {
+    //   setInterval(() => {
+    //     this.setState({
+    //       time_submitted : new Date().toLocaleString()
+    //     })
+    //   }, 1000)
+    // }
 
     handleChange = (event, typeParam) => {
       console.log(event.target.value, typeParam);
@@ -92,6 +92,7 @@ class ReportIncident extends Component {
       }
       else if(this.state.register === true && this.state.follow_incident === false) {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        this.props.dispatch({ type: 'UPDATE_INCIDENT_REPORTER'})
         swal(
           `Welcome!`,
           `Please input your information to register a new account.`, 

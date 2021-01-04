@@ -48,6 +48,15 @@ class CommunityPage extends Component {
   // to retrieve all incident data for incidents marked for public view
   componentDidMount = () => {
     this.getPublicIncidents();
+    if (this.props.store.user) {
+      this.getFollowedIncidentIds();
+    }
+  }
+
+  getFollowedIncidentIds = () => {
+    console.log('in personal incident ids');
+    this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
+    
   }
 
   // function to fetch all incident data for public view

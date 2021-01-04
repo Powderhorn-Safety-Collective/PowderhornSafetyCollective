@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './IncidentModule.css'
+import Button from 'react-bootstrap/Button';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Community Page Component
@@ -58,6 +59,10 @@ class IncidentModule extends Component {
         }
         {this.props.incident.user_notes_public &&
           <p>User Notes: {this.props.incident.notes}</p>
+        }
+        {this.props.store.user.id &&
+        
+        <Button>Follow this incident</Button>
         }
       </div>
     );

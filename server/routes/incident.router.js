@@ -305,5 +305,19 @@ router.get('/client_id/:client_id', (req,res) => {
   });
 });
 
+router.get('/followed', (req, res) => {
+  console.log('in get followed ids route', req.user.id);
+  const queryText = `select incident_id from incident_followers
+  where user_id = $1;`;
+
+  pool.query(queryText, [req.user.id]).then((response) => {
+    console.log('response.data', response.rows);
+    res.send(response.rows);
+  }).catch((error) => {
+    console.log('error in get followed ids route');
+    res.sendStatus(500);
+  });
+});
+
 
 module.exports = router;

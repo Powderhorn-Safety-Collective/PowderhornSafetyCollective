@@ -149,6 +149,20 @@ function* fetchPersonalIncidents(action) {
   }
 }
 
+// This function will get a list of ids of incidents the user is following
+function* getFollowedIncidents() {
+  console.log('in get followed incidents');
+  try {
+    const followedIdResponse = yield axios.get(`api/incident/followed`);
+    console.log('followedIdResponse', followedIdResponse.data);
+    put({type: 'SET_FOLLOWED_IDS', payload: followedIdResponse.data});
+  }
+  catch (error) {
+    console.log('error in get followed incidents', error);
+    
+  }
+}
+
 // below are the functions used to sort the incident table by column
 function* sortType() {
   try {
@@ -258,7 +272,7 @@ function* incidentSaga() {
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
     yield takeEvery('GET_PERSONAL_INCIDENTS', fetchPersonalIncidents);
     yield takeEvery('ADD_ASSIGNED', addAssigned);
-    
+    yield takeEvery('GET_FOLLOWED_INCIDENTS', getFollowedIncidents);
 
     yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

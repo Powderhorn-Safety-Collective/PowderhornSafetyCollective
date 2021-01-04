@@ -8,16 +8,33 @@ class InternalNotes extends Component {
     noteText: '',
     time_submitted: ''
   }
-  componentDidMount = () => {
-    this.props.dispatch({type: 'GET_NOTES'});
+
+   // function to render time associated with incident
+   renderTime = ( time) => {
+    let timeHour = Number(time.slice(11,13));
+    console.log('timeHour', timeHour);
+    
+    let timeMorningEvening = 'a.m.';
+    if (timeHour == 12) {
+      timeMorningEvening = 'p.m.';
+    }
+    else if (timeHour == 0) {
+      timeHour = 12;
+    }
+    else if (timeHour > 12) {
+      timeHour -= 12;
+      timeMorningEvening = 'p.m.';
+    }
+    let timeMinute = time.slice(14, 16);
+    let month = Number(time.slice(5,7));
+    let day = Number(time.slice(8,10));
+    let year = Number(time.slice(0,4));
+    let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
+    return <p>{displayTime}</p>
   }
 
-  clock = () => {
-    setInterval(() => {
-      this.setState({
-        time_submitted : new Date().toLocaleString()
-      })
-    }, 1000)
+  componentDidMount = () => {
+    this.props.dispatch({type: 'GET_NOTES'});
   }
 
   handleChange = (event) => {
@@ -27,6 +44,8 @@ class InternalNotes extends Component {
   }
 
   handleSubmit = () => {
+    console.log('STATE', this.state);
+    
     this.props.dispatch({
       type: 'ADD_NOTE',
       payload: {noteText: this.state.noteText, time_submitted: this.state.time_submitted,
@@ -53,7 +72,7 @@ class InternalNotes extends Component {
               {this.props.store.internalNoteReducer.map((note) => {
                 return(
                   note.incident_id === this.props.incidentId &&
-                    <li key={note.id}>{note.text}</li>
+                    <li key={note.id}>{note.text}: {this.renderTime(note.time)}</li>
                 )
               })}
             </ul>

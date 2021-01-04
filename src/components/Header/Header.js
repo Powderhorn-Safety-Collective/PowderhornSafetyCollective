@@ -132,8 +132,11 @@ class Header extends Component {
             {Number(this.props.store.onCallReducer.length) > 1 && 
               <h3>{this.props.store.onCallReducer.length} people are on call</h3>
             }
-            
-            <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
+            {this.props.store.user.role > 1 ?
+              <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
+              :
+              <h3> {this.props.store.publicIncidentReducer.length} Incidents</h3>
+            }
           </div>
         </div>
         <div className="headerBtns">

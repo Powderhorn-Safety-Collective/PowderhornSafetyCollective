@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
+import TestTable from '../TestTable/TestTable';
 
 import './IncidentHistoryPage.css';
 
@@ -93,8 +94,14 @@ class IncidentHistoryPage extends Component {
                 </tfoot>
             </table>
             <br/>
+                            <TestTable incident={this.props.store.incidentReducer}/>
 
-
+                            {/* {this.props.store.incidentReducer.map( (incident, index) => {
+                              const notes = this.props.store.internalNoteReducer.text
+                                return(
+                                  <TestTable incident={incident} key={index} notes={notes}/>
+                                );
+                            })} */}
       </div>
     );
   }

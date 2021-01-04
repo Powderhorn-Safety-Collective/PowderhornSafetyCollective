@@ -92,7 +92,7 @@ class ReportIncident extends Component {
       }
       else if(this.state.register === true && this.state.follow_incident === false) {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-        this.props.dispatch({ type: 'UPDATE_INCIDENT_REPORTER'})
+        this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
         swal(
           `Welcome!`,
           `Please input your information to register a new account.`, 

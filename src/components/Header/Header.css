@@ -11,3 +11,8 @@
   border-radius: 4px;
   font-size: 1.1rem;
 }
+
+.incidents:hover {
+  background-color: #fdf761;
+  cursor: pointer;
+}

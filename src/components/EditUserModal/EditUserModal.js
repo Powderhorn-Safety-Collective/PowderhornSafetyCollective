@@ -9,39 +9,22 @@ import swal from 'sweetalert';
 class EditUserModal extends Component {
 
   state = {
-    id: '',
-    username: '',
-    first_name: '',
-    last_name: '',
-    address: '',
-    email: '',
-    phone: '',
-    adult: '',
-    on_patrol: '',
-    on_call: '',
-    role: '',
+    id: this.props.store.editUserReducer.id,
+    username: this.props.store.editUserReducer.username,
+    first_name: this.props.store.editUserReducer.first_name,
+    last_name: this.props.store.editUserReducer.last_name,
+    address: this.props.store.editUserReducer.address,
+    email: this.props.store.editUserReducer.email,
+    phone: this.props.store.editUserReducer.phone,
+    adult: this.props.store.editUserReducer.adult,
+    on_patrol: this.props.store.editUserReducer.on_patrol,
+    on_call: this.props.store.editUserReducer.on_call,
+    role: this.props.store.editUserReducer.role,
     skills: [],
   }
   
   componentDidMount = () => {
-    this.getSkills();
-    this.setState( {
-      id: this.props.store.editUserReducer.id,
-      username: this.props.store.editUserReducer.username,
-      first_name: this.props.store.editUserReducer.first_name,
-      last_name: this.props.store.editUserReducer.last_name,
-      address: this.props.store.editUserReducer.address,
-      email: this.props.store.editUserReducer.email,
-      phone: this.props.store.editUserReducer.phone,
-      adult: this.props.store.editUserReducer.adult,
-      on_patrol: this.props.store.editUserReducer.on_patrol,
-      on_call: this.props.store.editUserReducer.on_call,
-      role: this.props.store.editUserReducer.role,
-    })
-  }
-
-  // fetches all the skills from the skills list in the DB
-  getSkills = () => {
+    // fetches all the skills from the skills list in the DB
     this.props.dispatch({type:'FETCH_ALL_SKILLS'});
   }
 
@@ -125,6 +108,29 @@ class EditUserModal extends Component {
       this.props.history.push('/edit');
     }
   }
+
+    // sends a new skill row to the user_skill table
+    addSkill = (event) => {
+      const newSkill = {
+        userId: this.props.store.editUserReducer.id,
+        skillId: Number(event.target.value)
+      }
+      this.props.dispatch({
+        type: 'ADD_SKILL',
+        payload: newSkill
+      })
+    }
+    // removes a skill from the user_skill table
+    removeSkill = (event) => {
+      const deleteSkill = {
+        userId: this.props.store.editUserReducer.id,
+        skillId: Number(event.target.value)
+      }
+      this.props.dispatch({
+        type: 'REMOVE_SKILL',
+        payload: deleteSkill
+      })
+    }
 
   goBack = () => {
     this.props.history.push('/edit');

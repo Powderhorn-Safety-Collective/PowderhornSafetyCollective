@@ -1,5 +1,5 @@
 /* CSS for table styling */
-
+/* 
 table {
   table-layout: fixed;
 }
@@ -49,4 +49,8 @@ background-color: #ffffff;
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+} */
+
+.EditIncidentTableHeader {
+  display: inline-flex;
 }

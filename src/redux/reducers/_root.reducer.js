@@ -14,6 +14,7 @@ import personalIncidentReducer from './personal.incident.reducer';
 import internalNoteReducer from './internal.note.reducer';
 import userSkillsReducer from './user.skills.reducer';
 import allSkillsReducer from './all.skills.reducer';
+import clientIdReducer from './client.id.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   internalNoteReducer, //reducer that holds all PSC internal notes
   userSkillsReducer,
   allSkillsReducer,
+  clientIdReducer,
 
 });
 

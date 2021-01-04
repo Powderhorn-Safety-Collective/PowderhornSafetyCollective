@@ -72,7 +72,7 @@ class LoginForm extends Component {
         <div>
           <input className="btn btn-primary" type="submit" name="submit" value="Log In" />
         </div>
-        <h4>New to PSC?</h4>
+        {/* <h4>New to PSC?</h4> */}
         {/* button to get registration modal */}
         {/* <Button
             variant="primary"

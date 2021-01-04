@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button'; 
 
 import './LandingPage.css';
 
@@ -60,9 +61,9 @@ class LandingPage extends Component {
 
             <center>
               <h4>Already a Member?</h4>
-              <button className="btn btn_sizeSm" onClick={this.onLogin}>
+              <Button className="btn btn-primary" onClick={this.onLogin}>
                 Login
-              </button>
+              </Button>
             </center>
           </div>
         </div>

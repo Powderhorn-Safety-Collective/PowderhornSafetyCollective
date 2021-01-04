@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
+import swal from 'sweetalert';
 
 // TODO add all DB columns to the payload to clear not-null violation
 class RegisterForm extends Component {
@@ -23,12 +24,12 @@ class RegisterForm extends Component {
     event.preventDefault();
     if(this.state.terms === 'yes') {
       this.props.dispatch({
-      type: 'REGISTER',
-      payload: this.state
+        type: 'REGISTER',
+        payload: this.state
       });
     }
     else {
-      alert('Please read and sign the terms and conditions.')
+      swal('Please read and sign the terms and conditions.')
     }
   }; // end registerUser
 
@@ -54,7 +55,7 @@ class RegisterForm extends Component {
           <div>
             <input 
               type="text" 
-              placeholder="Username" 
+              placeholder="Username*" 
               value={this.state.username}
               required
               onChange={this.handleInputChangeFor('username')}
@@ -63,7 +64,7 @@ class RegisterForm extends Component {
           <div>
             <input 
               type="password" 
-              placeholder="Password" 
+              placeholder="Password*" 
               value={this.state.password}
               required
               onChange={this.handleInputChangeFor('password')}
@@ -72,7 +73,7 @@ class RegisterForm extends Component {
           <div>
             <input 
               type="text" 
-              placeholder="First Name" 
+              placeholder="First Name*" 
               value={this.state.first_name}
               required
               onChange={this.handleInputChangeFor('first_name')}
@@ -81,7 +82,7 @@ class RegisterForm extends Component {
           <div>
             <input 
               type="text" 
-              placeholder="Last Name" 
+              placeholder="Last Name*" 
               value={this.state.last_name}
               required
               onChange={this.handleInputChangeFor('last_name')}
@@ -92,14 +93,13 @@ class RegisterForm extends Component {
               type="text" 
               placeholder="Address" 
               value={this.state.address}
-              required
               onChange={this.handleInputChangeFor('address')}
             />
           </div>
           <div>
             <input 
               type="text" 
-              placeholder="Email" 
+              placeholder="Email*" 
               value={this.state.email}
               required
               onChange={this.handleInputChangeFor('email')}
@@ -108,7 +108,7 @@ class RegisterForm extends Component {
           <div>
             <input 
               type="text" 
-              placeholder="Phone" 
+              placeholder="Phone*" 
               value={this.state.phone}
               required
               onChange={this.handleInputChangeFor('phone')}
@@ -117,6 +117,7 @@ class RegisterForm extends Component {
             {/* input to verify age */}
           <div>
             <label>Are you at least 18?</label>
+            <br/>
             <input 
               type="radio" 
               id="yes" 

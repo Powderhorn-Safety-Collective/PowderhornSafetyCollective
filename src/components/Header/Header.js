@@ -93,26 +93,7 @@ class Header extends Component {
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>
           </Link>
-          <div className="toggleForm">
-            <label for="onPatrolToggle">On Patrol:</label>
-            {this.props.store.user.on_patrol !== undefined &&
-              <ToggleSwitch 
-                toggleName="onPatrolToggle"
-                handleToggle={this.handleToggle} 
-                toggleOn={this.props.store.user.on_patrol}
-                name="onPatrolToggle"
-              />
-            }
-            <label for="onCallToggle">On Call:</label>
-            {this.props.store.user.on_call !== undefined &&
-              <ToggleSwitch 
-                toggleName="onCallToggle"
-                handleToggle={this.handleToggle} 
-                toggleOn={this.props.store.user.on_call}
-                name="onCallToggle"
-              />
-            }
-          </div>
+
           <div className="patrolDisplay">
             {Number(this.props.store.patrolReducer.length) === 1 && 
               <h3> {this.props.store.patrolReducer.length} person is on patrol</h3>
@@ -140,6 +121,29 @@ class Header extends Component {
           </div>
         </div>
         <div className="headerBtns">
+          {/* on patrol / on call toggles */}
+          {this.props.store.user.role > 1 &&
+            <div className="toggleForm">
+              <label for="onPatrolToggle">On Patrol:</label>
+              {this.props.store.user.on_patrol !== undefined &&
+                <ToggleSwitch 
+                  toggleName="onPatrolToggle"
+                  handleToggle={this.handleToggle} 
+                  toggleOn={this.props.store.user.on_patrol}
+                  name="onPatrolToggle"
+                />
+              }
+              <label for="onCallToggle">On Call:</label>
+              {this.props.store.user.on_call !== undefined &&
+                <ToggleSwitch 
+                  toggleName="onCallToggle"
+                  handleToggle={this.handleToggle} 
+                  toggleOn={this.props.store.user.on_call}
+                  name="onCallToggle"
+                />
+              }
+            </div>
+          }  
           <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
         </div>
         <div id="greeting">

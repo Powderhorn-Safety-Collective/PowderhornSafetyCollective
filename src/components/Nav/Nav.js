@@ -13,7 +13,7 @@ const Nav = (props) => {
     text: 'Login / Register',
   };
 
-  if (props.store.user.role === 1) {
+  if (props.store.user.role === 1 || props.store.user.role === 0) {
     loginLinkData.path = '/user';
     loginLinkData.text = 'My Dashboard';
   } else if (props.store.user.role === 2) {

@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import swal from 'sweetalert';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 import './ReportIncident.css';
+import Button from 'react-bootstrap/Button';
 
 class ReportIncident extends Component {
 
@@ -15,11 +16,38 @@ class ReportIncident extends Component {
         notes: '',
         location: '',
         time_submitted: '',
-        client_id: Math.floor(Math.random() * 1010101)
+        client_id: Math.floor(Math.random() * 1010101),
+        client_id_ok: false
     }
 
     componentDidMount = () => {
       this.clock();
+      this.clientCheck();
+    }
+
+    clientCheck = () => {
+      // want to check to make sure client_id doesn't already exist 
+      // before assigning to new incident
+      // perform get request with new client_id to see if it is associated
+      // with any of the incidents and make new one if it is
+      this.props.dispatch({type: 'GET_CLIENT', payload: this.state.client_id});
+      setTimeout(() => { 
+        console.log('this.props.store.clientIdReducer', this.props.store.clientIdReducer);
+        // if the client_id is not in the database yet, success
+        if (this.props.store.clientIdReducer == -1) {
+          this.setState({
+            client_id_ok: true
+          });
+        }
+        // if the client_id is in the database, and a new one needs to be created
+        else {
+          this.props.dispatch({type: 'UNSET_CLIENT_ID'});
+          this.setState({
+            client_id: Math.floor(Math.random() * 1010101),
+          })
+          this.clientCheck();
+        }
+      }, 500);
     }
 
     clock = () => {
@@ -110,6 +138,7 @@ class ReportIncident extends Component {
   render() {
     return (
     <>
+    {JSON.stringify(this.props.store.clientIdReducer)}
     {JSON.stringify(this.state)}
     {this.state.showReport === true ? 
     <div className="registerForm">
@@ -129,10 +158,10 @@ class ReportIncident extends Component {
           />
         <br/>
         <br/>
-          <button className="btn" onClick={this.editSubmission}>Edit Submission</button>
+          <Button className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
         <br/>
         <br/>
-          <button className="btn" onClick={this.confirmIncident}>Confirm Submission</button>
+          <Button className="btn btn-success" onClick={this.confirmIncident}>Confirm Submission</Button>
     </div>
     :
     <div className="registerForm">
@@ -162,7 +191,7 @@ class ReportIncident extends Component {
     <br/>
       <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
     <br/>
-      <button className="btn" onClick={this.submitReport}>Submit Incident</button>
+      <Button className="btn btn-primary" onClick={this.submitReport}>Submit Incident</Button>
     </div>
     }
     </>

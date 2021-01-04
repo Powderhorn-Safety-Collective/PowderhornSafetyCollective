@@ -71,7 +71,6 @@ class EditUser extends Component {
         <h2>Edit User Page</h2>
                       <div className="EditIncidentTableHeader">
                         <div>SORT BY:</div>
-                        <div onClick={this.getUsers}>Id</div>
                         <div onClick={this.sortByUsername}>Username</div>
                         <div onClick={this.sortByFirstName}>First Name</div>
                         <div onClick={this.sortByLastName}>Last name</div>

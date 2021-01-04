@@ -11,6 +11,7 @@ class LoginPage extends Component {
         <LoginForm />
 
         <center>
+          <h4>New to PSC?</h4>
           <Button
             variant="primary"
             type="button"

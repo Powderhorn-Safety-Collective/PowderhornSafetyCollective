@@ -7,7 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import './UserPage.css';
 import IncidentModule from '../IncidentModule/IncidentModule';
-import MailchimpSubscribe from "react-mailchimp-subscribe"
+import Mailchimp from 'react-mailchimp-form'
+
 
 
 // this will be the page a registered user sees when they log in if they are not a volunteer
@@ -59,8 +60,28 @@ class UserPage extends Component {
             </Row>
             <Row className="box">
               <h2>
-              <h2><MailchimpSubscribe url={process.env.REACT_APP_MAILCHIMP_URL}/></h2>
-              </h2>
+              Sign Up for the PSC Newsletter
+              <Mailchimp
+              action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
+              fields={[
+                {
+                  name: 'EMAIL',
+                  placeholder: 'Email',
+                  type: 'email',
+                  required: true
+                }
+              ]}
+              messages = {
+                {
+                sending: "Sending...",
+                success: "Thank you for subscribing!",
+                error: "An unexpected internal error has occurred.",
+                empty: "You must write an e-mail.",
+                duplicate: "This email has already been used to sign up!",
+                button: "Subscribe!"
+              }
+            }
+            /></h2>
             </Row>
 
           </Col>

@@ -263,6 +263,21 @@ function* sortSubmittedUser() {
       console.log('error in updateActiveStatus fn', error);
     }
   }
+// this function sends the client_id to the database and it is returned
+// if it exists in the database already, otherwise, an empty array is returned
+// and the reducer remains the same, with -1 as its state
+function* getClient(action) {
+  try{
+    console.log('get client action.payload', action.payload);
+    const response = yield axios.get(`/api/incident/client_id/${action.payload}`);
+    console.log('response in get client fn', response.data[0].client_id);
+    yield put({type: 'SET_CLIENT_ID', payload: response.data[0].client_id});
+  }
+  catch (error) {
+    console.log('error get client id fn', error);
+    
+  }
+}
 
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
@@ -297,6 +312,7 @@ function* incidentSaga() {
     yield takeLatest("EDIT_ACTIVE", editActiveStatus); // edit incident collapse table
     yield takeLatest("EDIT_PUBLIC", editPublicStatus); // edit incident collapse table
     yield takeLatest("EDIT_DUPLICATE", editDuplicateStatus); // edit incident collapse table
+    yield takeEvery('GET_CLIENT', getClient);
 }
 
 export default incidentSaga;

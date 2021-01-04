@@ -311,7 +311,7 @@ router.get('/followed', (req, res) => {
   where user_id = $1;`;
 
   pool.query(queryText, [req.user.id]).then((response) => {
-    console.log('response.data', response.rows);
+    console.log('response.rows', response.rows);
     res.send(response.rows);
   }).catch((error) => {
     console.log('error in get followed ids route');
@@ -319,5 +319,30 @@ router.get('/followed', (req, res) => {
   });
 });
 
+router.post('/follow', (req, res) => {
+  console.log('follow route with req.body', req.body);
+  const queryText = `insert into incident_followers (incident_id, user_id)
+  values($1, $2);`;
+
+  pool.query(queryText, [req.body.incident_Id, req.user.id]).then((response) => {
+    res.sendStatus(201);
+  }).catch((error) => {
+    console.log('error in add incident follow route', error);
+    res.sendStatus(500)
+  });
+});
+
+router.delete('/follow/:incident_Id', (req, res) => {
+  console.log('delete follow route with req.body', req.params);
+  const queryText = `delete from incident_followers
+  where incident_id = $1 and user_id = $2;`;
+
+  pool.query(queryText, [req.params.incident_Id, req.user.id]).then((response) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in delete incident follow route', error);
+    res.sendStatus(500);
+  });
+});
 
 module.exports = router;

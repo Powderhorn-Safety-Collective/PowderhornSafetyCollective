@@ -155,7 +155,7 @@ function* getFollowedIncidents() {
   try {
     const followedIdResponse = yield axios.get(`api/incident/followed`);
     console.log('followedIdResponse', followedIdResponse.data);
-    put({type: 'SET_FOLLOWED_IDS', payload: followedIdResponse.data});
+    yield put({type: 'SET_FOLLOWED_INCIDENTS', payload: followedIdResponse.data});
   }
   catch (error) {
     console.log('error in get followed incidents', error);

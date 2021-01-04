@@ -6,6 +6,7 @@ import statusSaga from './status.saga';
 import internalNoteSaga from './internal.notes.saga';
 import skillsSaga from './skills.saga';
 import incidentSaga from './incident.saga'; // saga used for data relating to incident table
+import followSaga from './follow.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     statusSaga(),
     internalNoteSaga(),
     skillsSaga(),
+    followSaga(),
   ]);
 }

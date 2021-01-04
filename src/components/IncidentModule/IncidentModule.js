@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import './IncidentModule.css'
 import Button from 'react-bootstrap/Button';
 
+
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Community Page Component
 class IncidentModule extends Component {
@@ -34,9 +35,37 @@ class IncidentModule extends Component {
     }
   }
 
+  // function render follow or stop following incident button
+  renderButton = (incidentId) => {
+    console.log('renderbutton function', incidentId);
+    if (this.props.followedIncidents) {
+      if (this.props.followedIncidents.some(incident => incident.incident_id === incidentId)) {
+        console.log('hello');
+        return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
+      }
+      else {
+
+        return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>
+      }
+    }
+  }
+
+  // function to dispatch action to follow incident
+  followIncident = (incidentId) => {
+    console.log('follow incident id', incidentId);
+    this.props.dispatch({type: 'FOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
+  }
+
+  // function to dispatch action to stop following incident
+  unfollowIncident = (incidentId) => {
+    console.log('unfollow incident id', incidentId);
+    this.props.dispatch({type: 'UNFOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
+  }
+
   render() {
     return (
       <div className="module">
+        {JSON.stringify(this.props.followedIncidents)}
         <h5>{this.props.incident.text_for_public_display}</h5>
         <h5>Incident Number: {this.props.incident.client_id}</h5>
         {/* active/inactive status will always be shown for incident */}
@@ -61,8 +90,8 @@ class IncidentModule extends Component {
           <p>User Notes: {this.props.incident.notes}</p>
         }
         {this.props.store.user.id &&
-        
-        <Button>Follow this incident</Button>
+          this.renderButton(this.props.incident.id)
+          
         }
       </div>
     );

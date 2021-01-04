@@ -63,9 +63,8 @@ class IncidentHistoryPage extends Component {
         <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p>
         <div className="EditIncidentTableHeader">
                                   <div>SORT BY:</div>
-                        <p onClick={this.sortByClient}>Id</p>
-                        <br/>
-                        <p onClick={this.sortByType}>Type</p>
+                        <div onClick={this.sortByClient}>Id</div>
+                        <div onClick={this.sortByType}>Type</div>
                         <div onClick={this.sortByNotes}>Reporter Notes</div>
                         <div onClick={this.sortByLocation}>Location</div>
                         <div onClick={this.sortByTime}>Time Submitted</div>

@@ -41,7 +41,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row" onClick={() => sortByClient()}>
+        <TableCell component="th" scope="row">
           {row.client_id}
         </TableCell>
         <TableCell align="right">{row.type}</TableCell>
@@ -68,15 +68,21 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                     <TableRow key={row.id}>
-                      <TableCell component="th" scope="row">
-                        <input defaultValue={row.active.toString()} placeholder={row.active.toString()}></input>
+                    <TableCell component="th" scope="row">
+                        <label><input type="radio" name="active" value="true" defaultChecked={row.active === true}></input> True</label>
+                        <br/>
+                        <label><input type="radio" name="active" value="false" defaultChecked={row.active === false}></input> False</label>
                       </TableCell>
                       <TableCell>
-                      <input defaultValue={row.view_publicly.toString()} placeholder={row.view_publicly.toString()}></input>
+                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === true}></input> True</label>
+                        <br/>
+                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === false}></input> False</label>
                       </TableCell>
                       {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
-                      <input defaultValue={row.duplicate_entry.toString()} placeholder={row.duplicate_entry.toString()}></input>
+                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === true}></input> True</label>
+                        <br/>
+                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === false}></input> False</label>
                       </TableCell>
                       <TableCell>
                         {row.username}

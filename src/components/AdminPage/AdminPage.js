@@ -25,12 +25,12 @@ class AdminPage extends Component {
   render() {
     return (
       <Container fluid>
-        <h1 id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
+        <h1 className="tabletitle" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
         {/* Row to go across entire page */}
         <Row>
           {/* left stuff for incidents */}
           <Col md={9} xs={12} className="adminLeft">  
-            <h1> All Incidents</h1>
+            <h1 className="tabletitle"> All Incidents</h1>
             {this.props.store.incidentReducer.map((incident) => {
               return <InternalIncident incident = {incident} />
             })}

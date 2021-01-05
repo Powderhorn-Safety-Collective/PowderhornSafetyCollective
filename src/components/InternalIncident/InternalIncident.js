@@ -159,7 +159,7 @@ class InternalIncident extends Component {
     let userNotesToggle = `userNotesToggle${this.props.incident.id}`;
     let activeToggle = `activeToggle${this.props.incident.id}`;
     return (
-      <Container fluid>
+      <Container className="tabletitle" fluid>
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
@@ -280,6 +280,7 @@ class InternalIncident extends Component {
                 Mark as Duplicate
               </Button>
               <AssignClaimComponent incidentId={this.props.incident.id}/>
+              <br/>
               <Button
                 variant="success" 
                 onClick={this.handlePostNotice} 

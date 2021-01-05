@@ -37,7 +37,7 @@ background-color: #ffffff;
 
 .edit:hover {
   background-color: rgb(236, 255, 62);
-}
+} */
 
 .editModal {
   text-align: center;
@@ -49,7 +49,7 @@ background-color: #ffffff;
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-} */
+}
 
 .EditIncidentTableHeader {
   display: inline-flex;

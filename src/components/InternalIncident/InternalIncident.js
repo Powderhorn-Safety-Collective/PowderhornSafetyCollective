@@ -50,7 +50,7 @@ class InternalIncident extends Component {
     let day = Number(time.slice(8,10));
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
-    return <p>{displayTime}</p>
+    return <>{displayTime}</>
   }
 
   handleChange = (event) => {
@@ -159,7 +159,7 @@ class InternalIncident extends Component {
     let userNotesToggle = `userNotesToggle${this.props.incident.id}`;
     let activeToggle = `activeToggle${this.props.incident.id}`;
     return (
-      <Container className="tabletitle" fluid>
+      <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
@@ -183,7 +183,7 @@ class InternalIncident extends Component {
             </Col>
             <Col lg={9} xs={12}>
             {/* Row for all the stuff inside the box */}
-              <Row>
+              {/* <Row> */}
                 <div className="internalModule">
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
                 {/* Need to display name   */}
@@ -191,6 +191,8 @@ class InternalIncident extends Component {
                 <div>
                   <InternalNotes incidentId={this.props.incident.id}/>
                 </div>
+                <div className="whiteBackground">
+                <br/>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 {this.props.incident.username_public !== undefined &&
                   <ToggleSwitchInternal toggleName={usernameToggle}
@@ -198,18 +200,10 @@ class InternalIncident extends Component {
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
                   />
                 }
+                <br/>
                 <p className="internalLine">Submitted by: {this.props.incident.username}</p>
                 <br/>
 
-                {/* timedate toggle here to select if timedate is viewable on the public post */}
-                {this.props.incident.timedate_public !== undefined &&
-                  <ToggleSwitchInternal toggleName={timedateToggle}
-                    className="internaLine"
-                    handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
-                  />
-                }
-                {this.renderTime( this.props.incident.time_submitted)}
-                <br/>
 
                 {/* location toggle here to select if location is viewable on the public post */}
                 {this.props.incident.location_public !== undefined &&
@@ -218,6 +212,7 @@ class InternalIncident extends Component {
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
                   />
                 }
+                <br/>
                 <p className="internalLine"> Location: {this.props.incident.location}</p>
                 <br/>
 
@@ -228,6 +223,7 @@ class InternalIncident extends Component {
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
                   />
                 }
+                <br/>
                 <p className="internalLine">Type: {this.props.incident.type}</p>
                 <br/>
 
@@ -238,8 +234,22 @@ class InternalIncident extends Component {
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
                   />
                 }
+                <br/>
                 <p className="internalLine">User Notes: {this.props.incident.notes}</p>
+                <br/>
 
+                {/* timedate toggle here to select if timedate is viewable on the public post */}
+                {this.props.incident.timedate_public !== undefined &&
+                  <ToggleSwitchInternal toggleName={timedateToggle}
+                    className="internaLine"
+                    handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
+                  />
+                }
+                <br/>
+                <p>Time Submitted: {this.renderTime(this.props.incident.time_submitted)}</p>
+                <br/>
+
+                </div>
                 <br/>
                 <label htmlFor="publicText">
                   Text to be displayed at beginning of public post:
@@ -259,10 +269,10 @@ class InternalIncident extends Component {
                 >
                   Save Public Display Text
                 </Button>
-              </div>
-            </Row>
+                <br/>
+            {/* </Row> */}
             <br/>
-            <Row>
+            <div className="centerClass">
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}
               {this.props.incident.active !== undefined &&
@@ -272,6 +282,7 @@ class InternalIncident extends Component {
                 />
               }
               <p className="internalLine">Active Incident? </p>
+              <br/>
               <Button
                 variant="warning" 
                 onClick={this.handleDuplicate} 
@@ -279,7 +290,11 @@ class InternalIncident extends Component {
               >
                 Mark as Duplicate
               </Button>
+              </div>
+              <div className="centerClass">
+              <br/>
               <AssignClaimComponent incidentId={this.props.incident.id}/>
+              <br/>
               <br/>
               <Button
                 variant="success" 
@@ -288,8 +303,8 @@ class InternalIncident extends Component {
               >
                 Post Public Notice
               </Button>
-
-            </Row>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

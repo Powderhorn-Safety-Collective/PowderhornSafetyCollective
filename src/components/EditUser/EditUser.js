@@ -61,7 +61,7 @@ class EditUser extends Component {
   render() {
     return (
       <div>
-        <h2 className="tabletitle">User Table</h2>
+        <h2 className="centerClass">User Table</h2>
             <EditUserTABLE user={this.props.store.allUsersReducer}/>
       </div>
     );

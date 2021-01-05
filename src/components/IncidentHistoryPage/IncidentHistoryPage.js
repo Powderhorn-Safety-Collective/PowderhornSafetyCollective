@@ -56,7 +56,7 @@ class IncidentHistoryPage extends Component {
   render() {
     return (
       <div>
-        <h2 className="tabletitle">Incident Table</h2>
+        <h2 className="centerClass">Incident Table</h2>
           <TestTable incident={this.props.store.incidentReducer}/>
 
                 {/* {this.props.store.incidentReducer.map( (incident, index) => {

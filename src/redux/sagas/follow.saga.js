@@ -26,8 +26,14 @@ function* getFollowersForIncidents(action) {
 
 
 function* makePhoneMessageUpdate(action) {
-  console.log('phone number', action.payload);
-  yield axios.post('api/message/update', action.payload);
+  try {
+    console.log('update to follower phone number', action.payload);
+    yield axios.post('api/message/update', action.payload);
+  }
+  catch (error) {
+    console.log('error in send message for update to followers');
+    
+  }
 }
 
 function* followSaga() {

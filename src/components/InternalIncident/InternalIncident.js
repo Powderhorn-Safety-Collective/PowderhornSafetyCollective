@@ -126,18 +126,18 @@ class InternalIncident extends Component {
   handlePostNotice = (incidentId) => {
     console.log('post button clicked');
     console.log('this.state in handlePostNotice', this.state);
-    // this.props.dispatch({
-    //   type: 'UPDATE_PUBLIC_POST',
-    //   payload: {
-    //     view_publicly: true,
-    //     username_public: this.state.username_public,
-    //     timedate_public: this.state.timedate_public,
-    //     location_public: this.state.location_public,
-    //     type_public: this.state.type_public,
-    //     user_notes_public: this.state.user_notes_public,
-    //     id: this.props.incident.id
-    //   }
-    // })
+    this.props.dispatch({
+      type: 'UPDATE_PUBLIC_POST',
+      payload: {
+        view_publicly: true,
+        username_public: this.state.username_public,
+        timedate_public: this.state.timedate_public,
+        location_public: this.state.location_public,
+        type_public: this.state.type_public,
+        user_notes_public: this.state.user_notes_public,
+        id: this.props.incident.id
+      }
+    })
     this.sendMessage(incidentId);
   }
 

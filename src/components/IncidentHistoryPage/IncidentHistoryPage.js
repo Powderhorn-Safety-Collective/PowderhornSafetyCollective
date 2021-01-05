@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
+import TestTable from '../TestTable/TestTable';
 
 import './IncidentHistoryPage.css';
 
@@ -56,45 +56,23 @@ class IncidentHistoryPage extends Component {
   render() {
     return (
       <div>
-        <p>editIncidentReducer:</p>
-        {JSON.stringify(this.props.store.editIncidentReducer)}
         <h2>Incident Table</h2>
-        <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th onClick={this.sortByClient}>Id</th>
-                        <th onClick={this.sortByType}>Type</th>
-                        <th onClick={this.sortByNotes}>Reporter Notes</th>
-                        <th onClick={this.sortByLocation}>Location</th>
-                        <th onClick={this.sortByTime}>Time Submitted</th>
-                        <th onClick={this.sortByStatus}>Active</th>
-                        <th onClick={this.sortByPublic}>Public</th>
-                        <th onClick={this.sortByResponder}>Responder Notes</th>
-                        <th onClick={this.sortByDuplicate}>Duplicate</th>
-                        <th onClick={this.sortBySubmittedUser}>User Who Reported Incident</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* map through incidentReducer data and passing it along to HistoryItem */}
-                    {this.props.store.incidentReducer.map( (incident, index) => {
-                        const notes = this.props.store.internalNoteReducer.text
-                        return(
-                            <IncidentHistoryItem incident={incident} key={index} notes={notes}/>
-                        );
-                    })}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan="12"></td>
-                    </tr>
-                </tfoot>
-            </table>
+        <div className="EditIncidentTableHeader">
+                                  <div>SORT BY:</div>
+                        <div onClick={this.sortByClient}>Id</div>
+                        <div onClick={this.sortByType}>Type</div>
+                        <div onClick={this.sortByNotes}>Reporter Notes</div>
+                        <div onClick={this.sortByLocation}>Location</div>
+                        <div onClick={this.sortByTime}>Time Submitted</div>
+        </div>
             <br/>
-
-
+                <TestTable incident={this.props.store.incidentReducer}/>
+                {/* {this.props.store.incidentReducer.map( (incident, index) => {
+                  const notes = this.props.store.internalNoteReducer.text
+                    return(
+                      <TestTable incident={incident} key={index} notes={notes}/>
+                    );
+                })} */}
       </div>
     );
   }

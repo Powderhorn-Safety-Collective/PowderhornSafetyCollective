@@ -111,10 +111,10 @@ class CommunityPage extends Component {
                   {
                     sending: "Sending...",
                     success: "Thank you for subscribing!",
-                    error: "An unexpected internal error has occurred.",
-                    empty: "You must write an e-mail.",
+                    error: "An unexpected internal error has occurred, please try again.",
+                    empty: "You must type in a valid e-mail address.",
                     duplicate: "This email has already been used to sign up!",
-                    button: "Subscribe!"
+                    button: "Subscribe"
                   }
                 }
                 />

@@ -100,6 +100,7 @@ class Header extends Component {
   render() {
     return ( 
       <div className="header">
+        {JSON.stringify(this.props.store.specialIncidentReducer)}
         <div className="titleContainer">
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>

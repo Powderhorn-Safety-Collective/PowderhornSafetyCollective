@@ -43,6 +43,7 @@ CREATE TABLE "internal_notes" (
 	"id" serial NOT NULL,
 	"text" varchar(1000) NOT NULL,
 	"incident_id" integer NOT NULL,
+	"time" timestamp without time zone NOT NULL,
 	CONSTRAINT "internal_notes_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

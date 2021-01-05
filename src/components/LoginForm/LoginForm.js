@@ -18,6 +18,7 @@ class LoginForm extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          specialIncident: this.props.store.specialIncidentReducer
         },
       });
     } else {

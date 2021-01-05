@@ -16,6 +16,7 @@ import userSkillsReducer from './user.skills.reducer';
 import allSkillsReducer from './all.skills.reducer';
 import clientIdReducer from './client.id.reducer';
 import followedIncidentsReducer from './followed.incidents.reducer';
+import incidentFollowersReducer from './incident.followers.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -42,7 +43,7 @@ const rootReducer = combineReducers({
   allSkillsReducer,
   clientIdReducer,
   followedIncidentsReducer,
-
+  incidentFollowersReducer,
 });
 
 export default rootReducer;

@@ -12,6 +12,7 @@ import './Admin.css';
 class AdminPage extends Component {
   componentDidMount = () => {
     this.getIncidents();
+    this.getFollowersForIncident();
   }
 
   // function to fetch all incident data
@@ -20,6 +21,10 @@ class AdminPage extends Component {
     console.log('GETTING INCIDENTS');
   }
 
+  // find the people who are following all of the incidents
+  getFollowersForIncident = () => {
+    this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
+  }
   
 
   render() {

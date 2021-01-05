@@ -53,12 +53,25 @@ function* fetchActive() {
 
 // function to post client's incident data to database
 function* postIncident(action) {
-  console.log(action.payload);
-  try {
-    yield axios.post('/api/incident', action.payload);
-    yield put( {type: 'GET_INCIDENTS'} );
-  } catch (error) {
-    console.log(error);
+  if (!action.payload.follow_incident) {
+    console.log('post incident no follow', action.payload); 
+    try {
+      yield axios.post('/api/incident', action.payload);
+      yield put( {type: 'GET_INCIDENTS'} );
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+  else {
+    console.log('post incident follow', action.payload);
+    try {
+      yield axios.post('/api/incident/incident_with_follow', action.payload);
+      yield put( {type: 'GET_INCIDENTS'} );
+    } 
+    catch (error) {
+      console.log(error);
+    }
   }
 }
 
@@ -146,6 +159,20 @@ function* fetchPersonalIncidents(action) {
   }
   catch (error) {
     console.log('error in fetch Personal Incidents fn', error);
+  }
+}
+
+// This function will get a list of ids of incidents the user is following
+function* getFollowedIncidents() {
+  console.log('in get followed incidents');
+  try {
+    const followedIdResponse = yield axios.get(`api/incident/followed`);
+    console.log('followedIdResponse', followedIdResponse.data);
+    yield put({type: 'SET_FOLLOWED_INCIDENTS', payload: followedIdResponse.data});
+  }
+  catch (error) {
+    console.log('error in get followed incidents', error);
+    
   }
 }
 
@@ -289,7 +316,7 @@ function* incidentSaga() {
     yield takeEvery('MARK_DUPLICATE', updateDuplicate);
     yield takeEvery('GET_PERSONAL_INCIDENTS', fetchPersonalIncidents);
     yield takeEvery('ADD_ASSIGNED', addAssigned);
-    
+    yield takeEvery('GET_FOLLOWED_INCIDENTS', getFollowedIncidents);
 
     yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 

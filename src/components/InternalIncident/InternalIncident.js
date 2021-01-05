@@ -123,22 +123,37 @@ class InternalIncident extends Component {
       })
   }
 
-  handlePostNotice = () => {
-      console.log('post button clicked');
-      console.log('this.state in handlePostNotice', this.state);
-      this.props.dispatch({
-        type: 'UPDATE_PUBLIC_POST',
-        payload: {
-          view_publicly: true,
-          username_public: this.state.username_public,
-          timedate_public: this.state.timedate_public,
-          location_public: this.state.location_public,
-          type_public: this.state.type_public,
-          user_notes_public: this.state.user_notes_public,
-          id: this.props.incident.id
-        }
-      })
+  handlePostNotice = (incidentId) => {
+    console.log('post button clicked');
+    console.log('this.state in handlePostNotice', this.state);
+    // this.props.dispatch({
+    //   type: 'UPDATE_PUBLIC_POST',
+    //   payload: {
+    //     view_publicly: true,
+    //     username_public: this.state.username_public,
+    //     timedate_public: this.state.timedate_public,
+    //     location_public: this.state.location_public,
+    //     type_public: this.state.type_public,
+    //     user_notes_public: this.state.user_notes_public,
+    //     id: this.props.incident.id
+    //   }
+    // })
+    this.sendMessage(incidentId);
+  }
+
+  sendMessage = (incidentId) => {
+    const incidentFollowers = this.props.incidentFollowers;
+    // check the incidentFollowers for the people following that incident, I hope
+    for(let i = 0; i < incidentFollowers.length; i++) {
+      console.log('for', incidentFollowers[i].incident_id, incidentId);
+      
+      if (incidentFollowers[i].incident_id === incidentId) {
+        console.log('################', incidentFollowers[i].phone);
+        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER'})
+      }
+      
     }
+  }
 
   handleDuplicate = () => {
     console.log('duplicate button clicked');
@@ -161,6 +176,7 @@ class InternalIncident extends Component {
     return (
       <Container fluid>
           {/* Row for all the stuff inside of the container */}
+          {JSON.stringify(this.props.incidentFollowers)}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={3}>
@@ -282,7 +298,7 @@ class InternalIncident extends Component {
               <AssignClaimComponent incidentId={this.props.incident.id}/>
               <Button
                 variant="success" 
-                onClick={this.handlePostNotice} 
+                onClick={() => this.handlePostNotice(this.props.incident.id)} 
                 className="btn"
               >
                 Post Public Notice

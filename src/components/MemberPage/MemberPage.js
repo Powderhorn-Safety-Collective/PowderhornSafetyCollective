@@ -39,8 +39,8 @@ class MemberPage extends Component {
             <h1> All Incidents</h1>
 
             {this.props.store.incidentReducer.map((incident) => {
-              
-              return <InternalIncident incident = {incident} />
+              const incidentFollowers = this.props.store.incidentFollowersReducer;
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers}/>
             })}
           </Col>{/* end of left section for incident cards */}
 

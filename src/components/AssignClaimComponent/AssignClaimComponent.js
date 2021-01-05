@@ -50,6 +50,13 @@ class AssignClaimComponent extends Component {
       <>
       {this.props.store.patrolReducer &&
       <>
+        <Button 
+          variant="primary"
+          onClick={this.submitAssign}
+        >
+          Assign/Claim
+        </Button>
+          <br/>
         <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
           <option key="0">select</option>
           {this.state.activeMemArray.map((person) => {
@@ -58,12 +65,6 @@ class AssignClaimComponent extends Component {
             )
           })}
         </select>
-        <Button 
-          variant="primary"
-          onClick={this.submitAssign}
-        >
-          Assign/Claim
-        </Button>
       </>  
       }
       </>

@@ -122,6 +122,7 @@ function* editIncident(action) {
       yield axios.put('api/incident/publicPost', action.payload);
       yield put({type: 'GET_INCIDENTS'})
       swal('Post updated.', '', "success");
+      // maybe here
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      

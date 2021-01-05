@@ -10,7 +10,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Mailchimp from 'react-mailchimp-form'
-
+import Button from 'react-bootstrap/Button';
+import swal from 'sweetalert';
 
 
 
@@ -63,9 +64,34 @@ class CommunityPage extends Component {
   getPublicIncidents = () => {
     this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});
   }
+
   // User can click this button to request a follow up from PSC on an incident
-  contactRequest = () => {
-    console.log('REQUESTING CONTACT TODO- ADD TWILIO');
+  renderContactRequest = (incidentId) => {
+    if (this.props.store.user.id) {
+      if (this.props.store.followedIncidentsReducer.some(incident => incident.incident_id === incidentId)) {
+        console.log('hello');
+        return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
+      }
+      else {
+
+        return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>
+      }
+    }
+    else {
+      return <p>You may follow this incident if you are registered as a PSC user and logged in</p>
+    }
+  }
+
+  // function to dispatch action to follow incident
+  followIncident = (incidentId) => {
+    console.log('follow incident id', incidentId);
+    this.props.dispatch({type: 'FOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
+  }
+
+  // function to dispatch action to stop following incident
+  unfollowIncident = (incidentId) => {
+    console.log('unfollow incident id', incidentId);
+    this.props.dispatch({type: 'UNFOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
   }
 
   render() {
@@ -158,7 +184,8 @@ class CommunityPage extends Component {
               <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
               <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
               {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
-              <button onClick={this.contactRequest}>Request Contact</button>
+              {/* <Button onClick={() => this.contactRequest(this.props.store.searchIncidentReducer.id)}>Follow this Incident</Button> */}
+              {this.renderContactRequest(this.props.store.searchIncidentReducer.id)}
             </div>
             }
             {/* TODO add sweet alert for no-results */}

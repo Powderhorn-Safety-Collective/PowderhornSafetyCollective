@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import IncidentHistoryItem from '../IncidentHistoryItem/IncidentHistoryItem';
 import TestTable from '../TestTable/TestTable';
 
 import './IncidentHistoryPage.css';
@@ -57,10 +56,7 @@ class IncidentHistoryPage extends Component {
   render() {
     return (
       <div>
-        {/* <p>editIncidentReducer:</p> */}
-        {/* {JSON.stringify(this.props.store.editIncidentReducer)} */}
         <h2>Incident Table</h2>
-        {/* <p>internalNoteReducer: {JSON.stringify(this.props.store.internalNoteReducer)}</p> */}
         <div className="EditIncidentTableHeader">
                                   <div>SORT BY:</div>
                         <div onClick={this.sortByClient}>Id</div>
@@ -69,16 +65,14 @@ class IncidentHistoryPage extends Component {
                         <div onClick={this.sortByLocation}>Location</div>
                         <div onClick={this.sortByTime}>Time Submitted</div>
         </div>
-
             <br/>
-                            <TestTable incident={this.props.store.incidentReducer}/>
-
-                            {/* {this.props.store.incidentReducer.map( (incident, index) => {
-                              const notes = this.props.store.internalNoteReducer.text
-                                return(
-                                  <TestTable incident={incident} key={index} notes={notes}/>
-                                );
-                            })} */}
+                <TestTable incident={this.props.store.incidentReducer}/>
+                {/* {this.props.store.incidentReducer.map( (incident, index) => {
+                  const notes = this.props.store.internalNoteReducer.text
+                    return(
+                      <TestTable incident={incident} key={index} notes={notes}/>
+                    );
+                })} */}
       </div>
     );
   }

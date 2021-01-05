@@ -54,3 +54,11 @@ background-color: #ffffff;
 .EditIncidentTableHeader {
   display: inline-flex;
 }
+
+.EditIncidentTableHeader div {
+  padding: 42px;
+}
+
+.EditIncidentTableHeader div:hover {
+  background-color: aqua;
+}

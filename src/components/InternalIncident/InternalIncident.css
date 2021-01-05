@@ -17,7 +17,8 @@ textarea {
 
 /* style for entire incident section including user data */
 .internalRow {
-    border: 2px solid blue;
+    border: 2px solid #fdf761;
+    background-color: #06989d;
     padding: 15px 0;
 }
 

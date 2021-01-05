@@ -6,6 +6,7 @@
 }
 
 .onPatrolDisplay {
+  background-color: #06989d;
   height: 350px;
   overflow-y: auto;
   border: 1px solid black;
@@ -13,6 +14,7 @@
 }
 
 .onCallDisplay {
+  background-color: #06989d;
   height: 350px;
   overflow-y: auto;
   border: 1px solid black;

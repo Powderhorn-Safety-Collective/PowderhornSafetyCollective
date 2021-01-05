@@ -21,7 +21,10 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
+<<<<<<< HEAD
       // this.clock();
+=======
+>>>>>>> main
       this.clientCheck();
     }
 
@@ -50,6 +53,7 @@ class ReportIncident extends Component {
       }, 500);
     }
 
+<<<<<<< HEAD
     // clock = () => {
     //   setInterval(() => {
     //     this.setState({
@@ -58,6 +62,8 @@ class ReportIncident extends Component {
     //   }, 1000)
     // }
 
+=======
+>>>>>>> main
     handleChange = (event, typeParam) => {
       console.log(event.target.value, typeParam);
       this.setState( {
@@ -166,9 +172,8 @@ class ReportIncident extends Component {
     </div>
     :
     <div className="registerForm">
-       <p>Current Time: <br/>
-      {this.state.time_submitted}</p>
-    <br/>
+      <h2>Report Incident Form</h2>
+      <br/>
       <input defaultValue={this.state.location} 
             type="text" 
             placeholder="Location" 

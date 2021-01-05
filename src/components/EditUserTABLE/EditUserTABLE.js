@@ -106,6 +106,7 @@ function handleClick(row) {
 }
 
 export default function EditUserTABLE(props) {
+  const dispatch = useDispatch();
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
@@ -113,12 +114,12 @@ export default function EditUserTABLE(props) {
         <TableHead>
           <TableRow className="dropdown">
             <TableCell />
-            <TableCell>Username</TableCell>
-            <TableCell align="right">First&nbsp;Name</TableCell>
-            <TableCell align="right">Last&nbsp;Name</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_USERNAME'})}>Username</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_FIRST_NAME'})} align="right">First&nbsp;Name</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_LAST_NAME'})} align="right">Last&nbsp;Name</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_ADDRESS'})} align="right">Address</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_EMAIL'})} align="right">Email</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_PHONE'})} align="right">Phone</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

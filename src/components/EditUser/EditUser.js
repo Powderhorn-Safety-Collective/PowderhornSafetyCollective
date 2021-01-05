@@ -11,11 +11,6 @@ class EditUser extends Component {
     componentDidMount = () => {
         this.getUsers();
         this.getUserSkills();
-        this.renderTable();
-      }
-
-      renderTable = () => {
-        return <EditUserTABLE user={this.props.store.allUsersReducer}/>
       }
 
     // function to fetch all incident data
@@ -28,24 +23,24 @@ class EditUser extends Component {
     }
 
        // below are functions used to sort user table by column
-      sortByUsername = () => {
-        this.props.dispatch( {type:'SORT_USERNAME'} );
-      }
-      sortByFirstName = () => {
-        this.props.dispatch( {type:'SORT_FIRST_NAME'} );
-      }
-      sortByLastName = () => {
-        this.props.dispatch( {type:'SORT_LAST_NAME'} );
-      }
-      sortByAddress = () => {
-        this.props.dispatch( {type:'SORT_ADDRESS'} );
-      }
-      sortByEmail = () => {
-        this.props.dispatch( {type:'SORT_EMAIL'} );
-      }
-      sortByPhone = () => {
-        this.props.dispatch( {type:'SORT_PHONE'} );
-      }
+      // sortByUsername = () => {
+      //   this.props.dispatch( {type:'SORT_USERNAME'} );
+      // }
+      // sortByFirstName = () => {
+      //   this.props.dispatch( {type:'SORT_FIRST_NAME'} );
+      // }
+      // sortByLastName = () => {
+      //   this.props.dispatch( {type:'SORT_LAST_NAME'} );
+      // }
+      // sortByAddress = () => {
+      //   this.props.dispatch( {type:'SORT_ADDRESS'} );
+      // }
+      // sortByEmail = () => {
+      //   this.props.dispatch( {type:'SORT_EMAIL'} );
+      // }
+      // sortByPhone = () => {
+      //   this.props.dispatch( {type:'SORT_PHONE'} );
+      // }
       // sortByAdult = () => {
       //   this.props.dispatch( {type:'SORT_ADULT'} );
       // }
@@ -66,25 +61,8 @@ class EditUser extends Component {
   render() {
     return (
       <div>
-        {/* THIS IS PLACEHOLDER TEXT TO SHOW SYNTAX FOR CONDITIONAL RENDERING OF SKILLS IN THE USERTABLE */}
-        {this.props.store.userSkillsReducer.map((skill) => {
-          return(
-            skill.user_id === 2 &&
-            <p>{skill.description}</p>
-          )
-        })}
-        <h2>Edit User Page</h2>
-                      <div className="EditIncidentTableHeader">
-                        <div>SORT BY:</div>
-                        <div onClick={this.sortByUsername}>Username</div>
-                        <div onClick={this.sortByFirstName}>First Name</div>
-                        <div onClick={this.sortByLastName}>Last name</div>
-                        <div onClick={this.sortByAddress}>Address</div>
-                        <div onClick={this.sortByEmail}>Email</div>
-                        <div onClick={this.sortByPhone}>Phone</div>
-                      </div>
-                      {this.renderTable()}
-            {/* <EditUserTABLE user={this.props.store.allUsersReducer}/> */}
+        <h2 className="tabletitle">User Table</h2>
+            <EditUserTABLE user={this.props.store.allUsersReducer}/>
       </div>
     );
   }

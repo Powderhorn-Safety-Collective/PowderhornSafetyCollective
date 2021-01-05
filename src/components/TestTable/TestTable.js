@@ -158,6 +158,7 @@ function Row(props) {
 }
 
 export default function CollapsibleTable(props) {
+  const dispatch = useDispatch();
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
@@ -165,11 +166,11 @@ export default function CollapsibleTable(props) {
         <TableHead>
           <TableRow className="dropdown">
             <TableCell />
-            <TableCell>Incident&nbsp;ID</TableCell>
-            <TableCell align="right">Incident&nbsp;Type</TableCell>
-            <TableCell align="right">Reported Notes</TableCell>
-            <TableCell align="right">Incident Location</TableCell>
-            <TableCell align="right">Time Submitted</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_CLIENT'})}>Incident&nbsp;ID</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_TYPE'})} align="right">Incident&nbsp;Type</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_NOTES'})} align="right">Reported Notes</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_LOCATION'})} align="right">Incident Location</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_TIME'})} align="right">Time Submitted</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

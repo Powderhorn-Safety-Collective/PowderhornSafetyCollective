@@ -12,6 +12,12 @@ class IncidentHistoryPage extends Component {
     componentDidMount = () => {
         this.getIncidents();
         this.props.dispatch( {type: 'GET_NOTES'}); // need this to access reducer
+        this.renderTable();
+        console.log(this.props)
+      }
+
+      renderTable = () => {
+        return <TestTable incident={this.props.store.incidentReducer}/>
       }
 
     // function to fetch all incident data
@@ -66,7 +72,10 @@ class IncidentHistoryPage extends Component {
                         <div onClick={this.sortByTime}>Time Submitted</div>
         </div>
             <br/>
-                <TestTable incident={this.props.store.incidentReducer}/>
+            {this.renderTable()}
+
+                {/* <TestTable incident={this.props.store.incidentReducer}/> */}
+
                 {/* {this.props.store.incidentReducer.map( (incident, index) => {
                   const notes = this.props.store.internalNoteReducer.text
                     return(

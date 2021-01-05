@@ -11,6 +11,11 @@ class EditUser extends Component {
     componentDidMount = () => {
         this.getUsers();
         this.getUserSkills();
+        this.renderTable();
+      }
+
+      renderTable = () => {
+        return <EditUserTABLE user={this.props.store.allUsersReducer}/>
       }
 
     // function to fetch all incident data
@@ -78,7 +83,8 @@ class EditUser extends Component {
                         <div onClick={this.sortByEmail}>Email</div>
                         <div onClick={this.sortByPhone}>Phone</div>
                       </div>
-            <EditUserTABLE user={this.props.store.allUsersReducer}/>
+                      {this.renderTable()}
+            {/* <EditUserTABLE user={this.props.store.allUsersReducer}/> */}
       </div>
     );
   }

@@ -15,6 +15,7 @@ import internalNoteReducer from './internal.note.reducer';
 import userSkillsReducer from './user.skills.reducer';
 import allSkillsReducer from './all.skills.reducer';
 import clientIdReducer from './client.id.reducer';
+import specialIncidentReducer from './special.incident.reducer';
 import followedIncidentsReducer from './followed.incidents.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   userSkillsReducer,
   allSkillsReducer,
   clientIdReducer,
+  specialIncidentReducer, //holds the client id when a user decides to register WHILE reporting an incident
   followedIncidentsReducer,
 
 });

@@ -39,7 +39,7 @@ class AdminPage extends Component {
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
-            {this.props.store.patrolReducer !== null && 
+            {this.props.store.patrolReducer.length > 0 && 
             <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
               <ul>  

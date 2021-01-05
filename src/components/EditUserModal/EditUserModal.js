@@ -177,23 +177,23 @@ class EditUserModal extends Component {
           <div className="editModal">
             <p>Id: {this.state.id}</p>
             <p>Username: {this.state.username}</p>
-            <label>First Name*:</label>
+            <label>First Name:</label>
             <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
             <br/>
-            <label>Last Name*:</label>
+            <label>Last Name:</label>
             <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
             <br/>
             <label>Address:</label>
             <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
             <br/>
-            <label>Email*:</label>
+            <label>Email:</label>
             <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
             <br/>
-            <label>Phone*:</label>
+            <label>Phone:</label>
             <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
             <br/>
             {/* Adult Section */}
-            <label>Is the user an adult?*:</label>
+            <label>Is the user an adult?:</label>
             <div className="form-check">
               <label>
                 <input 
@@ -266,7 +266,7 @@ class EditUserModal extends Component {
             </div>
             <br/>
 
-            <label>User's Skills</label>
+            <label>User's Skills:</label>
             {/* Skills section */}
             <div>
               {this.props.store.allSkillsReducer.map((skill) => {
@@ -275,21 +275,9 @@ class EditUserModal extends Component {
             </div>
 
             {/* Role Section */}
-            <label>Role*:</label>
+            <br/>
+            <label>Role:</label>
             {/* use radio buttons here for user, volunteer, and admin */}
-            <div className="form-check">
-              <label>
-                <input 
-                  type="radio"
-                  name="role"
-                  value={0}
-                  checked={this.state.role == 0}
-                  onChange={this.handlOptionChange}
-                  className="form-check-input"
-                />
-                Interested in Volunteering for PSC
-              </label>
-            </div>
             <div className="form-check">
               <label>
                 <input 
@@ -327,6 +315,19 @@ class EditUserModal extends Component {
                   className="form-check-input"
                 />
                 PSC Administrator
+              </label>
+            </div>
+            <div className="form-check">
+              <label>
+                <input 
+                  type="radio"
+                  name="role"
+                  value={0}
+                  checked={this.state.role == 0}
+                  onChange={this.handlOptionChange}
+                  className="form-check-input"
+                />
+                Interested in Volunteering for PSC
               </label>
             </div>
             <br/>

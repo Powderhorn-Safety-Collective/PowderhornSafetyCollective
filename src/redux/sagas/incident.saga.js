@@ -53,12 +53,25 @@ function* fetchActive() {
 
 // function to post client's incident data to database
 function* postIncident(action) {
-  console.log(action.payload);
-  try {
-    yield axios.post('/api/incident', action.payload);
-    yield put( {type: 'GET_INCIDENTS'} );
-  } catch (error) {
-    console.log(error);
+  if (!action.payload.follow_incident) {
+    console.log('post incident no follow', action.payload); 
+    try {
+      yield axios.post('/api/incident', action.payload);
+      yield put( {type: 'GET_INCIDENTS'} );
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+  else {
+    console.log('post incident follow', action.payload);
+    try {
+      yield axios.post('/api/incident/incident_with_follow', action.payload);
+      yield put( {type: 'GET_INCIDENTS'} );
+    } 
+    catch (error) {
+      console.log(error);
+    }
   }
 }
 

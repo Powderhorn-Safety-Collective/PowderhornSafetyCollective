@@ -246,7 +246,7 @@ router.put('/assign', (req, res) => {
     })
   })
 
-// POST route to save new incident data
+// POST route for new incident
 router.post('/', (req, res) => {
   // POST route code here
   console.log('POST incident', req.body);
@@ -254,6 +254,7 @@ router.post('/', (req, res) => {
   const type = req.body.type;
   const notes = req.body.notes;
   const location = req.body.location;
+  // if user logged in when submitting report
   if (req.user) {
     const username = req.user.username;
     const user_id = req.user.id;
@@ -273,6 +274,7 @@ router.post('/', (req, res) => {
       res.sendStatus(500);
     });
   }
+  // if no user associated with incident report
   else {
   
     const queryText = `INSERT INTO "incidents" (
@@ -290,6 +292,49 @@ router.post('/', (req, res) => {
     });
   }
 });
+
+// route for adding user to incident_followers table when they 
+// report the incident
+// assumes they already have user id
+router.post('/incident_with_follow', async (req, res) => {
+  console.log('POST incident', req.body);
+  const client_id = req.body.client_id;
+  const type = req.body.type;
+  const notes = req.body.notes;
+  const location = req.body.location;
+  const username = req.user.username;
+  const user_id = req.user.id;
+  const connection = await pool.connect();
+  try {
+    await connection.query('begin')
+    const queryText1 = `INSERT INTO "incidents" (
+    "type", 
+    "notes", 
+    "location", 
+    "time_submitted",
+    "client_id",
+    "username",
+    "submitted_user"
+    ) VALUES ($1, $2, $3, NOW(), $4, $5, $6)
+    returning id;`;
+    const incidentId = await connection.query(queryText1, [type, notes, location, client_id, username, user_id]);
+    const queryText2 =  `insert into incident_followers (incident_id, user_id)
+    values($1, $2);`;
+    console.log('323', incidentId.rows[0].id, req.user.id);
+    
+    await connection.query(queryText2, [incidentId.rows[0].id, req.user.id]);
+    await connection.query('commit');
+    res.sendStatus(201);
+  }
+  catch (error) {
+    await connection.query('rollback');
+      console.log('error', error);
+      res.sendStatus(500);
+  }
+  finally { // happens every time
+    connection.release();
+  }
+})
 
 // routes to edit things from incident table
 router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {

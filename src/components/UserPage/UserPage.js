@@ -101,8 +101,9 @@ class UserPage extends Component {
               </h2>
                 {/* incident cards are mapped onto cards for display here */}
                 {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
+                  const followedIncidents = this.props.store.followedIncidentsReducer
                   return(
-                    <IncidentModule incident={publicIncident} key={index}/>
+                    <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
                   );
                 })}
           </Col>

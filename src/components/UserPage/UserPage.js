@@ -19,6 +19,15 @@ class UserPage extends Component {
   componentDidMount = () => {
     this.getPublicIncidents();
     this.getPersonalIncidents();
+    if (this.props.store.user) {
+      this.getFollowedIncidentIds();
+    }
+  }
+
+  getFollowedIncidentIds = () => {
+    console.log('in personal incident ids');
+    this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
+    
   }
 
   // function to fetch all incident data for public view
@@ -92,8 +101,9 @@ class UserPage extends Component {
               </h2>
                 {/* incident cards are mapped onto cards for display here */}
                 {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
+                  const followedIncidents = this.props.store.followedIncidentsReducer
                   return(
-                    <IncidentModule incident={publicIncident} key={index}/>
+                    <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
                   );
                 })}
           </Col>

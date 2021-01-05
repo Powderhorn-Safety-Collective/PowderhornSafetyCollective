@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import EditUserItem from '../EditUserItem/EditUserItem'; // mapped out user data for the table
+import EditUserTABLE from '../EditUserTABLE/EditUserTABLE';
 
 class EditUser extends Component {
 
@@ -40,21 +41,21 @@ class EditUser extends Component {
       sortByPhone = () => {
         this.props.dispatch( {type:'SORT_PHONE'} );
       }
-      sortByAdult = () => {
-        this.props.dispatch( {type:'SORT_ADULT'} );
-      }
+      // sortByAdult = () => {
+      //   this.props.dispatch( {type:'SORT_ADULT'} );
+      // }
       // sortBySkills = () => {
       //   this.props.dispatch({ type: 'SORT_SKILLS'});
       // } THIS NEEDS tweaking because it's a many-many
-      sortByRole = () => {
-        this.props.dispatch( {type:'SORT_ROLE'} );
-      }
-      sortByOnPatrol = () => {
-        this.props.dispatch( {type:'SORT_ON_PATROL'} );
-      }
-      sortByOnCall = () => {
-        this.props.dispatch( {type:'SORT_ON_CALL'} );
-      }
+      // sortByRole = () => {
+      //   this.props.dispatch( {type:'SORT_ROLE'} );
+      // }
+      // sortByOnPatrol = () => {
+      //   this.props.dispatch( {type:'SORT_ON_PATROL'} );
+      // }
+      // sortByOnCall = () => {
+      //   this.props.dispatch( {type:'SORT_ON_CALL'} );
+      // }
       // end of sorting functions
 
   render() {
@@ -68,42 +69,16 @@ class EditUser extends Component {
           )
         })}
         <h2>Edit User Page</h2>
-        <table>
-                <thead>
-                    <tr>
-                        <th onClick={this.getUsers}>Id</th>
-                        <th onClick={this.sortByUsername}>Username</th>
-                        <th onClick={this.sortByFirstName}>First Name</th>
-                        <th onClick={this.sortByLastName}>Last name</th>
-                        <th onClick={this.sortByAddress}>Address</th>
-                        <th onClick={this.sortByEmail}>Email</th>
-                        <th onClick={this.sortByPhone}>Phone</th>
-                        <th onClick={this.sortByAdult}>Adult</th>
-                        <th>Skills</th> 
-                        {/* This is the onClick function for sorting the table by skills when it is working onClick={this.sortBySkills} */}
-                        <th onClick={this.sortByRole}>Role</th>
-                        <th onClick={this.sortByOnPatrol}>On Patrol</th>
-                        <th onClick={this.sortByOnCall}>On Call</th>
-                        <th onClick={() => this.editUser(this.props.user)}>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* map through allUsersReducer data and passing it along to EditUserItem */}
-                    {this.props.store.allUsersReducer.map( (user, index) => {
-                      const skills = this.props.store.userSkillsReducer.description
-                        return(
-                            <EditUserItem user={user} key={index} skills={skills}/>
-                        );
-                    })}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan="14"></td>
-                    </tr>
-                </tfoot>
-            </table>
-            <br/>  
+                      <div className="EditIncidentTableHeader">
+                        <div>SORT BY:</div>
+                        <div onClick={this.sortByUsername}>Username</div>
+                        <div onClick={this.sortByFirstName}>First Name</div>
+                        <div onClick={this.sortByLastName}>Last name</div>
+                        <div onClick={this.sortByAddress}>Address</div>
+                        <div onClick={this.sortByEmail}>Email</div>
+                        <div onClick={this.sortByPhone}>Phone</div>
+                      </div>
+            <EditUserTABLE user={this.props.store.allUsersReducer}/>
       </div>
     );
   }

@@ -23,10 +23,29 @@ const useRowStyles = makeStyles({
   },
 });
 
-function sortByClient() {
-    this.props.dispatch( {type:'SORT_CLIENT'} );
-    console.log('HELLO!');
+function renderTime(time) {
+  let timeHour = Number(time.slice(11,13));
+  console.log('timeHour', timeHour);
+  
+  let timeMorningEvening = 'a.m.';
+  if (timeHour == 12) {
+    timeMorningEvening = 'p.m.';
   }
+  else if (timeHour == 0) {
+    timeHour = 12;
+  }
+  else if (timeHour > 12) {
+    timeHour -= 12;
+    timeMorningEvening = 'p.m.';
+  }
+  let timeMinute = time.slice(14, 16);
+  let month = Number(time.slice(5,7));
+  let day = Number(time.slice(8,10));
+  let year = Number(time.slice(0,4));
+  let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
+  return <p>{displayTime}</p>
+  
+}
 
 function Row(props) {
   const { row } = props;
@@ -49,7 +68,7 @@ function Row(props) {
         <TableCell align="right">{row.type}</TableCell>
         <TableCell align="right">{row.notes}</TableCell>
         <TableCell align="right">{row.location}</TableCell>
-        <TableCell align="right">{row.time_submitted}</TableCell>
+        <TableCell align="right">{renderTime(row.time_submitted)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -71,20 +90,58 @@ function Row(props) {
                 <TableBody>
                     <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
-                        <label><input type="radio" name="active" value="true" defaultChecked={row.active === true} onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}></input> True</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="active" 
+                            value="true" 
+                            defaultChecked={row.active === true} 
+                            onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}>
+                          </input> True</label>
                         <br/>
-                        <label><input type="radio" name="active" value="false" defaultChecked={row.active === false} onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}></input> False</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="active" 
+                            value="false" 
+                            defaultChecked={row.active === false} 
+                            onClick={() => dispatch({ type: 'EDIT_ACTIVE', payload: !row.active, id: row.id})}>
+                          </input> False</label>
                       </TableCell>
                       <TableCell>
-                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === true} onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}></input> True</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="view_publicly" 
+                            defaultChecked={row.view_publicly === true} 
+                            onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}>
+                          </input> True</label>
                         <br/>
-                        <label><input type="radio" name="view_publicly" defaultChecked={row.view_publicly === false} onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}></input> False</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="view_publicly" 
+                            defaultChecked={row.view_publicly === false} 
+                            onClick={() => dispatch({ type: 'EDIT_PUBLIC', payload: !row.view_publicly, id: row.id})}>
+                          </input> False</label>
                       </TableCell>
                       {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
-                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === true} onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}></input> True</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="duplicate_entry" 
+                            defaultChecked={row.duplicate_entry === true} 
+                            onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}>
+                          </input> True</label>
                         <br/>
-                        <label><input type="radio" name="duplicate_entry" defaultChecked={row.duplicate_entry === false} onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}></input> False</label>
+                        <label>
+                          <input 
+                            type="radio" 
+                            name="duplicate_entry" 
+                            defaultChecked={row.duplicate_entry === false} 
+                            onClick={() => dispatch({ type: 'EDIT_DUPLICATE', payload: !row.duplicate_entry, id: row.id})}>
+                          </input> False</label>
                       </TableCell>
                       <TableCell>
                         {row.username}

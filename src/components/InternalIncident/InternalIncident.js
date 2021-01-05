@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './InternalIncident.css'
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import ToggleSwitchInternal from '../ToggleSwitchInternal/ToggleSwitchInternal';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -70,6 +71,8 @@ class InternalIncident extends Component {
   // handleToggles takes in the toggle and decides what to do with it depending on
   // which switch it is
   handleToggle = (event) => {
+    console.log('event.target.name', event.target.name);
+    
     if(event.target.name.slice(0,14) === 'usernameToggle') {
         console.log('username toggle');
         
@@ -190,7 +193,7 @@ class InternalIncident extends Component {
                 </div>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 {this.props.incident.username_public !== undefined &&
-                  <ToggleSwitch toggleName={usernameToggle}
+                  <ToggleSwitchInternal toggleName={usernameToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
                   />
@@ -200,7 +203,7 @@ class InternalIncident extends Component {
 
                 {/* timedate toggle here to select if timedate is viewable on the public post */}
                 {this.props.incident.timedate_public !== undefined &&
-                  <ToggleSwitch toggleName={timedateToggle}
+                  <ToggleSwitchInternal toggleName={timedateToggle}
                     className="internaLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.timedate_public}
                   />
@@ -210,7 +213,7 @@ class InternalIncident extends Component {
 
                 {/* location toggle here to select if location is viewable on the public post */}
                 {this.props.incident.location_public !== undefined &&
-                  <ToggleSwitch toggleName={locationToggle}
+                  <ToggleSwitchInternal toggleName={locationToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
                   />
@@ -220,7 +223,7 @@ class InternalIncident extends Component {
 
                 {/* type toggle here to select if type is viewable on the public post */}
                 {this.props.incident.type_public !== undefined &&
-                  <ToggleSwitch toggleName={typeToggle}
+                  <ToggleSwitchInternal toggleName={typeToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
                   />
@@ -230,7 +233,7 @@ class InternalIncident extends Component {
 
                 {/* user notes toggle here to select if user notes are viewable on the public post */}
                 {this.props.incident.user_notes_public !== undefined &&
-                  <ToggleSwitch toggleName={userNotesToggle}
+                  <ToggleSwitchInternal toggleName={userNotesToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
                   />

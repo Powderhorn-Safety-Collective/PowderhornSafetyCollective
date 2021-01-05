@@ -20,7 +20,7 @@ font-weight: normal;
 }
 
 table tr:nth-child(even) {
-background-color: #efefef;;
+background-color: #efefef;
 }
 
 table tr:nth-child(odd) {
@@ -56,9 +56,18 @@ background-color: #ffffff;
 }
 
 .EditIncidentTableHeader div {
-  padding: 42px;
+  padding: 55px;
 }
 
 .EditIncidentTableHeader div:hover {
   background-color: aqua;
+
+}
+
+.dropdown {
+  background-color: #d2d2d2;
+}
+
+.dropdowndata {
+  background-color: #efefef;
 }

@@ -57,18 +57,18 @@ function Row(props) {
     <React.Fragment>
         {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
-        <TableCell>
+        <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell className="dropdowndata" component="th" scope="row">
           {row.client_id}
         </TableCell>
-        <TableCell align="right">{row.type}</TableCell>
-        <TableCell align="right">{row.notes}</TableCell>
-        <TableCell align="right">{row.location}</TableCell>
-        <TableCell align="right">{renderTime(row.time_submitted)}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.type}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.notes}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.location}</TableCell>
+        <TableCell className="dropdowndata" align="right">{renderTime(row.time_submitted)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -79,7 +79,7 @@ function Row(props) {
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
+                  <TableRow className="dropdown">
                     <TableCell>Active Incident?</TableCell>
                     <TableCell>Viewable to Public?</TableCell>
                     {/* <TableCell>Internal Notes</TableCell> */}
@@ -88,7 +88,7 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow key={row.id}>
+                    <TableRow className="dropdowndata" key={row.id}>
                     <TableCell component="th" scope="row">
                         <label>
                           <input 
@@ -163,7 +163,7 @@ export default function CollapsibleTable(props) {
         {console.log('callData', props)}
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="dropdown">
             <TableCell />
             <TableCell>Incident&nbsp;ID</TableCell>
             <TableCell align="right">Incident&nbsp;Type</TableCell>

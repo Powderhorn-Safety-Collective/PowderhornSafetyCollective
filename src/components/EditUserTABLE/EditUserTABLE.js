@@ -24,13 +24,6 @@ const useRowStyles = makeStyles({
   },
 });
 
-// function editUser(id) {
-//     props.dispatch( {type: 'EDIT_USER', payload: id} );
-//     props.history.push("/editUserModal");
-//   }
-
-
-
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -47,22 +40,22 @@ function handleClick(row) {
     <React.Fragment>
         {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
-        <TableCell>
+        <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell  className="dropdowndata" component="th" scope="row">
           {row.username}
         </TableCell>
-        <TableCell align="right">{row.first_name}</TableCell>
-        <TableCell align="right">{row.last_name}</TableCell>
-        <TableCell align="right">{row.address}</TableCell>
-        <TableCell align="right">{row.email}</TableCell>
-        <TableCell align="right">{row.phone}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.first_name}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.last_name}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.address}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.email}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.phone}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -70,7 +63,7 @@ function handleClick(row) {
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
+                  <TableRow className="dropdown">
                     <TableCell>Is the user an adult?</TableCell>
                     {/* <TableCell>Internal Notes</TableCell> */}
                     <TableCell>Is the user on patrol?</TableCell>
@@ -79,7 +72,7 @@ function handleClick(row) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow key={row.id}>
+                    <TableRow className="dropdowndata" key={row.id}>
                     <TableCell component="th" scope="row">
                         <p>
                           {row.adult.toString()}
@@ -118,7 +111,7 @@ export default function EditUserTABLE(props) {
         {console.log('callData', props)}
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="dropdown">
             <TableCell />
             <TableCell>Username</TableCell>
             <TableCell align="right">First&nbsp;Name</TableCell>

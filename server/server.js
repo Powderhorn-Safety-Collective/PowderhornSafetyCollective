@@ -16,6 +16,7 @@ const onCallRouter = require('./routes/on.call.router');
 const internalNoteRouter = require('./routes/internal.note.router');
 const incidentRouter = require('./routes/incident.router'); // route to handle incident data table
 const incidentSortRouter = require('./routes/incident.sort.router');
+const messageRouter = require('./routes/message.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/api/notes', internalNoteRouter);
 app.use('/api/incident', incidentRouter); // route to handle incident data table
 app.use('/api/skills', skillsRouter);
 app.use('/api/incident/sort', incidentSortRouter);
+app.use('/api/message', messageRouter);
 
 // Serve static files
 app.use(express.static('build'));

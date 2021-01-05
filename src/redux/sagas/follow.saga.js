@@ -24,10 +24,17 @@ function* getFollowersForIncidents(action) {
   yield put({type:'SET_FOLLOWERS_FOR_INCIDENTS', payload: followersResponse.data});
 }
 
+
+function* makePhoneMessageUpdate(action) {
+  console.log('phone number', action.payload);
+  yield axios.post('api/message/update', action.payload);
+}
+
 function* followSaga() {
   yield takeEvery('FOLLOW_INCIDENT', followIncidentSaga); 
   yield takeEvery('UNFOLLOW_INCIDENT', unfollowIncidentSaga); 
   yield takeEvery('GET_FOLLOWERS_FOR_INCIDENTS', getFollowersForIncidents);
+  yield takeEvery('MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', makePhoneMessageUpdate)
 }
 
 export default followSaga;

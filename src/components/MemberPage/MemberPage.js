@@ -16,6 +16,7 @@ class MemberPage extends Component {
   componentDidMount = () => {
     this.getUsers();
     this.getIncidents();
+    this.getFollowersForIncident();
   }
 
   // function to fetch all incident data
@@ -23,6 +24,11 @@ class MemberPage extends Component {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
   }
 
+  // find the people who are following all of the incidents
+  getFollowersForIncident = () => {
+    this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
+  }
+  
   // function to fetch all incident data
   getUsers = () => {
     this.props.dispatch( {type: 'GET_ALL_USERS'});
@@ -39,8 +45,9 @@ class MemberPage extends Component {
             <h1> All Incidents</h1>
 
             {this.props.store.incidentReducer.map((incident) => {
+              const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;
-              return <InternalIncident incident = {incident} users={users}/>
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
 

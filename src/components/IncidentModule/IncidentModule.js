@@ -65,7 +65,6 @@ class IncidentModule extends Component {
   render() {
     return (
       <div className="module">
-        {JSON.stringify(this.props.followedIncidents)}
         <h5>{this.props.incident.text_for_public_display}</h5>
         <h5>Incident Number: {this.props.incident.client_id}</h5>
         {/* active/inactive status will always be shown for incident */}

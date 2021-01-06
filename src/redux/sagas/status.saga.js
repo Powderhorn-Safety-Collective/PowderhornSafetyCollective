@@ -46,12 +46,24 @@ function* fetchOnCall() {
   }
 }
 
+function* makePhoneMessageForNewIncident(action) {
+  try {
+
+    console.log('on call patrol phone number', action.payload);
+    yield axios.post('api/message/newIncident', action.payload);
+  }
+  catch(error) {
+    console.log('error in update text send');
+    
+  }
+}
 
 function* statusSaga() {
   yield takeEvery('ADD_CALL_STATUS', addCStatus);
   yield takeEvery('ADD_PATROL_STATUS', addPStatus);
   yield takeEvery('FETCH_ONCALL', fetchOnCall);
   yield takeEvery('FETCH_PATROL', fetchPatrol);
+  yield takeEvery('MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', makePhoneMessageForNewIncident);
 }
 
 

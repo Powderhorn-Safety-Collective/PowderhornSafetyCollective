@@ -14,12 +14,18 @@ import Col from "react-bootstrap/Col";
 class MemberPage extends Component {
 
   componentDidMount = () => {
+    this.getUsers();
     this.getIncidents();
   }
 
   // function to fetch all incident data
   getIncidents = () => {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
+  }
+
+  // function to fetch all incident data
+  getUsers = () => {
+    this.props.dispatch( {type: 'GET_ALL_USERS'});
   }
 
   render() {
@@ -33,7 +39,8 @@ class MemberPage extends Component {
             <h1> All Incidents</h1>
 
             {this.props.store.incidentReducer.map((incident) => {
-              return <InternalIncident incident = {incident} />
+              const users = this.props.store.allUsersReducer;
+              return <InternalIncident incident = {incident} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
 

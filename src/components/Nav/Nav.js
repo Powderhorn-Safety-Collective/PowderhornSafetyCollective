@@ -24,41 +24,45 @@ const Nav = (props) => {
     loginLinkData.text = 'Dashboard';
     return (     
       <>
-    <div className="nav-right">
-    <Link className="nav-link" to={loginLinkData.path}>
-          {loginLinkData.text}
-        </Link>
-    <Link className="nav-link" to="/community"> Community Page</Link>
-    <Link className="nav-link" to="/history">Incident History</Link>
-    <Link className="nav-link" to="/edit">Edit User</Link>
+    <div className="dropdown">
+    <button className="dropdownbtn">Nav Bar</button>
+    <div className="dropdown-content">
+    <a><Link className="nav-link" to={loginLinkData.path}>
+          {loginLinkData.text}</Link></a>
+     <a><Link className="nav-link" to="/community"> Community Page</Link></a>
+    <a><Link className="nav-link" to="/history">Incident History</Link> </a>
+    <a><Link className="nav-link" to="/edit">Edit User</Link></a>
     {props.store.user.id && (
           <>
             {/* <Link className="nav-link" to="/info">
               Info Page
             </Link> */}
-            <LogOutButton className="nav-link" />
+            <a><LogOutButton className="nav-link" /></a>
           </>
         )}
+    </div>
     </div>
     </>
     )
   }
 
   return (
-      <div className="nav-right">
-        <Link className="nav-link" to={loginLinkData.path}>
+<div className="dropdown">
+    <button className="dropdownbtn">Nav Bar</button>
+    <div className="dropdown-content">
+        <a><Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
-        </Link>
+        </Link></a>
        
         {/* Always show this link since the about page is not protected */}
         {/* Changed the route to be the future community page route */}
 
-        <Link className="nav-link" to="/community">
+        <a><Link className="nav-link" to="/community">
           Community Page
-        </Link>
+        </Link></a>
 
         {/* <Link className="nav-link" to="/history">Incident History</Link> */}
 
@@ -70,9 +74,10 @@ const Nav = (props) => {
             {/* <Link className="nav-link" to="/info">
               Info Page
             </Link> */}
-            <LogOutButton className="nav-link" />
+            <a><LogOutButton className="nav-link" /></a>
           </>
         )}
+      </div>
       </div>
   );
 };

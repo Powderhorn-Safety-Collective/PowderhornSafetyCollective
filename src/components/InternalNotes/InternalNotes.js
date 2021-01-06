@@ -75,7 +75,7 @@ class InternalNotes extends Component {
               {this.props.store.internalNoteReducer.map((note) => {
                 return(
                   note.incident_id === this.props.incidentId &&
-                    <p className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></p>
+                    <div className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></div>
                 )
               })}
             </>

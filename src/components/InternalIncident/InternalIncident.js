@@ -153,7 +153,6 @@ class InternalIncident extends Component {
   renderSubmittedUser = (submittedUserId) => {
     console.log('submittedUserId', submittedUserId);
     let submittedUserData =  this.props.users.find(user => user.id === submittedUserId)
-    console.log('winner');
     return( 
       <>
         <p>Submitted by: {submittedUserData.username}</p>

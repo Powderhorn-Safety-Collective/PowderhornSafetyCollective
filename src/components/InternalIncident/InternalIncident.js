@@ -176,7 +176,6 @@ class InternalIncident extends Component {
     let activeToggle = `activeToggle${this.props.incident.id}`;
     return (
       <Container className="centerClass" fluid>
-        {JSON.stringify(this.props.users)}
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}

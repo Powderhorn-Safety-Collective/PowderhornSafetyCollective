@@ -4,6 +4,7 @@
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    
 }
 
 
@@ -24,9 +25,9 @@
 }
 
 
-/* .nav-link:hover {
-  background-color: #008183;
-} */
+.nav-link:hover {
+  background-color: #fdf761;
+}
 .titleContainer {
   display: flex;
   justify-content: space-between;
@@ -45,6 +46,7 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+
 }
 
 .dropdown {

@@ -132,7 +132,7 @@ class Header extends Component {
             {this.props.store.user.role > 1 ?
               <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
               :
-              <h3>{this.props.store.publicIncidentReducer.length} Public Incidents</h3>
+              <h3>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h3>
             }
             </div>
           </div>

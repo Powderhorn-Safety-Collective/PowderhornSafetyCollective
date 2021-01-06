@@ -24,9 +24,9 @@ const Nav = (props) => {
     loginLinkData.text = 'Dashboard';
     return (     
       <>
-    <div className="dropdown">
-    <button className="dropbtn">Welcome to PSC!</button>
-    <div className="dropdown-content">
+    <div className="dropdown-nav">
+    <button className="dropbtn-nav">Welcome to PSC!</button>
+    <div className="dropdown-content-nav">
     <a><Link className="nav-link" to={loginLinkData.path}>
           {loginLinkData.text}</Link></a>
      <a><Link className="nav-link" to="/community"> Community Page</Link></a>
@@ -47,9 +47,9 @@ const Nav = (props) => {
   }
 
   return (
-<div className="dropdown">
-    <button className="dropbtn">Nav Bar</button>
-    <div className="dropdown-content">
+<div className="dropdown-nav">
+    <button className="dropbtn-nav">Welcome to PSC!</button>
+    <div className="dropdown-content-nav">
         <a><Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,

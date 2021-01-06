@@ -59,10 +59,10 @@ function* logoutUser(action) {
     yield put({ type: 'UNSET_ALL_USERS' });
     // yield put({ type: 'UNSET_ACTIVE_INCIDENTS' });
     yield put({ type: 'UNSET_EDIT_INCIDENT' });
+    yield action.history.push(`/community`);
   } catch (error) {
     console.log('Error with user logout:', error);
   }
-  yield action.history.push('/community');
 }
 
 function* loginSaga() {

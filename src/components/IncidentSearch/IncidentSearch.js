@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Button from 'react-bootstrap/Button';
 
 // This component will be displayed on and is consumed by the Comunity 
 // Page component.  It will allow the user to search for an incident 
@@ -54,11 +55,11 @@ class IncidentSearch extends Component {
           />
         </div>
         <div>
-          <button className="btn" 
+          <Button className="btn" 
             onClick={this.search} 
           > 
             Search
-          </button>
+          </Button>
         </div>
       </form>
     );

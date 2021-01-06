@@ -2,13 +2,12 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchUser() {
+function* fetchUser(action) {
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
     // the config includes credentials which
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
@@ -19,6 +18,12 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+    //if there is a specialIncident then the new userID will be added to that incident in the DB
+    if(action.payload > 0) {
+      yield console.log('THE SPECIAL IS', action.payload);
+      yield put({type: 'UPDATE_SPECIAL_INCIDENT', payload: action.payload})
+    }
+    yield put({type: 'UNSET_SPECIAL_INCIDENT'});
   } catch (error) {
     console.log('User get request failed', error);
   }
@@ -37,9 +42,7 @@ function* getAllUsers() {
 
 function* editUser(action) {
   try {
-    yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload);
-    console.log('*******', action.payload);
-    
+    yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload); 
     yield put({type: 'GET_ALL_USERS'});
   }
   catch (error){

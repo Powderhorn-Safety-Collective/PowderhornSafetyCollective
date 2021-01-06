@@ -128,6 +128,19 @@ router.put('/publicText', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// this route will update an incident with the submitted_user
+router.put('/specialIncident', (req, res) => {
+  console.log('In SPECIAL INCIDENT', req.body.specialIncident, req.user.id);
+  const queryText = `UPDATE "incidents" SET "submitted_user" = $1 WHERE "client_id" = $2;`;
+  pool.query(queryText, [req.user.id, req.body.specialIncident])
+  .then((result) => {
+    res.sendStatus(202)
+}).catch((error) => {
+  console.log('error in update specialIncident', error);
+  res.sendStatus(500)
+})
+});
+
 // this route will toggle the status of the active boolean for the incident
 router.put('/active', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {

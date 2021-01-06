@@ -24,13 +24,6 @@ const useRowStyles = makeStyles({
   },
 });
 
-// function editUser(id) {
-//     props.dispatch( {type: 'EDIT_USER', payload: id} );
-//     props.history.push("/editUserModal");
-//   }
-
-
-
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -47,22 +40,22 @@ function handleClick(row) {
     <React.Fragment>
         {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
-        <TableCell>
+        <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell  className="dropdowndata" component="th" scope="row">
           {row.username}
         </TableCell>
-        <TableCell align="right">{row.first_name}</TableCell>
-        <TableCell align="right">{row.last_name}</TableCell>
-        <TableCell align="right">{row.address}</TableCell>
-        <TableCell align="right">{row.email}</TableCell>
-        <TableCell align="right">{row.phone}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.first_name}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.last_name}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.address}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.email}</TableCell>
+        <TableCell className="dropdowndata" align="right">{row.phone}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -70,7 +63,7 @@ function handleClick(row) {
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow>
+                  <TableRow className="dropdown">
                     <TableCell>Is the user an adult?</TableCell>
                     {/* <TableCell>Internal Notes</TableCell> */}
                     <TableCell>Is the user on patrol?</TableCell>
@@ -79,7 +72,7 @@ function handleClick(row) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow key={row.id}>
+                    <TableRow className="dropdowndata" key={row.id}>
                     <TableCell component="th" scope="row">
                         <p>
                           {row.adult.toString()}
@@ -113,19 +106,20 @@ function handleClick(row) {
 }
 
 export default function EditUserTABLE(props) {
+  const dispatch = useDispatch();
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow>
+          <TableRow className="dropdown">
             <TableCell />
-            <TableCell>Username</TableCell>
-            <TableCell align="right">First&nbsp;Name</TableCell>
-            <TableCell align="right">Last&nbsp;Name</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_USERNAME'})}>Username</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_FIRST_NAME'})} align="right">First&nbsp;Name</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_LAST_NAME'})} align="right">Last&nbsp;Name</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_ADDRESS'})} align="right">Address</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_EMAIL'})} align="right">Email</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_PHONE'})} align="right">Phone</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

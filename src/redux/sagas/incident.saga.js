@@ -306,6 +306,16 @@ function* getClient(action) {
     
   }
 }
+// this function adds the id of the current user to the submitted_user column of that incident
+function* updateSpecial(action) {
+  try{
+    yield axios.put(`/api/incident/specialIncident`, {specialIncident: action.payload} ) 
+  }
+  catch(error) {
+    console.log('error in update special', error);    
+  }
+}
+
 
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
@@ -318,7 +328,7 @@ function* incidentSaga() {
     yield takeEvery('GET_PERSONAL_INCIDENTS', fetchPersonalIncidents);
     yield takeEvery('ADD_ASSIGNED', addAssigned);
     yield takeEvery('GET_FOLLOWED_INCIDENTS', getFollowedIncidents);
-
+    yield takeEvery('UPDATE_SPECIAL_INCIDENT', updateSpecial);
     yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
 
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)

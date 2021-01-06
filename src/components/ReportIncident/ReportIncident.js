@@ -21,7 +21,7 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
-      this.clock();
+      // this.clock();
       this.clientCheck();
     }
 
@@ -50,13 +50,13 @@ class ReportIncident extends Component {
       }, 500);
     }
 
-    clock = () => {
-      setInterval(() => {
-        this.setState({
-          time_submitted : new Date().toLocaleString()
-        })
-      }, 1000)
-    }
+    // clock = () => {
+    //   setInterval(() => {
+    //     this.setState({
+    //       time_submitted : new Date().toLocaleString()
+    //     })
+    //   }, 1000)
+    // }
 
     handleChange = (event, typeParam) => {
       console.log(event.target.value, typeParam);
@@ -93,6 +93,7 @@ class ReportIncident extends Component {
       }
       else if(this.state.register === true && this.state.follow_incident === false) {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
         swal(
           `Welcome!`,
           `Please input your information to register a new account.`, 
@@ -187,9 +188,8 @@ class ReportIncident extends Component {
     </div>
     :
     <div className="registerForm">
-       <p>Current Time: <br/>
-      {this.state.time_submitted}</p>
-    <br/>
+      <h2>Report Incident Form</h2>
+      <br/>
       <input defaultValue={this.state.location} 
             type="text" 
             placeholder="Location" 

@@ -30,12 +30,12 @@ class AdminPage extends Component {
   render() {
     return (
       <Container fluid>
-        <h1 id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
+        <h1 className="centerClass" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
         {/* Row to go across entire page */}
         <Row>
           {/* left stuff for incidents */}
           <Col md={9} xs={12} className="adminLeft">  
-            <h1> All Incidents</h1>
+            <h1 className="centerClass"> All Incidents</h1>
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers}/>
@@ -45,7 +45,7 @@ class AdminPage extends Component {
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
-            {this.props.store.patrolReducer !== null && 
+            {this.props.store.patrolReducer.length > 0 && 
             <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
               <ul>  

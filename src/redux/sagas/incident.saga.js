@@ -316,6 +316,16 @@ function* updateSpecial(action) {
   }
 }
 
+function* makeMessageAssigned(action) {
+  console.log('message assigned action.payload', action.payload);
+  try {
+    yield axios.post('api/message/assigned', action.payload);
+  }
+  catch (error) {
+    console.log('error in message to assigned user saga');
+  }
+}
+
 
 function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
@@ -351,6 +361,7 @@ function* incidentSaga() {
     yield takeLatest("EDIT_PUBLIC", editPublicStatus); // edit incident collapse table
     yield takeLatest("EDIT_DUPLICATE", editDuplicateStatus); // edit incident collapse table
     yield takeEvery('GET_CLIENT', getClient);
+    yield takeEvery('MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', makeMessageAssigned);
 }
 
 export default incidentSaga;

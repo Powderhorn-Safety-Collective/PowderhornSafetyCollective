@@ -176,7 +176,6 @@ class InternalIncident extends Component {
     return (
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
-          {JSON.stringify(this.props.incidentFollowers)}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={3}>

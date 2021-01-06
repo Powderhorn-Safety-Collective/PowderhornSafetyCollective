@@ -25,7 +25,7 @@ const Nav = (props) => {
     return (     
       <>
     <div className="dropdown">
-    <button className="dropdownbtn">Nav Bar</button>
+    <button className="dropbtn">Welcome to PSC!</button>
     <div className="dropdown-content">
     <a><Link className="nav-link" to={loginLinkData.path}>
           {loginLinkData.text}</Link></a>
@@ -48,7 +48,7 @@ const Nav = (props) => {
 
   return (
 <div className="dropdown">
-    <button className="dropdownbtn">Nav Bar</button>
+    <button className="dropbtn">Nav Bar</button>
     <div className="dropdown-content">
         <a><Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -60,7 +60,7 @@ const Nav = (props) => {
         {/* Always show this link since the about page is not protected */}
         {/* Changed the route to be the future community page route */}
 
-        <a><Link className="nav-link" to="/community">
+        <a><Link className="nav-link"  to="/community">
           Community Page
         </Link></a>
 

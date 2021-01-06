@@ -17,3 +17,10 @@
 .links {
   color: #fdf761;
 }
+
+.white {
+  background-color: #ffffff;
+  border: 3px solid black;
+  margin: 5px;
+  padding: 5px;
+}

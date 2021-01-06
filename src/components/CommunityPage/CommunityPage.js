@@ -116,11 +116,6 @@ class CommunityPage extends Component {
           </Col> {/* end left stuff */}
           {/* middle stuff / incident cards */}
           <Col md={6} lg={4}>
-            <Row className="box">
-              <h2>
-                About Us
-              </h2>
-            </Row>
             <Row className="box scrollable" >
               <h2>
                 Incidents
@@ -136,9 +131,23 @@ class CommunityPage extends Component {
           </Col>{/* end middle stuff */}
           {/* right column stuff / login and search */}
           <Col md={6} lg={4}>
+          {this.props.store.user.role ?
+            <></>
+            :
             <Row className="box">
               {/* section to login */}
               <LoginForm/>
+            </Row>
+            }
+            <Row className="box">
+              <h2>
+                About Us
+              </h2>
+              <div className="white">
+              <p>The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
+                We are neighbors providing support to the community with compassion and care in mind. 
+                As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.</p>
+              </div>
             </Row>
             <Row className="box">
               {/* section to search for an incident */}

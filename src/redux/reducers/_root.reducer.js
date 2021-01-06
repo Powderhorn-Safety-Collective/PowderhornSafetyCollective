@@ -17,6 +17,7 @@ import allSkillsReducer from './all.skills.reducer';
 import clientIdReducer from './client.id.reducer';
 import specialIncidentReducer from './special.incident.reducer';
 import followedIncidentsReducer from './followed.incidents.reducer';
+import incidentFollowersReducer from './incident.followers.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -44,7 +45,7 @@ const rootReducer = combineReducers({
   clientIdReducer,
   specialIncidentReducer, //holds the client id when a user decides to register WHILE reporting an incident
   followedIncidentsReducer,
-
+  incidentFollowersReducer,
 });
 
 export default rootReducer;

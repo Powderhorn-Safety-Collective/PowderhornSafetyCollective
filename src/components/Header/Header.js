@@ -105,7 +105,10 @@ class Header extends Component {
           <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>
           </Link>
-
+          <div id="greeting">
+            <p>Hello, {this.props.store.user.first_name}!</p>
+          <Nav/>
+          </div>
           <div className="patrolDisplay">
             {Number(this.props.store.patrolReducer.length) === 1 && 
               <h3> {this.props.store.patrolReducer.length} person is on patrol</h3>
@@ -160,10 +163,6 @@ class Header extends Component {
           }  
           <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
         </div>
-        <div id="greeting">
-            <p>Hello {this.props.store.user.first_name}</p>
-        </div>
-        <Nav/>
       </div>
     )
   }

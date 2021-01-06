@@ -151,19 +151,20 @@ class InternalIncident extends Component {
   }
 
   renderSubmittedUser = (submittedUserId) => {
-    console.log(submittedUserId);
+    console.log('submittedUserId', submittedUserId);
     let submittedUserData =  this.props.users.find(user => user.id === submittedUserId)
     console.log('winner');
     return( 
-    <>
-    <p>Submitted by: {submittedUserData.username}</p>
-    <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
-    {submittedUserData.address && 
-      <p>Address: {submittedUserData.address}</p>
-    }
-    <p>Phone: {submittedUserData.phone}</p>
-    <p>email: {submittedUserData.email}</p>
-  </>)
+      <>
+        <p>Submitted by: {submittedUserData.username}</p>
+        <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
+        {submittedUserData.address && 
+          <p>Address: {submittedUserData.address}</p>
+        }
+        <p>Phone: {submittedUserData.phone}</p>
+        <p>email: {submittedUserData.email}</p>
+      </>
+    )
   }
 
   render() {
@@ -175,6 +176,7 @@ class InternalIncident extends Component {
     let activeToggle = `activeToggle${this.props.incident.id}`;
     return (
       <Container className="centerClass" fluid>
+        {JSON.stringify(this.props.users)}
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}

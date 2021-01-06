@@ -11,11 +11,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Mailchimp from 'react-mailchimp-form'
 
-
-
-
-
-
 // Community Page component
 // visible to everyone
 // contains organization info and links, a list of incidents, and
@@ -23,8 +18,6 @@ import Mailchimp from 'react-mailchimp-form'
 class CommunityPage extends Component {
   state = {
   };
-
-  
 
   renderTime = (time) => {
     let timeHour = Number(time.slice(11,13));
@@ -76,7 +69,7 @@ class CommunityPage extends Component {
           <Col md={6} lg={4}>
             <Row className="box">
               {/* we can put whatever site they want here later */}
-              <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+              <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Resources
                 </h2>
@@ -84,7 +77,7 @@ class CommunityPage extends Component {
             </Row>
             <Row className="box">
               {/* we will change link later */}
-              <a target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+              <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Events
                 </h2>

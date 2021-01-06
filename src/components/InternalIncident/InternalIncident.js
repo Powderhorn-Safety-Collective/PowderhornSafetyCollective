@@ -165,7 +165,23 @@ class InternalIncident extends Component {
     });
   }
 
-  
+  renderSubmittedUser = (submittedUserId) => {
+    console.log('submittedUserId', submittedUserId);
+    let submittedUserData =  this.props.users.find(user => user.id === submittedUserId)
+    console.log('winner');
+    return( 
+      <>
+        <p>Submitted by: {submittedUserData.username}</p>
+        <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
+        {submittedUserData.address && 
+          <p>Address: {submittedUserData.address}</p>
+        }
+        <p>Phone: {submittedUserData.phone}</p>
+        <p>email: {submittedUserData.email}</p>
+      </>
+    )
+  }
+
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;
     let timedateToggle = `timedateToggle${this.props.incident.id}`;
@@ -178,25 +194,16 @@ class InternalIncident extends Component {
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
-            <Col lg={3}>
-              {this.props.incident.username ?
-                <>
-                  <p>Submitted by: {this.props.incident.username}</p>
-                  <p>Name: {this.props.incident.first_name} {this.props.incident.last_name}</p>
-                  {this.props.incident.address && 
-                    <p>Address: {this.props.incident.address}</p>
-                  }
-                  <p>Phone: {this.props.incident.phone}</p>
-                  {this.props.incident.email && 
-                  <p>email: {this.props.incident.email}</p>}
-                </>
+            <Col lg={12} xs={12}>
+              {this.props.incident.submitted_user ?
+                this.renderSubmittedUser(this.props.incident.submitted_user)
               :
                 <p>
                   The user who submitted the incident is not registered
                 </p>
               }
             </Col>
-            <Col lg={9} xs={12}>
+            <Col lg={12} xs={12}>
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">

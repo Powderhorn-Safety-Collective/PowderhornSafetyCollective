@@ -11,6 +11,7 @@ import './Admin.css';
 
 class AdminPage extends Component {
   componentDidMount = () => {
+    this.getUsers();
     this.getIncidents();
     this.getFollowersForIncident();
   }
@@ -26,6 +27,10 @@ class AdminPage extends Component {
     this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
   }
   
+  // function to fetch all incident data
+  getUsers = () => {
+    this.props.dispatch( {type: 'GET_ALL_USERS'});
+  }
 
   render() {
     return (
@@ -38,7 +43,8 @@ class AdminPage extends Component {
             <h1 className="centerClass"> All Incidents</h1>
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
-              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers}/>
+              const users = this.props.store.allUsersReducer;
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
 

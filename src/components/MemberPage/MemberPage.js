@@ -14,6 +14,7 @@ import Col from "react-bootstrap/Col";
 class MemberPage extends Component {
 
   componentDidMount = () => {
+    this.getUsers();
     this.getIncidents();
     this.getFollowersForIncident();
   }
@@ -26,6 +27,11 @@ class MemberPage extends Component {
   // find the people who are following all of the incidents
   getFollowersForIncident = () => {
     this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
+  }
+  
+  // function to fetch all incident data
+  getUsers = () => {
+    this.props.dispatch( {type: 'GET_ALL_USERS'});
   }
 
   render() {
@@ -40,7 +46,8 @@ class MemberPage extends Component {
 
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
-              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers}/>
+              const users = this.props.store.allUsersReducer;
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
 

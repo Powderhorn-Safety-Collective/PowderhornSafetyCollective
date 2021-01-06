@@ -3,6 +3,7 @@
 /* border and spacing for sections on page */
 .box {
   border: 3px solid black;
+  background-color: #06989d;
   margin: 5px;
   padding: 5px;
 }
@@ -11,4 +12,8 @@
 .scrollable {
   height: 600px;
   overflow-y: auto;
+}
+
+.links {
+  color: #fdf761;
 }

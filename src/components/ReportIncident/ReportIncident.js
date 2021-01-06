@@ -21,6 +21,7 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
+      this.clock();
       this.clientCheck();
     }
 
@@ -47,6 +48,14 @@ class ReportIncident extends Component {
           this.clientCheck();
         }
       }, 500);
+    }
+
+    clock = () => {
+      setInterval(() => {
+        this.setState({
+          time_submitted : new Date().toLocaleString()
+        })
+      }, 1000)
     }
 
     handleChange = (event, typeParam) => {
@@ -150,10 +159,6 @@ class ReportIncident extends Component {
   render() {
     return (
     <>
-    {JSON.stringify(this.props.store.clientIdReducer)}
-    {JSON.stringify(this.state)}
-    <br/>
-    {JSON.stringify(this.props.store)}
     {this.state.showReport === true ? 
     <div className="registerForm">
         <h2>IS THIS CORRECT?</h2>

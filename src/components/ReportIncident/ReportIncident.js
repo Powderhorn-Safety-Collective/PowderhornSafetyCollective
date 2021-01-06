@@ -21,7 +21,6 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
-      // this.clock();
       this.clientCheck();
     }
 
@@ -49,14 +48,6 @@ class ReportIncident extends Component {
         }
       }, 500);
     }
-
-    // clock = () => {
-    //   setInterval(() => {
-    //     this.setState({
-    //       time_submitted : new Date().toLocaleString()
-    //     })
-    //   }, 1000)
-    // }
 
     handleChange = (event, typeParam) => {
       console.log(event.target.value, typeParam);

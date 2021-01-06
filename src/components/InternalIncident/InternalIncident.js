@@ -178,7 +178,7 @@ class InternalIncident extends Component {
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
-            <Col lg={3}>
+            <Col lg={12} xs={12}>
               {this.props.incident.submitted_user ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :
@@ -187,7 +187,7 @@ class InternalIncident extends Component {
                 </p>
               }
             </Col>
-            <Col lg={9} xs={12}>
+            <Col lg={12} xs={12}>
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">

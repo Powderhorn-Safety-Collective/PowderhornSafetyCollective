@@ -1,6 +1,7 @@
 /* border and spacing for incident modules */
 .module {
-  border: 2px solid black;  
+  border: 2px solid black; 
+  background: #ffffff; 
   padding: 5px;
   margin: 5px;
   width: 100%;

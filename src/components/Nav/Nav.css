@@ -4,6 +4,7 @@
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    
 }
 
 
@@ -11,7 +12,6 @@
 .nav-link {
   float: left;
   color: black;
-  background-color: #fdf761;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -24,13 +24,14 @@
   outline:0;
 }
 
+
 .nav-link:hover {
-  background-color: #008183;
+  background-color: #fdf761;
 }
 .titleContainer {
   display: flex;
   justify-content: space-between;
 }
-.nav-right {
+/* .nav-right {
   float: right;
-}
+

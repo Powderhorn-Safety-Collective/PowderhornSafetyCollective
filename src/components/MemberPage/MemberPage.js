@@ -14,12 +14,24 @@ import Col from "react-bootstrap/Col";
 class MemberPage extends Component {
 
   componentDidMount = () => {
+    this.getUsers();
     this.getIncidents();
+    this.getFollowersForIncident();
   }
 
   // function to fetch all incident data
   getIncidents = () => {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
+  }
+
+  // find the people who are following all of the incidents
+  getFollowersForIncident = () => {
+    this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
+  }
+  
+  // function to fetch all incident data
+  getUsers = () => {
+    this.props.dispatch( {type: 'GET_ALL_USERS'});
   }
 
   render() {
@@ -33,14 +45,16 @@ class MemberPage extends Component {
             <h1> All Incidents</h1>
 
             {this.props.store.incidentReducer.map((incident) => {
-              return <InternalIncident incident = {incident} />
+              const incidentFollowers = this.props.store.incidentFollowersReducer;
+              const users = this.props.store.allUsersReducer;
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
 
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
-            {this.props.store.patrolReducer !== null && 
+            {this.props.store.patrolReducer.length > 0 && 
             <Row className="onPatrolDisplay">
               <h2>Members on patrol: </h2>
               <ul>  

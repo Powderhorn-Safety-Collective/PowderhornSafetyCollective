@@ -12,8 +12,6 @@ class IncidentModule extends Component {
   // function to render time associated with incident
   renderTime = (publicDisplayTime, time) => {
     let timeHour = Number(time.slice(11,13));
-    console.log('timeHour', timeHour);
-    
     let timeMorningEvening = 'a.m.';
     if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
@@ -65,7 +63,6 @@ class IncidentModule extends Component {
   render() {
     return (
       <div className="module">
-        {JSON.stringify(this.props.followedIncidents)}
         <h5>{this.props.incident.text_for_public_display}</h5>
         <h5>Incident Number: {this.props.incident.client_id}</h5>
         {/* active/inactive status will always be shown for incident */}

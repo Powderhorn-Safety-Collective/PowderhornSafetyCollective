@@ -43,9 +43,18 @@ class RegisterForm extends Component {
     });
   };
 
+  setPhoneValue = (phoneNumber) => {
+    console.log(phoneNumber);
+    this.setState({
+      phone: phoneNumber
+    })
+  }
+
   render() {
     return (
       <div className="editModal">
+        {JSON.stringify(this.state.phone)}
+        <br/>
         {JSON.stringify(this.state.value)}
       <form className="formPanel" onSubmit={this.registerUser}>
         <h2>Register User</h2>
@@ -109,21 +118,14 @@ class RegisterForm extends Component {
               onChange={this.handleInputChangeFor('email')}
             />
           </div>
-          <div>
-            <input 
-              type="text" 
-              placeholder="Phone*" 
-              value={this.state.phone}
-              required
-              onChange={this.handleInputChangeFor('phone')}
-            />
-          </div>
+
           <div>
             <PhoneInput 
               country="US"
-              placeholder="phone*"
-              value={this.state.value}
-              onChange={value => this.setState({value})}
+              placeholder="Phone*"
+              value={this.state.phone}
+              onChange={this.setPhoneValue}
+              required
             />
           </div>
             {/* input to verify age */}

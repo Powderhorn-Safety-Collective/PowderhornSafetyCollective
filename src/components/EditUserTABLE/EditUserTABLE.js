@@ -67,7 +67,7 @@ function Row(props) {
         <TableCell className="dropdowndata" align="right">{row.phone}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">

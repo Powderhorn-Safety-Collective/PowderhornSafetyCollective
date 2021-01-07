@@ -39,11 +39,7 @@ const Nav = (props) => {
             {/* <Link className="nav-link" to="/info">
               Info Page
             </Link> */}
-<<<<<<< HEAD
-            <LogOutButton className="nav-link" history={history} />
-=======
-            <a><LogOutButton className="nav-link" /></a>
->>>>>>> main
+            <a><LogOutButton className="nav-link" history={history} /></a>
           </>
         )}
     </div>

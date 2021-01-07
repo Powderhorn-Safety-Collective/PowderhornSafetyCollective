@@ -24,3 +24,7 @@
   margin: 5px;
   padding: 5px;
 }
+
+.mailChimpInput, input {
+  width: 250px;
+}

@@ -35,16 +35,19 @@ Button
 .btn_sizeMin {
   min-height: 50px;
   min-width: 100px;
+  border-radius: 4px;
 }
 
 .btn_sizeSm {
   padding: 10px 15px;
   font-size: 0.8rem;
+  border-radius: 4px;
 }
 
 .btn_sizeFull {
   display: block;
   width: 100%;
+  border-radius: 4px;
 }
 
 .btn:hover {
@@ -57,7 +60,7 @@ Button
   padding: 0;
   border-width: 0;
   border-bottom: 1px solid #444;
-  border-radius: 0;
+  border-radius: 4px;
   background: none;
   font: inherit;
   color: #444;
@@ -103,10 +106,15 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+  border-radius: 4px;
 }
 /* for if we want to change colors of bootstrap buttons */
-/* .btn-warning {
-  background-color: red !important;
-  border-color: red !important;
-} */
+button.btn.btn-warning {
+  background-color: #fdf761;
+  border-color: black;
+}
+
+.emailLink {
+  color: #fdf761;
+}
 

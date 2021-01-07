@@ -64,13 +64,13 @@ class UserPage extends Component {
             </Row>
             <Row className="box">
               <h2>
-                PSC Contact Info
+              <a className="emailLink" href='mailto: pohosafetycollective@gmail.com' >Contact Us</a>
               </h2>
             </Row>
             <Row className="box">
               <h2>
               Sign Up for the PSC Newsletter
-              <Mailchimp
+              <Mailchimp className="mailChimpInput"
               action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
               fields={[
                 {

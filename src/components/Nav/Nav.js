@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import {useHistory} from 'react-router-dom';
 
 const Nav = (props) => {
   
-  
+  const history = useHistory();
+
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
@@ -37,7 +39,11 @@ const Nav = (props) => {
             {/* <Link className="nav-link" to="/info">
               Info Page
             </Link> */}
+<<<<<<< HEAD
+            <LogOutButton className="nav-link" history={history} />
+=======
             <a><LogOutButton className="nav-link" /></a>
+>>>>>>> main
           </>
         )}
     </div>

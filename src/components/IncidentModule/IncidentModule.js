@@ -72,7 +72,7 @@ class IncidentModule extends Component {
           <p className="active">Inactive</p>
         }
         {/* this function gets called to display time submitted*/}
-        {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
+        <p>Time Submitted: {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}</p>
         {/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&
           <p>Location: {this.props.incident.location}</p>

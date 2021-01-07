@@ -161,7 +161,7 @@ export default function CollapsibleTable(props) {
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
-      <Table aria-label="collapsible table">
+      <Table className="blackdrop" aria-label="collapsible table">
         <TableHead>
           <TableRow className="dropdown">
             <TableCell />

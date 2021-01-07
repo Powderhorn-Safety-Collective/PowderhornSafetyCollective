@@ -40,7 +40,7 @@ function Row(props) {
         array = array += ` •` + skills[i].description + '\n';
       }
     }
-    return array;
+    return (array);
   }
 
   function handleClick(row) {

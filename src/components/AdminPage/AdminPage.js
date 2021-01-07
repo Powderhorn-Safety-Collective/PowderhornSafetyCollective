@@ -10,6 +10,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import './Admin.css';
 
 class AdminPage extends Component {
+  
   componentDidMount = () => {
     this.getUsers();
     this.getIncidents();
@@ -47,7 +48,6 @@ class AdminPage extends Component {
               return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
-
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
@@ -77,5 +77,6 @@ class AdminPage extends Component {
     );
   }
 }
+
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(AdminPage);

@@ -66,5 +66,4 @@ function* statusSaga() {
   yield takeEvery('MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', makePhoneMessageForNewIncident);
 }
 
-
 export default statusSaga;

@@ -1,6 +1,5 @@
 // this reducer stores the client_id from the database or -1 if 
 // client_id not in db yet
-
 const clientIdReducer = (state = -1, action) => {
   switch (action.type) {
       case 'SET_CLIENT_ID':
@@ -11,6 +10,5 @@ const clientIdReducer = (state = -1, action) => {
           return state;
   }
 }
-
 
 export default clientIdReducer;

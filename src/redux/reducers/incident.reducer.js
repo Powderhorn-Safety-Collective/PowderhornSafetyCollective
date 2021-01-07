@@ -1,5 +1,4 @@
 // this reducer stores history of all incidents from all users
-
 const incidentReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_INCIDENTS':
@@ -12,8 +11,6 @@ const incidentReducer = (state = [], action) => {
     }
 }
 
-
-
-  // admin will be on the redux state at:
-  // state.incident
-  export default incidentReducer;
+// admin will be on the redux state at:
+// state.incident
+export default incidentReducer;

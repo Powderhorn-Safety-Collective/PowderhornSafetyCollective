@@ -24,7 +24,6 @@ class IncidentHistoryItem extends Component {
   // function to render time associated with incident
   renderTime = (time) => {
     let timeHour = Number(time.slice(11,13));
-    
     let timeMorningEvening = 'a.m.';
     if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
@@ -42,7 +41,6 @@ class IncidentHistoryItem extends Component {
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     return <p>{displayTime}</p>
-    
   }
     
   render() {
@@ -58,9 +56,7 @@ class IncidentHistoryItem extends Component {
             <td>{this.props.incident.view_publicly.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.notesFunction()}</td>
             <td>{this.props.incident.duplicate_entry.toString()}</td> {/* toString method to convert boolean to string */}
-            <td>{this.props.incident.username}</td> {/* Fix this line*/}
-
-            {/* trash can row to delete incident? */}
+            <td>{this.props.incident.username}</td>
             <td className="edit" onClick={() => this.editIncident(this.props.incident)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>
             <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️</span></td>
         </tr>

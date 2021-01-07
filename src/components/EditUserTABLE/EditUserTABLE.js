@@ -38,7 +38,6 @@ function handleClick(row) {
 }
   return (
     <React.Fragment>
-        {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
         <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>

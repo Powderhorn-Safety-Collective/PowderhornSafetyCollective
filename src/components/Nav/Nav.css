@@ -3,7 +3,6 @@
     font-weight: 700;
     display: inline-block;
     color: #f2f2f2;
-    padding-left: 10px;
     
 }
 
@@ -38,18 +37,21 @@
   padding: 10px;
   border: none;
   cursor: pointer;
+  float:left;
 }
 
 .dropdown-nav {
-  position: relative;
+  position: absolute;
   display: inline-block;
   background:fixed;
+  justify-content: end;
+
 }
 
 .dropdown-content-nav {
   display: none;
-  position: relative;
-  right: 0;
+  position: absolute;
+  left: 0;
   min-width: 160px;
   z-index: 1;
   overflow:auto;

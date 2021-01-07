@@ -100,14 +100,15 @@ class Header extends Component {
   render() {
     return ( 
       <div className="header">
-        {JSON.stringify(this.props.store.specialIncidentReducer)}
         <div className="titleContainer">
-          <Link to="/home">
+          {/* <Link to="/home">
             <img src="/logo.png" alt="PSC Logo" height="100px"/>
-          </Link>
+          </Link> */}
           <div id="greeting">
+          <div className="nav-bar-style">
             <p>Hello, {this.props.store.user.first_name}!</p>
           <Nav/>
+          </div>
           </div>
           <div className="patrolDisplay">
             {Number(this.props.store.patrolReducer.length) === 1 && 
@@ -135,7 +136,6 @@ class Header extends Component {
               <h3>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h3>
             }
             </div>
-          </div>
         </div>
         <div className="headerBtns">
           {/* on patrol / on call toggles */}
@@ -162,6 +162,7 @@ class Header extends Component {
             </div>
           }  
           <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
+        </div>
         </div>
       </div>
     )

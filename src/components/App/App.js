@@ -22,6 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CommunityPage from '../CommunityPage/CommunityPage';
 import MemberPage from '../MemberPage/MemberPage';
 import AdminPage from '../AdminPage/AdminPage';
+// import Nav from '../Nav/Nav';
+
 
 
 import Header from '../Header/Header.js';
@@ -55,8 +57,9 @@ class App extends Component {
     return (
       <Router>
         <div>
+
           <Header/>
-          {/* <Nav /> */}
+          {/* <Nav>/</Nav> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

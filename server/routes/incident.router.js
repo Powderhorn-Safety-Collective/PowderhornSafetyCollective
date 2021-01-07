@@ -418,7 +418,7 @@ router.get('/client_id/:client_id', (req,res) => {
   });
 });
 
-router.get('/followed', (req, res) => {
+router.get('/followed', rejectUnauthenticated, (req, res) => {
   const queryText = `select incident_id from incident_followers
   where user_id = $1;`;
 

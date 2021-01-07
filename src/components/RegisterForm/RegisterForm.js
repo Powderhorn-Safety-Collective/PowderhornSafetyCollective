@@ -43,6 +43,7 @@ class RegisterForm extends Component {
     });
   };
 
+  // This function saves the phone number entered into the box
   setPhoneValue = (phoneNumber) => {
     console.log(phoneNumber);
     this.setState({
@@ -53,9 +54,6 @@ class RegisterForm extends Component {
   render() {
     return (
       <div className="editModal">
-        {JSON.stringify(this.state.phone)}
-        <br/>
-        {JSON.stringify(this.state.value)}
       <form className="formPanel" onSubmit={this.registerUser}>
         <h2>Register User</h2>
         {this.props.store.errors.registrationMessage && (
@@ -118,15 +116,18 @@ class RegisterForm extends Component {
               onChange={this.handleInputChangeFor('email')}
             />
           </div>
-
           <div>
             <PhoneInput 
+              name="phoneInput"
               country="US"
-              placeholder="Phone*"
+              placeholder="Cell Phone*"
               value={this.state.phone}
               onChange={this.setPhoneValue}
               required
+              maxlength="14"
             />
+          <br/>
+          <label htmlFor="phoneInput">Normal text rates may apply.</label>
           </div>
             {/* input to verify age */}
           <div>

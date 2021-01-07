@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { formatPhoneNumber } from 'react-phone-number-input';
 
 const useRowStyles = makeStyles({
   root: {
@@ -23,6 +24,7 @@ const useRowStyles = makeStyles({
     },
   },
 });
+// function formatPhoneNumber = formatPhoneNumber();
 
 function Row(props) {
   const { row } = props;
@@ -30,12 +32,12 @@ function Row(props) {
   const classes = useRowStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-
-function handleClick(row) {
+  
+  function handleClick(row) {
     console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
-}
+  }
   return (
     <React.Fragment>
         {console.log('callDataMini', props)}
@@ -52,7 +54,7 @@ function handleClick(row) {
         <TableCell className="dropdowndata" align="right">{row.last_name}</TableCell>
         <TableCell className="dropdowndata" align="right">{row.address}</TableCell>
         <TableCell className="dropdowndata" align="right">{row.email}</TableCell>
-        <TableCell className="dropdowndata" align="right">{row.phone}</TableCell>
+        <TableCell className="dropdowndata" align="right">{formatPhoneNumber(row.phone)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

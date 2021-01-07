@@ -115,9 +115,11 @@ class CommunityPage extends Component {
               </a>
             </Row>
             <Row className="box">
-              <h2>
-                PSC Contact Info
-              </h2>
+              <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org/" rel="noopener noreferrer">
+                <h2>
+                  PSC Contact Info
+                </h2>
+              </a>
             </Row>
             <Row className="box">
               <h2> Sign Up for the PSC Newsletter

@@ -82,7 +82,7 @@ function Row(props) {
                     <TableCell>Is the user on patrol?</TableCell>
                     <TableCell>Is the user on call?</TableCell>
                     <TableCell >User Skills</TableCell>
-                    <TableCell>Edit User</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

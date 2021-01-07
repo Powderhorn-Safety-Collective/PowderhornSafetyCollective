@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import PhoneInput from 'react-phone-number-input/input';
 
 // TODO add all DB columns to the payload to clear not-null violation
 class RegisterForm extends Component {
@@ -17,7 +18,8 @@ class RegisterForm extends Component {
     adult: '',
     terms: '',
     role: 1,
-    specialIncident: this.props.store.specialIncidentReducer
+    specialIncident: this.props.store.specialIncidentReducer,
+    value: ''
   };
 
   // function to register new user
@@ -44,6 +46,7 @@ class RegisterForm extends Component {
   render() {
     return (
       <div className="editModal">
+        {JSON.stringify(this.state.value)}
       <form className="formPanel" onSubmit={this.registerUser}>
         <h2>Register User</h2>
         {this.props.store.errors.registrationMessage && (
@@ -113,6 +116,14 @@ class RegisterForm extends Component {
               value={this.state.phone}
               required
               onChange={this.handleInputChangeFor('phone')}
+            />
+          </div>
+          <div>
+            <PhoneInput 
+              country="US"
+              placeholder="phone*"
+              value={this.state.value}
+              onChange={value => this.setState({value})}
             />
           </div>
             {/* input to verify age */}

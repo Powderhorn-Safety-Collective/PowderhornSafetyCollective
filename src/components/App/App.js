@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
 
 // import Nav from '../Nav/Nav';
@@ -39,6 +39,18 @@ class App extends Component {
     this.props.dispatch({ type: 'FETCH_USER' });
   }
 
+  routeUser = () => {
+    if(this.props.store.user.role === 3){
+      return AdminPage
+    }else if(this.props.store.user.role === 2){
+      return MemberPage
+    }else if(this.props.store.user.role === 1){
+      return UserPage
+    }else {
+      return CommunityPage
+    }
+  };
+
   render() {
     return (
       <Router>
@@ -50,12 +62,12 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
+            {/* <Route
               // shows AboutPage at all times (logged in or not)
               exact
               path="/about"
               component={AboutPage}
-            />
+            /> */}
             <Route
             exact
             path="/community"
@@ -108,8 +120,8 @@ class App extends Component {
               // - else shows LoginPage at /login
               exact
               path="/login"
-              component={LoginPage}
-              authRedirect="/user"
+              component={this.routeUser()}
+              // authRedirect="/user"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -168,4 +180,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default connect(mapStoreToProps)(App);

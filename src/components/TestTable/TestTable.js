@@ -25,8 +25,7 @@ const useRowStyles = makeStyles({
 
 function renderTime(time) {
   let timeHour = Number(time.slice(11,13));
-  console.log('timeHour', timeHour);
-  
+
   let timeMorningEvening = 'a.m.';
   if (timeHour == 12) {
     timeMorningEvening = 'p.m.';

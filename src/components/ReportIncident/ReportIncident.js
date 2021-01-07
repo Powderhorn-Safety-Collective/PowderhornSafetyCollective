@@ -21,6 +21,7 @@ class ReportIncident extends Component {
     }
 
     componentDidMount = () => {
+      this.clock();
       this.clientCheck();
     }
 
@@ -47,6 +48,14 @@ class ReportIncident extends Component {
           this.clientCheck();
         }
       }, 500);
+    }
+
+    clock = () => {
+      setInterval(() => {
+        this.setState({
+          time_submitted : new Date().toLocaleString()
+        })
+      }, 1000)
     }
 
     handleChange = (event, typeParam) => {
@@ -79,6 +88,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
+        this.sendMessage();
         this.props.history.push('/');
       }
       else if(this.state.register === true && this.state.follow_incident === false) {
@@ -90,6 +100,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
+        this.sendMessage();
         this.props.history.push('/registration');
       }
       else if(this.state.register === false && this.state.follow_incident === false) {
@@ -100,6 +111,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
+        this.sendMessage();
         this.props.history.push('/');
       }
       else if(this.state.register === true && this.state.follow_incident === true) {
@@ -111,6 +123,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
+        this.sendMessage();
         this.props.history.push('/registration');
       }
       }
@@ -127,11 +140,25 @@ class ReportIncident extends Component {
     } 
   }
 
+  // this function should send the message to all the people on patrol and on call
+  // to say that a new incident has been submitted
+  sendMessage = (incidentId) => {
+    const onCall = this.props.store.onCallReducer;
+    for(let i = 0; i < onCall.length; i++) {
+      console.log('call for', onCall[i].incident_id, incidentId);
+      console.log('################', onCall[i].phone);
+      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: onCall[i].phone}});
+    }
+    const patrol = this.props.store.patrolReducer;
+    for (let i = 0; i < patrol.length; i++) {
+      console.log('patrol for #########', patrol[i].phone);
+      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: patrol[i].phone}});
+    }
+  }
+
   render() {
     return (
     <>
-    {JSON.stringify(this.props.store.clientIdReducer)}
-    {JSON.stringify(this.state)}
     {this.state.showReport === true ? 
     <div className="registerForm">
         <h2>IS THIS CORRECT?</h2>

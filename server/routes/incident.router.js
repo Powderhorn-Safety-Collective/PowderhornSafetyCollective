@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // retrieving all data from all users
 
   if(req.user.role > 1) {
-    const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", "assigned_user", "first_name" AS "assigned" FROM "incidents" 
+    const queryText = `SELECT "incidents"."id", "type", "notes", "location", time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, "view_publicly", "duplicate_entry", "client_id", "incidents"."username", "username_public", "timedate_public", "location_public", "type_public", "user_notes_public", "text_for_public_display",  "user"."first_name", "active", submitted_user, "assigned_user", "first_name" AS "assigned" FROM "incidents" 
     left JOIN "user" on "user"."id" = "incidents"."assigned_user"
     ORDER BY "time_submitted" DESC;`
     pool.query(queryText)
@@ -419,7 +419,6 @@ router.get('/client_id/:client_id', (req,res) => {
 });
 
 router.get('/followed', (req, res) => {
-  console.log('in get followed ids route', req.user.id);
   const queryText = `select incident_id from incident_followers
   where user_id = $1;`;
 
@@ -454,6 +453,22 @@ router.delete('/follow/:incident_Id', (req, res) => {
     res.sendStatus(200);
   }).catch((error) => {
     console.log('error in delete incident follow route', error);
+    res.sendStatus(500);
+  });
+});
+
+router.get('/followers', rejectUnauthenticated, (req, res) => {
+  console.log('get followers route');
+  const queryText = `select incident_id, "user".id as user_id, phone from "user"
+  join incident_followers
+  on "user".id = incident_followers.user_id
+  order by incident_id;`
+
+  pool.query(queryText).then((response) => {
+    console.log('followers response.rows', response.rows);
+    res.send(response.rows);
+  }).catch((error) => {
+    console.log('error in get followers route');
     res.sendStatus(500);
   });
 });

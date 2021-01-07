@@ -96,7 +96,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/all', rejectUnauthenticated, (req, res) => {
-  if (Number(req.user.role) ===3) {
+  if (Number(req.user.role) > 1) {
     // data to populate user table
     // retrieving all data from all users
     const queryText = `select id, username, first_name, 

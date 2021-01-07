@@ -4,6 +4,7 @@
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    
 }
 
 
@@ -11,7 +12,6 @@
 .nav-link {
   float: left;
   color: black;
-  background-color: #fdf761;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -24,13 +24,77 @@
   outline:0;
 }
 
+
 .nav-link:hover {
-  background-color: #008183;
+  background-color: #fdf761;
 }
 .titleContainer {
   display: flex;
   justify-content: space-between;
 }
-.nav-right {
+/* .nav-right {
   float: right;
+<<<<<<< HEAD
 }
+=======
+} */
+.patrolDisplay {
+  text-align: right;
+}
+
+.dropbtn-nav {
+  background-color: #fdf761;
+  color: black;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+
+
+}
+
+.dropdown-nav {
+  position: relative;
+  display: inline-block;
+  background:fixed;
+
+
+}
+
+.dropdown-content-nav {
+  display: none;
+  position: relative;
+  right: 0;
+  min-width: 160px;
+  z-index: 1;
+  overflow:auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background: #d2d2d2;
+  padding-bottom: 15px;
+
+
+}
+
+.dropdown-content-nav a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  background: #d2d2d2
+}
+
+/* .dropdown-content a:hover {background-color: #f1f1f1} */
+
+
+.dropdown-nav:hover .dropdown-content-nav {
+  display: block;
+}
+
+.dropdown-nav:hover .dropbtn-nav {
+  background-color: gray;
+  color: white;
+
+}
+
+
+>>>>>>> main

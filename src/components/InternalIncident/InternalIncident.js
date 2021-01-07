@@ -32,8 +32,6 @@ class InternalIncident extends Component {
   // function to render time associated with incident
   renderTime = ( time) => {
     let timeHour = Number(time.slice(11,13));
-    console.log('timeHour', timeHour);
-    
     let timeMorningEvening = 'a.m.';
     if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
@@ -123,22 +121,37 @@ class InternalIncident extends Component {
       })
   }
 
-  handlePostNotice = () => {
-      console.log('post button clicked');
-      console.log('this.state in handlePostNotice', this.state);
-      this.props.dispatch({
-        type: 'UPDATE_PUBLIC_POST',
-        payload: {
-          view_publicly: true,
-          username_public: this.state.username_public,
-          timedate_public: this.state.timedate_public,
-          location_public: this.state.location_public,
-          type_public: this.state.type_public,
-          user_notes_public: this.state.user_notes_public,
-          id: this.props.incident.id
-        }
-      })
+  handlePostNotice = (incidentId) => {
+    console.log('post button clicked');
+    console.log('this.state in handlePostNotice', this.state);
+    this.props.dispatch({
+      type: 'UPDATE_PUBLIC_POST',
+      payload: {
+        view_publicly: true,
+        username_public: this.state.username_public,
+        timedate_public: this.state.timedate_public,
+        location_public: this.state.location_public,
+        type_public: this.state.type_public,
+        user_notes_public: this.state.user_notes_public,
+        id: this.props.incident.id
+      }
+    })
+    this.sendMessage(incidentId);
+  }
+
+  sendMessage = (incidentId) => {
+    const incidentFollowers = this.props.incidentFollowers;
+    // check the incidentFollowers for the people following that incident, I hope
+    for(let i = 0; i < incidentFollowers.length; i++) {
+      console.log('for', incidentFollowers[i].incident_id, incidentId);
+      
+      if (incidentFollowers[i].incident_id === incidentId) {
+        console.log('################', incidentFollowers[i].phone);
+        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone}});
+      }
+      
     }
+  }
 
   handleDuplicate = () => {
     console.log('duplicate button clicked');
@@ -150,7 +163,21 @@ class InternalIncident extends Component {
     });
   }
 
-  
+  renderSubmittedUser = (submittedUserId) => {
+    let submittedUserData =  this.props.users.find(user => user.id === submittedUserId)
+    return( 
+      <>
+        <p>Submitted by: {submittedUserData.username}</p>
+        <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
+        {submittedUserData.address && 
+          <p>Address: {submittedUserData.address}</p>
+        }
+        <p>Phone: {submittedUserData.phone}</p>
+        <p>email: {submittedUserData.email}</p>
+      </>
+    )
+  }
+
   render() {
     let usernameToggle = `usernameToggle${this.props.incident.id}`;
     let timedateToggle = `timedateToggle${this.props.incident.id}`;
@@ -164,17 +191,8 @@ class InternalIncident extends Component {
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
-              {this.props.incident.username ?
-                <>
-                  <p>Submitted by: {this.props.incident.username}</p>
-                  <p>Name: {this.props.incident.first_name} {this.props.incident.last_name}</p>
-                  {this.props.incident.address && 
-                    <p>Address: {this.props.incident.address}</p>
-                  }
-                  <p>Phone: {this.props.incident.phone}</p>
-                  {this.props.incident.email && 
-                  <p>email: {this.props.incident.email}</p>}
-                </>
+              {this.props.incident.submitted_user ?
+                this.renderSubmittedUser(this.props.incident.submitted_user)
               :
                 <p>
                   The user who submitted the incident is not registered
@@ -298,7 +316,7 @@ class InternalIncident extends Component {
               <br/>
               <Button
                 variant="success" 
-                onClick={this.handlePostNotice} 
+                onClick={() => this.handlePostNotice(this.props.incident.id)} 
                 className="btn"
               >
                 Post Public Notice

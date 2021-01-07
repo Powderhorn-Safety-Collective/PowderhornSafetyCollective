@@ -25,7 +25,6 @@ const useRowStyles = makeStyles({
   },
 });
 
-
 function Row(props) {
   const { row } = props;
   const { skills } = props;
@@ -125,8 +124,6 @@ function Row(props) {
 
 export default function EditUserTABLE(props) {
   const dispatch = useDispatch();
-  const { skills } = props.skills
-
 
   return (
     <TableContainer component={Paper}>

@@ -43,7 +43,6 @@ function renderTime(time) {
   let year = Number(time.slice(0,4));
   let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
   return <p>{displayTime}</p>
-  
 }
 
 function Row(props) {

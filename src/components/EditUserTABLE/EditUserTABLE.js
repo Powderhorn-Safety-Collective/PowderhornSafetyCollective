@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import Button from "react-bootstrap/button";
 
 const useRowStyles = makeStyles({
   root: {
@@ -24,14 +25,26 @@ const useRowStyles = makeStyles({
   },
 });
 
+
 function Row(props) {
   const { row } = props;
+  const { skills } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  
+  function skillsFunction(skills, row) {
+    let array = '';
+    for(let i = 0; i < skills.length; i++) {
+      if(skills[i].user_id === row.id) {
+        array = array += ` •` + skills[i].description + '\n';
+      }
+    }
+    return array;
+  }
 
-function handleClick(row) {
+  function handleClick(row) {
     console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
@@ -68,6 +81,7 @@ function handleClick(row) {
                     {/* <TableCell>Internal Notes</TableCell> */}
                     <TableCell>Is the user on patrol?</TableCell>
                     <TableCell>Is the user on call?</TableCell>
+                    <TableCell >User Skills</TableCell>
                     <TableCell>Edit User</TableCell>
                   </TableRow>
                 </TableHead>
@@ -90,9 +104,14 @@ function handleClick(row) {
                           </p>
                       </TableCell>
                       <TableCell>
-                        <p onClick={() => handleClick(row)}>
-                            Click Me!
-                        </p>
+                          <p>
+                              {skillsFunction(skills, row)}
+                          </p>
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => handleClick(row)}>
+                            Edit User
+                        </Button>
                     </TableCell>
                     </TableRow>
                 </TableBody>
@@ -107,6 +126,9 @@ function handleClick(row) {
 
 export default function EditUserTABLE(props) {
   const dispatch = useDispatch();
+  const { skills } = props.skills
+
+
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
@@ -123,8 +145,8 @@ export default function EditUserTABLE(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.user.map((props) => (
-            <Row key={props.id} row={props} />
+          {props.user.map((user) => (
+            <Row key={user.id} row={user} skills={props.skills}/>
           ))}
         </TableBody>
       </Table>

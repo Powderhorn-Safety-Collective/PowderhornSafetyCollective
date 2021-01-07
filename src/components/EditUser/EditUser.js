@@ -62,7 +62,7 @@ class EditUser extends Component {
     return (
       <div>
         <h2 className="centerClass">User Table</h2>
-            <EditUserTABLE className="blackdrop" user={this.props.store.allUsersReducer}/>
+            <EditUserTABLE className="blackdrop" user={this.props.store.allUsersReducer} skills={this.props.store.userSkillsReducer}/>
       </div>
     );
   }

@@ -4,9 +4,7 @@ body,
   height: 100%;
   background: #bbb;
 }
-h2, h3 {
-  color: white;
-}
+
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

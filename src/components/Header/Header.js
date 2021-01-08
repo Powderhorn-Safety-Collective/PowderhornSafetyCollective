@@ -146,7 +146,6 @@ class Header extends Component {
           {/* on patrol / on call toggles */}
           {this.props.store.user.role > 1 &&
             <div className="toggleForm">
-              <Col lg={6} xs={12}>
               <label for="onPatrolToggle">On Patrol:</label>
               {this.props.store.user.on_patrol !== undefined &&
                 <ToggleSwitch 
@@ -156,9 +155,7 @@ class Header extends Component {
                   name="onPatrolToggle"
                 />
               }
-              </Col>
 
-              <Col lg={6} xs={12}>
               <label for="onCallToggle">On Call:</label>
               {this.props.store.user.on_call !== undefined &&
                 <ToggleSwitch 
@@ -168,7 +165,6 @@ class Header extends Component {
                   name="onCallToggle"
                 />
               }
-              </Col>
 
             </div>
             

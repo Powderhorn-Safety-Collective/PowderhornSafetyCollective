@@ -11,3 +11,11 @@
 .active {
   float: right;
 }
+
+select#assignClaim {
+  word-wrap: normal;
+  padding: 3px;
+  margin-top: 10px;
+  -webkit-box-shadow: 1px 1px 6px 2px #aca9a9 !important; 
+  box-shadow: 1px 1px 6px 2px #aca9a9 !important;
+}

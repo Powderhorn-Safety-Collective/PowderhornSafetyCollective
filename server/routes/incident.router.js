@@ -15,7 +15,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     ORDER BY "time_submitted" DESC;`
     pool.query(queryText)
     .then((results) => {res.send(results.rows)
-    console.log('results.rows', results.rows);
     })
     .catch((error) => {
       console.log(error);
@@ -99,8 +98,6 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   or incident_followers.user_id = $1;`;
 
   pool.query(queryText, [req.params.id]).then((result) => {
-    console.log('results.rows', result.rows);
-    
     res.send(result.rows);
   }).catch((error) => {
     console.log('error in get personal incidents route', error);
@@ -165,15 +162,15 @@ router.put('/active', rejectUnauthenticated, (req, res) => {
 // should be displayed on the public incident display
 router.put('/publicPost', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
-    console.log('in public post route with req.body', req.body);
+    console.log('in public post route with req.body', req.body.view_publicly);
     const queryText=`update incidents
     set username_public = $1,
     timedate_public = $2,
     location_public = $3,
     type_public = $4,
     user_notes_public = $5,
-    view_publicly = true
-    where id = $6;
+    view_publicly = $6
+    where id = $7;
     `;
 
     pool.query(queryText, [
@@ -182,6 +179,7 @@ router.put('/publicPost', rejectUnauthenticated, (req, res) => {
       req.body.location_public,
       req.body.type_public,
       req.body.user_notes_public,
+      req.body.view_publicly,
       req.body.id
     ]).then((result) => {
       res.sendStatus(200);

@@ -141,7 +141,7 @@ class Header extends Component {
             }
             </div>
         </div>
-        <Row className="toggleBtns">
+        <Row>
         <div className="headerBtns">
           {/* on patrol / on call toggles */}
           {this.props.store.user.role > 1 &&
@@ -180,7 +180,9 @@ class Header extends Component {
           {/* <div id="greeting"> */}
               <p>Hello, {this.props.store.user.first_name}!</p>
             <Row>
-            <Col lg={6} xs={6}><Nav/></Col>
+              <Col lg={6} xs={6}>
+                <Nav/>
+              </Col>
             <Col lg = {6} xs={6}><Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button></Col></Row>
 
       </Col>

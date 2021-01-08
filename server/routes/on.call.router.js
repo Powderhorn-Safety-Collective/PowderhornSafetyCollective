@@ -4,8 +4,9 @@ const router = express.Router();
 
 // route to get count of on_patrol = true from user table
 router.get('/', (req, res) => {
-  let queryText = `SELECT * from "user"
-  WHERE "on_call" = true;`;
+  let queryText = `select id, username, first_name, last_name, address, 
+  email, phone, adult, role, on_patrol, on_call from "user"
+  where on_call = true;`;
   pool.query(queryText).then((result) => {
     res.send(result.rows)
   }).catch((error) => {

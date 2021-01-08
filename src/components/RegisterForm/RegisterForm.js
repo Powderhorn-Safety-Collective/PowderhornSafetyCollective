@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import PhoneInput from 'react-phone-number-input/input';
 
 // TODO add all DB columns to the payload to clear not-null violation
 class RegisterForm extends Component {
@@ -17,7 +18,7 @@ class RegisterForm extends Component {
     adult: '',
     terms: '',
     role: 1,
-    specialIncident: this.props.store.specialIncidentReducer
+    specialIncident: this.props.store.specialIncidentReducer,
   };
 
   // function to register new user
@@ -40,6 +41,14 @@ class RegisterForm extends Component {
       [propertyName]: event.target.value,
     });
   };
+
+  // This function saves the phone number entered into the box
+  setPhoneValue = (phoneNumber) => {
+    console.log(phoneNumber);
+    this.setState({
+      phone: phoneNumber
+    })
+  }
 
   render() {
     return (
@@ -107,13 +116,17 @@ class RegisterForm extends Component {
             />
           </div>
           <div>
-            <input 
-              type="text" 
-              placeholder="Phone*" 
+            <PhoneInput 
+              name="phoneInput"
+              country="US"
+              placeholder="Cell Phone*"
               value={this.state.phone}
+              onChange={this.setPhoneValue}
               required
-              onChange={this.handleInputChangeFor('phone')}
+              maxlength="14"
             />
+          <br/>
+          <label htmlFor="phoneInput">Normal text rates may apply.</label>
           </div>
             {/* input to verify age */}
           <div>

@@ -182,7 +182,6 @@ class EditUserModal extends Component {
       <div>
         {this.props.store.editUserReducer ? 
           <div className="editModal">
-            {JSON.stringify(this.state)}
             <p>Id: {this.state.id}</p>
             <p>Username: {this.state.username}</p>
             <label>First Name:</label>

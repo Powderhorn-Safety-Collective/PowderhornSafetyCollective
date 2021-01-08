@@ -19,7 +19,6 @@ class RegisterForm extends Component {
     terms: '',
     role: 1,
     specialIncident: this.props.store.specialIncidentReducer,
-    value: ''
   };
 
   // function to register new user

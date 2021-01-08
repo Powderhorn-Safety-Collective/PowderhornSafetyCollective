@@ -25,7 +25,6 @@ const useRowStyles = makeStyles({
     },
   },
 });
-// function formatPhoneNumber = formatPhoneNumber();
 
 function Row(props) {
   const { row } = props;

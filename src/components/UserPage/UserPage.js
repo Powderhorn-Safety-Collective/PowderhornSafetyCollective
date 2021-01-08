@@ -59,16 +59,14 @@ class UserPage extends Component {
               </a>
             </Row>
             <Row className="box">
-              <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org/" rel="noopener noreferrer">
-                <h2>
-                  PSC Contact Info
-                </h2>
-              </a>
+              <h2>
+              <a className="emailLink" href='mailto: pohosafetycollective@gmail.com' >Contact Us</a>
+              </h2>
             </Row>
             <Row className="box">
               <h2>
               Sign Up for the PSC Newsletter
-              <Mailchimp
+              <Mailchimp className="mailChimpInput"
               action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
               fields={[
                 {

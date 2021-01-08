@@ -119,7 +119,7 @@ class CommunityPage extends Component {
 {/* These Are the incidents */}
         <Row>
           <Col></Col>
-          <Col md={8} lg={6} className="communityColumnCenter">
+          <Col md={8} lg={6}    className="communityColumnCenter">
             <Row className="box scrollable" >
               <h2>
                 Incidents

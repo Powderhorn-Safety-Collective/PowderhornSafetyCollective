@@ -44,12 +44,12 @@
   width: 70%;
   margin: auto;
   justify-content: center;
-  -webkit-box-shadow: 2px 2px 6px 2px #282828 !important; 
+  /* -webkit-box-shadow: 2px 2px 6px 2px #282828 !important; 
   box-shadow: 2px 2px 6px 2px #3b3b3b !important;
   border-radius: 5px;
   margin: 25px;
   background-color:#06989d;
-  color: white;
+  color: white; */
 
 }
 #collapseBox {

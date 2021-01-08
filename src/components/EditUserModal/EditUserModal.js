@@ -32,9 +32,9 @@ class EditUserModal extends Component {
     const thisUserSkillArray = [];
     this.props.store.userSkillsReducer.map((skill) => {
       if(skill.user_id === this.props.store.editUserReducer.id) {
-        thisUserSkillArray.push({id: skill.skill_id, description: skill.description})
+        thisUserSkillArray.push({id: skill.skill_id, description: skill.description});
       }
-    })
+    });
     if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
       return(
         <div  className="form-check">
@@ -52,7 +52,7 @@ class EditUserModal extends Component {
             {skillItem.description}
           </label>
         </div>
-      )
+      );
     } else {
       return (
         <div  className="form-check">
@@ -69,16 +69,15 @@ class EditUserModal extends Component {
             {skillItem.description}
           </label>
         </div>
-      )
+      );
     }
   }
-
 
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
     this.setState( {
         [typeParam]: event.target.value
-    })
+    });
   }
 
   // This function checks to make sure there is text in the required inputs
@@ -147,19 +146,19 @@ class EditUserModal extends Component {
         this.setState({
           on_patrol: true,
           on_call: false
-        })
+        });
       }
       else if (event.target.value == 2) {
         this.setState({
           on_patrol: false,
           on_call: true
-        })
+        });
       }
       else if (event.target.value == 3) {
         this.setState({
           on_patrol: false,
           on_call: false
-        })
+        });
       }
     }
     // if either of the radios besides 'on patrol' / 'on call'
@@ -235,7 +234,6 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
-
             {/* On Patrol / On Call Section */}
             <label htmlFor="patrolRadios">Current Status</label>
             <div className="form-check" id="patrolRadios">
@@ -279,15 +277,13 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
-
             <label>User's Skills:</label>
             {/* Skills section */}
             <div>
               {this.props.store.allSkillsReducer.map((skill) => {
-                return this.renderSkills(skill)
+                return this.renderSkills(skill);
               })}
             </div>
-
             {/* Role Section */}
             <br/>
             <label>Role:</label>

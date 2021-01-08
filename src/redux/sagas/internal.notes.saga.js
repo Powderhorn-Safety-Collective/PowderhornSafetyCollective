@@ -1,7 +1,6 @@
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-
 // this function will add internal PSC Notes to the internal_notes table for a specific incident
 function* addNote(action) {
   try {
@@ -12,6 +11,7 @@ function* addNote(action) {
     console.log('error in add note incidentSaga', error);    
   }
 }
+
 // this function retrieves all notes from the internal Notes table for a given incident
 function* getNotes() {
   const response = yield axios.get('/api/notes');

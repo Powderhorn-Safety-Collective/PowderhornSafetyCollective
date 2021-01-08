@@ -113,7 +113,6 @@ function* editIncident(action) {
     }
   }
 
-  
   // This function toggles booleans for values that select which items are displayed in 
   // incident public postings
   function* updatePublicPost(action) {
@@ -326,8 +325,7 @@ function* makeMessageAssigned(action) {
   }
 }
 
-
-function* incidentSaga() {
+  function* incidentSaga() {
     yield takeLatest('GET_INCIDENTS', fetchIncidents); // command to retrieve all incident data from database
     yield takeLatest('POST_INCIDENT', postIncident); // command to post new incident to database
     yield takeEvery('GET_PUBLIC_INCIDENTS', fetchPublicIncidents);
@@ -340,9 +338,7 @@ function* incidentSaga() {
     yield takeEvery('GET_FOLLOWED_INCIDENTS', getFollowedIncidents);
     yield takeEvery('UPDATE_SPECIAL_INCIDENT', updateSpecial);
     yield takeEvery('GET_ACTIVE', fetchActive); // commmand to GET all active incidents
-
     yield takeEvery('FETCH_SEARCHED_INCIDENT', fetchSearchedIncident)
-
     // below are all the yields to sort incident table by column
     yield takeLatest("SORT_CLIENT", sortClient);
     yield takeLatest("SORT_TYPE", sortType);
@@ -354,14 +350,12 @@ function* incidentSaga() {
     yield takeLatest("SORT_RESPONDER", sortResponder);
     yield takeLatest("SORT_DUPLICATE", sortDuplicate);
     yield takeEvery('SORT_SUBMITTED_USER', sortSubmittedUser);
-
     yield takeLatest("SUBMIT_EDIT_INCIDENT", editIncident); // for edit of incidents
-
     yield takeLatest("EDIT_ACTIVE", editActiveStatus); // edit incident collapse table
     yield takeLatest("EDIT_PUBLIC", editPublicStatus); // edit incident collapse table
     yield takeLatest("EDIT_DUPLICATE", editDuplicateStatus); // edit incident collapse table
     yield takeEvery('GET_CLIENT', getClient);
     yield takeEvery('MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', makeMessageAssigned);
-}
+  }
 
 export default incidentSaga;

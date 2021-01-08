@@ -25,9 +25,8 @@ class InternalIncident extends Component {
     type_public: this.props.incident.type_public,
     user_notes_public: this.props.incident.user_notes_public,
     active_public: this.props.incident.active_public,
-    active: this.props.incident.active
+    active: this.props.incident.active,
   }
-
 
   // function to render time associated with incident
   renderTime = ( time) => {
@@ -54,7 +53,7 @@ class InternalIncident extends Component {
   handleChange = (event) => {
     this.setState({
       publicText: event.target.value
-    })
+    });
   }
 
   handlePublicTextSave = () => {
@@ -63,44 +62,33 @@ class InternalIncident extends Component {
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_DISPLAY_TEXT',
       payload: {text: this.state.publicText, id: this.props.incident.id}
-    })
+    });
   }
 
   // handleToggles takes in the toggle and decides what to do with it depending on
   // which switch it is
   handleToggle = (event) => {
-    console.log('event.target.name', event.target.name);
-    
-    if(event.target.name.slice(0,14) === 'usernameToggle') {
-        console.log('username toggle');
-        
+    if(event.target.name.slice(0,14) === 'usernameToggle') { 
       this.setState({
         username_public: !this.state.username_public
       });  
     }
-    else if (event.target.name.slice(0,14) === 'timedateToggle') {
-      console.log('timedate toggle');
-      
+    else if (event.target.name.slice(0,14) === 'timedateToggle') {    
       this.setState({
         timedate_public: !this.state.timedate_public
       });
     }
-    else if (event.target.name.slice(0,14) === 'locationToggle') {
-      console.log('location toggle');
-      
+    else if (event.target.name.slice(0,14) === 'locationToggle') { 
       this.setState({
         location_public: !this.state.location_public
       });
     }
-    else if (event.target.name.slice(0, 10) === 'typeToggle') {
-      console.log('type toggle');
-      
+    else if (event.target.name.slice(0, 10) === 'typeToggle') { 
       this.setState({
         type_public: !this.state.type_public
       });
     }
     else if (event.target.name.slice(0, 15) === 'userNotesToggle') {
-      console.log('usernotes toggle');
       this.setState({
         user_notes_public: !this.state.user_notes_public
       });
@@ -112,8 +100,6 @@ class InternalIncident extends Component {
 
   // this function will change the state of the 'active' boolean in the incidents table
   sendActiveStatus = () => {
-      console.log('switchtoggled');
-      
       this.props.dispatch({
           type: 'UPDATE_ACTIVE_STATUS',
           payload: {active: !this.props.incident.active,
@@ -122,12 +108,10 @@ class InternalIncident extends Component {
   }
 
   handlePostNotice = (incidentId) => {
-    console.log('post button clicked');
-    console.log('this.state in handlePostNotice', this.state);
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_POST',
       payload: {
-        view_publicly: true,
+        view_publicly: !this.props.incident.view_publicly,
         username_public: this.state.username_public,
         timedate_public: this.state.timedate_public,
         location_public: this.state.location_public,
@@ -143,13 +127,9 @@ class InternalIncident extends Component {
     const incidentFollowers = this.props.incidentFollowers;
     // check the incidentFollowers for the people following that incident, I hope
     for(let i = 0; i < incidentFollowers.length; i++) {
-      console.log('for', incidentFollowers[i].incident_id, incidentId);
-      
       if (incidentFollowers[i].incident_id === incidentId) {
-        console.log('################', incidentFollowers[i].phone);
         this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone}});
-      }
-      
+      }     
     }
   }
 
@@ -190,6 +170,7 @@ class InternalIncident extends Component {
     return (
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
+          {JSON.stringify(this.props.incident.view_publicly)}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
@@ -205,6 +186,10 @@ class InternalIncident extends Component {
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
+                {this.props.incident.duplicate_entry === true &&
+                <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
+                }
+                <h3></h3>
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
                 {/* Need to display name   */}
                 <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
@@ -316,13 +301,23 @@ class InternalIncident extends Component {
               <AssignClaimComponent incidentId={this.props.incident.id}/>
               <br/>
               <br/>
-              <Button
-                variant="success" 
-                onClick={() => this.handlePostNotice(this.props.incident.id)} 
-                className="btn"
-              >
-                Post Public Notice
-              </Button>
+              {this.props.incident.view_publicly === false ?
+                <Button
+                  variant="success" 
+                  onClick={() => this.handlePostNotice(this.props.incident.id)} 
+                  className="btn"
+                >
+                  Post Public Notice
+                </Button>
+              :
+                <Button
+                  variant="success" 
+                  onClick={() => this.handlePostNotice(this.props.incident.id)} 
+                  className="btn"
+                >
+                  Remove Public Notice
+                </Button>
+            }
               </div>
             </div>
           </Col>

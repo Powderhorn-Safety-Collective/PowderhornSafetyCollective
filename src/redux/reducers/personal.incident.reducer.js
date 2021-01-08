@@ -1,4 +1,3 @@
-
 // this reducer stores incidents submitted or followed by user
 const personalIncidentReducer = (state = [], action) => {
   switch (action.type) {

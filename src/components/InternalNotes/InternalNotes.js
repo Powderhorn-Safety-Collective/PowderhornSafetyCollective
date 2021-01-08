@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 
 class InternalNotes extends Component {
+
   state = {
     noteText: '',
     time_submitted: ''
@@ -12,8 +13,6 @@ class InternalNotes extends Component {
    // function to render time associated with incident
    renderTime = ( time) => {
     let timeHour = Number(time.slice(11,13));
-
-    
     let timeMorningEvening = 'a.m.';
     if (timeHour == 12) {
       timeMorningEvening = 'p.m.';
@@ -44,8 +43,6 @@ class InternalNotes extends Component {
   }
 
   handleSubmit = () => {
-    console.log('STATE', this.state);
-    
     this.props.dispatch({
       type: 'ADD_NOTE',
       payload: {noteText: this.state.noteText, time_submitted: this.state.time_submitted,
@@ -55,7 +52,6 @@ class InternalNotes extends Component {
       noteText: ''
     })
   }
-
 
   render (){
     return(
@@ -69,22 +65,20 @@ class InternalNotes extends Component {
         <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
         </div>
         <div>
-          <br/>
-          <h3>Internal Notes</h3>
-            <>
-              {this.props.store.internalNoteReducer.map((note) => {
-                return(
-                  note.incident_id === this.props.incidentId &&
-                    <div className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></div>
-                )
-              })}
-            </>
+        <br/>
+        <h3>Internal Notes</h3>
+        <>
+          {this.props.store.internalNoteReducer.map((note) => {
+            return(
+              note.incident_id === this.props.incidentId &&
+                <div className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></div>
+            );
+          })}
+        </>
         </div>
       </>
-    )
-
+    );
   }
 }
-
 
 export default connect(mapStoreToProps)(InternalNotes);

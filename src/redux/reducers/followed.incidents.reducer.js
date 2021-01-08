@@ -1,4 +1,3 @@
-
 // holds a list of all the skills in the skills table
 const followedIncidentsReducer = (state= [], action) => {
   switch (action.type) {

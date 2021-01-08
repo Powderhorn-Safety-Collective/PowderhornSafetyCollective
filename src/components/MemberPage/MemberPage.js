@@ -43,14 +43,12 @@ class MemberPage extends Component {
           {/* left stuff for incidents */}
           <Col md={9} xs={12} className="memberLeft">  
             <h1> All Incidents</h1>
-
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;
               return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
             })}
           </Col>{/* end of left section for incident cards */}
-
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}
@@ -80,6 +78,5 @@ class MemberPage extends Component {
     );
   }
 }
-
 
 export default connect(mapStoreToProps)(MemberPage);

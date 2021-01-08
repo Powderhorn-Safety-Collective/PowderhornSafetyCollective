@@ -25,7 +25,6 @@ const useRowStyles = makeStyles({
 
 function renderTime(time) {
   let timeHour = Number(time.slice(11,13));
-
   let timeMorningEvening = 'a.m.';
   if (timeHour == 12) {
     timeMorningEvening = 'p.m.';
@@ -43,7 +42,6 @@ function renderTime(time) {
   let year = Number(time.slice(0,4));
   let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
   return <p>{displayTime}</p>
-  
 }
 
 function Row(props) {
@@ -54,7 +52,6 @@ function Row(props) {
 
   return (
     <React.Fragment>
-        {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
         <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -161,7 +158,7 @@ export default function CollapsibleTable(props) {
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
-      <Table aria-label="collapsible table">
+      <Table className="blackdrop" aria-label="collapsible table">
         <TableHead>
           <TableRow className="dropdown">
             <TableCell />

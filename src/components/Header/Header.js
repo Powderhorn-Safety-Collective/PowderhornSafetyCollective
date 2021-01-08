@@ -179,7 +179,10 @@ class Header extends Component {
       <Col lg = {4} xs = {12}> 
           {/* <div id="greeting"> */}
               <p>Hello, {this.props.store.user.first_name}!</p>
-            <Row><Col lg={6} xs={6}><Nav/></Col>
+            <Row>
+              <Col lg={6} xs={6}>
+                <Nav/>
+              </Col>
             <Col lg = {6} xs={6}><Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button></Col></Row>
 
       </Col>

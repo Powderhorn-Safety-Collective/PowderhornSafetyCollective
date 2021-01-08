@@ -40,10 +40,9 @@
 }
 
 .dropbtn-nav {
-  background-color: #fdf761;
+  background-color: #f8f8f8;
   color: black;
   font-size: 16px;
-  padding: 10px;
   border: none;
   cursor: pointer;
   float:left;

@@ -34,7 +34,7 @@ class IncidentSearch extends Component {
 
   render() {
     return (
-      <form id="searchNum" className="box">
+      <form id="searchNum">
         <h2>Search for an Incident</h2>
         <div className="box">
           <label htmlFor="searchNum">

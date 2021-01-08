@@ -39,59 +39,35 @@ class UserPage extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          {/* left column with community links */}
-          <Col lg={3} className="userModule">
-          <Row className="box">
-              {/* we can put whatever site they want here later */}
-              <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+        <Row id="topBoxes">
+          {/* This div has the boxes at the top of the page */}
+            <div className="box">
+              <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org" rel="noopener noreferrer">
                 <h2>
                   Community Resources
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
-              {/* we will change link later */}
+            </div>
+            <div className="box">
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Events
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
+            </div>
+            <div className="box">
               <h2>
-              <a className="emailLink" href='mailto: pohosafetycollective@gmail.com' >Contact Us</a>
+                <a className="emailLink" href='mailto: pohosafetycollective@gmail.com'>Contact Us</a>
               </h2>
-            </Row>
-            <Row className="box">
+            </div>
+        </Row>
+{/* these Are the incidents */}
+          <Row>
+            <Col></Col>
+          <Col md={8} lg={6} 
+            className="userModule">
+            <Row className="box scrollable">
               <h2>
-              Sign Up for the PSC Newsletter
-              <Mailchimp className="mailChimpInput"
-              action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
-              fields={[
-                {
-                  name: 'EMAIL',
-                  placeholder: 'Email',
-                  type: 'email',
-                  required: true
-                }
-              ]}
-              messages = {
-                {
-                  sending: "Sending...",
-                  success: "Thank you for subscribing!",
-                  error: "An unexpected internal error has occurred, please try again.",
-                  empty: "You must type in a valid e-mail address.",
-                  duplicate: "This email has already been used to sign up!",
-                  button: "Subscribe"
-              }
-            }
-            /></h2>
-            </Row>
-          </Col>
-          {/* center column with publicly posted incidents */}
-          <Col lg={5} className="userModule">
-          <h2>
                 Incidents
               </h2>
                 {/* incident cards are mapped onto cards for display here */}
@@ -101,17 +77,46 @@ class UserPage extends Component {
                     <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
                   );
                 })}
+            </Row>
           </Col>
+          <Col></Col>
+
           {/* right column with incidents user submitted or is following */}
-          <Col lg={4} className="userModule">
-            <h3>Incidents that you submitted or are following will show up here</h3>
+          <Col md={6} lg={4} className="box scrollable" id="followedIncidentContainer">
+            <h3>Your Followed and Subitted Incidents</h3>
             {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {
               return(
                 <IncidentModule incident={personalIncident} key={index}/>
               );
             })}
           </Col>
+          <Col></Col>
         </Row>
+        <Row id="newsBox">
+              <h4> Sign Up for the PSC Newsletter
+              <Mailchimp 
+                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
+                fields={[
+                  {
+                    name: 'EMAIL',
+                    placeholder: 'Email',
+                    type: 'email',
+                    required: true,
+                  }
+                ]}
+                messages = {
+                  {
+                    sending: "Sending...",
+                    success: "Thank you for subscribing!",
+                    error: "An unexpected internal error has occurred, please try again.",
+                    empty: "You must type in a valid e-mail address.",
+                    duplicate: "This email has already been used to sign up!",
+                    button: "Subscribe"
+                  }
+                }
+                />
+              </h4>
+            </Row>
       </Container>
     );
   }

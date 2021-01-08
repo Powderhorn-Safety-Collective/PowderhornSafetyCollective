@@ -95,17 +95,15 @@ class CommunityPage extends Component {
     return (
       <Container fluid>
         <Row id="topBoxes">
-          {/* This div should have the left stuff */}
+          {/* This div has the boxes at the top of the page */}
             <div className="box">
-              {/* we can put whatever site they want here later */}
-              <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
+              <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org" rel="noopener noreferrer">
                 <h2>
                   Community Resources
                 </h2>
               </a>
             </div>
             <div className="box">
-              {/* we will change link later */}
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Events
@@ -118,15 +116,15 @@ class CommunityPage extends Component {
               </h2>
             </div>
           </Row>
-          {/* middle stuff / incident cards */}
+{/* These Are the incidents */}
         <Row>
           <Col></Col>
-          <Col md={8} lg={6} className="communityColumnCenter">
+          <Col md={8} lg={6}    className="communityColumnCenter">
             <Row className="box scrollable" >
               <h2>
                 Incidents
               </h2>
-                {/* incident cards are mapped onto cards for display here */}
+{/* incident cards are mapped onto cards for display here */}
                 {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
                     const followedIncidents = this.props.store.followedIncidentsReducer
                   return(
@@ -136,14 +134,14 @@ class CommunityPage extends Component {
             </Row>
           </Col>{/* end middle stuff */}
           <Col></Col>
-          {/* right column stuff / login and search */}
+{/* these items will usually display on the Right, login, search, etc */}
           
           <Col md={6} lg={4} className="communityColumnRight">
           {this.props.store.user.role ?
             <></>
             :
             <Row className="box">
-              {/* section to login */}
+{/* section to login */}
               <LoginForm/>
             </Row>
             }
@@ -178,6 +176,7 @@ class CommunityPage extends Component {
                   </div>
                 </Collapse>
             </Row>
+{/* end of login Column */}
             <Row className="box">
               {/* section to search for an incident */}
               <IncidentSearch/>
@@ -189,16 +188,15 @@ class CommunityPage extends Component {
               <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
               <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
               {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
-              {/* <Button onClick={() => this.contactRequest(this.props.store.searchIncidentReducer.id)}>Follow this Incident</Button> */}
               {this.renderContactRequest(this.props.store.searchIncidentReducer.id)}
             </div>
             }
-            {/* TODO add sweet alert for no-results */}
             {this.props.store.searchIncidentReducer === "" &&
               <p>No Incident with that ID was found, please try again.</p>
             }
             </Row>
-          </Col> {/* end right stuff */}
+          </Col> 
+          {/* end of search incident */}
           <Col></Col>
         </Row>
             <Row id="newsBox">

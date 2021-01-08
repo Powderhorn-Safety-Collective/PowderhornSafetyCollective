@@ -91,12 +91,13 @@ class ReportIncident extends Component {
       this.sendMessage();
       this.props.history.push('/');
     }
-    else if(this.state.register === true && this.state.follow_incident === false) {
+    else if(this.state.register === true) {
       this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
       this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
       swal(
-        `Welcome!`,
-        `Please input your information to register a new account.`, 
+        `${this.state.client_id}`,
+        `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+        On the next page, please input your information to register a new account.`, 
         {
           button: "Ok!",
       });
@@ -114,19 +115,7 @@ class ReportIncident extends Component {
       this.sendMessage();
       this.props.history.push('/');
     }
-    else if(this.state.register === true && this.state.follow_incident === true) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
-        `${this.state.client_id}`,
-        `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
-        On the next page, please input your information to register a new account.`, 
-        {
-          button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/registration');
-    }
-    }
+  }
 
   handleToggle = (event) => {
     if(event.target.name === 'followToggle') {
@@ -167,14 +156,25 @@ class ReportIncident extends Component {
           <p>Incident type: {this.state.type}</p>
           <p>Notes: {this.state.notes}</p>
         <br/>
-          <p>Would you like to receive updates on this incident?</p>
-          <ToggleSwitch toggleName="followToggle"
-          handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
-          />
-          <p>Register with PSC and see all of your submitted incidents in one place?</p>
-          <ToggleSwitch toggleName="registerToggle"
-          handleToggle={this.handleToggle} toggleOn={this.state.register}
-          />
+          {this.props.store.user.id ?
+            <>
+              <p>Would you like to receive text updates on this incident?</p>
+              <ToggleSwitch toggleName="followToggle"
+                handleToggle={this.handleToggle} toggleOn={this.state.follow_incident}
+              />
+            </>
+          :
+          <>
+            <p>Register with PSC and see all of your submitted incidents in one place?</p>
+            <ToggleSwitch toggleName="registerToggle"
+              handleToggle={this.handleToggle} toggleOn={this.state.register}
+            />
+            <br/>
+            <br/>
+            <p>To receive text updates for this incident, please register as a user.
+            Registered users may follow specific incidents to receive text updates.</p>
+          </>
+          }
         <br/>
         <br/>
           <Button className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>

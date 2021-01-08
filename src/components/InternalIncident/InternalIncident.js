@@ -164,7 +164,9 @@ class InternalIncident extends Component {
   }
 
   renderSubmittedUser = (submittedUserId) => {
-    let submittedUserData =  this.props.users.find(user => user.id === submittedUserId)
+    let submittedUserData =  this.props.users.find(user => user.id == submittedUserId)
+    console.log('submittedUserData', submittedUserData);
+    
     return( 
       <>
         <p>Submitted by: {submittedUserData.username}</p>
@@ -191,7 +193,7 @@ class InternalIncident extends Component {
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
-              {this.props.incident.submitted_user ?
+              {this.props.incident.submitted_user != null ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :
                 <p>

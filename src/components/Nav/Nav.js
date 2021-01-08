@@ -6,8 +6,7 @@ import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {useHistory} from 'react-router-dom';
 
-const Nav = (props) => {
-  
+  const Nav = (props) => {
   const history = useHistory();
 
   let loginLinkData = {
@@ -45,11 +44,11 @@ const Nav = (props) => {
     </div>
     </div>
     </>
-    )
+    );
   }
 
   return (
-<div className="dropdown-nav">
+    <div className="dropdown-nav">
     <button className="dropbtn-nav">Welcome to PSC!</button>
     <div className="dropdown-content-nav">
         <a><Link className="nav-link" to={loginLinkData.path}>
@@ -57,19 +56,14 @@ const Nav = (props) => {
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
-        </Link></a>
-       
-        {/* Always show this link since the about page is not protected */}
-        {/* Changed the route to be the future community page route */}
-
-        <a><Link className="nav-link"  to="/community">
-          Community Page
-        </Link></a>
-
-        {/* <Link className="nav-link" to="/history">Incident History</Link> */}
-
-        {/* <Link className="nav-link" to="/edit">Edit User</Link> */}
-
+          </Link></a>
+          {/* Always show this link since the about page is not protected */}
+          {/* Changed the route to be the future community page route */}
+          <a><Link className="nav-link"  to="/community">
+            Community Page
+          </Link></a>
+          {/* <Link className="nav-link" to="/history">Incident History</Link> */}
+          {/* <Link className="nav-link" to="/edit">Edit User</Link> */}
          {/* Show the link to the info page and the logout button if the user is logged in */}
          {props.store.user.id && (
           <>
@@ -83,7 +77,5 @@ const Nav = (props) => {
       </div>
   );
 };
-
-
 
 export default connect(mapStoreToProps)(Nav);

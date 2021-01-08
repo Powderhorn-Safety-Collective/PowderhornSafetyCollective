@@ -10,9 +10,7 @@ import { connect } from 'react-redux';
 
 // import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -22,9 +20,6 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CommunityPage from '../CommunityPage/CommunityPage';
 import MemberPage from '../MemberPage/MemberPage';
 import AdminPage from '../AdminPage/AdminPage';
-// import Nav from '../Nav/Nav';
-
-
 
 import Header from '../Header/Header.js';
 import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component to display incident table data

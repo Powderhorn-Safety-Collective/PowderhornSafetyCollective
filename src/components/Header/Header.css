@@ -4,8 +4,6 @@
   background-color: #06989d;
   overflow: hidden;
 
-
-
 }
 
 .titleContainer {
@@ -49,12 +47,8 @@
 }
 
 .patrolDisplay {
-  /* align-self: flex-end; */
   padding: 15px;
   text-align: center;
-  /* background-color: #fdf761; */
-  /* border-radius: 50%; */
-  /* margin: 45px; */
 
 }
 
@@ -66,4 +60,8 @@ label {
 .btn-warning {
 background-color: #fdf761 !important;
 border-color:#fdf761 !important
-}
+  padding: 35px;
+  text-align: right;
+  background-color: #fdf761;
+  border-radius: 50%;
+  }

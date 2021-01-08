@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import Button from "react-bootstrap/button";
 
 const useRowStyles = makeStyles({
   root: {
@@ -26,19 +27,29 @@ const useRowStyles = makeStyles({
 
 function Row(props) {
   const { row } = props;
+  const { skills } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  
+  function skillsFunction(skills, row) {
+    let array = '';
+    for(let i = 0; i < skills.length; i++) {
+      if(skills[i].user_id === row.id) {
+        array = array += ` •` + skills[i].description + '\n';
+      }
+    }
+    return (array);
+  }
 
-function handleClick(row) {
+  function handleClick(row) {
     console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
 }
   return (
     <React.Fragment>
-        {console.log('callDataMini', props)}
       <TableRow className={classes.root}>
         <TableCell className="dropdowndata">
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -55,7 +66,7 @@ function handleClick(row) {
         <TableCell className="dropdowndata" align="right">{row.phone}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -68,7 +79,8 @@ function handleClick(row) {
                     {/* <TableCell>Internal Notes</TableCell> */}
                     <TableCell>Is the user on patrol?</TableCell>
                     <TableCell>Is the user on call?</TableCell>
-                    <TableCell>Edit User</TableCell>
+                    <TableCell >User Skills</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -90,9 +102,14 @@ function handleClick(row) {
                           </p>
                       </TableCell>
                       <TableCell>
-                        <p onClick={() => handleClick(row)}>
-                            Click Me!
-                        </p>
+                          <p>
+                              {skillsFunction(skills, row)}
+                          </p>
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => handleClick(row)}>
+                            Edit User
+                        </Button>
                     </TableCell>
                     </TableRow>
                 </TableBody>
@@ -107,10 +124,11 @@ function handleClick(row) {
 
 export default function EditUserTABLE(props) {
   const dispatch = useDispatch();
+
   return (
     <TableContainer component={Paper}>
         {console.log('callData', props)}
-      <Table aria-label="collapsible table">
+      <Table  className="blackdrop" aria-label="collapsible table">
         <TableHead>
           <TableRow className="dropdown">
             <TableCell />
@@ -123,8 +141,8 @@ export default function EditUserTABLE(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.user.map((props) => (
-            <Row key={props.id} row={props} />
+          {props.user.map((user) => (
+            <Row key={user.id} row={user} skills={props.skills}/>
           ))}
         </TableBody>
       </Table>

@@ -6,6 +6,8 @@
     
 }
 
+
+
 .nav-link {
   float: left;
   color: black;
@@ -28,6 +30,13 @@
 .titleContainer {
   display: flex;
   justify-content: space-between;
+}
+/* .nav-right {
+  float: right;
+}
+} */
+.patrolDisplay {
+  text-align: right;
 }
 
 .dropbtn-nav {
@@ -53,7 +62,6 @@
   display: inline-block;
   background:fixed;
   justify-content: end;
-
 }
 
 .dropdown-content-nav {
@@ -66,6 +74,8 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background: #d2d2d2;
   padding-bottom: 15px;
+
+
 }
 
 .dropdown-content-nav a {
@@ -75,6 +85,9 @@
   display: block;
   background: #d2d2d2
 }
+
+/* .dropdown-content a:hover {background-color: #f1f1f1} */
+
 
 .dropdown-nav:hover .dropdown-content-nav {
   display: block;

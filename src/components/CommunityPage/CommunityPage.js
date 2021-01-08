@@ -11,18 +11,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Mailchimp from 'react-mailchimp-form'
 import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 import swal from 'sweetalert';
-
-
-
-
 
 // Community Page component
 // visible to everyone
 // contains organization info and links, a list of incidents, and
 // a section for login and a ection to search for an incident
 class CommunityPage extends Component {
+  
   state = {
+    aboutOpen: false,
+    missionOpen: false,
   };
 
   renderTime = (time) => {
@@ -55,7 +55,6 @@ class CommunityPage extends Component {
   getFollowedIncidentIds = () => {
     console.log('in personal incident ids');
     this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
-    
   }
 
   // function to fetch all incident data for public view
@@ -71,7 +70,6 @@ class CommunityPage extends Component {
         return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
       }
       else {
-
         return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>
       }
     }
@@ -92,61 +90,38 @@ class CommunityPage extends Component {
     this.props.dispatch({type: 'UNFOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
   }
 
+
   render() {
     return (
       <Container fluid>
-        <Row>
+        <Row id="topBoxes">
           {/* This div should have the left stuff */}
-          <Col md={6} lg={4}>
-            <Row className="box">
+            <div className="box">
               {/* we can put whatever site they want here later */}
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Resources
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
+            </div>
+            <div className="box">
               {/* we will change link later */}
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Events
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
+            </div>
+            <div className="box">
               <h2>
-                PSC Contact Info
+                <a className="emailLink" href='mailto: pohosafetycollective@gmail.com'>Contact Us</a>
               </h2>
-            </Row>
-            <Row className="box">
-              <h2> Sign Up for the PSC Newsletter
-              <Mailchimp
-                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
-                fields={[
-                  {
-                    name: 'EMAIL',
-                    placeholder: 'Email',
-                    type: 'email',
-                    required: true
-                  }
-                ]}
-                messages = {
-                  {
-                    sending: "Sending...",
-                    success: "Thank you for subscribing!",
-                    error: "An unexpected internal error has occurred, please try again.",
-                    empty: "You must type in a valid e-mail address.",
-                    duplicate: "This email has already been used to sign up!",
-                    button: "Subscribe"
-                  }
-                }
-                />
-              </h2>
-            </Row>
-          </Col> {/* end left stuff */}
+            </div>
+          </Row>
           {/* middle stuff / incident cards */}
-          <Col md={6} lg={4}>
+        <Row>
+          <Col></Col>
+          <Col md={8} lg={6} className="communityColumnCenter">
             <Row className="box scrollable" >
               <h2>
                 Incidents
@@ -160,8 +135,10 @@ class CommunityPage extends Component {
                 })}
             </Row>
           </Col>{/* end middle stuff */}
+          <Col></Col>
           {/* right column stuff / login and search */}
-          <Col md={6} lg={4}>
+          
+          <Col md={6} lg={4} className="communityColumnRight">
           {this.props.store.user.role ?
             <></>
             :
@@ -170,22 +147,38 @@ class CommunityPage extends Component {
               <LoginForm/>
             </Row>
             }
-            <Row className="box">
-              <h2>
-                About Us
-              </h2>
-              <div className="white">
-              <p>The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
-                We are neighbors providing support to the community with compassion and care in mind. 
-                As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.</p>
-              </div>
+            <Row className="box" id="collapseBox">
+              <Button
+                onClick={()=> this.setState({aboutOpen: !this.state.aboutOpen})}
+                aria-controls="collapseAbout"
+                aria-expanded={this.state.aboutOpen}
+                className="collapseBtn"
+              >About Us</Button>
+                <Collapse in={this.state.aboutOpen}>
+                  <div id="aboutBody" className="white">
+                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
+                    We are neighbors providing support to the community with compassion and care in mind. 
+                    As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.
+                  </div>
+                </Collapse>
+                <Button
+                  onClick={()=> this.setState({missionOpen: !this.state.missionOpen})}
+                  aria-controls="collapseAbout"
+                  aria-expanded={this.state.missionOpen}
+                  className="collapseBtn"
+                >Mission</Button>
+                <Collapse in={this.state.missionOpen}>
+                  <div id="missionBody" className="white">
+                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+                  </div>
+                </Collapse>
             </Row>
             <Row className="box">
               {/* section to search for an incident */}
               <IncidentSearch/>
               {/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
             {this.props.store.searchIncidentReducer.client_id &&
-            <div>
+            <div className="white">
               <p>Incident ID: {this.props.store.searchIncidentReducer.client_id}</p>
               <p>Incident Type: {this.props.store.searchIncidentReducer.type}</p>
               <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
@@ -201,7 +194,33 @@ class CommunityPage extends Component {
             }
             </Row>
           </Col> {/* end right stuff */}
-        </Row> 
+          <Col></Col>
+        </Row>
+            <Row id="newsBox">
+              <h2> Sign Up for the PSC Newsletter
+              <Mailchimp 
+                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
+                fields={[
+                  {
+                    name: 'EMAIL',
+                    placeholder: 'Email',
+                    type: 'email',
+                    required: true,
+                  }
+                ]}
+                messages = {
+                  {
+                    sending: "Sending...",
+                    success: "Thank you for subscribing!",
+                    error: "An unexpected internal error has occurred, please try again.",
+                    empty: "You must type in a valid e-mail address.",
+                    duplicate: "This email has already been used to sign up!",
+                    button: "Subscribe"
+                  }
+                }
+                />
+              </h2>
+            </Row>
       </Container>
     );
   }

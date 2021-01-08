@@ -1,5 +1,3 @@
-
-
 const incidentFollowersReducer = (state= [], action) => {
   switch (action.type) {
     case 'SET_FOLLOWERS_FOR_INCIDENTS':

@@ -17,11 +17,11 @@ class IncidentSearch extends Component {
     this.props.dispatch({
       type: 'FETCH_SEARCHED_INCIDENT',
       payload: this.state
-    }) 
+    }) ;
     document.getElementById('searchNum').reset();
     this.setState({
       searchNumber: 0
-    })
+    });
   }; // end 
 
   // handle change function for search input box
@@ -31,17 +31,12 @@ class IncidentSearch extends Component {
     });
   };
 
-  noResults = () => {
-    console.log('There are no results');
-    // TODO ADD NO RESULTS ALERT
-  }
-
 
   render() {
     return (
       <form id="searchNum">
         <h2>Search for an Incident</h2>
-        <div>
+        <div className="box">
           <label htmlFor="searchNum">
             Enter the 6 Digit Incident ID:
           </label>
@@ -49,8 +44,6 @@ class IncidentSearch extends Component {
             type="text"
             placeholder="######"
             name="searchNum"
-            // required
-            // value={this.state.searchNumber}
             onChange={(event) => this.handleInputChangeFor(event)}
           />
         </div>

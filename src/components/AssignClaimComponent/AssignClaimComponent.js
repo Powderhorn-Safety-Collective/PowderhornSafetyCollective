@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 
 class AssignClaimComponent extends Component {
+
   state= {
     assigning: {
       assigned: 0,
@@ -11,24 +12,26 @@ class AssignClaimComponent extends Component {
     },
     activeMemArray: []
   }
+
   componentDidMount = () => {
-    this.populateArray()
+    this.populateArray();
   }
+  
   // sets local state to an array with all patrolling or oncall members
   populateArray = () => {
     let tempArray = []
     if(this.props.store.patrolReducer !== null) {
       this.props.store.patrolReducer.map((person) => {
       tempArray.push(person)
-      })
+      });
     }
     this.props.store.onCallReducer.map((oCPerson) => {
       tempArray.push(oCPerson)
-    })
+    });
     this.setState ({
       ...this.state,
       activeMemArray: tempArray
-    })
+    });
   }
 
   // sets local state to selected PSC member and incident id
@@ -38,7 +41,7 @@ class AssignClaimComponent extends Component {
         assigned: event.target.value,
         incident: param
       }
-    })
+    });
   }
 
   // dispatches request to add assigned PSC member to the incident
@@ -69,7 +72,7 @@ class AssignClaimComponent extends Component {
           {this.state.activeMemArray.map((person) => {
             return(
               <option key={person.id} value={person.id}>{person.first_name}</option>
-            )
+            );
           })}
         </select>
       </>  

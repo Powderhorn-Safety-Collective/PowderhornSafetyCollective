@@ -104,16 +104,22 @@ class ReportIncident extends Component {
       this.sendMessage();
       this.props.history.push('/registration');
     }
-    else if(this.state.register === false && this.state.follow_incident === false) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
-        `Thank you!`,
-        `We will respond to your reported incident.`, 
+    else if(this.state.register === false) {
+      // if the user is registered and they choose not to follow the incident
+      if (this.props.store.user.id && this.state.follow_incident === false) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `Thank you!`,
+          `We will respond to your reported incident.`, 
         {
           button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/');
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+      else if (!this.props.store.user.id && this.state.register === true) {
+
+      }
     }
   }
 

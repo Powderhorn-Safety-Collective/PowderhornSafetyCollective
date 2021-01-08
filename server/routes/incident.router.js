@@ -247,7 +247,7 @@ router.put('/assign', (req, res) => {
   router.get('/search/:num', (req, res) => {
     let queryText = `SELECT active, client_id, id, location, location_public, notes, submitted_user,
     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
-    timedate_public, user_notes_public, username, username_public view_publicly FROM "incidents"
+    timedate_public, type, user_notes_public, username, username_public view_publicly FROM "incidents"
     WHERE "client_id" = '${req.params.num}';`;
     pool.query(queryText).then((result) => {
       res.send(result.rows[0])

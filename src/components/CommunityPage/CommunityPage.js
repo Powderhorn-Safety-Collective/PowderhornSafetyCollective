@@ -169,7 +169,12 @@ class CommunityPage extends Component {
                 >Mission</Button>
                 <Collapse in={this.state.missionOpen}>
                   <div id="missionBody" className="white">
-                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+                    <p>
+                      The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  
+                    </p>
+                    <p>
+                      El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+                    </p>              
                   </div>
                 </Collapse>
             </Row>
@@ -197,7 +202,7 @@ class CommunityPage extends Component {
           <Col></Col>
         </Row>
             <Row id="newsBox">
-              <h2> Sign Up for the PSC Newsletter
+              <h4> Sign Up for the PSC Newsletter
               <Mailchimp 
                 action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
                 fields={[
@@ -219,7 +224,7 @@ class CommunityPage extends Component {
                   }
                 }
                 />
-              </h2>
+              </h4>
             </Row>
       </Container>
     );

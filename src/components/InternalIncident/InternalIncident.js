@@ -183,6 +183,10 @@ class InternalIncident extends Component {
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
+                {this.props.incident.duplicate_entry === true &&
+                <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
+                }
+                <h3></h3>
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
                 {/* Need to display name   */}
                 <h4>This incident is assigned to: {this.props.incident.assigned}</h4>

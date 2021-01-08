@@ -20,6 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CommunityPage from '../CommunityPage/CommunityPage';
 import MemberPage from '../MemberPage/MemberPage';
 import AdminPage from '../AdminPage/AdminPage';
+
 import Header from '../Header/Header.js';
 import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component to display incident table data
 import EditUser from '../EditUser/EditUser'; // Component to display all user data in a table
@@ -51,8 +52,9 @@ class App extends Component {
     return (
       <Router>
         <div>
+
           <Header/>
-          {/* <Nav /> */}
+          {/* <Nav>/</Nav> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

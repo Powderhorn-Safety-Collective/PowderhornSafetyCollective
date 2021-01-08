@@ -29,7 +29,7 @@ class IncidentModule extends Component {
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     if (publicDisplayTime === true) {
-      return <p>{displayTime}</p>
+      return <p>Time Submitted: {displayTime}</p>
     }
   }
 
@@ -72,7 +72,7 @@ class IncidentModule extends Component {
           <p className="active">Inactive</p>
         }
         {/* this function gets called to display time submitted*/}
-        <p>Time Submitted: {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}</p>
+        {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
         {/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&
           <p>Location: {this.props.incident.location}</p>

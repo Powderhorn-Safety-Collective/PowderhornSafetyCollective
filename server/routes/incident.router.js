@@ -27,6 +27,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// router to edit the data in an incident (from the Admin page)
 router.put('/editIncident/:id', (req, res) => {
 
   if (Number(req.user.role) === 3) {
@@ -128,7 +129,7 @@ router.put('/publicText', rejectUnauthenticated, (req, res) => {
   }
 });
 
-// this route will update an incident with the submitted_user
+// this route will update an incident with the submitted_user id
 router.put('/specialIncident', (req, res) => {
   console.log('In SPECIAL INCIDENT', req.body.specialIncident, req.user.id);
   const queryText = `UPDATE "incidents" SET "submitted_user" = $1 WHERE "client_id" = $2;`;
@@ -233,31 +234,31 @@ router.put('/assign', (req, res) => {
   }
 })
 
-  // route to get count of all active incidents
-  router.get('/active', (req, res) => {
-    // query to count the number of active incidents
-    const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
-    pool.query(queryText)
-      .then((results) => res.send(results.rows))
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-      });
-  });
+// route to get count of all active incidents
+router.get('/active', (req, res) => {
+  // query to count the number of active incidents
+  const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
+  pool.query(queryText)
+    .then((results) => res.send(results.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
-  // get all incident data for searched incident
-  router.get('/search/:num', (req, res) => {
-    let queryText = `SELECT active, client_id, id, location, location_public, notes, submitted_user,
-    text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
-    timedate_public, user_notes_public, username, username_public view_publicly FROM "incidents"
-    WHERE "client_id" = '${req.params.num}';`;
-    pool.query(queryText).then((result) => {
-      res.send(result.rows[0])
-    }).catch((error) => {
-      console.log('error in get searched incident', error);
-      res.sendStatus(500)      
-    })
+// get all incident data for searched incident
+router.get('/search/:num', (req, res) => {
+  let queryText = `SELECT active, client_id, id, location, location_public, notes, submitted_user,
+  text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
+  timedate_public, user_notes_public, username, username_public view_publicly FROM "incidents"
+  WHERE "client_id" = '${req.params.num}';`;
+  pool.query(queryText).then((result) => {
+    res.send(result.rows[0])
+  }).catch((error) => {
+    console.log('error in get searched incident', error);
+    res.sendStatus(500)      
   })
+})
 
 // POST route for new incident
 router.post('/', (req, res) => {
@@ -368,6 +369,7 @@ router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// edits the the view_publicly column of the database
 router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
@@ -386,6 +388,7 @@ router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// edits adds duplicate label to an incident
 router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
@@ -404,13 +407,12 @@ router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
-router.get('/client_id/:client_id', (req,res) => {
-  console.log('client id', req.params.client_id);
-  const queryText = `select client_id from incidents where client_id = $1;`;
 
+// route to retrieve the client_id from a specific incident
+router.get('/client_id/:client_id', (req,res) => {
+  const queryText = `select client_id from incidents where client_id = $1;`;
   pool.query(queryText, [req.params.client_id]).then((response) => {
     console.log('response.data', response.rows);
-    
     res.send(response.rows);
   }).catch((error) => {
     console.log('error in get client id');
@@ -418,6 +420,7 @@ router.get('/client_id/:client_id', (req,res) => {
   });
 });
 
+// route to retrieve the logged-in user's followed incidents
 router.get('/followed', (req, res) => {
   const queryText = `select incident_id from incident_followers
   where user_id = $1;`;
@@ -431,6 +434,7 @@ router.get('/followed', (req, res) => {
   });
 });
 
+// route to add an incident to a user's followed incidents 
 router.post('/follow', (req, res) => {
   console.log('follow route with req.body', req.body);
   const queryText = `insert into incident_followers (incident_id, user_id)
@@ -444,6 +448,7 @@ router.post('/follow', (req, res) => {
   });
 });
 
+// removes an incident from the incidents_followers table
 router.delete('/follow/:incident_Id', (req, res) => {
   console.log('delete follow route with req.body', req.params);
   const queryText = `delete from incident_followers
@@ -457,6 +462,7 @@ router.delete('/follow/:incident_Id', (req, res) => {
   });
 });
 
+// retrieves a list of the people following a specific incident
 router.get('/followers', rejectUnauthenticated, (req, res) => {
   console.log('get followers route');
   const queryText = `select incident_id, "user".id as user_id, phone from "user"

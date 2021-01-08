@@ -1,4 +1,3 @@
-
 // this reducer stores history of all publlic incidents from all users
 const publicIncidentReducer = (state = [], action) => {
   switch (action.type) {

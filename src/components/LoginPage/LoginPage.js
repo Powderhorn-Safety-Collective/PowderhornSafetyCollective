@@ -9,7 +9,6 @@ class LoginPage extends Component {
     return (
       <div>
         <LoginForm />
-
         <center>
           <h4>New to PSC?</h4>
           <Button

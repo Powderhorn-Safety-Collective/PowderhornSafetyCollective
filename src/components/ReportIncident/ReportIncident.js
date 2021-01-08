@@ -8,125 +8,125 @@ import Button from 'react-bootstrap/Button';
 
 class ReportIncident extends Component {
 
-    state = {
-        showReport: false,
-        follow_incident: false,
-        register: false,
-        type: '',
-        notes: '',
-        location: '',
-        time_submitted: '',
-        client_id: Math.floor(Math.random() * 1010101),
-        client_id_ok: false
-    }
+  state = {
+      showReport: false,
+      follow_incident: false,
+      register: false,
+      type: '',
+      notes: '',
+      location: '',
+      time_submitted: '',
+      client_id: Math.floor(Math.random() * 1010101),
+      client_id_ok: false
+  }
 
-    componentDidMount = () => {
-      this.clock();
-      this.clientCheck();
-    }
+  componentDidMount = () => {
+    this.clock();
+    this.clientCheck();
+  }
 
-    clientCheck = () => {
-      // want to check to make sure client_id doesn't already exist 
-      // before assigning to new incident
-      // perform get request with new client_id to see if it is associated
-      // with any of the incidents and make new one if it is
-      this.props.dispatch({type: 'GET_CLIENT', payload: this.state.client_id});
-      setTimeout(() => { 
-        console.log('this.props.store.clientIdReducer', this.props.store.clientIdReducer);
-        // if the client_id is not in the database yet, success
-        if (this.props.store.clientIdReducer == -1) {
-          this.setState({
-            client_id_ok: true
-          });
-        }
-        // if the client_id is in the database, and a new one needs to be created
-        else {
-          this.props.dispatch({type: 'UNSET_CLIENT_ID'});
-          this.setState({
-            client_id: Math.floor(Math.random() * 1010101),
-          })
-          this.clientCheck();
-        }
-      }, 500);
-    }
-
-    clock = () => {
-      setInterval(() => {
+  clientCheck = () => {
+    // want to check to make sure client_id doesn't already exist 
+    // before assigning to new incident
+    // perform get request with new client_id to see if it is associated
+    // with any of the incidents and make new one if it is
+    this.props.dispatch({type: 'GET_CLIENT', payload: this.state.client_id});
+    setTimeout(() => { 
+      console.log('this.props.store.clientIdReducer', this.props.store.clientIdReducer);
+      // if the client_id is not in the database yet, success
+      if (this.props.store.clientIdReducer == -1) {
         this.setState({
-          time_submitted : new Date().toLocaleString()
+          client_id_ok: true
+        });
+      }
+      // if the client_id is in the database, and a new one needs to be created
+      else {
+        this.props.dispatch({type: 'UNSET_CLIENT_ID'});
+        this.setState({
+          client_id: Math.floor(Math.random() * 1010101),
         })
-      }, 1000)
-    }
+        this.clientCheck();
+      }
+    }, 500);
+  }
 
-    handleChange = (event, typeParam) => {
-      console.log(event.target.value, typeParam);
+  clock = () => {
+    setInterval(() => {
+      this.setState({
+        time_submitted : new Date().toLocaleString()
+      })
+    }, 1000)
+  }
+
+  handleChange = (event, typeParam) => {
+    console.log(event.target.value, typeParam);
+    this.setState( {
+        [typeParam]: event.target.value
+    });
+  }
+
+  submitReport = () => {
+      console.log('clicked on report incident');
       this.setState( {
-          [typeParam]: event.target.value
+          showReport: true
       });
-    }
+  }
+  
+  editSubmission = () => {
+    this.setState( {
+      showReport: false
+    });
+  }
 
-    submitReport = () => {
-        console.log('clicked on report incident');
-        this.setState( {
-            showReport: true
-        });
-    }
-   
-    editSubmission = () => {
-      this.setState( {
-        showReport: false
+  // this long function checks to see if the user wants to register an account or follow the incident, or both
+  confirmIncident = () => {
+    if(this.state.register === false && this.state.follow_incident === true) {
+      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+      swal(
+        `${this.state.client_id}`,
+        `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+        {
+          button: "Ok!",
       });
+      this.sendMessage();
+      this.props.history.push('/');
     }
-
-    // this long function checks to see if the user wants to register an account or follow the incident, or both
-    confirmIncident = () => {
-      if(this.state.register === false && this.state.follow_incident === true) {
-        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-        swal(
-          `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
-          {
-            button: "Ok!",
-        });
-        this.sendMessage();
-        this.props.history.push('/');
-      }
-      else if(this.state.register === true && this.state.follow_incident === false) {
-        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-        this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
-        swal(
-          `Welcome!`,
-          `Please input your information to register a new account.`, 
-          {
-            button: "Ok!",
-        });
-        this.sendMessage();
-        this.props.history.push('/registration');
-      }
-      else if(this.state.register === false && this.state.follow_incident === false) {
-        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-        swal(
-          `Thank you!`,
-          `We will respond to your reported incident.`, 
-          {
-            button: "Ok!",
-        });
-        this.sendMessage();
-        this.props.history.push('/');
-      }
-      else if(this.state.register === true && this.state.follow_incident === true) {
-        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-        swal(
-          `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
-          On the next page, please input your information to register a new account.`, 
-          {
-            button: "Ok!",
-        });
-        this.sendMessage();
-        this.props.history.push('/registration');
-      }
-      }
+    else if(this.state.register === true && this.state.follow_incident === false) {
+      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+      this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
+      swal(
+        `Welcome!`,
+        `Please input your information to register a new account.`, 
+        {
+          button: "Ok!",
+      });
+      this.sendMessage();
+      this.props.history.push('/registration');
+    }
+    else if(this.state.register === false && this.state.follow_incident === false) {
+      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+      swal(
+        `Thank you!`,
+        `We will respond to your reported incident.`, 
+        {
+          button: "Ok!",
+      });
+      this.sendMessage();
+      this.props.history.push('/');
+    }
+    else if(this.state.register === true && this.state.follow_incident === true) {
+      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+      swal(
+        `${this.state.client_id}`,
+        `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+        On the next page, please input your information to register a new account.`, 
+        {
+          button: "Ok!",
+      });
+      this.sendMessage();
+      this.props.history.push('/registration');
+    }
+    }
 
   handleToggle = (event) => {
     if(event.target.name === 'followToggle') {
@@ -350,4 +350,3 @@ class ReportIncident extends Component {
 }
 
 export default connect(mapStoreToProps)(ReportIncident);
-

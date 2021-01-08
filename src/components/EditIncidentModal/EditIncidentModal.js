@@ -3,44 +3,25 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 
-
 class EditIncidentModal extends Component {
 
     state = {
-        id: '',
-        type: '',
-        notes: '',
-        location: '',
-        time_submitted: '',
-        view_publicly: '',
-        active: '',
-        responder_notes: '',
-        duplicate_entry: '',
-        client_id: ''
-      }
-
-      componentDidMount = () => {
-        this.setState( {
-          id: this.props.store.editIncidentReducer.id,
-          type: this.props.store.editIncidentReducer.type,
-          notes: this.props.store.editIncidentReducer.notes,
-          location: this.props.store.editIncidentReducer.location,
-          time_submitted: this.props.store.editIncidentReducer.time_submitted,
-          active: this.props.store.editIncidentReducer.active,
-          view_publicly: this.props.store.editIncidentReducer.view_publicly,
-          responder_notes: this.props.store.editIncidentReducer.notes,
-          duplicate_entry: this.props.store.editIncidentReducer.duplicate_entry,
-          client_id: this.props.store.editIncidentReducer.client_id
-        })
+      id: this.props.store.editIncidentReducer.id,
+      type: this.props.store.editIncidentReducer.type,
+      notes: this.props.store.editIncidentReducer.notes,
+      location: this.props.store.editIncidentReducer.location,
+      time_submitted: this.props.store.editIncidentReducer.time_submitted,
+      active: this.props.store.editIncidentReducer.active,
+      view_publicly: this.props.store.editIncidentReducer.view_publicly,
+      responder_notes: this.props.store.editIncidentReducer.notes,
+      duplicate_entry: this.props.store.editIncidentReducer.duplicate_entry,
+      client_id: this.props.store.editIncidentReducer.client_id,
       }
     
-
       handleChange = (event, typeParam) => {
-        console.log(event.target.value, typeParam);
-    
         this.setState( {
             [typeParam]: event.target.value
-        })
+        });
       }
 
       submitEdit = () => {
@@ -52,7 +33,6 @@ class EditIncidentModal extends Component {
         this.props.history.push('/history');
       }
     
-
   render() {
     return (
       <div>

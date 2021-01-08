@@ -20,8 +20,7 @@ class EditUserItem extends Component {
     }
     return array;
   }
-    
-  
+
   // This function creates the text that is rendered for each role in the table
   renderRole = (roleNumber) => {
     if (roleNumber === 1) {
@@ -53,8 +52,6 @@ class EditUserItem extends Component {
             <td>{this.renderRole(this.props.user.role)}</td>
             <td>{this.props.user.on_patrol.toString()}</td> {/* toString method to convert boolean to string */}
             <td>{this.props.user.on_call.toString()}</td> {/* toString method to convert boolean to string */}
-
-            {/* trash can row to delete user? */}
             <td className="edit" onClick={() => this.editUser(this.props.user)}><span role="img" aria-labelledby="cute pencil">✏️</span></td>
             <td className="trash"><span role="img" aria-labelledby="trash bin">🗑️ </span></td>
         </tr>

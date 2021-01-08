@@ -8,7 +8,6 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 import Button from "react-bootstrap/Button";
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-
 class Header extends Component {
 
   state = {

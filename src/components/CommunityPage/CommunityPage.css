@@ -25,6 +25,10 @@
   padding: 5px;
 }
 
-.mailChimpInput, input {
+/* .mailChimpInput.input {
   width: 250px;
+} */
+
+.collapseBtn {
+  margin: 5px;
 }

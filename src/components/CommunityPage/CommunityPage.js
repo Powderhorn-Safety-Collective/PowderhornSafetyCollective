@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Mailchimp from 'react-mailchimp-form'
 import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 import swal from 'sweetalert';
 
 
@@ -23,6 +24,8 @@ import swal from 'sweetalert';
 // a section for login and a ection to search for an incident
 class CommunityPage extends Component {
   state = {
+    aboutOpen: false,
+    missionOpen: false,
   };
 
   renderTime = (time) => {
@@ -91,6 +94,7 @@ class CommunityPage extends Component {
     console.log('unfollow incident id', incidentId);
     this.props.dispatch({type: 'UNFOLLOW_INCIDENT', payload: {incident_Id: incidentId}});
   }
+
 
   render() {
     return (
@@ -171,15 +175,40 @@ class CommunityPage extends Component {
             </Row>
             }
             <Row className="box">
-              <h2>
-                About Us
-              </h2>
-              <div className="white">
+              <Button
+                onClick={()=> this.setState({aboutOpen: !this.state.aboutOpen})}
+                aria-controls="collapseAbout"
+                aria-expanded={this.state.aboutOpen}
+                className="collapseBtn"
+              >About Us</Button>
+                <Collapse in={this.state.aboutOpen}>
+                  <div id="aboutBody" className="white">
+                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
+                    We are neighbors providing support to the community with compassion and care in mind. 
+                    As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.
+                  </div>
+                </Collapse>
+                <Button
+                  onClick={()=> this.setState({missionOpen: !this.state.missionOpen})}
+                  aria-controls="collapseAbout"
+                  aria-expanded={this.state.missionOpen}
+                  className="collapseBtn"
+                >Mission</Button>
+                <Collapse in={this.state.missionOpen}>
+                  <div id="missionBody" className="white">
+                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+                  </div>
+                </Collapse>
+            </Row>
+              {/* <div className="white">
               <p>The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
                 We are neighbors providing support to the community with compassion and care in mind. 
                 As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.</p>
               </div>
-            </Row>
+              <h2>Mission Statement</h2>
+              <div className="white">
+              The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+              </div> */}
             <Row className="box">
               {/* section to search for an incident */}
               <IncidentSearch/>

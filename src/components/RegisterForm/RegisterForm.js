@@ -176,8 +176,9 @@ class RegisterForm extends Component {
               id="volunteer" 
               name="volunteer"
               value= '0' 
-              onChange={this.handleInputChangeFor('role')}/>
-            <label htmlFor="role">I would like to learn more about how to volunteer</label>
+              onChange={this.handleInputChangeFor('role')}
+              />
+            <label htmlFor="volunteer" id="volLabel">I would like to learn more <br/>about how to volunteer</label>
           </div>
         </div>
         <div>

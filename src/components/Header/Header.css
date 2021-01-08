@@ -58,13 +58,12 @@
 
 }
 
-.greeting {
-  padding: 5px;
-
-
-}
-
 label {
   display: inline-block;
   margin: .5rem;
+}
+
+.btn-warning {
+background-color: #fdf761 !important;
+border-color:#fdf761 !important
 }

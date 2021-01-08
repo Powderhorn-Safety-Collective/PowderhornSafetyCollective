@@ -7,7 +7,9 @@ import Nav from '../Nav/Nav';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 import Button from "react-bootstrap/Button";
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class Header extends Component {
 
@@ -99,48 +101,52 @@ class Header extends Component {
   
   render() {
     return ( 
-      <div className="header">
-        <div className="titleContainer">
-          {/* <Link to="/home">
-            <img src="/logo.png" alt="PSC Logo" height="100px"/>
-          </Link> */}
-          <div id="greeting">
-          <div className="nav-bar-style">
-            <p>Hello, {this.props.store.user.first_name}!</p>
-          <Nav/>
-          </div>
-          </div>
+      <Container fluid>
+        <Row className="titleContainer">
+      {/* <div className="header"> */}
+        {/* <div className="titleContainer"> */}
+        <Col lg = {4} xs={12} >
+          <Link to="/community">
+            <img src="/logo.png" alt="PSC Logo"/>
+          </Link>
+        </Col>
+
+          {/* </div> */}
+          {/* </div> */}
+        <Col lg ={4} xs={12}>
           <div className="patrolDisplay">
             {Number(this.props.store.patrolReducer.length) === 1 && 
-              <h3> {this.props.store.patrolReducer.length} person is on patrol</h3>
+              <h5> {this.props.store.patrolReducer.length} person is on patrol</h5>
             }
             {Number(this.props.store.patrolReducer.length) === 0 &&
-              <h3>No One is on Patrol</h3>
+              <h5>No One is on Patrol</h5>
               }
             {Number(this.props.store.patrolReducer.length) > 1 &&
-              <h3>{this.props.store.patrolReducer.length} people are on patrol</h3>
+              <h5>{this.props.store.patrolReducer.length} people are on patrol</h5>
             }
             {Number(this.props.store.onCallReducer.length) === 1 && 
-              <h3>{this.props.store.onCallReducer.length} person is on call</h3>
+              <h5>{this.props.store.onCallReducer.length} person is on call</h5>
             }
             {Number(this.props.store.onCallReducer.length) === 0 && 
-              <h3>No One is On Call</h3>
+              <h5>No One is On Call</h5>
             }
             {Number(this.props.store.onCallReducer.length) > 1 && 
-              <h3>{this.props.store.onCallReducer.length} people are on call</h3>
+              <h5>{this.props.store.onCallReducer.length} people are on call</h5>
             }
             <div className="incidents" onClick={this.viewIncidents}>
             {this.props.store.user.role > 1 ?
-              <h3> {this.props.store.activeIncidentReducer} active incidents</h3>
+              <h5> {this.props.store.activeIncidentReducer} active incidents</h5>
               :
-              <h3>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h3>
+              <h5>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h5>
             }
             </div>
         </div>
+        <Row>
         <div className="headerBtns">
           {/* on patrol / on call toggles */}
           {this.props.store.user.role > 1 &&
             <div className="toggleForm">
+              <Col lg={6} xs={12}>
               <label for="onPatrolToggle">On Patrol:</label>
               {this.props.store.user.on_patrol !== undefined &&
                 <ToggleSwitch 
@@ -150,6 +156,9 @@ class Header extends Component {
                   name="onPatrolToggle"
                 />
               }
+              </Col>
+
+              <Col lg={6} xs={12}>
               <label for="onCallToggle">On Call:</label>
               {this.props.store.user.on_call !== undefined &&
                 <ToggleSwitch 
@@ -159,12 +168,27 @@ class Header extends Component {
                   name="onCallToggle"
                 />
               }
+              </Col>
+
             </div>
+            
           }  
-          <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
         </div>
-        </div>
-      </div>
+        </Row>
+
+        {/* </div> */}
+      {/* // </div> */}
+      </Col>
+      
+      <Col lg = {4} xs = {12}> 
+          {/* <div id="greeting"> */}
+              <p>Hello, {this.props.store.user.first_name}!</p>
+            <Row><Col lg={6} xs={6}><Nav/></Col>
+            <Col lg = {6} xs={6}><Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button></Col></Row>
+
+      </Col>
+      </Row>
+      </Container>
     )
   }
 }

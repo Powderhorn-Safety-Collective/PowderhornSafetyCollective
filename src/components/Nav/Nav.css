@@ -41,7 +41,7 @@
 }
 
 .dropdown-nav {
-  position: absolute;
+  position: relative;
   display: inline-block;
   background:fixed;
   justify-content: end;

@@ -3,19 +3,19 @@
   padding: 5px;
   background-color: #06989d;
   overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  align-self: flex-end;
+
 
 
 }
 
 .titleContainer {
   
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   align-self: flex-end;
-  flex-direction: column;
+  flex-direction: column; */
+  background-color: #06989d;
+
 
   
 
@@ -27,18 +27,18 @@
   border-width: 1px 1px 3px;
   border-radius: 4px;
   font-size: 1.1rem;
-  display: flex;
+  /* display: flex;
   align-self: flex-start;
-  flex-direction: column;
+  flex-direction: column; */
 
 }
 
 .incidentBtn {
-  display: flex;
+  /* display: flex; */
   padding: 5px;
   margin: 5px;
   justify-content: space-between;
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 
 .incidents:hover {
@@ -49,12 +49,11 @@
 }
 
 .patrolDisplay {
-  align-self: flex-end;
-
-  padding: 35px;
+  /* align-self: flex-end; */
+  padding: 15px;
   text-align: center;
-  background-color: #fdf761;
-  border-radius: 50%;
+  /* background-color: #fdf761; */
+  /* border-radius: 50%; */
   /* margin: 45px; */
 
 }

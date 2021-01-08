@@ -36,7 +36,7 @@ class AdminPage extends Component {
   render() {
     return (
       <Container fluid>
-        <h1 className="centerClass" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1>
+        {/* <h1 className="centerClass" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1> */}
         {/* Row to go across entire page */}
         <Row>
           {/* left stuff for incidents */}

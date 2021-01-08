@@ -25,7 +25,7 @@ class InternalIncident extends Component {
     type_public: this.props.incident.type_public,
     user_notes_public: this.props.incident.user_notes_public,
     active_public: this.props.incident.active_public,
-    active: this.props.incident.active
+    active: this.props.incident.active,
   }
 
   // function to render time associated with incident
@@ -111,7 +111,7 @@ class InternalIncident extends Component {
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_POST',
       payload: {
-        view_publicly: true,
+        view_publicly: !this.props.incident.view_publicly,
         username_public: this.state.username_public,
         timedate_public: this.state.timedate_public,
         location_public: this.state.location_public,
@@ -168,6 +168,7 @@ class InternalIncident extends Component {
     return (
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
+          {JSON.stringify(this.props.incident.view_publicly)}
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
@@ -183,6 +184,10 @@ class InternalIncident extends Component {
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
+                {this.props.incident.duplicate_entry === true &&
+                <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
+                }
+                <h3></h3>
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
                 {/* Need to display name   */}
                 <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
@@ -294,13 +299,23 @@ class InternalIncident extends Component {
               <AssignClaimComponent incidentId={this.props.incident.id}/>
               <br/>
               <br/>
-              <Button
-                variant="success" 
-                onClick={() => this.handlePostNotice(this.props.incident.id)} 
-                className="btn"
-              >
-                Post Public Notice
-              </Button>
+              {this.props.incident.view_publicly === false ?
+                <Button
+                  variant="success" 
+                  onClick={() => this.handlePostNotice(this.props.incident.id)} 
+                  className="btn"
+                >
+                  Post Public Notice
+                </Button>
+              :
+                <Button
+                  variant="success" 
+                  onClick={() => this.handlePostNotice(this.props.incident.id)} 
+                  className="btn"
+                >
+                  Remove Public Notice
+                </Button>
+            }
               </div>
             </div>
           </Col>

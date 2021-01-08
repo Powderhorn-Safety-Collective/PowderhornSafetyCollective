@@ -196,7 +196,7 @@ class CommunityPage extends Component {
           </Col> {/* end right stuff */}
           <Col></Col>
         </Row>
-            <Row className="box" id="newsBox">
+            <Row id="newsBox">
               <h2> Sign Up for the PSC Newsletter
               <Mailchimp 
                 action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'

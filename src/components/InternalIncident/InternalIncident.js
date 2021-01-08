@@ -193,7 +193,7 @@ class InternalIncident extends Component {
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
-              {this.props.incident.submitted_user != null ?
+              {this.props.incident.submitted_user != undefined ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :
                 <p>

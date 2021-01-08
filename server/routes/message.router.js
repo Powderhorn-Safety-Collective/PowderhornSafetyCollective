@@ -14,7 +14,7 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
   .create({
      body: 'The incident you are following has been updated.  You may log into the PSC app to view details',
      from: process.env.TWILIO_NUMBER,
-     to: `+1${req.body.phone}`
+     to: `${req.body.phone}`
    })
   .then(message => console.log(message.sid));
   res.sendStatus(200);
@@ -28,7 +28,7 @@ router.post('/newIncident', (req, res) => {
   .create({
      body: 'There has been a new incident submitted.  You may view it in the PSC app.',
      from: process.env.TWILIO_NUMBER,
-     to: `+1${req.body.phone}`
+     to: `${req.body.phone}`
    })
   .then(message => console.log(message.sid));
   res.sendStatus(200);
@@ -42,7 +42,7 @@ router.post('/assigned', (req, res) => {
   .create({
      body: 'You have been assigned to an incident.  You may view it in the PSC app.',
      from: process.env.TWILIO_NUMBER,
-     to: `+1${req.body.phone}`
+     to: `${req.body.phone}`
    })
   .then(message => console.log(message.sid));
   res.sendStatus(200);

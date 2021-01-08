@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
+import PhoneInput from 'react-phone-number-input/input';
+
 import swal from 'sweetalert';
 
 class EditUserModal extends Component {
@@ -167,6 +169,14 @@ class EditUserModal extends Component {
     }
   };
 
+  // This function edits the value sent or stored as the phone number
+  setPhoneValue = (phoneNumber) => {
+    console.log(phoneNumber);
+    this.setState({
+      phone: phoneNumber
+    })
+  }
+
   render() {
     return (
       <div>
@@ -187,7 +197,12 @@ class EditUserModal extends Component {
             <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
             <br/>
             <label>Phone:</label>
-            <input defaultValue={this.props.store.editUserReducer.phone} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
+            <PhoneInput 
+              country="US"
+              value={this.state.phone}
+              onChange={this.setPhoneValue}
+              maxlength="14"
+            />
             <br/>
             {/* Adult Section */}
             <label>Is the user an adult?:</label>

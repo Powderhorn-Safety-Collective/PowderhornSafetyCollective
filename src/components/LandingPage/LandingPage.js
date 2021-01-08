@@ -8,7 +8,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 class LandingPage extends Component {
 
   state = {
-    heading: 'Class Component',
+    heading: 'Welcome to the Powderhorn Safety Collective',
   };
 
   onLogin = (event) => {

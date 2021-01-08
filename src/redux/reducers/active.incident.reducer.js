@@ -1,5 +1,4 @@
 // this reducer stores the count of all incidents from all users
-
 const activeIncidentReducer = (state = 0, action) => {
     switch (action.type) {
         case 'SET_ACTIVE_INCIDENTS':

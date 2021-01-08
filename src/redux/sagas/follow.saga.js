@@ -24,7 +24,6 @@ function* getFollowersForIncidents(action) {
   yield put({type:'SET_FOLLOWERS_FOR_INCIDENTS', payload: followersResponse.data});
 }
 
-
 function* makePhoneMessageUpdate(action) {
   try {
     console.log('update to follower phone number', action.payload);

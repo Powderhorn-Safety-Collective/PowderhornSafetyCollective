@@ -9,8 +9,6 @@ import './UserPage.css';
 import IncidentModule from '../IncidentModule/IncidentModule';
 import Mailchimp from 'react-mailchimp-form'
 
-
-
 // this will be the page a registered user sees when they log in if they are not a volunteer
 class UserPage extends Component {
   
@@ -25,9 +23,7 @@ class UserPage extends Component {
   }
 
   getFollowedIncidentIds = () => {
-    console.log('in personal incident ids');
-    this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
-    
+    this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});  
   }
 
   // function to fetch all incident data for public view
@@ -63,9 +59,11 @@ class UserPage extends Component {
               </a>
             </Row>
             <Row className="box">
-              <h2>
-                PSC Contact Info
-              </h2>
+              <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org/" rel="noopener noreferrer">
+                <h2>
+                  PSC Contact Info
+                </h2>
+              </a>
             </Row>
             <Row className="box">
               <h2>
@@ -92,7 +90,6 @@ class UserPage extends Component {
             }
             /></h2>
             </Row>
-
           </Col>
           {/* center column with publicly posted incidents */}
           <Col lg={5} className="userModule">
@@ -124,4 +121,3 @@ class UserPage extends Component {
 
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(UserPage);
-

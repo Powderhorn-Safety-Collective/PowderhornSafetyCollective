@@ -27,12 +27,10 @@ class ToggleSwitch extends (Component) {
           <span 
             className="toggle-switch-switch">
           </span>
-
         </label>
       </div>
-    )
+    );
   }
 }
-
 
 export default connect(mapStoreToProps)(ToggleSwitch);

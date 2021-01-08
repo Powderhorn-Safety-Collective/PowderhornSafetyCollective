@@ -1,3 +1,6 @@
 .userModule {
   border: 1px solid black;
+  height: 700px;
+  overflow-y: auto;
 }
+

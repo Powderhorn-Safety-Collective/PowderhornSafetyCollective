@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button'; 
-
 import './LandingPage.css';
-
-// CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
 
 class LandingPage extends Component {
+
   state = {
     heading: 'Class Component',
   };
@@ -21,7 +19,6 @@ class LandingPage extends Component {
     return (
       <div className="container">
         <h2>{this.state.heading}</h2>
-
         <div className="grid">
           <div className="grid-col grid-col_8">
             <p>
@@ -33,7 +30,6 @@ class LandingPage extends Component {
           </div>
           <div className="grid-col grid-col_4">
             <RegisterForm />
-
             <center>
               <h4>Already a Member?</h4>
               <Button className="btn btn-primary" onClick={this.onLogin}>

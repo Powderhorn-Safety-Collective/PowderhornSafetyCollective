@@ -125,3 +125,6 @@ button.btn.btn-warning {
   -webkit-box-shadow: 2px 2px 6px 2px #282828 !important; 
   box-shadow: 2px 2px 6px 2px #282828 !important;
 }
+.whiteText {
+  color: white !important;
+}

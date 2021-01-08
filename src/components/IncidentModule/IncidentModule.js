@@ -4,7 +4,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import './IncidentModule.css'
 import Button from 'react-bootstrap/Button';
 
-
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Community Page Component
 class IncidentModule extends Component {
@@ -42,7 +41,6 @@ class IncidentModule extends Component {
         return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
       }
       else {
-
         return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>
       }
     }
@@ -88,7 +86,6 @@ class IncidentModule extends Component {
         }
         {this.props.store.user.id &&
           this.renderButton(this.props.incident.id)
-          
         }
       </div>
     );

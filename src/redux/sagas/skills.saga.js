@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {put, takeEvery} from 'redux-saga/effects';
 
-
 // function to fetch all the rows from the user_skills table in the DB
 function* fetchUserSkills() {
   try{
@@ -22,6 +21,7 @@ function * fetchAllSkills() {
     console.log('Error is fetching all skills');
   }
 }
+
 // adds a new row to the user_skills table
 function* addSkill(action) {
   try{
@@ -47,4 +47,5 @@ function* skillsSaga(){
   yield takeEvery('ADD_SKILL', addSkill);
   yield takeEvery('REMOVE_SKILL', removeSkill);
 }
+
 export default skillsSaga;

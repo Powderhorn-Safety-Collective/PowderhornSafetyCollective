@@ -17,11 +17,11 @@ class IncidentSearch extends Component {
     this.props.dispatch({
       type: 'FETCH_SEARCHED_INCIDENT',
       payload: this.state
-    }) 
+    }) ;
     document.getElementById('searchNum').reset();
     this.setState({
       searchNumber: 0
-    })
+    });
   }; // end 
 
   // handle change function for search input box

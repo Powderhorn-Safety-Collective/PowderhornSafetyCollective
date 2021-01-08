@@ -7,6 +7,8 @@
     
 }
 
+
+
 .nav-link {
   float: left;
   color: black;
@@ -30,6 +32,16 @@
   display: flex;
   justify-content: space-between;
 }
+/* .nav-right {
+  float: right;
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+=======
+} */
+.patrolDisplay {
+  text-align: right;
+}
 
 .dropbtn-nav {
   background-color: #fdf761;
@@ -38,12 +50,16 @@
   padding: 10px;
   border: none;
   cursor: pointer;
+
+
 }
 
 .dropdown-nav {
   position: relative;
   display: inline-block;
   background:fixed;
+
+
 }
 
 .dropdown-content-nav {
@@ -56,6 +72,8 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background: #d2d2d2;
   padding-bottom: 15px;
+
+
 }
 
 .dropdown-content-nav a {
@@ -65,6 +83,9 @@
   display: block;
   background: #d2d2d2
 }
+
+/* .dropdown-content a:hover {background-color: #f1f1f1} */
+
 
 .dropdown-nav:hover .dropdown-content-nav {
   display: block;

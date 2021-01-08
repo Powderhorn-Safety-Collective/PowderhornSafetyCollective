@@ -14,15 +14,12 @@ import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import swal from 'sweetalert';
 
-
-
-
-
 // Community Page component
 // visible to everyone
 // contains organization info and links, a list of incidents, and
 // a section for login and a ection to search for an incident
 class CommunityPage extends Component {
+  
   state = {
     aboutOpen: false,
     missionOpen: false,
@@ -58,7 +55,6 @@ class CommunityPage extends Component {
   getFollowedIncidentIds = () => {
     console.log('in personal incident ids');
     this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
-    
   }
 
   // function to fetch all incident data for public view
@@ -74,7 +70,6 @@ class CommunityPage extends Component {
         return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
       }
       else {
-
         return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>
       }
     }

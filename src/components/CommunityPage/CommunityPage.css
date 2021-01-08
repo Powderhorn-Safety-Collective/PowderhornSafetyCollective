@@ -2,10 +2,12 @@
 
 /* border and spacing for sections on page */
 .box {
-  border: 3px solid black;
+  border: 1px solid black;
   background-color: #06989d;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
+  justify-content: center;
+  text-align: center;
 }
 
 /* make the center box scrollable */
@@ -21,14 +23,24 @@
 .white {
   background-color: #ffffff;
   border: 3px solid black;
-  margin: 5px;
+  margin: 5px; 
   padding: 5px;
 }
 
-/* .mailChimpInput.input {
-  width: 250px;
-} */
 
 .collapseBtn {
   margin: 5px;
+}
+
+#topBoxes {
+  display: flex;
+  justify-content: center;
+}
+#newsBox {
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+}
+#collapseBox {
+  justify-content: center;
 }

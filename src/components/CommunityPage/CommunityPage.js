@@ -99,58 +99,34 @@ class CommunityPage extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
+        <Row id="topBoxes">
           {/* This div should have the left stuff */}
-          <Col md={6} lg={4}>
-            <Row className="box">
+            <div className="box">
               {/* we can put whatever site they want here later */}
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Resources
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
+            </div>
+            <div className="box">
               {/* we will change link later */}
               <a className="links" target="_blank" href="https://www.facebook.com/Powderhorn-Safety-Collective-110798767447531/" rel="noopener noreferrer">
                 <h2>
                   Community Events
                 </h2>
               </a>
-            </Row>
-            <Row className="box">
+            </div>
+            <div className="box">
               <h2>
                 <a className="emailLink" href='mailto: pohosafetycollective@gmail.com'>Contact Us</a>
               </h2>
-            </Row>
-            <Row className="box">
-              <h2> Sign Up for the PSC Newsletter
-              <Mailchimp 
-                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
-                fields={[
-                  {
-                    name: 'EMAIL',
-                    placeholder: 'Email',
-                    type: 'email',
-                    required: true,
-                  }
-                ]}
-                messages = {
-                  {
-                    sending: "Sending...",
-                    success: "Thank you for subscribing!",
-                    error: "An unexpected internal error has occurred, please try again.",
-                    empty: "You must type in a valid e-mail address.",
-                    duplicate: "This email has already been used to sign up!",
-                    button: "Subscribe"
-                  }
-                }
-                />
-              </h2>
-            </Row>
-          </Col> {/* end left stuff */}
+            </div>
+          </Row>
           {/* middle stuff / incident cards */}
-          <Col md={6} lg={4}>
+        <Row>
+          <Col></Col>
+          <Col md={8} lg={6} className="communityColumnCenter">
             <Row className="box scrollable" >
               <h2>
                 Incidents
@@ -164,8 +140,10 @@ class CommunityPage extends Component {
                 })}
             </Row>
           </Col>{/* end middle stuff */}
+          <Col></Col>
           {/* right column stuff / login and search */}
-          <Col md={6} lg={4}>
+          
+          <Col md={6} lg={4} className="communityColumnRight">
           {this.props.store.user.role ?
             <></>
             :
@@ -174,7 +152,7 @@ class CommunityPage extends Component {
               <LoginForm/>
             </Row>
             }
-            <Row className="box">
+            <Row className="box" id="collapseBox">
               <Button
                 onClick={()=> this.setState({aboutOpen: !this.state.aboutOpen})}
                 aria-controls="collapseAbout"
@@ -200,15 +178,6 @@ class CommunityPage extends Component {
                   </div>
                 </Collapse>
             </Row>
-              {/* <div className="white">
-              <p>The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
-                We are neighbors providing support to the community with compassion and care in mind. 
-                As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.</p>
-              </div>
-              <h2>Mission Statement</h2>
-              <div className="white">
-              The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
-              </div> */}
             <Row className="box">
               {/* section to search for an incident */}
               <IncidentSearch/>
@@ -230,7 +199,33 @@ class CommunityPage extends Component {
             }
             </Row>
           </Col> {/* end right stuff */}
-        </Row> 
+          <Col></Col>
+        </Row>
+            <Row className="box" id="newsBox">
+              <h2> Sign Up for the PSC Newsletter
+              <Mailchimp 
+                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
+                fields={[
+                  {
+                    name: 'EMAIL',
+                    placeholder: 'Email',
+                    type: 'email',
+                    required: true,
+                  }
+                ]}
+                messages = {
+                  {
+                    sending: "Sending...",
+                    success: "Thank you for subscribing!",
+                    error: "An unexpected internal error has occurred, please try again.",
+                    empty: "You must type in a valid e-mail address.",
+                    duplicate: "This email has already been used to sign up!",
+                    button: "Subscribe"
+                  }
+                }
+                />
+              </h2>
+            </Row>
       </Container>
     );
   }

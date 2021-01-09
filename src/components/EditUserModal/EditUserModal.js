@@ -182,26 +182,34 @@ class EditUserModal extends Component {
       <div>
         {this.props.store.editUserReducer ? 
           <div className="editModal">
+            <div>
             <p>Username: {this.state.username}</p>
+            </div>
+            <div>
             <label>First Name:</label>
             <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
-            <br/>
+            </div>
+            <div>
             <label>Last Name:</label>
             <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
-            <br/>
-            <label>Address:</label>
+            </div>
+            <div>
+            <label>Address:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
-            <br/>
-            <label>Email:</label>
+            </div>
+            <div>
+            <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
-            <br/>
-            <label>Phone:</label>
+            </div>
+            <div>
+            <label>Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <PhoneInput 
               country="US"
               value={this.state.phone}
               onChange={this.setPhoneValue}
               maxlength="14"
             />
+            </div>
             <br/>
             {/* Adult Section */}
             <label>Is the user an adult?:</label>
@@ -233,8 +241,8 @@ class EditUserModal extends Component {
             </div>
             <br/>
             {/* On Patrol / On Call Section */}
-            <label htmlFor="patrolRadios">Current Status</label>
-            <div className="form-check" id="patrolRadios">
+            <label htmlFor="patrolRadios">Current Status:</label>
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"
@@ -247,7 +255,7 @@ class EditUserModal extends Component {
                 On Patrol
               </label>
             </div>
-            <div className="form-check" id="patrolRadios">
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"
@@ -260,7 +268,7 @@ class EditUserModal extends Component {
                 On Call
               </label>
             </div>
-            <div className="form-check" id="patrolRadios">
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"

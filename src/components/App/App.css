@@ -133,8 +133,7 @@ button.btn.btn-warning {
   background-color: #fdf761;
 }
 ol {
-  width: 300px;
-  margin: auto; 
+  list-style-position: inside;
 }
 .greyBackground {
   background-color: #efefef;

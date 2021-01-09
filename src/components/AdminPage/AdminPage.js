@@ -53,7 +53,7 @@ class AdminPage extends Component {
             {/* on patrol display */}
             {this.props.store.patrolReducer.length > 0 && 
             <Row className="onPatrolDisplay">
-              <div className="patrolDisplay">
+              <div className="onPatrolDisplay">
                 <h2>Members on patrol: </h2>
                 <ul>  
                   {this.props.store.patrolReducer.map((patroller) => {
@@ -65,7 +65,7 @@ class AdminPage extends Component {
             }
             {/* on call display */}
             <Row className="onCallDisplay">
-              <div className="patrolDisplay">
+              <div className="onCallDisplay">
                 <h2>Members on call: </h2>
                 <ul>  
                   {this.props.store.onCallReducer.map((onCall) => {

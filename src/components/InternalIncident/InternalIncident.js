@@ -220,9 +220,8 @@ class InternalIncident extends Component {
                 </div>
                 <div className="whiteBackground">
                 <br/>
-
                 <h2 className="yellowBackground">Information Provided by Reporter</h2>
-                <div className="instructions">
+                <div className="internalLine">
                   <h5
                     onClick={(()=>this.setState({open: !this.state.open}))}
                     aria-controls="collapseInstructions"
@@ -230,7 +229,7 @@ class InternalIncident extends Component {
                     className="greyBackground"
                     >Click Here For Public Post Instructions
                   </h5>
-                  <Collapse in={this.state.open}>
+                  <Collapse in={this.state.open} className="internalLine">
                   <ol>
                     <li>Select data to include in public post using toggles below</li>
                     <li>Enter text for headline of public post</li>
@@ -352,9 +351,9 @@ class InternalIncident extends Component {
             }
               </div>
             </div>
+            <h2>_____**_____</h2>
           </Col>
         </Row>
-        <h2>______________**______________</h2>
       </Container>
     );
   }

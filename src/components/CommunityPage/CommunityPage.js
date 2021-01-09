@@ -67,7 +67,7 @@ class CommunityPage extends Component {
     if (this.props.store.user.id) {
       if (this.props.store.followedIncidentsReducer.some(incident => incident.incident_id === incidentId)) {
         console.log('hello');
-        return <Button onClick={() => this.unfollowIncident(incidentId)} variant="warning">Stop Following this Incident</Button>
+        return <Button onClick={() => this.unfollowIncident(incidentId)} variant="success">Stop Following this Incident</Button>
       }
       else {
         return <Button onClick={() => this.followIncident(incidentId)}>Follow this Incident</Button>

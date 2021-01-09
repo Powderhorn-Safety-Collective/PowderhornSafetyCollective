@@ -7,20 +7,23 @@
 
 .onPatrolDisplay {
   background-color: #06989d;
-  height: 350px;
   overflow-y: auto;
-  border: 1px solid black;
   padding: 5px;
+  color: white;
+  /* text-align: center !important; */
+  margin: 5px; 
+  border-radius: 5px;
 }
 
 .onCallDisplay {
   background-color: #06989d;
-  height: 350px;
   overflow-y: auto;
-  border: 1px solid black;
   padding: 5px;
+  color: white;
+  /* text-align: center !important; */
+  margin: 5px; 
+  border-radius: 5px;
 }
 ul {
-  list-style: none;
-  display: inline;
+  list-style-position: outside;
 }

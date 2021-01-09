@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
 import InternalNotes from '../InternalNotes/InternalNotes';
 import Button from 'react-bootstrap/Button';
+import { formatPhoneNumber } from 'react-phone-number-input';
 import swal from 'sweetalert';
 
 // This component is going to be the card display for the incident
@@ -157,7 +158,7 @@ class InternalIncident extends Component {
         {submittedUserData.address && 
           <p>Address: {submittedUserData.address}</p>
         }
-        <p>Phone: {submittedUserData.phone}</p>
+        <p>Phone: {formatPhoneNumber(submittedUserData.phone)}</p>
         <p>email: {submittedUserData.email}</p>
       </div>
     )

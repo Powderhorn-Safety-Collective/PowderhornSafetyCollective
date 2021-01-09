@@ -53,22 +53,26 @@ class AdminPage extends Component {
             {/* on patrol display */}
             {this.props.store.patrolReducer.length > 0 && 
             <Row className="onPatrolDisplay">
-              <h2>Members on patrol: </h2>
-              <ul>  
-                {this.props.store.patrolReducer.map((patroller) => {
+              <div className="patrolDisplay">
+                <h2>Members on patrol: </h2>
+                <ul>  
+                  {this.props.store.patrolReducer.map((patroller) => {
                   return <PatrolItem patroller={patroller}/>
-                })}
-              </ul>
+                  })}
+                </ul>
+              </div>
             </Row>
             }
             {/* on call display */}
             <Row className="onCallDisplay">
-              <h2>Members on call: </h2>
-              <ul>  
-                {this.props.store.onCallReducer.map((onCall) => {
+              <div className="patrolDisplay">
+                <h2>Members on call: </h2>
+                <ul>  
+                  {this.props.store.onCallReducer.map((onCall) => {
                   return <OnCallItem onCall={onCall}/>
-                })}
-              </ul>
+                  })}
+                </ul>
+              </div>
             </Row> {/* end on call */}
           </Col>
           {/* </div> end of right on patrol / on call display */}

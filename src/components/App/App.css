@@ -129,8 +129,15 @@ button.btn.btn-warning {
 .whiteText {
   color: white !important;
 }
-
-
+.yellowBackground {
+  background-color: #fdf761;
+}
+ol {
+  list-style-position: inside;
+}
+.greyBackground {
+  background-color: #efefef;
+}
 
 .btn-success {
     color: #fff;

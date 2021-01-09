@@ -7,7 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import './UserPage.css';
 import IncidentModule from '../IncidentModule/IncidentModule';
-import Mailchimp from 'react-mailchimp-form'
+import Mailchimp from 'react-mailchimp-form';
+import Button from 'react-bootstrap/Button';
 
 // this will be the page a registered user sees when they log in if they are not a volunteer
 class UserPage extends Component {
@@ -35,6 +36,7 @@ class UserPage extends Component {
   getPersonalIncidents = () => {
     this.props.dispatch({type: 'GET_PERSONAL_INCIDENTS', payload: {id: this.props.store.user.id}});
   }
+
 
   render() {
     return (
@@ -86,8 +88,24 @@ class UserPage extends Component {
             <h3>Your Followed and Submitted Incidents</h3>
             {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {
               return(
-                <IncidentModule incident={personalIncident} key={index}/>
-              );
+                // <IncidentModule incident={personalIncident} key={index}/>
+                <div className="white">
+                  <p className="yellowBackground"><strong>Incident Number: </strong>{personalIncident.client_id}</p>
+                  <p><strong>Incident Type: </strong>{personalIncident.type}</p>
+                  <p><strong>Location: </strong>{personalIncident.location}</p>
+                  {personalIncident.notes &&
+                    <p><strong>Submitter's Notes: </strong>{personalIncident.notes}</p>
+                  }
+                  {personalIncident.text_for_public_display &&
+                    <p><strong>PSC Notes: </strong>{personalIncident.text_for_public_display} </p>
+                  }
+                  {personalIncident.active === true ?
+                  <p className="alert">Active</p>
+                  :
+                  <p className="alert">Resolved</p>
+                  }
+                </div>
+                );
             })}
           </Col>
           <Col></Col>

@@ -21,7 +21,7 @@ CREATE TABLE "incidents" (
 	"time_submitted" TIMESTAMP (255) NOT NULL,
 	"view_publicly" BOOLEAN NOT NULL DEFAULT 'false',
 	"duplicate_entry" BOOLEAN NOT NULL DEFAULT 'false',
-	"client_id" integer NOT NULL,
+	"client_id" integer NOT NULL unique,
 	"username" varchar(255),
 	"username_public" BOOLEAN NOT NULL DEFAULT 'false',
 	"timedate_public" BOOLEAN NOT NULL DEFAULT 'false',

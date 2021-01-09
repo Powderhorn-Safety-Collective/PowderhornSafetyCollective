@@ -216,10 +216,8 @@ class ReportIncident extends Component {
           }
         <br/>
         <br/>
-          <Button className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
-        <br/>
-        <br/>
-          <Button className="btn btn-success" onClick={this.confirmIncident}>Confirm Submission</Button>
+        <Button id="confirm" className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
+        <Button id="confirm" className="btn btn-success" onClick={this.confirmIncident}>Confirm Submission</Button>
     </div>
     :
     <div className="registerForm">

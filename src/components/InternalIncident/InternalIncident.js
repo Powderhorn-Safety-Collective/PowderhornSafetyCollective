@@ -217,7 +217,7 @@ class InternalIncident extends Component {
                 <br/>
 
                 <h2>Information Provided by Reporter</h2>
-                <h3>Toggle items be viewed by the public. Submit by clicking post notice.</h3>
+                <h3>Toggle items to be viewed by the public. Submit by clicking post notice.</h3>
                 <div>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 <br/>
@@ -310,7 +310,7 @@ class InternalIncident extends Component {
               </Button>
               </div>
               } 
-              
+
               <div className="centerClass">
               <br/>
               {this.props.incident.view_publicly === false ?

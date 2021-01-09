@@ -150,7 +150,8 @@ class InternalIncident extends Component {
     console.log('submittedUserData', submittedUserData);
     
     return( 
-      <>
+      <div className="incidentHeader">
+        <h3>Incident Number: {this.props.incident.client_id}</h3>
         <p>Submitted by: {submittedUserData.username}</p>
         <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
         {submittedUserData.address && 
@@ -158,7 +159,7 @@ class InternalIncident extends Component {
         }
         <p>Phone: {submittedUserData.phone}</p>
         <p>email: {submittedUserData.email}</p>
-      </>
+      </div>
     )
   }
 
@@ -190,9 +191,6 @@ class InternalIncident extends Component {
                 {this.props.incident.duplicate_entry === true &&
                 <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
               }
-              <br/>
-                <h3></h3>
-                <h3>Incident Number: {this.props.incident.client_id}</h3>
               <br/>
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}

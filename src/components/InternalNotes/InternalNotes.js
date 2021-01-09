@@ -70,7 +70,6 @@ class InternalNotes extends Component {
         </div>
         <div className="noteForm">
         {/* <label htmlFor="internalNoteInput">Internal Notes</label> */}
-        <br/>
         <textarea className="internalNoteInput" type="text" placeholder="Add an update or note on this incident." 
         value={this.state.noteText} onChange={this.handleChange}></textarea>
         <br/>

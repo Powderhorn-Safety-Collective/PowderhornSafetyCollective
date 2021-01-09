@@ -128,8 +128,8 @@ router.put('/publicText', rejectUnauthenticated, (req, res) => {
 // this route will update an incident with the submitted_user
 router.put('/specialIncident', (req, res) => {
   console.log('In SPECIAL INCIDENT', req.body.specialIncident, req.user.id);
-  const queryText = `UPDATE "incidents" SET "submitted_user" = $1 WHERE "client_id" = $2;`;
-  pool.query(queryText, [req.user.id, req.body.specialIncident])
+  const queryText = `UPDATE "incidents" SET "submitted_user" = $1, "username" = $2 WHERE "client_id" = $3;`;
+  pool.query(queryText, [req.user.id, req.user.username, req.body.specialIncident])
   .then((result) => {
     res.sendStatus(202)
 }).catch((error) => {

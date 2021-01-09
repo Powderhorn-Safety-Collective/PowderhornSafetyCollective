@@ -34,7 +34,6 @@ class IncidentModule extends Component {
 
   // function render follow or stop following incident button
   renderButton = (incidentId) => {
-    console.log('renderbutton function', incidentId);
     if (this.props.followedIncidents) {
       if (this.props.followedIncidents.some(incident => incident.incident_id === incidentId)) {
         console.log('hello');

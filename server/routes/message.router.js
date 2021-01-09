@@ -23,14 +23,14 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
 // route for sending a notice to people on patrol / on call when a new incident is submitted
 router.post('/newIncident', (req, res) => {
   console.log('new incident req.body', req.body);
-  
-  client.messages
-  .create({
-     body: 'There has been a new incident submitted.  You may view it in the PSC app.',
-     from: process.env.TWILIO_NUMBER,
-     to: `${req.body.phone}`
-   })
-  .then(message => console.log(message.sid));
+    
+  // client.messages
+  // .create({
+  //    body: 'There has been a new incident submitted.  You may view it in the PSC app.',
+  //    from: process.env.TWILIO_NUMBER,
+  //    to: `${req.body.phone}`
+  //  })
+  // .then(message => console.log(message.sid));
   res.sendStatus(200);
 });
 

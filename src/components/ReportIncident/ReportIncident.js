@@ -180,19 +180,6 @@ class ReportIncident extends Component {
   sendMessage = (incidentId) => {
     const onCall = this.props.store.onCallReducer;
     const patrol = this.props.store.patrolReducer; 
-    // for(let i = 0; i < onCall.length; i++) {
-    //   console.log('call for', onCall[i].incident_id, incidentId);
-    //   console.log('################', onCall[i].phone);
-    //   this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: onCall[i].phone}});
-    // }
-    // const patrol = this.props.store.patrolReducer;
-    // for (let i = 0; i < patrol.length; i++) {
-    //   console.log('patrol for #########', patrol[i].phone);
-    //   this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: patrol[i].phone}});
-    // }
-
-    //////////////////////////////////////////////////////////////////////
-    // fix to add admin to text message, also
     let callPatrolArray = [];
     for(let i = 0; i < onCall.length; i++) {
       callPatrolArray.push(onCall[i])
@@ -206,9 +193,18 @@ class ReportIncident extends Component {
     const admins = this.props.store.adminReducer;
     let callPatrolAdminArray = callPatrolArray.concat(admins);
     console.log('callPatrolAdminArray', callPatrolAdminArray);
-    let uniqueCallPatrolAdminArray = Array.from(new Set(callPatrolAdminArray));
+    let uniqueCallPatrolAdminArray = this.trimArray(callPatrolAdminArray);
     console.log('uniqueCallPatrolAdminArray', uniqueCallPatrolAdminArray);
-    
+    for (let i = 0; i < uniqueCallPatrolAdminArray.length; i++){
+      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: uniqueCallPatrolAdminArray[i].phone, client_id: this.state.client_id}});
+    }
+  }
+
+  // trims the on call & on patrol & admin array to remove duplicates if an admin is also
+  // on call or on patrol
+  trimArray (items) {
+    const ids = [];
+    return items.filter(item => ids.includes(item.id) ? false : ids.push(item.id));
   }
 
   render() {

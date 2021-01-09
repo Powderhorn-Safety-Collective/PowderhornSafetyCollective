@@ -58,15 +58,13 @@ class AssignClaimComponent extends Component {
   render() {
     return(
       <>
+                  {this.props.incident.assigned ?
+                    <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
+                    :
+                    <h4>This incident is not assigned to anyone.</h4>
+                  }
       {this.props.store.patrolReducer &&
       <>
-        <Button 
-          variant="primary"
-          onClick={this.submitAssign}
-        >
-          Assign/Claim
-        </Button>
-          <br/>
         <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
           <option key="0">select</option>
           {this.state.activeMemArray.map((person) => {
@@ -75,6 +73,14 @@ class AssignClaimComponent extends Component {
             );
           })}
         </select>
+        <Button 
+          className="internalLine"
+          id="confirm"
+          variant="primary"
+          onClick={this.submitAssign}
+        >
+          Assign
+        </Button>
       </>  
       }
       </>

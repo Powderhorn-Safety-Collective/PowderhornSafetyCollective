@@ -45,7 +45,7 @@ class AdminPage extends Component {
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;
-              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
+              return <><InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/><br/></>
             })}
           </Col>{/* end of left section for incident cards */}
           {/* right on patrol / on call display */}

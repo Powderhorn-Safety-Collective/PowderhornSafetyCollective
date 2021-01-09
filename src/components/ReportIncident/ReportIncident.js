@@ -78,35 +78,24 @@ class ReportIncident extends Component {
     });
   }
 
-  // this long function checks to see if the user wants to register an account or follow the incident, or both
+  // this function checks to see if the user wants to register an account or follow the incident, or both
   confirmIncident = () => {
-    if(this.state.register === false && this.state.follow_incident === true) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
-        `${this.state.client_id}`,
-        `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
-        {
-          button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/');
-    }
-    else if(this.state.register === true) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
-      swal(
-        `${this.state.client_id}`,
-        `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
-        On the next page, please input your information to register a new account.`, 
-        {
-          button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/registration');
-    }
-    else if(this.state.register === false) {
-      // if the user is registered and they choose not to follow the incident
-      if (this.props.store.user.id && this.state.follow_incident === false) {
+    // if user logged in
+    if (this.props.store.user.id) {
+      // 1. if logged in user wants to follow incident 
+      if (this.state.follow_incident) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+      // 2. if logged in user does not want to follow incident
+      else {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
         swal(
           `Thank you!`,
@@ -117,10 +106,36 @@ class ReportIncident extends Component {
         this.sendMessage();
         this.props.history.push('/');
       }
-      else if (!this.props.store.user.id && this.state.register === true) {
-
+    } // end logged in user section
+    // if user not logged in
+    else {
+      // 3. if not logged in user wants to register
+      if (this.state.register === true) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+          On the next page, please input your information to register a new account.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/registration');
       }
-    }
+      // 4. if not logged in user only wants to submit incident and not register
+      else {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+    }// end not logged in user section
   }
 
   handleToggle = (event) => {

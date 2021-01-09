@@ -152,14 +152,14 @@ class InternalIncident extends Component {
     let submittedUserData =  this.props.users.find(user => user.id == submittedUserId)
     return( 
       <div className="incidentHeader">
-        <h3>Incident Number: {this.props.incident.client_id}</h3>
-        <p>Submitted by: {submittedUserData.username}</p>
-        <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
+        <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
+        <p><strong>Submitted by: </strong>{submittedUserData.username}</p>
+        <p><strong>Name: </strong>{submittedUserData.first_name} {submittedUserData.last_name}</p>
         {submittedUserData.address && 
-          <p>Address: {submittedUserData.address}</p>
+          <p><strong>Address: </strong>{submittedUserData.address}</p>
         }
-        <p>Phone: {formatPhoneNumber(submittedUserData.phone)}</p>
-        <p>email: {submittedUserData.email}</p>
+        <p><strong>Phone: </strong>{formatPhoneNumber(submittedUserData.phone)}</p>
+        <p><strong>Email: </strong>{submittedUserData.email}</p>
       </div>
     )
   }
@@ -177,6 +177,9 @@ class InternalIncident extends Component {
           <Row className="internalRow">
             {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
+            {this.props.incident.duplicate_entry === true &&
+                <h2 className="alert">*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
+              }
               {this.props.incident.submitted_user != undefined && this.props.users.length > 0 ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :
@@ -189,9 +192,6 @@ class InternalIncident extends Component {
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
-                {this.props.incident.duplicate_entry === true &&
-                <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
-              }
               <br/>
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}
@@ -350,6 +350,7 @@ class InternalIncident extends Component {
             </div>
           </Col>
         </Row>
+        <h2>______________**______________</h2>
       </Container>
     );
   }

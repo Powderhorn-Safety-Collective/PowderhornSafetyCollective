@@ -142,7 +142,7 @@ class InternalIncident extends Component {
         id: this.props.incident.id
       }
     });
-    swal('Text has been saved', "", "success");
+    swal('Duplicate entry has been noted.', "", "success");
   }
 
   renderSubmittedUser = (submittedUserId) => {

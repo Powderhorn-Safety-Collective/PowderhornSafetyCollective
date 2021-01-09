@@ -132,6 +132,7 @@ function* editIncident(action) {
   function* addAssigned(action) {
     try {
       yield axios.put('api/incident/assign', action.payload)
+      yield put({type: 'GET_INCIDENTS'});
     }catch (error) {
       console.log('error in assign saga', error);
     }

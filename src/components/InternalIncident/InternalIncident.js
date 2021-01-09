@@ -112,7 +112,7 @@ class InternalIncident extends Component {
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_POST',
       payload: {
-        view_publicly: !this.props.incident.view_publicly,
+        view_publicly: true,
         username_public: this.state.username_public,
         timedate_public: this.state.timedate_public,
         location_public: this.state.location_public,
@@ -216,7 +216,8 @@ class InternalIncident extends Component {
                 <div className="whiteBackground">
                 <br/>
 
-                <h3>Information provided by reporter</h3>
+                <h2>Information Provided by Reporter</h2>
+                <h3>Toggle items be viewed by the public. Submit by clicking post notice.</h3>
                 <div>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 <br/>
@@ -314,17 +315,17 @@ class InternalIncident extends Component {
                 <Button
                   variant="success" 
                   onClick={() => this.handlePostNotice(this.props.incident.id)} 
-                  className="btn"
+                  className="btn finalButton"
                 >
-                  Post Public Notice
+                  POST PUBLIC NOTICE
                 </Button>
               :
                 <Button
                   variant="success" 
                   onClick={() => this.handlePostNotice(this.props.incident.id)} 
-                  className="btn"
+                  className="btn finalButton"
                 >
-                  Remove Public Notice
+                  UPDATE PUBLIC NOTICE
                 </Button>
             }
               </div>

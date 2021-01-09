@@ -37,3 +37,8 @@ textarea {
     border: 2px solid #000000;
     background-color: #ffffff;
 }
+
+.finalButton {
+    max-width: 100% !important;
+    font-size: 28px !important;
+}

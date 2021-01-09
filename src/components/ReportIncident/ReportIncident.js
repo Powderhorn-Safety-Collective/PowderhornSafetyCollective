@@ -66,10 +66,19 @@ class ReportIncident extends Component {
   }
 
   submitReport = () => {
-      console.log('clicked on report incident');
-      this.setState( {
-          showReport: true
-      });
+    console.log('clicked on report incident');
+    // check to make sure inputs for type and location are valid
+    let inputCheckResult = this.inputCheck();
+    if (inputCheckResult !== true) {
+      swal(`Please make sure there is a location and type of incident entered.`,
+      {
+        button: "Ok!",
+      })
+      return
+    }
+    this.setState( {
+      showReport: true
+    });
   }
   
   editSubmission = () => {
@@ -78,43 +87,73 @@ class ReportIncident extends Component {
     });
   }
 
-  // this long function checks to see if the user wants to register an account or follow the incident, or both
+  inputCheck = () => {
+    if (this.state.type && this.state.location) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  // this function checks to see if the user wants to register an account or follow the incident, or both
   confirmIncident = () => {
-    if(this.state.register === false && this.state.follow_incident === true) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
-        `${this.state.client_id}`,
-        `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+    // if user logged in
+    if (this.props.store.user.id) {
+      // 1. if logged in user wants to follow incident 
+      if (this.state.follow_incident) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+      // 2. if logged in user does not want to follow incident
+      else {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `Thank you!`,
+          `We will respond to your reported incident.`, 
         {
           button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/');
-    }
-    else if(this.state.register === true) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
-      swal(
-        `${this.state.client_id}`,
-        `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
-        On the next page, please input your information to register a new account.`, 
-        {
-          button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/registration');
-    }
-    else if(this.state.register === false && this.state.follow_incident === false) {
-      this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
-      swal(
-        `Thank you!`,
-        `We will respond to your reported incident.`, 
-        {
-          button: "Ok!",
-      });
-      this.sendMessage();
-      this.props.history.push('/');
-    }
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+    } // end logged in user section
+    // if user not logged in
+    else {
+      // 3. if not logged in user wants to register
+      if (this.state.register === true) {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+          On the next page, please input your information to register a new account.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/registration');
+      }
+      // 4. if not logged in user only wants to submit incident and not register
+      else {
+        this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
+        swal(
+          `${this.state.client_id}`,
+          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          {
+            button: "Ok!",
+        });
+        this.sendMessage();
+        this.props.history.push('/');
+      }
+    }// end not logged in user section
   }
 
   handleToggle = (event) => {
@@ -335,8 +374,9 @@ class ReportIncident extends Component {
           In need of neighborly help
       </label>
     <br/>
+    <label>
       <input className="radio" type="radio" name="type"></input>
-      <label>Other</label>
+      Other</label>
       <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
     <br/>
       <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>

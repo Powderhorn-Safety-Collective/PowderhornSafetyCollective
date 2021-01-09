@@ -187,11 +187,11 @@ class CommunityPage extends Component {
               {/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
             {this.props.store.searchIncidentReducer.client_id &&
             <div className="white">
-              <p>Incident ID: {this.props.store.searchIncidentReducer.client_id}</p>
-              <p>Incident Type: {this.props.store.searchIncidentReducer.type}</p>
-              <p>Incident Time: {this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
-              <p>Reporter Notes: {this.props.store.searchIncidentReducer.notes}</p>
-              {this.props.store.searchIncidentReducer.active === true ? <p>Incident is Active</p> : <p>Incident is Inactive</p>}
+              <p className="yellowBackground"><strong>Incident ID: </strong>{this.props.store.searchIncidentReducer.client_id}</p>
+              <p><strong>Incident Type: </strong>{this.props.store.searchIncidentReducer.type}</p>
+              <p><strong>Incident Time: </strong>{this.renderTime(this.props.store.searchIncidentReducer.time_submitted)}</p>
+              <p><strong>Reporter Notes: </strong>{this.props.store.searchIncidentReducer.notes}</p>
+              {this.props.store.searchIncidentReducer.active === true ? <p className="alert">Active</p> : <p className = "alert">Resolved</p>}
               {this.renderContactRequest(this.props.store.searchIncidentReducer.id)}
             </div>
             }

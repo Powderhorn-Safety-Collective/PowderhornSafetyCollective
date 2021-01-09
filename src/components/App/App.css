@@ -129,7 +129,9 @@ button.btn.btn-warning {
 .whiteText {
   color: white !important;
 }
-
+.yellowBackground {
+  background-color: #fdf761;
+}
 
 
 .btn-success {

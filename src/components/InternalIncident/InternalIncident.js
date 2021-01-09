@@ -298,6 +298,7 @@ class InternalIncident extends Component {
                 <br/>
             {/* </Row> */}
 
+            {this.props.incident.duplicate_entry === false &&
             <div className="centerClass">
               <br/>
               <Button
@@ -308,8 +309,9 @@ class InternalIncident extends Component {
                 Mark Incident as Duplicate
               </Button>
               </div>
+              } 
+              
               <div className="centerClass">
-
               <br/>
               {this.props.incident.view_publicly === false ?
                 <Button

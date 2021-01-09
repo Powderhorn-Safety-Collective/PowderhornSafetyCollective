@@ -7,7 +7,7 @@ class ToggleSwitchInternal extends (Component) {
 
   render() {
     return(
-      <div className="toggle-switch">
+      <div className="toggle-switch-int">
         <input 
           type="checkbox"
           defaultChecked={this.props.toggleOn}

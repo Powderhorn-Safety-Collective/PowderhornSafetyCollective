@@ -193,18 +193,21 @@ class ReportIncident extends Component {
 
     //////////////////////////////////////////////////////////////////////
     // fix to add admin to text message, also
-    let callPatrolAdminArray = [];
+    let callPatrolArray = [];
     for(let i = 0; i < onCall.length; i++) {
-      callPatrolAdminArray.push(onCall[i])
+      callPatrolArray.push(onCall[i])
     }
     for(let i = 0; i < patrol.length; i++) {
-      callPatrolAdminArray.push(patrol[i]); 
+      callPatrolArray.push(patrol[i]); 
     }
-    console.log('callPatrolAdminArray', callPatrolAdminArray);
+    console.log('callPatrolArray', callPatrolArray);
     // at this point, the callPatrolAdminArray should have all members in it who are on
     // call or on patrol and needs admins added to it, but not ones who are already in the array
-    console.log(this.props.store.allUserReducer);
-    
+    const admins = this.props.store.adminReducer;
+    let callPatrolAdminArray = callPatrolArray.concat(admins);
+    console.log('callPatrolAdminArray', callPatrolAdminArray);
+    let uniqueCallPatrolAdminArray = Array.from(new Set(callPatrolAdminArray));
+    console.log('uniqueCallPatrolAdminArray', uniqueCallPatrolAdminArray);
     
   }
 

@@ -277,4 +277,19 @@ router.get('/oncall', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// get the admins' id and phone number to send text to when new incident submitted
+router.get('/admins', (req, res) => {
+  const queryText = `select id, phone from "user"
+  where role = 3;`;
+
+  pool.query(queryText).then((results) => {
+    console.log('admins results.rows', results.rows);
+    res.send(results.rows);
+  }).catch((error) => {
+    console.log('error in get admins route');
+    res.sendStatus(500);
+    
+  })
+})
+
 module.exports = router;

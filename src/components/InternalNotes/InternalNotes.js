@@ -56,14 +56,6 @@ class InternalNotes extends Component {
   render (){
     return(
       <>
-        <div className="noteForm">
-        <label htmlFor="internalNoteInput">Notes/Updates</label>
-        <br/>
-        <textarea className="internalNoteInput" type="text" placeholder="Add an update or note on this incident." 
-        value={this.state.noteText} onChange={this.handleChange}></textarea>
-        <br/>
-        <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
-        </div>
         <div>
         <br/>
         <h3>Internal Notes</h3>
@@ -76,6 +68,14 @@ class InternalNotes extends Component {
           })}
         </>
         </div>
+        <div className="noteForm">
+        {/* <label htmlFor="internalNoteInput">Internal Notes</label> */}
+        <textarea className="internalNoteInput" type="text" placeholder="Add an update or note on this incident." 
+        value={this.state.noteText} onChange={this.handleChange}></textarea>
+        <br/>
+        <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
+        </div>
+        <br/>
       </>
     );
   }

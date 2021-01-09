@@ -132,7 +132,13 @@ button.btn.btn-warning {
 .yellowBackground {
   background-color: #fdf761;
 }
-
+ol {
+  width: 300px;
+  margin: auto; 
+}
+.greyBackground {
+  background-color: #efefef;
+}
 
 .btn-success {
     color: #fff;

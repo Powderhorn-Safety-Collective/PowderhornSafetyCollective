@@ -41,3 +41,7 @@ textarea {
 .finalButton {
     font-size: 28px !important;
 }
+.instructions {
+    width: 400px;
+    margin: auto;
+}

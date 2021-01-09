@@ -341,6 +341,7 @@ class EditUserModal extends Component {
             <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
             <br/>
+            <br/>
             <Button onClick={this.goBack} variant="warning">Back to Data Table</Button>
           </div>
           :

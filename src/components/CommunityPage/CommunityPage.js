@@ -168,10 +168,14 @@ class CommunityPage extends Component {
                 <Collapse in={this.state.missionOpen}>
                   <div id="missionBody" className="white">
                     <p>
-                      The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. We are neighbors providing support to the community with compassion and care in mind. As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  
+                      The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
+                      We are neighbors providing support to the community with compassion and care in mind. 
+                      As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.  
                     </p>
                     <p>
-                      El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
+                      El Colectivo Seguridad del Powderhorn (PSC) imaginamos una nueva forma de respuesta comunal que solicita a los recursos del vecindario en vez de la policía. 
+                      Somos vecinos, proveyendo apoyo a la comunidad, teniendo en mente la compasión y el cuidado. 
+                      Como colectivo, nos comprometemos a la práctica de no violencia y la desescalada, con la meta de hacer más fuerte la fábrica social del vecindario.
                     </p>              
                   </div>
                 </Collapse>

@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import AssignClaimComponent from '../AssignClaimComponent/AssignClaimComponent';
 import InternalNotes from '../InternalNotes/InternalNotes';
 import Button from 'react-bootstrap/Button';
+import swal from 'sweetalert';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.
@@ -141,6 +142,7 @@ class InternalIncident extends Component {
         id: this.props.incident.id
       }
     });
+    swal('Text has been saved', "", "success");
   }
 
   renderSubmittedUser = (submittedUserId) => {
@@ -187,62 +189,84 @@ class InternalIncident extends Component {
                 <div className="internalModule">
                 {this.props.incident.duplicate_entry === true &&
                 <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
-                }
+              }
+              <br/>
                 <h3></h3>
                 <h3>Incident Number: {this.props.incident.client_id}</h3>
+              <br/>
+              {/* toggle for active/inactive goes here 
+              This will change the data directly in the database when toggled*/}
+              {this.props.incident.active !== undefined &&
+                <ToggleSwitch toggleName={activeToggle}
+                  className="internalLine"
+                  handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
+                />
+              }
+              <p className="internalLine">Active Incident? </p>
+              <br/>
+              <br/>
                 {/* Need to display name   */}
-                <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
+                {/* {this.props.incident.assigned ?
+                  <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
+                  :
+                  <h4>This incident is not assigned to anyone.</h4>
+                } */}
+                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident}/>
                 <div>
                   <InternalNotes incidentId={this.props.incident.id}/>
                 </div>
                 <div className="whiteBackground">
                 <br/>
+
+                <h3>Information provided by reporter</h3>
+                <div>
                 {/* username toggle here to select if username is viewable on the public post*/}
+                <br/>
+                <p className="internalLine">Submitted by: {this.props.incident.username}</p>
                 {this.props.incident.username_public !== undefined &&
                   <ToggleSwitchInternal toggleName={usernameToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.username_public}
                   />
                 }
-                <br/>
-                <p className="internalLine">Submitted by: {this.props.incident.username}</p>
-                <br/>
-
 
                 {/* location toggle here to select if location is viewable on the public post */}
+                <br/>
+                <br/>
+                <p className="internalLine"> Location: {this.props.incident.location}</p>
                 {this.props.incident.location_public !== undefined &&
                   <ToggleSwitchInternal toggleName={locationToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.location_public}
                   />
                 }
-                <br/>
-                <p className="internalLine"> Location: {this.props.incident.location}</p>
-                <br/>
 
                 {/* type toggle here to select if type is viewable on the public post */}
+                <br/>
+                <br/>
+                <p className="internalLine">Type: {this.props.incident.type}</p>
                 {this.props.incident.type_public !== undefined &&
                   <ToggleSwitchInternal toggleName={typeToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.type_public}
                   />
                 }
-                <br/>
-                <p className="internalLine">Type: {this.props.incident.type}</p>
-                <br/>
 
                 {/* user notes toggle here to select if user notes are viewable on the public post */}
+                <br/>
+                <br/>
+                <p className="internalLine">User Notes: {this.props.incident.notes}</p>
                 {this.props.incident.user_notes_public !== undefined &&
                   <ToggleSwitchInternal toggleName={userNotesToggle}
                     className="internalLine"
                     handleToggle={this.handleToggle} toggleOn={this.props.incident.user_notes_public}
                   />
                 }
-                <br/>
-                <p className="internalLine">User Notes: {this.props.incident.notes}</p>
-                <br/>
 
                 {/* timedate toggle here to select if timedate is viewable on the public post */}
+                <br/>
+                <br/>
+                <p className="internalLine">Time Submitted: {this.renderTime(this.props.incident.time_submitted)}</p>
                 {this.props.incident.timedate_public !== undefined &&
                   <ToggleSwitchInternal toggleName={timedateToggle}
                     className="internaLine"
@@ -250,9 +274,8 @@ class InternalIncident extends Component {
                   />
                 }
                 <br/>
-                <p>Time Submitted: {this.renderTime(this.props.incident.time_submitted)}</p>
                 <br/>
-
+                </div>
                 </div>
                 <br/>
                 <label htmlFor="publicText">
@@ -275,30 +298,19 @@ class InternalIncident extends Component {
                 </Button>
                 <br/>
             {/* </Row> */}
-            <br/>
+
             <div className="centerClass">
-              {/* toggle for active/inactive goes here 
-              This will change the data directly in the database when toggled*/}
-              {this.props.incident.active !== undefined &&
-                <ToggleSwitch toggleName={activeToggle}
-                  className="internalLine"
-                  handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
-                />
-              }
-              <p className="internalLine">Active Incident? </p>
               <br/>
               <Button
                 variant="warning" 
                 onClick={this.handleDuplicate} 
                 className="btn"
               >
-                Mark as Duplicate
+                Mark Incident as Duplicate
               </Button>
               </div>
               <div className="centerClass">
-              <br/>
-              <AssignClaimComponent incidentId={this.props.incident.id}/>
-              <br/>
+
               <br/>
               {this.props.incident.view_publicly === false ?
                 <Button

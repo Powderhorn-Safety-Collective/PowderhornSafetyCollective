@@ -66,16 +66,34 @@ class ReportIncident extends Component {
   }
 
   submitReport = () => {
-      console.log('clicked on report incident');
-      this.setState( {
-          showReport: true
-      });
+    console.log('clicked on report incident');
+    // check to make sure inputs for type and location are valid
+    let inputCheckResult = this.inputCheck();
+    if (inputCheckResult !== true) {
+      swal(`Please make sure there is a location and type of incident entered.`,
+      {
+        button: "Ok!",
+      })
+      return
+    }
+    this.setState( {
+      showReport: true
+    });
   }
   
   editSubmission = () => {
     this.setState( {
       showReport: false
     });
+  }
+
+  inputCheck = () => {
+    if (this.state.type && this.state.location) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   // this function checks to see if the user wants to register an account or follow the incident, or both
@@ -356,8 +374,9 @@ class ReportIncident extends Component {
           In need of neighborly help
       </label>
     <br/>
+    <label>
       <input className="radio" type="radio" name="type"></input>
-      <label>Other</label>
+      Other</label>
       <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
     <br/>
       <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>

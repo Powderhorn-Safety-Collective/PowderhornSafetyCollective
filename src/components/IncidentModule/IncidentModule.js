@@ -28,7 +28,7 @@ class IncidentModule extends Component {
     let year = Number(time.slice(0,4));
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     if (publicDisplayTime === true) {
-      return <p>Time Submitted: {displayTime}</p>
+      return <p><strong>Time Submitted: </strong>{displayTime}</p>
     }
   }
 
@@ -60,28 +60,28 @@ class IncidentModule extends Component {
   render() {
     return (
       <div className="module">
-        <h5>{this.props.incident.text_for_public_display}</h5>
-        <h5>Incident Number: {this.props.incident.client_id}</h5>
+        <h3>{this.props.incident.text_for_public_display}</h3>
+        <h5 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h5>
         {/* active/inactive status will always be shown for incident */}
         {this.props.incident.active ?
-          <p className="active">Active</p>
+          <p className="alert">Active</p>
           :
-          <p className="active">Inactive</p>
+          <p className="alert">Resolved</p>
         }
         {/* this function gets called to display time submitted*/}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
         {/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&
-          <p>Location: {this.props.incident.location}</p>
+          <p><strong>Location: </strong>{this.props.incident.location}</p>
         }
         {this.props.incident.type_public &&
-          <p>Type: {this.props.incident.type}</p>
+          <p><strong>Incident Type: </strong> {this.props.incident.type}</p>
         }
         {this.props.incident.username_public && 
-          <p>Submitted by: {this.props.incident.username}</p>
+          <p><strong>Submitted by: </strong>{this.props.incident.username}</p>
         }
         {this.props.incident.user_notes_public &&
-          <p>User Notes: {this.props.incident.notes}</p>
+          <p><strong>Submitter's Notes:</strong> {this.props.incident.notes}</p>
         }
         {this.props.store.user.id &&
           this.renderButton(this.props.incident.id)

@@ -61,7 +61,7 @@ class AssignClaimComponent extends Component {
                   {this.props.incident.assigned ?
                     <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
                     :
-                    <h4>This incident is not assigned to anyone.</h4>
+                    <h4 className="alert">This incident is not assigned to anyone.</h4>
                   }
       {this.props.store.patrolReducer &&
       <>

@@ -152,7 +152,6 @@ class InternalIncident extends Component {
     let submittedUserData =  this.props.users.find(user => user.id == submittedUserId)
     return( 
       <div className="incidentHeader">
-        <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
         <p><strong>Submitted by: </strong>{submittedUserData.username}</p>
         <p><strong>Name: </strong>{submittedUserData.first_name} {submittedUserData.last_name}</p>
         {submittedUserData.address && 
@@ -175,11 +174,16 @@ class InternalIncident extends Component {
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
-            {/* left stuff for user info for person who submitted incident, if available*/}
+            <Col lg={12} xs={12}>
+              <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
+            </Col>
             <Col lg={12} xs={12}>
             {this.props.incident.duplicate_entry === true &&
                 <h2 className="alert">*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
               }
+            {!this.props.incident.assigned && this.props.incident.duplicate_entry === false &&
+              <h2 className="redBackground">THIS INCIDENT IS NEW</h2>
+            }
               {this.props.incident.submitted_user != undefined && this.props.users.length > 0 ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :

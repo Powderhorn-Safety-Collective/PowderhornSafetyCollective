@@ -37,36 +37,26 @@ class EditUserModal extends Component {
     });
     if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
       return(
-        <div  className="form-check">
-          <input
-            type="checkbox"
-            value={skillItem.id}
-            onChange={this.removeSkill}
-            className="form-check-input"
-            id="flexCheckChecked"
-            defaultChecked
-            />
-          <label 
-            className="form-check-label"
-            for="flexCheckChecked">
-            {skillItem.description}
+        <div>
+          <label onClick={this.removeSkill}>
+            <input
+              type="checkbox"
+              value={skillItem.id}
+              defaultChecked
+              />
+              {skillItem.description}
           </label>
         </div>
       );
     } else {
       return (
-        <div  className="form-check">
-          <input
-            type="checkbox"
-            value={skillItem.id}
-            onChange={this.addSkill}
-            className="form-check-input"
-            id="flexCheckDefault"   
-            />
-          <label 
-            className="form-check-label"
-            for="flexCheckDefault">
-            {skillItem.description}
+        <div>
+          <label onClick={this.addSkill}>
+            <input
+              type="checkbox"
+              value={skillItem.id}
+              />
+              {skillItem.description}
           </label>
         </div>
       );
@@ -182,29 +172,37 @@ class EditUserModal extends Component {
       <div>
         {this.props.store.editUserReducer ? 
           <div className="editModal">
-            <p>Username: {this.state.username}</p>
+            <div>
+            <strong>Username: {this.state.username}</strong>
+            </div>
+            <div>
             <label>First Name:</label>
             <input defaultValue={this.props.store.editUserReducer.first_name} onChange={(event) => this.handleChange(event, 'first_name')} type="text"></input>
-            <br/>
+            </div>
+            <div>
             <label>Last Name:</label>
             <input defaultValue={this.props.store.editUserReducer.last_name} onChange={(event) => this.handleChange(event, 'last_name')} type="text"></input>
-            <br/>
-            <label>Address:</label>
+            </div>
+            <div>
+            <label>Address:&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input defaultValue={this.props.store.editUserReducer.address} onChange={(event) => this.handleChange(event, 'address')} type="text"></input>
-            <br/>
-            <label>Email:</label>
+            </div>
+            <div>
+            <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input defaultValue={this.props.store.editUserReducer.email} onChange={(event) => this.handleChange(event, 'email')} type="text"></input>
-            <br/>
-            <label>Phone:</label>
+            </div>
+            <div>
+            <label>Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <PhoneInput 
               country="US"
               value={this.state.phone}
               onChange={this.setPhoneValue}
               maxlength="14"
             />
+            </div>
             <br/>
             {/* Adult Section */}
-            <label>Is the user an adult?:</label>
+            <strong>Is the user an adult?:</strong>
             <div className="form-check">
               <label>
                 <input 
@@ -233,8 +231,8 @@ class EditUserModal extends Component {
             </div>
             <br/>
             {/* On Patrol / On Call Section */}
-            <label htmlFor="patrolRadios">Current Status</label>
-            <div className="form-check" id="patrolRadios">
+            <strong htmlFor="patrolRadios">Current Status:</strong>
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"
@@ -247,7 +245,7 @@ class EditUserModal extends Component {
                 On Patrol
               </label>
             </div>
-            <div className="form-check" id="patrolRadios">
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"
@@ -260,7 +258,7 @@ class EditUserModal extends Component {
                 On Call
               </label>
             </div>
-            <div className="form-check" id="patrolRadios">
+            <div className="form-check">
               <label>
                 <input 
                   type="radio"
@@ -275,7 +273,7 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
-            <label>User's Skills:</label>
+            <strong>User's Skills:</strong>
             {/* Skills section */}
             <div>
               {this.props.store.allSkillsReducer.map((skill) => {
@@ -284,7 +282,7 @@ class EditUserModal extends Component {
             </div>
             {/* Role Section */}
             <br/>
-            <label>Role:</label>
+            <strong>Role:</strong>
             {/* use radio buttons here for user, volunteer, and admin */}
             <div className="form-check">
               <label>
@@ -340,6 +338,7 @@ class EditUserModal extends Component {
             </div>
             <br/>
             <Button onClick={this.submitEdit} variant="primary">Submit Edit</Button>
+            <br/>
             <br/>
             <Button onClick={this.goBack} variant="warning">Back to Data Table</Button>
           </div>

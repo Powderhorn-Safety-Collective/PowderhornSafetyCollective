@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 import './ReportIncident.css';
 import Button from 'react-bootstrap/Button';
+import patrolReducer from '../../redux/reducers/patrol.reducer';
 
 class ReportIncident extends Component {
 
@@ -23,6 +24,12 @@ class ReportIncident extends Component {
   componentDidMount = () => {
     this.clock();
     this.clientCheck();
+    this.getAdmins();
+  }
+
+  // function to fetch all admins from db
+  getAdmins = () => {
+    this.props.dispatch( {type: 'GET_ADMINS'});
   }
 
   clientCheck = () => {
@@ -172,16 +179,32 @@ class ReportIncident extends Component {
   // to say that a new incident has been submitted
   sendMessage = (incidentId) => {
     const onCall = this.props.store.onCallReducer;
+    const patrol = this.props.store.patrolReducer; 
+    let callPatrolArray = [];
     for(let i = 0; i < onCall.length; i++) {
-      console.log('call for', onCall[i].incident_id, incidentId);
-      console.log('################', onCall[i].phone);
-      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: onCall[i].phone}});
+      callPatrolArray.push(onCall[i])
     }
-    const patrol = this.props.store.patrolReducer;
-    for (let i = 0; i < patrol.length; i++) {
-      console.log('patrol for #########', patrol[i].phone);
-      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: patrol[i].phone}});
+    for(let i = 0; i < patrol.length; i++) {
+      callPatrolArray.push(patrol[i]); 
     }
+    console.log('callPatrolArray', callPatrolArray);
+    // at this point, the callPatrolAdminArray should have all members in it who are on
+    // call or on patrol and needs admins added to it, but not ones who are already in the array
+    const admins = this.props.store.adminReducer;
+    let callPatrolAdminArray = callPatrolArray.concat(admins);
+    console.log('callPatrolAdminArray', callPatrolAdminArray);
+    let uniqueCallPatrolAdminArray = this.trimArray(callPatrolAdminArray);
+    console.log('uniqueCallPatrolAdminArray', uniqueCallPatrolAdminArray);
+    for (let i = 0; i < uniqueCallPatrolAdminArray.length; i++){
+      this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: {phone: uniqueCallPatrolAdminArray[i].phone, client_id: this.state.client_id}});
+    }
+  }
+
+  // trims the on call & on patrol & admin array to remove duplicates if an admin is also
+  // on call or on patrol
+  trimArray (items) {
+    const ids = [];
+    return items.filter(item => ids.includes(item.id) ? false : ids.push(item.id));
   }
 
   render() {

@@ -129,10 +129,12 @@ class InternalIncident extends Component {
 
   sendMessage = (incidentId) => {
     const incidentFollowers = this.props.incidentFollowers;
-    // check the incidentFollowers for the people following that incident, I hope
+    // check the incidentFollowers for the people following that incident
     for(let i = 0; i < incidentFollowers.length; i++) {
       if (incidentFollowers[i].incident_id === incidentId) {
-        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone}});
+        console.log('sendMessage incidentId', this.props.incident.client_id);
+        
+        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone, client_id: this.props.incident.client_id}});
       }     
     }
   }

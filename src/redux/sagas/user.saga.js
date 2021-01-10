@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser(action) {
@@ -36,6 +36,17 @@ function* getAllUsers() {
     yield put ( {type:'SET_ALL_USERS', payload: response.data} );
   } catch (error) {
     console.log(error);
+  }
+}
+
+function* getAllAdmins() {
+  try {
+    const response = yield axios.get('/api/user/admins');
+    console.log('admins response.data', response.data);
+    yield put({type: 'SET_ADMINS', payload: response.data});
+  }
+  catch(error) {
+    console.log('error in getAllAdmins saga', error);
   }
 }
 
@@ -142,6 +153,7 @@ function* sortOnCall() {
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('GET_ALL_USERS', getAllUsers); // yield to grab all users from database, as opposed to the single user data that the above yield grabs
+  yield takeEvery('GET_ADMINS', getAllAdmins);
 
       // below are all the yields to sort data table by column
       yield takeLatest("SORT_USERNAME", sortUsername);

@@ -18,7 +18,7 @@ CREATE TABLE "incidents" (
 	"type" varchar(511) NOT NULL,
 	"notes" varchar(1000),
 	"location" varchar(255) NOT NULL,
-	"time_submitted" TIMESTAMP (255) NOT NULL,
+	"time_submitted" TIMESTAMP(6) without time zone NOT NULL,
 	"view_publicly" BOOLEAN NOT NULL DEFAULT 'false',
 	"duplicate_entry" BOOLEAN NOT NULL DEFAULT 'false',
 	"client_id" integer NOT NULL unique,

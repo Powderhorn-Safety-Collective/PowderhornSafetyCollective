@@ -216,25 +216,6 @@ class InternalIncident extends Component {
               <br/>
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}
-              <strong className="internalLine">Active Incident? </strong>
-              {this.props.incident.active !== undefined &&
-                <ToggleSwitch toggleName={activeToggle}
-                  className="internalLine"
-                  handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
-                />
-              }
-              <br/>
-              <br/>
-                {/* Need to display name   */}
-                {/* {this.props.incident.assigned ?
-                  <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
-                  :
-                  <h4>This incident is not assigned to anyone.</h4>
-                } */}
-                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident}/>
-                <div>
-                  <InternalNotes incidentId={this.props.incident.id}/>
-                </div>
                 <div className="whiteBackground">
                 <br/>
                 <h2 className="yellowBackground">Information Provided by Reporter</h2>
@@ -309,8 +290,27 @@ class InternalIncident extends Component {
                   />
                 }
                 <br/>
-                <br/>
                 </div>
+                </div>
+                <br/>
+              <strong className="internalLine">Active Incident? </strong>
+              {this.props.incident.active !== undefined &&
+                <ToggleSwitch toggleName={activeToggle}
+                  className="internalLine"
+                  handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
+                />
+              }
+              <br/>
+              <br/>
+                {/* Need to display name   */}
+                {/* {this.props.incident.assigned ?
+                  <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
+                  :
+                  <h4>This incident is not assigned to anyone.</h4>
+                } */}
+                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident}/>
+                <div>
+                  <InternalNotes incidentId={this.props.incident.id}/>
                 </div>
                 <br/>
                 <label htmlFor="publicText">

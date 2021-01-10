@@ -69,7 +69,7 @@ class UserPage extends Component {
           <Col md={8} lg={6} 
             className="userModule">
             <Row className="box scrollable">
-              <h2>
+              <h2 className="whiteText">
                 Incidents
               </h2>
                 {/* incident cards are mapped onto cards for display here */}
@@ -85,7 +85,7 @@ class UserPage extends Component {
 
           {/* right column with incidents user submitted or is following */}
           <Col md={6} lg={4} className="box scrollable" id="followedIncidentContainer">
-            <h3>Your Followed and Submitted Incidents</h3>
+            <h3 className="whiteText">Your Followed and Submitted Incidents</h3>
             {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {
               return(
                 // <IncidentModule incident={personalIncident} key={index}/>

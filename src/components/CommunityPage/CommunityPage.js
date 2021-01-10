@@ -121,7 +121,7 @@ class CommunityPage extends Component {
           <Col></Col>
           <Col md={8} lg={6}    className="communityColumnCenter">
             <Row className="box scrollable" >
-              <h2>
+              <h2 className="whiteText">
                 Incidents
               </h2>
 {/* incident cards are mapped onto cards for display here */}

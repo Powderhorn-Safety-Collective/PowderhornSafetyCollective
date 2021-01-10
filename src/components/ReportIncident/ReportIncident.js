@@ -276,7 +276,7 @@ class ReportIncident extends Component {
       <input defaultValue={this.state.location} 
             type="text" 
             placeholder="Location" 
-            maxLength="254"
+            maxLength="255"
             onChange={(event) => this.handleChange(event, 'location')}></input>
     <br/>
     <label>

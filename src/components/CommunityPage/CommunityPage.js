@@ -154,9 +154,7 @@ class CommunityPage extends Component {
               >About Us</Button>
                 <Collapse in={this.state.aboutOpen}>
                   <div id="aboutBody" className="white">
-                    The Powderhorn Safety Collective (PSC) envisions a new form of community response that calls upon the resources of the neighborhood rather than the police. 
-                    We are neighbors providing support to the community with compassion and care in mind. 
-                    As a collective we commit to the practices of nonviolence and de-escalation with the end goal of strengthening the social fabric of the neighborhood.
+                  The Powderhorn Safety Collective is a community organization in the Powderhorn Park area of Minneapolis, MN.
                   </div>
                 </Collapse>
                 <Button

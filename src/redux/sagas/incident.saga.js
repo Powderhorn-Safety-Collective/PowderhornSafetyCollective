@@ -154,7 +154,7 @@ function* editIncident(action) {
 function* fetchPersonalIncidents(action) {
   console.log('fetch Personal Incidents fn with payload', action.payload);
   try {
-    const personalResponse = yield axios.get(`api/incident/personal/${action.payload.id}`);
+    const personalResponse = yield axios.get(`api/incident/personal`);
     console.log('personal incidents', personalResponse.data);
     yield put({type: 'SET_PERSONAL_INCIDENTS', payload: personalResponse.data});
   }

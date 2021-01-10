@@ -7,6 +7,7 @@ function* followIncidentSaga(action) {
   console.log('in follow incident with incident id', action.payload);
   yield axios.post('api/incident/follow', action.payload);
   yield put({type: 'GET_FOLLOWED_INCIDENTS'});
+  yield put({type: 'GET_PERSONAL_INCIDENTS'});
 } 
 
 // this saga function is to remove the user from the junction table incident_followers
@@ -15,6 +16,7 @@ function* unfollowIncidentSaga(action) {
   console.log('in unfollow incident with incident id', action.payload);
   yield axios.delete(`api/incident/follow/${action.payload.incident_Id}`);
   yield put({type: 'GET_FOLLOWED_INCIDENTS'});
+  yield put({type: 'GET_PERSONAL_INCIDENTS'});
 } 
 
 function* getFollowersForIncidents(action) {

@@ -25,6 +25,7 @@ class EditUser extends Component {
     return (
       <div>
         <h2 className="centerClass">User Table</h2>
+        <h3 className="centerClass">Click on a column's heading to sort by that data type.</h3>
             <EditUserTABLE className="blackdrop" user={this.props.store.allUsersReducer} skills={this.props.store.userSkillsReducer}/>
       </div>
     );

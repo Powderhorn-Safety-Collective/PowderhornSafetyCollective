@@ -7,7 +7,7 @@ class ToggleSwitchInternal extends (Component) {
 
   render() {
     return(
-      <div className="toggle-switch">
+      <div className="toggle-switch-int">
         <input 
           type="checkbox"
           defaultChecked={this.props.toggleOn}
@@ -21,8 +21,8 @@ class ToggleSwitchInternal extends (Component) {
         >
           <span 
             className="toggle-switch-inner" 
-            data-yes="Yes" 
-            data-no="No">
+            data-yes="Show" 
+            data-no="Hide">
           </span>
           <span 
             className="toggle-switch-switch">

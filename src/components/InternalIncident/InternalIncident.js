@@ -12,6 +12,7 @@ import InternalNotes from '../InternalNotes/InternalNotes';
 import Button from 'react-bootstrap/Button';
 import { formatPhoneNumber } from 'react-phone-number-input';
 import swal from 'sweetalert';
+import Collapse from 'react-bootstrap/Collapse';
 
 // This component is going to be the card display for the incident
 // that appears and is consumed by the Member Page Component.
@@ -28,6 +29,7 @@ class InternalIncident extends Component {
     user_notes_public: this.props.incident.user_notes_public,
     active_public: this.props.incident.active_public,
     active: this.props.incident.active,
+    open: false
   }
 
   // function to render time associated with incident
@@ -148,18 +150,15 @@ class InternalIncident extends Component {
 
   renderSubmittedUser = (submittedUserId) => {
     let submittedUserData =  this.props.users.find(user => user.id == submittedUserId)
-    console.log('submittedUserData', submittedUserData);
-    
     return( 
       <div className="incidentHeader">
-        <h3>Incident Number: {this.props.incident.client_id}</h3>
-        <p>Submitted by: {submittedUserData.username}</p>
-        <p>Name: {submittedUserData.first_name} {submittedUserData.last_name}</p>
+        <p><strong>Submitted by: </strong>{submittedUserData.username}</p>
+        <p><strong>Name: </strong>{submittedUserData.first_name} {submittedUserData.last_name}</p>
         {submittedUserData.address && 
-          <p>Address: {submittedUserData.address}</p>
+          <p><strong>Address: </strong>{submittedUserData.address}</p>
         }
-        <p>Phone: {formatPhoneNumber(submittedUserData.phone)}</p>
-        <p>email: {submittedUserData.email}</p>
+        <p><strong>Phone: </strong>{formatPhoneNumber(submittedUserData.phone)}</p>
+        <p><strong>Email: </strong>{submittedUserData.email}</p>
       </div>
     )
   }
@@ -175,8 +174,16 @@ class InternalIncident extends Component {
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
-            {/* left stuff for user info for person who submitted incident, if available*/}
             <Col lg={12} xs={12}>
+              <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
+            </Col>
+            <Col lg={12} xs={12}>
+            {this.props.incident.duplicate_entry === true &&
+                <h2 className="alert">*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
+              }
+            {!this.props.incident.assigned && this.props.incident.duplicate_entry === false &&
+              <h2 className="redBackground">THIS INCIDENT IS NEW</h2>
+            }
               {this.props.incident.submitted_user != undefined && this.props.users.length > 0 ?
                 this.renderSubmittedUser(this.props.incident.submitted_user)
               :
@@ -189,9 +196,6 @@ class InternalIncident extends Component {
             {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
-                {this.props.incident.duplicate_entry === true &&
-                <h2>*THIS IS A DUPLICATE OF ANOTHER INCIDENT*</h2>
-              }
               <br/>
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}
@@ -216,13 +220,27 @@ class InternalIncident extends Component {
                 </div>
                 <div className="whiteBackground">
                 <br/>
-
-                <h2>Information Provided by Reporter</h2>
-                <h3>Toggle items to be viewed by the public. Submit by clicking post notice.</h3>
+                <h2 className="yellowBackground">Information Provided by Reporter</h2>
+                <div className="internalLine">
+                  <h5
+                    onClick={(()=>this.setState({open: !this.state.open}))}
+                    aria-controls="collapseInstructions"
+                    aria-expanded={this.state.open}
+                    className="greyBackground"
+                    >Click Here For Public Post Instructions
+                  </h5>
+                  <Collapse in={this.state.open} className="internalLine">
+                  <ol>
+                    <li>Select data to include in public post using toggles below</li>
+                    <li>Enter text for headline of public post</li>
+                    <li>Click Post (or Update) Public Notice</li>
+                  </ol>
+                  </Collapse>
+                </div>
                 <div>
                 {/* username toggle here to select if username is viewable on the public post*/}
                 <br/>
-                <p className="internalLine">Submitted by: {this.props.incident.username}</p>
+                <p className="internalLine"><strong>Submitted by: </strong>{this.props.incident.username}</p>
                 {this.props.incident.username_public !== undefined &&
                   <ToggleSwitchInternal toggleName={usernameToggle}
                     className="internalLine"
@@ -233,7 +251,7 @@ class InternalIncident extends Component {
                 {/* location toggle here to select if location is viewable on the public post */}
                 <br/>
                 <br/>
-                <p className="internalLine"> Location: {this.props.incident.location}</p>
+                <p className="internalLine"><strong> Location: </strong>{this.props.incident.location}</p>
                 {this.props.incident.location_public !== undefined &&
                   <ToggleSwitchInternal toggleName={locationToggle}
                     className="internalLine"
@@ -244,7 +262,7 @@ class InternalIncident extends Component {
                 {/* type toggle here to select if type is viewable on the public post */}
                 <br/>
                 <br/>
-                <p className="internalLine">Type: {this.props.incident.type}</p>
+                <p className="internalLine"><strong>Incident Type:</strong>{this.props.incident.type}</p>
                 {this.props.incident.type_public !== undefined &&
                   <ToggleSwitchInternal toggleName={typeToggle}
                     className="internalLine"
@@ -255,7 +273,7 @@ class InternalIncident extends Component {
                 {/* user notes toggle here to select if user notes are viewable on the public post */}
                 <br/>
                 <br/>
-                <p className="internalLine">User Notes: {this.props.incident.notes}</p>
+                <p className="internalLine"><strong>Submitter Notes:</strong>{this.props.incident.notes}</p>
                 {this.props.incident.user_notes_public !== undefined &&
                   <ToggleSwitchInternal toggleName={userNotesToggle}
                     className="internalLine"
@@ -266,7 +284,7 @@ class InternalIncident extends Component {
                 {/* timedate toggle here to select if timedate is viewable on the public post */}
                 <br/>
                 <br/>
-                <p className="internalLine">Time Submitted: {this.renderTime(this.props.incident.time_submitted)}</p>
+                <p className="internalLine"><strong>Time Submitted:</strong> {this.renderTime(this.props.incident.time_submitted)}</p>
                 {this.props.incident.timedate_public !== undefined &&
                   <ToggleSwitchInternal toggleName={timedateToggle}
                     className="internaLine"
@@ -279,7 +297,7 @@ class InternalIncident extends Component {
                 </div>
                 <br/>
                 <label htmlFor="publicText">
-                  Text to be displayed at beginning of public post:
+                  Enter a Headline for This Public Post Below
                 </label>
                 <br/>
                 <textarea 
@@ -333,6 +351,7 @@ class InternalIncident extends Component {
             }
               </div>
             </div>
+            <h2>_____**_____</h2>
           </Col>
         </Row>
       </Container>

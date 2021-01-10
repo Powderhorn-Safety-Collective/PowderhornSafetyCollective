@@ -122,7 +122,7 @@ class CommunityPage extends Component {
           <Col md={8} lg={6}    className="communityColumnCenter">
             <Row className="box scrollable" >
               <h2 className="whiteText">
-                Incidents
+                Public Notices
               </h2>
 {/* incident cards are mapped onto cards for display here */}
                 {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {

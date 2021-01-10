@@ -112,7 +112,14 @@ class ReportIncident extends Component {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
         swal(
           `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          `This is your incident ID, save this for your records. 
+          Use this number to search for your incident on the Community Page. 
+
+          A PSC admin will review your report as soon as possible. 
+          
+          You can see a summary of your report on your Dashboard, and you will recieve text alerts when this incident is updated.
+          
+          Keep an eye on the community page for public notices about your incident.`, 
           {
             button: "Ok!",
         });
@@ -123,8 +130,15 @@ class ReportIncident extends Component {
       else {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
         swal(
-          `Thank you!`,
-          `We will respond to your reported incident.`, 
+          `${this.state.client_id}`,
+          `This is your incident ID, please save this for your records.  
+          Use this number to search for your incident on the Community Page. 
+
+          A PSC admin will review your report as soon as possible. 
+          
+          You can see a summary of your report on your Dashboard. 
+          
+          Keep an eye on the community page for public notices about your incident.`, 
         {
           button: "Ok!",
         });
@@ -140,7 +154,15 @@ class ReportIncident extends Component {
         this.props.dispatch({type: 'SPECIAL_INCIDENT', payload: this.state.client_id})
         swal(
           `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this number to search for any updates on your incident. 
+          `This is your incident ID, please save this for your records.  
+          Use this number to search for your incident on the Community Page. 
+          
+          A PSC admin will review your report as soon as possible. 
+          
+          You can see a summary of your report on your Dashboard. 
+          
+          Keep an eye on the community page for public notices about your incident.
+
           On the next page, please input your information to register a new account.`, 
           {
             button: "Ok!",
@@ -153,7 +175,12 @@ class ReportIncident extends Component {
         this.props.dispatch({ type: 'POST_INCIDENT', payload: this.state });
         swal(
           `${this.state.client_id}`,
-          `This is your incident ID, please write it down. Use this number to search for any updates on your incident.`, 
+          `This is your incident ID, please write it down. 
+          Use this number to search for any updates on your incident.
+          
+          A PSC admin will review your report as soon as possible. 
+          
+          Keep an eye on the community page for public notices about your incident.`, 
           {
             button: "Ok!",
         });

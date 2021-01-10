@@ -38,7 +38,7 @@ class IncidentSearch extends Component {
         <h2>Search for an Incident</h2>
         <div className="box">
           <label htmlFor="searchNum" className="whiteText">
-            Enter the 6 Digit Incident ID:
+            Enter the Incident ID:
           </label>
           <input
             type="text"

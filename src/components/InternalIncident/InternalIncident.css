@@ -2,7 +2,7 @@
 /* style for incident card w/o user data */
 .internalModule {
     background-color: lightgrey;
-    border: 2px solid black;  
+    border: 1px solid black;  
     padding: 15px;
     margin: auto;
     max-width: 100%;
@@ -17,7 +17,7 @@ textarea {
 
 /* style for entire incident section including user data */
 .internalRow {
-    border: 2px solid #fdf761;
+    border: 2px solid black;
     background-color: #06989d;
     padding: 15px 0;
 }
@@ -28,7 +28,8 @@ textarea {
     padding: 0 10px;
 }
 .redBackground {
-    background-color: red;
+    background-color: #e07816;
+
 }
 
 .whiteBackground {

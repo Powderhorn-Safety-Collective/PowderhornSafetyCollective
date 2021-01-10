@@ -81,11 +81,24 @@ Alert
   box-sizing: border-box;
   padding: 15px 10px;
   margin: 15px 0;
-  border: 2px solid #e01616;
+  border: 2px solid #e07816;
   background-color: #efefef;
   border-radius: 3px;
-  color: #e01616;
+  color: #e07816;
+  font-weight:450;
+
   /* font-size: 0.8rem; */
+}
+
+.alertresolved {
+  box-sizing: border-box;
+  padding: 15px 10px;
+  margin: 15px 0;
+  background-color: #efefef;
+  border-radius: 3px;
+  color: #06989d;
+  font-weight:450;
+
 }
 
 /* --------------------------------------------------------------------------------
@@ -113,6 +126,8 @@ input {
 button.btn.btn-warning {
   background-color: #fdf761;
   border-color: black;
+  -webkit-box-shadow: 2px 2px 6px 2px #747272 !important; 
+  box-shadow: 2px 2px 6px 2px #747272 !important;
 }
 
 .emailLink {

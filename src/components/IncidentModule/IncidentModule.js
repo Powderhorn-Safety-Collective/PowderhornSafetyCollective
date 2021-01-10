@@ -66,7 +66,7 @@ class IncidentModule extends Component {
         {this.props.incident.active ?
           <p className="alert">Active</p>
           :
-          <p className="alert">Resolved</p>
+          <p className="alertresolved">Resolved</p>
         }
         {/* this function gets called to display time submitted*/}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}

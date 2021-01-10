@@ -62,3 +62,9 @@ background-color: #fdf761 !important;
 border-color:#fdf761 !important;
 color: black !important;
 }
+ul {
+  list-style-type: square;
+  margin: 2px;
+  list-style-position: outside;
+
+}

@@ -177,6 +177,56 @@ class CommunityPage extends Component {
                     </p>              
                   </div>
                 </Collapse>
+                <Button
+                onClick={()=> this.setState({howOpen: !this.state.howOpen})}
+                aria-controls="collapseHow"
+                aria-expanded={this.state.howOpen}
+                className="collapseBtn"
+              >How to Use</Button>
+                <Collapse in={this.state.howOpen}>
+                  <div id="howBody" className="white">
+                    
+                    <h4>Welcome to Powderhorn Safety Collective (PSC)!</h4>
+                    <div> 
+                      <h5>How do I use PSC?</h5>
+                      <p>You can use PSC without signing up! Anyone in the community can:</p>
+                        <ul>
+                        <li>Report incidents</li>
+                        <li>Follow and view incidents</li>
+                        <li>Look up incidents with an incident ID number.</li>
+                        <li>Join the PSC mailing list</li>
+                        </ul>
+                      <p><mark>When an incident is reported it is not posted to the community page right away.</mark> PSC admins will assign and look over your newly posted incident before sharing it with the public. </p>
+
+                      <p>Want to be able to utilize PSC even more? Register for a free account!</p>
+                    </div>
+
+
+
+                    <div>
+                      <h5>What is a PSC Volunteer?</h5>
+                      <p>PSC Volunteers are here for the community to:</p>
+                      <ul>
+                        <li>Patrol the neighborhood and respond to incidents</li>
+                        <li>Update existing incidents with new information</li>
+                        <li>Notify you and the community about urgent incidents.</li>
+                      </ul>
+                      </div>
+
+                  <div>
+                  <h5>And how about PSC Admins?</h5>
+
+                    <ul>
+                      <li>Manage, update, and assign incidents to volunteers to incidents as they are reported</li>
+                      <li>Connect with volunteers and community members about incidents happening in Powderhorn.</li>
+                      <li>Answer any and all of your questions about PSC!</li>
+                    </ul>
+                  </div>
+
+
+
+                  </div>
+                </Collapse>
             </Row>
 {/* end of login Column */}
             <Row className="box">

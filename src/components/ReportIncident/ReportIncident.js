@@ -276,6 +276,7 @@ class ReportIncident extends Component {
       <input defaultValue={this.state.location} 
             type="text" 
             placeholder="Location" 
+            maxLength="255"
             onChange={(event) => this.handleChange(event, 'location')}></input>
     <br/>
     <label>
@@ -425,9 +426,9 @@ class ReportIncident extends Component {
     <label>
       <input className="radio" type="radio" name="type"></input>
       &nbsp;Other</label>
-      <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
+      <input type="text" maxLength="500" onChange={(event) => this.handleChange(event, 'type')}></input>
     <br/>
-      <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
+      <textarea defaultValue={this.state.notes} placeholder="Additional Notes" maxLength="1000" onChange={(event) => this.handleChange(event, 'notes')}></textarea>
     <br/>
       <Button className="btn btn-primary" onClick={this.submitReport}>Submit Incident</Button>
     </div>

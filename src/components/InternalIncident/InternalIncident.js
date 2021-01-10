@@ -322,6 +322,7 @@ class InternalIncident extends Component {
                   placeholder="Text for public post"
                   onChange={(event) => this.handleChange(event)}
                   value={this.state.publicText}
+                  maxLength="2000"
                 />
                 <br/>
                 <Button

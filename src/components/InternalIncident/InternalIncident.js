@@ -126,6 +126,21 @@ class InternalIncident extends Component {
     })
     this.sendMessage(incidentId);
   }
+  handleRemoveNotice = (incidentId) => {
+    this.props.dispatch({
+      type: 'UPDATE_PUBLIC_POST',
+      payload: {
+        view_publicly: false,
+        username_public: this.state.username_public,
+        timedate_public: this.state.timedate_public,
+        location_public: this.state.location_public,
+        type_public: this.state.type_public,
+        user_notes_public: this.state.user_notes_public,
+        id: this.props.incident.id
+      }
+    })
+    this.sendMessage(incidentId); 
+  }
 
   sendMessage = (incidentId) => {
     const incidentFollowers = this.props.incidentFollowers;
@@ -350,6 +365,15 @@ class InternalIncident extends Component {
                 >
                   UPDATE PUBLIC NOTICE
                 </Button>
+            }
+            </div><br></br>
+            <div className="centerClass">
+            {this.props.incident.view_publicly === true &&
+              <Button
+                variant="warning"
+                onClick={() => this.handleRemoveNotice (this.props.incident.id)}
+                className="btn"
+              >Remove Public Notice</Button>
             }
               </div>
             </div>

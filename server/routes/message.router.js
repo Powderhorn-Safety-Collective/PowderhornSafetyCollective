@@ -21,7 +21,7 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
   res.sendStatus(200);
 });
 
-// route for sending a notice to people on patrol / on call when a new incident is submitted
+// route for sending a notice to people on patrol / on call and admins when a new incident is submitted
 router.post('/newIncident', (req, res) => {
   console.log('new incident req.body', req.body);
     
@@ -35,7 +35,7 @@ router.post('/newIncident', (req, res) => {
   res.sendStatus(200);
 });
 
-// router for sending a notice to people on patrol / on call to investigate an incident
+// route for sending a notice to people on patrol / on call to investigate an incident
 router.post('/assigned', (req, res) => {
   console.log('assigned req.body', req.body);
   

@@ -31,8 +31,8 @@ import {useHistory} from 'react-router-dom';
     <a><Link className="nav-link" to={loginLinkData.path}>
           {loginLinkData.text}</Link></a>
      <a><Link className="nav-link" to="/community"> Community Page</Link></a>
-    <a><Link className="nav-link" to="/history">Incident History</Link> </a>
-    <a><Link className="nav-link" to="/edit">Edit User</Link></a>
+    <a><Link className="nav-link" to="/history">Incident Table</Link> </a>
+    <a><Link className="nav-link" to="/edit">User Table</Link></a>
     {props.store.user.id && (
           <>
             {/* <Link className="nav-link" to="/info">

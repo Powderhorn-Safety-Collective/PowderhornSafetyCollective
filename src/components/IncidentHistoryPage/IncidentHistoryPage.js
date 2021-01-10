@@ -23,6 +23,7 @@ class IncidentHistoryPage extends Component {
     return (
       <div>
         <h2 className="centerClass">Incident Table</h2>
+        <h3 className="centerClass">Click on a column's heading to sort by that data type.</h3>
           <TestTable incident={this.props.store.incidentReducer}/>
       </div>
     );

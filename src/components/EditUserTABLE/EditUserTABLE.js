@@ -41,7 +41,10 @@ function Row(props) {
         array = array += ` •` + skills[i].description + '\n';
       }
     }
-    return (array);
+    if(array == []) {
+      return <p>No skills added.</p>
+    }
+    else { return (array); }
   }
 
   function handleClick(row) {
@@ -49,6 +52,22 @@ function Row(props) {
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
   }
+
+  function checkRole(row) {
+    if(row.role === 3) {
+      return 'Admin';
+    }
+    else if(row.role === 2) {
+      return 'Volunteer';
+    }
+    else if(row.role === 1) {
+      return 'User';
+    }
+    else if(row.role === 0) {
+      return 'Interested in Volunteering';
+    }
+  }
+
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -60,6 +79,7 @@ function Row(props) {
         <TableCell  className="dropdowndata" component="th" scope="row">
           {row.username}
         </TableCell>
+        <TableCell className="dropdowndata">{checkRole(row)}</TableCell>
         <TableCell className="dropdowndata" align="right">{row.first_name}</TableCell>
         <TableCell className="dropdowndata" align="right">{row.last_name}</TableCell>
         <TableCell className="dropdowndata" align="right">{row.address}</TableCell>
@@ -67,7 +87,7 @@ function Row(props) {
         <TableCell className="dropdowndata" align="right">{formatPhoneNumber(row.phone)}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell className="dropdowndata" style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
@@ -134,6 +154,7 @@ export default function EditUserTABLE(props) {
           <TableRow className="dropdown">
             <TableCell />
             <TableCell onClick={() => dispatch( {type: 'SORT_USERNAME'})}>Username</TableCell>
+            <TableCell onClick={() => dispatch( {type: 'SORT_ROLE'})}>Role</TableCell>
             <TableCell onClick={() => dispatch( {type: 'SORT_FIRST_NAME'})} align="right">First&nbsp;Name</TableCell>
             <TableCell onClick={() => dispatch( {type: 'SORT_LAST_NAME'})} align="right">Last&nbsp;Name</TableCell>
             <TableCell onClick={() => dispatch( {type: 'SORT_ADDRESS'})} align="right">Address</TableCell>

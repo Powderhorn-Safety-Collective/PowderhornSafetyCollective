@@ -44,7 +44,7 @@ class EditUserModal extends Component {
               value={skillItem.id}
               defaultChecked
               />
-              {skillItem.description}
+              &nbsp;{skillItem.description}
           </label>
         </div>
       );
@@ -56,7 +56,7 @@ class EditUserModal extends Component {
               type="checkbox"
               value={skillItem.id}
               />
-              {skillItem.description}
+              &nbsp;{skillItem.description}
           </label>
         </div>
       );

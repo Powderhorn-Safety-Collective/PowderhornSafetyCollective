@@ -257,7 +257,7 @@ class ReportIncident extends Component {
             value="Gunfire" 
             onChange={(event) => this.handleChange(event, 'type')} 
             name="type"></input>
-            Gunfire
+            &nbsp;Gunfire
     </label>
     <br/>
     <label>
@@ -266,7 +266,7 @@ class ReportIncident extends Component {
             value="Armed Assault/Robbery" 
             onChange={(event) => this.handleChange(event, 'type')} 
             name="type"></input>
-            Armed Assault/Robbery
+            &nbsp;Armed Assault/Robbery
       </label>
     <br/>
     <label>
@@ -275,7 +275,7 @@ class ReportIncident extends Component {
             value="Assualt/Fighting" 
             onChange={(event) => this.handleChange(event, 'type')} 
             name="type"></input>
-            Assualt/Fighting
+            &nbsp;Assualt/Fighting
       </label>
     <br/>
     <label>
@@ -284,7 +284,7 @@ class ReportIncident extends Component {
             value="Fire (Please call 911 first)" 
             onChange={(event) => this.handleChange(event, 'type')} 
             name="type"></input>
-            Fire (Please call 911 first)
+            &nbsp;Fire (Please call 911 first)
       </label>
     <br/>
     <label>
@@ -293,7 +293,7 @@ class ReportIncident extends Component {
             value="Medical Emergency" 
             onChange={(event) => this.handleChange(event, 'type')} 
             name="type"></input>
-            Medical Emergency
+            &nbsp;Medical Emergency
       </label>
     <br/>
     <label>
@@ -302,7 +302,7 @@ class ReportIncident extends Component {
           value="Mental Health Emergency" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Mental Health Emergency
+          &nbsp;Mental Health Emergency
       </label>
     <br/>
     <label>
@@ -311,7 +311,7 @@ class ReportIncident extends Component {
           value="Drug Overdose" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Drug Overdose
+          &nbsp;Drug Overdose
       </label>
     <br/>
     <label>
@@ -320,7 +320,7 @@ class ReportIncident extends Component {
           value="Break In/Theft" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Break In/Theft
+          &nbsp;Break In/Theft
       </label>
     <br/>
     <label>
@@ -329,7 +329,7 @@ class ReportIncident extends Component {
           value="Vandalism" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Vandalism
+          &nbsp;Vandalism
       </label>
     <br/>
     <label>
@@ -338,7 +338,7 @@ class ReportIncident extends Component {
           value="Car Accident" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Car Accident
+          &nbsp;Car Accident
       </label>
     <br/>
     <label>
@@ -347,7 +347,7 @@ class ReportIncident extends Component {
           value="Vehicle Problem" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Vehicle Problem
+          &nbsp;Vehicle Problem
       </label>
     <br/>
     <label>
@@ -356,7 +356,7 @@ class ReportIncident extends Component {
           value="Police Activity" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Police Activity
+          &nbsp;Police Activity
       </label>
     <br/>
     <label>
@@ -365,7 +365,7 @@ class ReportIncident extends Component {
           value="Suspicious Behavior" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Suspicious Behavior
+          &nbsp;Suspicious Behavior
       </label>
     <br/>
     <label>
@@ -374,7 +374,7 @@ class ReportIncident extends Component {
           value="Unsafe Behavior" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Unsafe Behavior
+          &nbsp;Unsafe Behavior
       </label>
     <br/>
     <label>
@@ -383,7 +383,7 @@ class ReportIncident extends Component {
           value="Safety Escort" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          Safety Escort
+          &nbsp;Safety Escort
       </label>
     <br/>
     <label>
@@ -392,12 +392,12 @@ class ReportIncident extends Component {
           value="In need of neighborly help" 
           onChange={(event) => this.handleChange(event, 'type')} 
           name="type"></input>
-          In need of neighborly help
+          &nbsp;In need of neighborly help
       </label>
     <br/>
     <label>
       <input className="radio" type="radio" name="type"></input>
-      Other</label>
+      &nbsp;Other</label>
       <input type="text" onChange={(event) => this.handleChange(event, 'type')}></input>
     <br/>
       <textarea defaultValue={this.state.notes} placeholder="Additional Notes" onChange={(event) => this.handleChange(event, 'notes')}></textarea>

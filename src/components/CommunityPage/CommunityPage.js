@@ -154,7 +154,7 @@ class CommunityPage extends Component {
               >About Us</Button>
                 <Collapse in={this.state.aboutOpen}>
                   <div id="aboutBody" className="white">
-                  The Powderhorn Safety Collective is a community organization in the Powderhorn Park area of Minneapolis, MN.
+                  The Powderhorn Safety Collective is a community organization in the Powderhorn Park neighborhood of Minneapolis, MN.
                   </div>
                 </Collapse>
                 <Button

@@ -201,13 +201,13 @@ class InternalIncident extends Component {
               <br/>
               {/* toggle for active/inactive goes here 
               This will change the data directly in the database when toggled*/}
+              <strong className="internalLine">Active Incident? </strong>
               {this.props.incident.active !== undefined &&
                 <ToggleSwitch toggleName={activeToggle}
                   className="internalLine"
                   handleToggle={this.handleToggle} toggleOn={this.props.incident.active}
                 />
               }
-              <p className="internalLine">Active Incident? </p>
               <br/>
               <br/>
                 {/* Need to display name   */}

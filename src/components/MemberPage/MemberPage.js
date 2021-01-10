@@ -37,12 +37,14 @@ class MemberPage extends Component {
   render() {
     return ( 
       <Container fluid>
-        <h1 id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
+        <Col md={9} xs={12}> 
+        <h1 className="centerText" id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
+        </Col>
         {/* Row to go across entire page */}
         <Row>
           {/* left stuff for incidents */}
           <Col md={9} xs={12} className="memberLeft">  
-            <h1> All Incidents</h1>
+            <h1 className="centerText">All Incidents</h1>
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;

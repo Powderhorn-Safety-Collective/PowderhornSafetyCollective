@@ -37,36 +37,26 @@ class EditUserModal extends Component {
     });
     if(thisUserSkillArray.some(skill => skill.id === skillItem.id)){
       return(
-        <div  className="form-check">
-          <input
-            type="checkbox"
-            value={skillItem.id}
-            onChange={this.removeSkill}
-            className="form-check-input"
-            id="flexCheckChecked"
-            defaultChecked
-            />
-          <label 
-            className="form-check-label"
-            for="flexCheckChecked">
-            {skillItem.description}
+        <div>
+          <label onClick={this.removeSkill}>
+            <input
+              type="checkbox"
+              value={skillItem.id}
+              defaultChecked
+              />
+              {skillItem.description}
           </label>
         </div>
       );
     } else {
       return (
-        <div  className="form-check">
-          <input
-            type="checkbox"
-            value={skillItem.id}
-            onChange={this.addSkill}
-            className="form-check-input"
-            id="flexCheckDefault"   
-            />
-          <label 
-            className="form-check-label"
-            for="flexCheckDefault">
-            {skillItem.description}
+        <div>
+          <label onClick={this.addSkill}>
+            <input
+              type="checkbox"
+              value={skillItem.id}
+              />
+              {skillItem.description}
           </label>
         </div>
       );
@@ -183,7 +173,7 @@ class EditUserModal extends Component {
         {this.props.store.editUserReducer ? 
           <div className="editModal">
             <div>
-            <p>Username: {this.state.username}</p>
+            <strong>Username: {this.state.username}</strong>
             </div>
             <div>
             <label>First Name:</label>
@@ -212,7 +202,7 @@ class EditUserModal extends Component {
             </div>
             <br/>
             {/* Adult Section */}
-            <label>Is the user an adult?:</label>
+            <strong>Is the user an adult?:</strong>
             <div className="form-check">
               <label>
                 <input 
@@ -241,7 +231,7 @@ class EditUserModal extends Component {
             </div>
             <br/>
             {/* On Patrol / On Call Section */}
-            <label htmlFor="patrolRadios">Current Status:</label>
+            <strong htmlFor="patrolRadios">Current Status:</strong>
             <div className="form-check">
               <label>
                 <input 
@@ -283,7 +273,7 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
-            <label>User's Skills:</label>
+            <strong>User's Skills:</strong>
             {/* Skills section */}
             <div>
               {this.props.store.allSkillsReducer.map((skill) => {
@@ -292,7 +282,7 @@ class EditUserModal extends Component {
             </div>
             {/* Role Section */}
             <br/>
-            <label>Role:</label>
+            <strong>Role:</strong>
             {/* use radio buttons here for user, volunteer, and admin */}
             <div className="form-check">
               <label>

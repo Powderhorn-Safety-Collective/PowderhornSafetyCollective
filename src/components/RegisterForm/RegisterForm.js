@@ -171,6 +171,7 @@ class RegisterForm extends Component {
             {/* option to learn more about volunteering */}
             {/* need to figure out volunteer angle */}
           <div>
+            <label htmlFor="volunteer" id="volLabel">
             <input 
               type="checkbox" 
               id="volunteer" 
@@ -178,7 +179,7 @@ class RegisterForm extends Component {
               value= '0' 
               onChange={this.handleInputChangeFor('role')}
               />
-            <label htmlFor="volunteer" id="volLabel">I would like to learn more <br/>about how to volunteer</label>
+            &nbsp;I would like to learn more <br/>about how to volunteer</label>
           </div>
         </div>
         <div>

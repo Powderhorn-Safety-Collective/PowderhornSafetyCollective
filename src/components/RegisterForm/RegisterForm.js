@@ -69,6 +69,7 @@ class RegisterForm extends Component {
               value={this.state.username}
               required
               onChange={this.handleInputChangeFor('username')}
+              maxLength="255"
             />
           </div>
           <div>
@@ -78,6 +79,7 @@ class RegisterForm extends Component {
               value={this.state.password}
               required
               onChange={this.handleInputChangeFor('password')}
+              maxLength="255"
             />
           </div>
           <div>
@@ -87,6 +89,7 @@ class RegisterForm extends Component {
               value={this.state.first_name}
               required
               onChange={this.handleInputChangeFor('first_name')}
+              maxLength="255"
             />
           </div>
           <div>
@@ -96,6 +99,7 @@ class RegisterForm extends Component {
               value={this.state.last_name}
               required
               onChange={this.handleInputChangeFor('last_name')}
+              maxLength="255"
             />
           </div>
           <div>
@@ -104,6 +108,7 @@ class RegisterForm extends Component {
               placeholder="Address" 
               value={this.state.address}
               onChange={this.handleInputChangeFor('address')}
+              maxLength="500"
             />
           </div>
           <div>
@@ -113,6 +118,7 @@ class RegisterForm extends Component {
               value={this.state.email}
               required
               onChange={this.handleInputChangeFor('email')}
+              maxLength="255"
             />
           </div>
           <div>

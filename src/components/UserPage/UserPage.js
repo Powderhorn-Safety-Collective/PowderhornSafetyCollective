@@ -34,7 +34,7 @@ class UserPage extends Component {
 
   // function to fetch incidents this user submitted or is following
   getPersonalIncidents = () => {
-    this.props.dispatch({type: 'GET_PERSONAL_INCIDENTS', payload: {id: this.props.store.user.id}});
+    this.props.dispatch({type: 'GET_PERSONAL_INCIDENTS'});
   }
 
 

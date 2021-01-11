@@ -83,9 +83,9 @@ router.get('/public', (req, res) => {
 
 // this route will get incidents associated with this user, either submitted
 // by the user or followed by the user.  The user id is used to get those in 
-// in the joined table with the user id.
-router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
-  console.log('personal incidents', req.params.id);
+// the joined table with the user id.
+router.get('/personal', rejectUnauthenticated, (req, res) => {
+  console.log('personal incidents', req.user.id);
     
   const queryText = `select distinct incidents.id, type, notes, location, 
   time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, view_publicly, duplicate_entry, client_id, 
@@ -97,7 +97,7 @@ router.get('/personal/:id', rejectUnauthenticated, (req, res) => {
   where submitted_user = $1
   or incident_followers.user_id = $1;`;
 
-  pool.query(queryText, [req.params.id]).then((result) => {
+  pool.query(queryText, [req.user.id]).then((result) => {
     res.send(result.rows);
   }).catch((error) => {
     console.log('error in get personal incidents route', error);

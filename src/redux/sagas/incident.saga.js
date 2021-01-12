@@ -136,8 +136,11 @@ function* editIncident(action) {
   // function to assign a PSC member to an incident
   function* addAssigned(action) {
     try {
+      console.log('action.payload for add assigned saga', action.payload);
+      
       yield axios.put('api/incident/assign', action.payload)
       yield put({type: 'GET_INCIDENTS'});
+      yield put({type: 'MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', payload: action.payload});
     }catch (error) {
       console.log('error in assign saga', error);
     }

@@ -64,18 +64,29 @@ router.post('/newIncident', (req, res) => {
   });
 });
 
-// route for sending a notice to people on patrol / on call to investigate an incident
+// route for sending a notice one person on patrol / on call to investigate an incident if it is assigned to them
 router.post('/assigned', (req, res) => {
   console.log('assigned req.body', req.body);
   
-  // client.messages
-  // .create({
-  //    body: `You have been assigned to an incident.  You may view it in the PSC app.  It is number ${req.body.client_id}`,
-  //    from: process.env.TWILIO_NUMBER,
-  //    to: `${req.body.phone}`
-  //  })
-  // .then(message => console.log(message.sid));
-  res.sendStatus(200);
+  const queryText =  `select phone from incidents
+                      join "user"
+                      on incidents.assigned_user = "user".id
+                      where incidents.id = $1;`;
+
+  pool.query(queryText, [req.body.incident]).then((result) => {
+
+    client.messages
+    .create({
+      body: `You have been assigned to an incident.  You may view it in the PSC app.  It is number ${req.body.client_id}`,
+      from: process.env.TWILIO_NUMBER,
+      to: `${result.rows[0].phone}`
+    })
+    .then(message => console.log(message.sid));
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error', error);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;

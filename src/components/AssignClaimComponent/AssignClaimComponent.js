@@ -48,13 +48,15 @@ class AssignClaimComponent extends Component {
   submitAssign = () => {
     console.log(this.state.assigning.assigned);
     
-    this.props.dispatch({type: 'ADD_ASSIGNED', payload: this.state.assigning});
+    this.props.dispatch({type: 'ADD_ASSIGNED', payload: {assigned: this.state.assigning.assigned, 
+                                                        incident: this.state.assigning.incident,
+                                                        client_id: this.props.incident.client_id}});
     // the id is this.state.assigning.assigned, but need the phone number
-    let assignedUserData = this.state.activeMemArray.find(user => user.id == this.state.assigning.assigned);
-    console.log('assignedUserData', assignedUserData);
-    console.log('assigned incident', this.props.incident.client_id);
+    // let assignedUserData = this.state.activeMemArray.find(user => user.id == this.state.assigning.assigned);
+    // console.log('assignedUserData', assignedUserData);
+    // console.log('assigned incident', this.props.incident.client_id);
     
-    this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', payload: {phone: assignedUserData.phone, client_id: this.props.incident.client_id}});
+    // this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', payload: {phone: assignedUserData.phone, client_id: this.props.incident.client_id}});
   }
 
   render() {

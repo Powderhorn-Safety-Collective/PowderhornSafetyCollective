@@ -22,38 +22,46 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
   pool.query(queryText, [req.body.id]).then((result) => {
     console.log('result', result.rows);
     for (let i = 0; i < result.rows.length; i++) {
-    client.messages
-    .create({
-      body: `The incident you are following, number ${req.body.client_id}, has been updated.  You may log into the PSC app to view details`,
-      from: process.env.TWILIO_NUMBER,
-      to: `${result.rows[i].phone}`
-    })
-    .then(message => console.log(message.sid));
-  }
+      client.messages
+      .create({
+        body: `The incident you are following, number ${req.body.client_id}, has been updated.  You may log into the PSC app to view details`,
+        from: process.env.TWILIO_NUMBER,
+        to: `${result.rows[i].phone}`
+      })
+      .then(message => console.log(message.sid));
+    }
+    res.sendStatus(200);
   }).catch((error)=>{
     console.log('error', error);
     res.sendStatus(500);
   });
-  
 });
-
-// router.post('/message_update', (req, res) => {
-//   console.log('message route');
-//   res.sendStatus(200);
-// })
 
 // route for sending a notice to people on patrol / on call and admins when a new incident is submitted
 router.post('/newIncident', (req, res) => {
   console.log('new incident req.body', req.body);
-    
-  // client.messages
-  // .create({
-  //    body: `There has been a new incident submitted.  You may view it in the PSC app.  It is number ${req.body.client_id}`,
-  //    from: process.env.TWILIO_NUMBER,
-  //    to: `${req.body.phone}`
-  //  })
-  // .then(message => console.log(message.sid));
-  res.sendStatus(200);
+
+  const queryText =  `select phone from "user" 
+                      where on_patrol = true
+                      or on_call = true
+                      or role = 3;`
+  
+  pool.query(queryText).then((result) => {
+    console.log('message new incident result', result.rows);
+    for( let i = 0; i < result.rows.length; i++) {
+      client.messages
+      .create({
+        body: `There has been a new incident submitted.  You may view it in the PSC app.  It is number ${req.body.client_id}`,
+        from: process.env.TWILIO_NUMBER,
+        to: `${result.rows[i].phone}`
+      })
+      .then(message => console.log(message.sid));
+    }
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error', error);
+    res.sendStatus(500);
+  });
 });
 
 // route for sending a notice to people on patrol / on call to investigate an incident

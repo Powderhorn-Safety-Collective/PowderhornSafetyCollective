@@ -58,6 +58,7 @@ function* postIncident(action) {
     try {
       yield axios.post('/api/incident', action.payload);
       yield put( {type: 'GET_INCIDENTS'} );
+      yield put({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: action.payload});
     } 
     catch (error) {
       console.log(error);

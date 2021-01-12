@@ -24,13 +24,13 @@ class ReportIncident extends Component {
   componentDidMount = () => {
     this.clock();
     this.clientCheck();
-    this.getAdmins();
+    // this.getAdmins();
   }
 
   // function to fetch all admins from db
-  getAdmins = () => {
-    this.props.dispatch( {type: 'GET_ADMINS'});
-  }
+  // getAdmins = () => {
+    // this.props.dispatch( {type: 'GET_ADMINS'});
+  // }
 
   clientCheck = () => {
     // want to check to make sure client_id doesn't already exist 
@@ -123,7 +123,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
-        this.sendMessage();
+        // this.sendMessage();
         this.props.history.push('/');
       }
       // 2. if logged in user does not want to follow incident
@@ -142,7 +142,7 @@ class ReportIncident extends Component {
         {
           button: "Ok!",
         });
-        this.sendMessage();
+        // this.sendMessage();
         this.props.history.push('/');
       }
     } // end logged in user section
@@ -167,7 +167,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
-        this.sendMessage();
+        // this.sendMessage();
         this.props.history.push('/registration');
       }
       // 4. if not logged in user only wants to submit incident and not register
@@ -184,7 +184,7 @@ class ReportIncident extends Component {
           {
             button: "Ok!",
         });
-        this.sendMessage();
+        // this.sendMessage();
         this.props.history.push('/');
       }
     }// end not logged in user section

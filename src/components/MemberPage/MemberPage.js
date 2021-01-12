@@ -16,7 +16,7 @@ class MemberPage extends Component {
   componentDidMount = () => {
     this.getUsers();
     this.getIncidents();
-    this.getFollowersForIncident();
+    // this.getFollowersForIncident();
   }
 
   // function to fetch all incident data
@@ -25,9 +25,9 @@ class MemberPage extends Component {
   }
 
   // find the people who are following all of the incidents
-  getFollowersForIncident = () => {
-    this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
-  }
+  // getFollowersForIncident = () => {
+  //   this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
+  // }
   
   // function to fetch all incident data
   getUsers = () => {

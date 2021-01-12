@@ -119,9 +119,13 @@ function* editIncident(action) {
     console.log('updatePublicPost', action.payload);
     try {
       yield axios.put('api/incident/publicPost', action.payload);
-      yield put({type: 'GET_INCIDENTS'})
+      yield put({type: 'GET_INCIDENTS'});
       swal('Post updated.', '', "success");
-      // maybe here
+      // send the message to people following it if it's been updated and is visible, 
+      // not if it's been taken down
+      if (action.payload.view_publicly){
+        yield put({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: action.payload});
+      }
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      

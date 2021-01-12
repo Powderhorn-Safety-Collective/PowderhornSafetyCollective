@@ -121,10 +121,11 @@ class InternalIncident extends Component {
         location_public: this.state.location_public,
         type_public: this.state.type_public,
         user_notes_public: this.state.user_notes_public,
-        id: this.props.incident.id
+        id: this.props.incident.id,
+        client_id: this.props.incident.client_id
       }
     })
-    this.sendMessage(incidentId);
+    // this.sendMessage(incidentId);
   }
   handleRemoveNotice = (incidentId) => {
     this.props.dispatch({
@@ -136,23 +137,27 @@ class InternalIncident extends Component {
         location_public: this.state.location_public,
         type_public: this.state.type_public,
         user_notes_public: this.state.user_notes_public,
-        id: this.props.incident.id
+        id: this.props.incident.id,
+        cliend_id: this.props.incident.client_id
       }
     })
-    this.sendMessage(incidentId); 
+    // this.sendMessage(incidentId); 
   }
 
-  sendMessage = (incidentId) => {
-    const incidentFollowers = this.props.incidentFollowers;
-    // check the incidentFollowers for the people following that incident
-    for(let i = 0; i < incidentFollowers.length; i++) {
-      if (incidentFollowers[i].incident_id === incidentId) {
-        console.log('sendMessage incidentId', this.props.incident.client_id);
+  // sendMessage = (incidentId) => {
+    // const incidentFollowers = this.props.incidentFollowers;
+    // // check the incidentFollowers for the people following that incident
+    // for(let i = 0; i < incidentFollowers.length; i++) {
+    //   if (incidentFollowers[i].incident_id === incidentId) {
+    //     console.log('sendMessage incidentId', this.props.incident.client_id);
         
-        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone, client_id: this.props.incident.client_id}});
-      }     
-    }
-  }
+    //     this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone, client_id: this.props.incident.client_id}});
+    //   }     
+    // }
+    // console.log('heloo sendmessage');
+    
+    // this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {id: incidentId, client_id: this.props.incident.client_id}});    
+  // }
 
   handleDuplicate = () => {
     console.log('duplicate button clicked');

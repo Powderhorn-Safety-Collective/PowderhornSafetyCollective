@@ -26,7 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 });
 
-router.put('/editIncident/:id', (req, res) => {
+router.put('/editIncident/:id', rejectUnauthenticated, (req, res) => {
 
   if (Number(req.user.role) === 3) {
     console.log('REQ IS', req.body);
@@ -429,7 +429,7 @@ router.get('/followed', rejectUnauthenticated, (req, res) => {
   });
 });
 
-router.post('/follow', (req, res) => {
+router.post('/follow', rejectUnauthenticated, (req, res) => {
   console.log('follow route with req.body', req.body);
   const queryText = `insert into incident_followers (incident_id, user_id)
   values($1, $2);`;
@@ -442,7 +442,7 @@ router.post('/follow', (req, res) => {
   });
 });
 
-router.delete('/follow/:incident_Id', (req, res) => {
+router.delete('/follow/:incident_Id', rejectUnauthenticated, (req, res) => {
   console.log('delete follow route with req.body', req.params);
   const queryText = `delete from incident_followers
   where incident_id = $1 and user_id = $2;`;
@@ -455,20 +455,20 @@ router.delete('/follow/:incident_Id', (req, res) => {
   });
 });
 
-router.get('/followers', rejectUnauthenticated, (req, res) => {
-  console.log('get followers route');
-  const queryText = `select incident_id, "user".id as user_id, phone from "user"
-  join incident_followers
-  on "user".id = incident_followers.user_id
-  order by incident_id;`
+// router.get('/followers', rejectUnauthenticated, (req, res) => {
+//   console.log('get followers route');
+//   const queryText = `select incident_id, "user".id as user_id, phone from "user"
+//   join incident_followers
+//   on "user".id = incident_followers.user_id
+//   order by incident_id;`
 
-  pool.query(queryText).then((response) => {
-    console.log('followers response.rows', response.rows);
-    res.send(response.rows);
-  }).catch((error) => {
-    console.log('error in get followers route');
-    res.sendStatus(500);
-  });
-});
+//   pool.query(queryText).then((response) => {
+//     console.log('followers response.rows', response.rows);
+//     res.send(response.rows);
+//   }).catch((error) => {
+//     console.log('error in get followers route');
+//     res.sendStatus(500);
+//   });
+// });
 
 module.exports = router;

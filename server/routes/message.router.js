@@ -37,6 +37,9 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
   }
+  else {
+    res.sendStatus(403);
+  }
 });
 
 // route for sending a notice to people on patrol / on call and admins when a new incident is submitted
@@ -90,6 +93,9 @@ router.post('/assigned', rejectUnauthenticated, (req, res) => {
       console.log('error', error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
   }
 });
 

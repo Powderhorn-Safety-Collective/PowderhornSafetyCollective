@@ -102,7 +102,7 @@ class UserPage extends Component {
                   {personalIncident.active === true ?
                   <p className="alert">Active</p>
                   :
-                  <p className="alert">Resolved</p>
+                  <p className="alertresolved">Resolved</p>
                   }
                 </div>
                 );

@@ -254,7 +254,7 @@ class CommunityPage extends Component {
             <Row id="newsBox">
               <h4> Sign Up for the PSC Newsletter
               <Mailchimp 
-                action='https://gmail.us7.list-manage.com/subscribe/post?u=6648d06c78d7cae5c47a9580d&amp;id=7ab777aba9'
+                action='"https://conniemoffett.us17.list-manage.com/subscribe/post?u=708a00624e362f504e2fbe541&amp;id=605b398d96'
                 fields={[
                   {
                     name: 'EMAIL',

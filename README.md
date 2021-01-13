@@ -1,7 +1,8 @@
 # Powderhorn Safetey Collective (PSC) - app
 This app is a tool to facilitate the PSC's activities in the Powderhorn community. The app allows for unregistered community members to view information about incidents, as well as report incidents to the PSC. Registered users are able do the same, as well as follow and recieve text alerts about incidents. Volunteers (Members) can set their status as on patrol, on call, or off duty, respond to and update information on indidents, receive text alerts when they have been assigned to an incident, set incidents as duplicate, set active-status of incidents, and post public notices about incidents. Administrators have the additional capability of editing and updating users and incidents.
 
-
+Build Status
+- Beta
 
 ## Prerequisites
 
@@ -32,7 +33,14 @@ Before you get started, make sure you have the following software installed on y
   ```
   SERVER_SESSION_SECRET=longComplexString
 
+  REACT_APP_MAILCHIMP_URL= 'yourURL'
+
+  TWILIO_ACCOUNT_SID='your SID'
+  TWILIO_AUTH_TOKEN= 'your AUTH TOKEN'
+  TWILIO_NUMBER=+##########
+
   Replace `longComplexString` with some long random string to keep the application secure. 
+  Replace the URLs and keys with data provided by the appropriate API (Mailchimp and Twilio)
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm run server`
 - Run `npm run client`
@@ -47,6 +55,8 @@ Directory Structure:
 - `server/` contains the Express App
 
 
+To use:
 
+https://fb.watch/2-9QoO1J8J/
 
 

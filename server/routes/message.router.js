@@ -7,7 +7,6 @@ const {
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const axios = require('axios')
 
 // route for if a user gets an update on an incident they are following
 // take in incident id to find followers and client_id to display on text message

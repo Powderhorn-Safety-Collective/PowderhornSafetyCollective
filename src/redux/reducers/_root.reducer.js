@@ -19,6 +19,9 @@ import specialIncidentReducer from './special.incident.reducer';
 import followedIncidentsReducer from './followed.incidents.reducer';
 // import incidentFollowersReducer from './incident.followers.reducer';
 // import adminReducer from './admin.reducer';
+import combinedPatrolCallReducer from './comined.patrol.call.reducer';
+import patrolCountReducer from './patrol.count.reducer';
+import onCallCountReducer from './on.call.count.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -48,6 +51,9 @@ const rootReducer = combineReducers({
   followedIncidentsReducer,
   // incidentFollowersReducer,
   // adminReducer,
+  combinedPatrolCallReducer,
+  patrolCountReducer,
+  onCallCountReducer,
 });
 
 export default rootReducer;

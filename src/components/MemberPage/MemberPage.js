@@ -17,6 +17,9 @@ class MemberPage extends Component {
     this.getUsers();
     this.getIncidents();
     // this.getFollowersForIncident();
+    this.props.dispatch({type: 'FETCH_PATROL'});//get members on patrol
+    this.props.dispatch({type: 'FETCH_ONCALL'});//get members on call
+    this.props.dispatch({type: 'FETCH_PATROL_CALL'});
   }
 
   // function to fetch all incident data
@@ -48,7 +51,8 @@ class MemberPage extends Component {
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;
-              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/>
+              const combinedReducer = this.props.store.combinedPatrolCallReducer;
+              return <InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users} combinedReducer = {combinedReducer}/>
             })}
           </Col>{/* end of left section for incident cards */}
           {/* right on patrol / on call display */}

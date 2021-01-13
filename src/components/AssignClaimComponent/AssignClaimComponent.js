@@ -19,19 +19,37 @@ class AssignClaimComponent extends Component {
   
   // sets local state to an array with all patrolling or oncall members
   populateArray = () => {
+    console.log('populate array fn');
+    
     let tempArray = []
-    if(this.props.store.patrolReducer !== null) {
-      this.props.store.patrolReducer.map((person) => {
-      tempArray.push(person)
-      });
-    }
-    this.props.store.onCallReducer.map((oCPerson) => {
-      tempArray.push(oCPerson)
-    });
-    this.setState ({
-      ...this.state,
-      activeMemArray: tempArray
-    });
+    // if(this.props.patrolReducer !== null) {
+    // if(this.props.patrolReducer != undefined) {
+    // if(this.props.patrolReducer != null) {
+    // // if (this.props.patrolReducer.length > 0) {
+    //   this.props.patrolReducer.map((person) => {
+    //   tempArray.push(person)
+    //   });
+    // }
+    // if (this.props.onCallReducer.length > 0) {
+    //   this.props.onCallReducer.map((oCPerson) => {
+    //     tempArray.push(oCPerson)
+    //   });
+    // }
+    // for (let i=0; i < this.props.patrolReducer.length; i++) {
+    //   tempArray.push(this.props.patrolReducer[i]);
+    // }
+    // for(let i=0; i < this.props.onCallReducer.length; i++) {
+    //   tempArray.push(this.props.onCallReducer[i]);
+    // }
+    // console.log('tempArray', tempArray);
+    
+    // this.setState ({
+    //   ...this.state,
+    //   activeMemArray: tempArray
+    // });
+    console.log('patrol', this.props.patrolReducer);
+    console.log('call', this.props.onCallReducer);
+    
   }
 
   // sets local state to selected PSC member and incident id
@@ -62,16 +80,20 @@ class AssignClaimComponent extends Component {
   render() {
     return(
       <>
+      {/* {JSON.stringify(this.props.patrolReducer)} */}
+      {/* {JSON.stringify(this.props.onCallReducer)} */}
+      {/* {JSON.stringify(this.state)} */}
+      {JSON.stringify(this.props.combinedReducer)}
                   {this.props.incident.assigned ?
                     <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
                     :
                     <h4 className="alert">This incident is not assigned to anyone.</h4>
                   }
-      {this.props.store.patrolReducer &&
+      {this.props.combinedReducer != undefined &&
       <>
         <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
           <option key="0">select</option>
-          {this.state.activeMemArray.map((person) => {
+          {this.props.combinedReducer.map((person) => {
             return(
               <option key={person.id} value={person.id}>{person.first_name}</option>
             );

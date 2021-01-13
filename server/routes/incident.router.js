@@ -354,7 +354,7 @@ router.post('/incident_with_follow', async (req, res) => {
 
 // routes to edit things from incident table
 router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role === 3) {
+  if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
     SET "active" = $1
     WHERE "id" = $2;`;
@@ -372,7 +372,7 @@ router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role === 3) {
+  if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
     SET "view_publicly" = $1
     WHERE "id" = $2;`;
@@ -390,7 +390,7 @@ router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role === 3) {
+  if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
     SET "duplicate_entry" = $1
     WHERE "id" = $2;`;

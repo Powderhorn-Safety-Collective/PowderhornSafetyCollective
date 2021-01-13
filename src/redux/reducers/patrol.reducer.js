@@ -1,4 +1,4 @@
-const patrolReducer = (state=0, action) => {
+const patrolReducer = (state=[], action) => {
   switch(action.type) {
     case 'SET_PATROL':
       return action.payload;

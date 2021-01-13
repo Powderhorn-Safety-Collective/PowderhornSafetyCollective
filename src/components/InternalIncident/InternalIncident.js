@@ -192,8 +192,12 @@ class InternalIncident extends Component {
     let typeToggle = `typeToggle${this.props.incident.id}`;
     let userNotesToggle = `userNotesToggle${this.props.incident.id}`;
     let activeToggle = `activeToggle${this.props.incident.id}`;
+
     return (
       <Container className="centerClass" fluid>
+        {JSON.stringify(this.props.combinedReducer)}
+        {/* {JSON.stringify(this.props.patrolReducer)} */}
+        {/* {JSON.stringify(this.props.onCallReducer)} */}
           {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             <Col lg={12} xs={12}>
@@ -313,7 +317,7 @@ class InternalIncident extends Component {
                   :
                   <h4>This incident is not assigned to anyone.</h4>
                 } */}
-                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident}/>
+                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident} combinedReducer={this.props.combinedReducer}/>
                 <div>
                   <InternalNotes incidentId={this.props.incident.id}/>
                 </div>

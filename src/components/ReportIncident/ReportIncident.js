@@ -240,10 +240,10 @@ class ReportIncident extends Component {
     {this.state.showReport === true ? 
     <div className="registerForm">
         <h2>IS THIS CORRECT?</h2>
-          <p>Time/Date: {this.state.time_submitted}</p>
-          <p>Location: {this.state.location}</p>
-          <p>Incident type: {this.state.type}</p>
-          <p>Notes: {this.state.notes}</p>
+          <p><strong>Time/Date: </strong>{this.state.time_submitted}</p>
+          <p><strong>Location: </strong>{this.state.location}</p>
+          <p><strong>Incident type: </strong>{this.state.type}</p>
+          <p><strong>Notes: </strong>{this.state.notes}</p>
         <br/>
           {this.props.store.user.id ?
             <>

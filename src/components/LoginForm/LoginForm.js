@@ -47,10 +47,10 @@ class LoginForm extends Component {
         )}
         <div>
           <label htmlFor="username">
-            Username:
             <input
               type="text"
               name="username"
+              placeholder=" Username"
               required
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
@@ -59,10 +59,11 @@ class LoginForm extends Component {
         </div>
         <div>
           <label htmlFor="password">
-            Password:
             <input
               type="password"
               name="password"
+              placeholder=" Password"
+
               required
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}

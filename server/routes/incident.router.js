@@ -215,7 +215,7 @@ router.put('/duplicate', rejectUnauthenticated, (req, res) => {
 });
 
 // this route will mark an incident with its assigned PSC Member
-router.put('/assign', (req, res) => {
+router.put('/assign', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents"
     SET "assigned_user" = $1
@@ -232,15 +232,20 @@ router.put('/assign', (req, res) => {
 })
 
   // route to get count of all active incidents
-  router.get('/active', (req, res) => {
-    // query to count the number of active incidents
-    const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
-    pool.query(queryText)
+  router.get('/active', rejectUnauthenticated, (req, res) => {
+    if (req.user.role > 1) {
+      // query to count the number of active incidents
+      const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
+      pool.query(queryText)
       .then((results) => res.send(results.rows))
       .catch((error) => {
         console.log(error);
         res.sendStatus(500);
       });
+    }
+    else {
+      res.sendStatus(403);
+    }
   });
 
   // get all incident data for searched incident
@@ -349,7 +354,7 @@ router.post('/incident_with_follow', async (req, res) => {
 
 // routes to edit things from incident table
 router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role > 1) {
+  if (req.user.role === 3) {
     const queryText = `UPDATE "incidents" 
     SET "active" = $1
     WHERE "id" = $2;`;
@@ -367,7 +372,7 @@ router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role > 1) {
+  if (req.user.role === 3) {
     const queryText = `UPDATE "incidents" 
     SET "view_publicly" = $1
     WHERE "id" = $2;`;
@@ -385,7 +390,7 @@ router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
-  if (req.user.role > 1) {
+  if (req.user.role === 3) {
     const queryText = `UPDATE "incidents" 
     SET "duplicate_entry" = $1
     WHERE "id" = $2;`;
@@ -402,6 +407,7 @@ router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// this is used to get a client id if it exists in the check to make sure it is a unique client id
 router.get('/client_id/:client_id', (req,res) => {
   console.log('client id', req.params.client_id);
   const queryText = `select client_id from incidents where client_id = $1;`;
@@ -454,21 +460,5 @@ router.delete('/follow/:incident_Id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
   });
 });
-
-// router.get('/followers', rejectUnauthenticated, (req, res) => {
-//   console.log('get followers route');
-//   const queryText = `select incident_id, "user".id as user_id, phone from "user"
-//   join incident_followers
-//   on "user".id = incident_followers.user_id
-//   order by incident_id;`
-
-//   pool.query(queryText).then((response) => {
-//     console.log('followers response.rows', response.rows);
-//     res.send(response.rows);
-//   }).catch((error) => {
-//     console.log('error in get followers route');
-//     res.sendStatus(500);
-//   });
-// });
 
 module.exports = router;

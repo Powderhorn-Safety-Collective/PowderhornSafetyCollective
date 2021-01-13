@@ -47,7 +47,7 @@ Before you get started, make sure you have the following software installed on y
 - Navigate to `localhost:3000`
 
 
-Directory Structure:
+## Directory Structure:
 
 - `src/` contains the React application
 - `public/` contains static assets for the client-side
@@ -55,8 +55,12 @@ Directory Structure:
 - `server/` contains the Express App
 
 
-To use:
+## To Use: (start at minute 47:00)
 
 https://fb.watch/2-9QoO1J8J/
+
+
+# Thank You
+- Prime Digital Academy, Casie Siekman and all of the instructors there, along with Powderhorn Safety Collective, and the Ukkonen Cohort as a whole.
 
 

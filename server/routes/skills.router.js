@@ -1,8 +1,9 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.delete('/user/:id/:skill', (req, res) => {
+router.delete('/user/:id/:skill', rejectUnauthenticated, (req, res) => {
   if (req.user.role === 3) {
     console.log('deleting skill', req.params.id, req.params.skill);
     const queryText = `DELETE FROM "user_skills" WHERE "user_id" = $1 AND "skill_id" = $2;`;
@@ -30,7 +31,7 @@ router.get('/', (req, res) => {
 })
 
 //this route adds a new row to the user_skills table
-router.post('/user', (req, res) => {
+router.post('/user', rejectUnauthenticated, (req, res) => {
   if (req.user.role === 3) {
     const queryText = `INSERT INTO "user_skills" ("user_id", "skill_id") VALUES ($1, $2);`;
     pool.query(queryText, [req.body.userId, req.body.skillId])
@@ -47,7 +48,7 @@ router.post('/user', (req, res) => {
 
 
 // this route gets all the user_skills data
-router.get('/user', (req, res) => {
+router.get('/user', rejectUnauthenticated, (req, res) => {
   if (req.user.role === 3) {
     let queryText = `SELECT "user_skills"."id", "user_id", "description", "skill_id" FROM "user_skills"
     JOIN "skills" on "skills"."id" = "user_skills"."skill_id"`;

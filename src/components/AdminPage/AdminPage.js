@@ -31,8 +31,6 @@ class AdminPage extends Component {
   }
 
   render() {
-    console.log('adminpage', this.props.store.combinedPatrolCallReducer);
-    
     return (
       <Container fluid>
         {/* <h1 className="centerClass" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1> */}

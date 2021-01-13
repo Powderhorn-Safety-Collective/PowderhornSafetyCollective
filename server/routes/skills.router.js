@@ -13,6 +13,9 @@ router.delete('/user/:id/:skill', (req, res) => {
       res.sendStatus(500);
     })
   }
+  else {
+    res.sendStatus(403);
+  }
 })
 
 // this route gets all the skills from the skills table
@@ -37,6 +40,9 @@ router.post('/user', (req, res) => {
       res.sendStatus(500);
     })
   }
+  else {
+    res.sendStatus(403);
+  }
 })
 
 
@@ -51,6 +57,9 @@ router.get('/user', (req, res) => {
       console.log('error in get skills', error);
       res.sendStatus(500);
     })
+  }
+  else {
+    res.sendStatus(403);
   }
 })
 

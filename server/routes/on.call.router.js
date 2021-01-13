@@ -3,7 +3,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// route to get count of on_patrol = true from user table
+// route to get list of on call members
 router.get('/', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     let queryText = `select id, username, first_name from "user"
@@ -20,6 +20,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 })
 
+// route to get count of on call members
 router.get('/count', (req, res) => {
   const queryText =   `select count(*) from "user"
                       where on_call = true;`;

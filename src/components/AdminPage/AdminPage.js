@@ -14,7 +14,6 @@ class AdminPage extends Component {
   componentDidMount = () => {
     this.getUsers();
     this.getIncidents();
-    // this.getFollowersForIncident();
     this.props.dispatch({type: 'FETCH_PATROL'});//get members on patrol
     this.props.dispatch({type: 'FETCH_ONCALL'});//get members on call
     this.props.dispatch({type: 'FETCH_PATROL_CALL'});
@@ -25,11 +24,6 @@ class AdminPage extends Component {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
     console.log('GETTING INCIDENTS');
   }
-
-  // find the people who are following all of the incidents
-  // getFollowersForIncident = () => {
-  //   this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
-  // }
   
   // function to fetch all incident data
   getUsers = () => {

@@ -50,7 +50,7 @@ function* getPatrolCount() {
   }
 }
 
-// This function gets the 
+// This function gets the number of people on call
 function* getOnCallCount() {
   try {
     console.log('getOnCall');

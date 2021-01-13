@@ -17,8 +17,6 @@ import allSkillsReducer from './all.skills.reducer';
 import clientIdReducer from './client.id.reducer';
 import specialIncidentReducer from './special.incident.reducer';
 import followedIncidentsReducer from './followed.incidents.reducer';
-// import incidentFollowersReducer from './incident.followers.reducer';
-// import adminReducer from './admin.reducer';
 import combinedPatrolCallReducer from './comined.patrol.call.reducer';
 import patrolCountReducer from './patrol.count.reducer';
 import onCallCountReducer from './on.call.count.reducer';
@@ -49,8 +47,6 @@ const rootReducer = combineReducers({
   clientIdReducer,
   specialIncidentReducer, //holds the client id when a user decides to register WHILE reporting an incident
   followedIncidentsReducer,
-  // incidentFollowersReducer,
-  // adminReducer,
   combinedPatrolCallReducer,
   patrolCountReducer,
   onCallCountReducer,

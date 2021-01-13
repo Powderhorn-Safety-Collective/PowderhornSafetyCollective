@@ -23,7 +23,7 @@ class Header extends Component {
     this.props.dispatch({type: "GET_PATROL_COUNT"});
     this.props.dispatch({type: "GET_ON_CALL_COUNT"});
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
-    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});//dispatch to GET all active incidents
+    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'}); //dispatch to GET all active incidents
   }
 
   // This function is called whenever either one of the toggles is switched

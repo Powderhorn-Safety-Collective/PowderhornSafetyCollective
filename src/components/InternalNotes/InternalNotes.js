@@ -57,23 +57,23 @@ class InternalNotes extends Component {
     return(
       <>
         <div>
-        <br/>
-        <h3>Internal Notes</h3>
-        <>
-          {this.props.store.internalNoteReducer.map((note) => {
-            return(
-              note.incident_id === this.props.incidentId &&
-                <div className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></div>
-            );
-          })}
-        </>
+          <br/>
+          <h3>Internal Notes</h3>
+          <>
+            {this.props.store.internalNoteReducer.map((note) => {
+              return(
+                note.incident_id === this.props.incidentId &&
+                  <div className="whiteBackground" key={note.id}>{note.text} <p>Note added at {this.renderTime(note.time)}</p></div>
+              );
+            })}
+          </>
         </div>
         <div className="noteForm">
-        {/* <label htmlFor="internalNoteInput">Internal Notes</label> */}
-        <textarea className="internalNoteInput" type="text" placeholder="Add an update or note on this incident." 
-        value={this.state.noteText} maxLength="1000" onChange={this.handleChange}></textarea>
-        <br/>
-        <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
+          <textarea className="internalNoteInput" type="text" placeholder="Add an update or note on this incident." 
+            value={this.state.noteText} maxLength="1000" onChange={this.handleChange}>
+          </textarea>
+          <br/>
+          <Button variant="primary" className="noteSubmit" onClick={this.handleSubmit}>Submit Note</Button>
         </div>
         <br/>
       </>

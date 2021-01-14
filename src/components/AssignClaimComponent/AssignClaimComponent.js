@@ -9,8 +9,7 @@ class AssignClaimComponent extends Component {
     assigning: {
       assigned: 0,
       incident: 0,
-    },
-    activeMemArray: []
+    }
   }
 
   // sets local state to selected PSC member and incident id
@@ -35,31 +34,31 @@ class AssignClaimComponent extends Component {
   render() {
     return(
       <>
-      {this.props.incident.assigned ?
-        <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
-        :
-        <h4 className="alert">This incident is not assigned to anyone.</h4>
-      }
-      {this.props.combinedReducer != undefined &&
-      <>
-        <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
-          <option key="0">select</option>
-          {this.props.combinedReducer.map((person) => {
-            return(
-              <option key={person.id} value={person.id}>{person.first_name}</option>
-            );
-          })}
-        </select>
-        <Button 
-          className="internalLine"
-          id="confirm"
-          variant="primary"
-          onClick={this.submitAssign}
-        >
-          Assign
-        </Button>
-      </>  
-      }
+        {this.props.incident.assigned ?
+          <h4>This incident is assigned to: {this.props.incident.assigned}</h4>
+          :
+          <h4 className="alert">This incident is not assigned to anyone.</h4>
+        }
+        {this.props.combinedReducer != undefined &&
+          <>
+            <select id="assignClaim" onChange={(event) => this.handleChange(event, this.props.incidentId)}>
+            <option key="0">select</option>
+            {this.props.combinedReducer.map((person) => {
+              return(
+                <option key={person.id} value={person.id}>{person.first_name}</option>
+              );
+            })}
+            </select>
+            <Button 
+              className="internalLine"
+              id="confirm"
+              variant="primary"
+              onClick={this.submitAssign}
+            >
+            Assign
+            </Button>
+          </>  
+        }
       </>
     )
   }

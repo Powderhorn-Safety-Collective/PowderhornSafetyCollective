@@ -97,7 +97,6 @@ function Row(props) {
                 <TableHead>
                   <TableRow className="dropdown">
                     <TableCell>Is the user an adult?</TableCell>
-                    {/* <TableCell>Internal Notes</TableCell> */}
                     <TableCell>Is the user on patrol?</TableCell>
                     <TableCell>Is the user on call?</TableCell>
                     <TableCell >User Skills</TableCell>
@@ -111,7 +110,6 @@ function Row(props) {
                           {row.adult.toString()}
                         </p>
                       </TableCell>
-                      {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
                         <p>
                             {row.on_patrol.toString()}

@@ -59,6 +59,7 @@ function* editUser(action) {
     yield put({type: 'FETCH_PATROL_CALL'});
     yield put({type: 'GET_ON_CALL_COUNT'});
     yield put({type: 'GET_PATROL_COUNT'});
+    yield put({type: 'FETCH_USER'});
   }
   catch (error){
       console.log('user edit failed', error);

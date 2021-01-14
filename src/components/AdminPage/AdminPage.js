@@ -22,7 +22,6 @@ class AdminPage extends Component {
   // function to fetch all incident data
   getIncidents = () => {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
-    console.log('GETTING INCIDENTS');
   }
   
   // function to fetch all incident data

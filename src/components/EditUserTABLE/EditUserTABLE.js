@@ -48,7 +48,6 @@ function Row(props) {
   }
 
   function handleClick(row) {
-    console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
   }

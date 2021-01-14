@@ -37,7 +37,7 @@ router.get('/count', (req, res) => {
 // update a user's oncall status 
 router.put('/status', (req,res) => {
   if (req.user.role > 1) {
-    console.log('On call route REQ IS', req.body.onCallValue);
+    console.log('On call route', req.body.onCallValue);
     let queryText = `UPDATE "user" 
     SET "on_call" = $1
     WHERE "id" = $2;`;

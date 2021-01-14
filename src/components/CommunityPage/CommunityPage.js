@@ -12,7 +12,6 @@ import Col from "react-bootstrap/Col";
 import Mailchimp from 'react-mailchimp-form'
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import swal from 'sweetalert';
 
 // Community Page component
 // visible to everyone
@@ -54,7 +53,6 @@ class CommunityPage extends Component {
 
   // get all the incidents a given user is following
   getFollowedIncidentIds = () => {
-    console.log('in personal incident ids');
     this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
   }
 
@@ -67,7 +65,6 @@ class CommunityPage extends Component {
   renderContactRequest = (incidentId) => {
     if (this.props.store.user.id) {
       if (this.props.store.followedIncidentsReducer.some(incident => incident.incident_id === incidentId)) {
-        console.log('hello');
         return <Button onClick={() => this.unfollowIncident(incidentId)} variant="success">Stop Following this Incident</Button>
       }
       else {

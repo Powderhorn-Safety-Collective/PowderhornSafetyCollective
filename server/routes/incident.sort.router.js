@@ -30,7 +30,7 @@ router.get('/client_id', rejectUnauthenticated, (req, res) => {
 
 // route for getting incidents sorted by type  
 router.get('/type', rejectUnauthenticated, (req, res) => {
-  console.log('hello sort type');
+  console.log('sort type');
   if (Number(req.user.role) === 3) {
     // sort by type
     const queryText = `SELECT active, client_id, duplicate_entry, id, location, location_public, notes, submitted_user,

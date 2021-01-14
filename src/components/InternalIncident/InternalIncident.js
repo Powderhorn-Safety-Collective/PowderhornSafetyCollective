@@ -144,7 +144,6 @@ class InternalIncident extends Component {
   }
 // marks an incident as a duplicate
   handleDuplicate = () => {
-    console.log('duplicate button clicked');
     this.props.dispatch({
       type: 'MARK_DUPLICATE',
       payload: {

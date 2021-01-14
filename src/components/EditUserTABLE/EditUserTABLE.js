@@ -51,7 +51,6 @@ function Row(props) {
 
  //function to open and populate the edit user modal 
   function handleClick(row) {
-    console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
   }

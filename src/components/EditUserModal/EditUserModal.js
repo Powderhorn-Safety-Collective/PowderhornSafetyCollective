@@ -92,7 +92,6 @@ class EditUserModal extends Component {
       return
     }
     else {
-      console.log('editing user');
       this.props.dispatch( {type: 'SUBMIT_EDIT_USER', payload: this.state} );
       this.props.history.push('/edit');
     }

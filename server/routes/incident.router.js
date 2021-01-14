@@ -86,7 +86,6 @@ router.get('/public', (req, res) => {
 // by the user or followed by the user.  The user id is used to get those in 
 // the joined table with the user id.
 router.get('/personal', rejectUnauthenticated, (req, res) => {
-  console.log('personal incidents', req.user.id);
     
   const queryText = `select distinct incidents.id, type, notes, location, 
   time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted, view_publicly, duplicate_entry, client_id, 

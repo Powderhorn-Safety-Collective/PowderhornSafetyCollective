@@ -121,10 +121,10 @@ class InternalIncident extends Component {
         location_public: this.state.location_public,
         type_public: this.state.type_public,
         user_notes_public: this.state.user_notes_public,
-        id: this.props.incident.id
+        id: this.props.incident.id,
+        client_id: this.props.incident.client_id
       }
     })
-    this.sendMessage(incidentId);
   }
   handleRemoveNotice = (incidentId) => {
     this.props.dispatch({
@@ -136,22 +136,10 @@ class InternalIncident extends Component {
         location_public: this.state.location_public,
         type_public: this.state.type_public,
         user_notes_public: this.state.user_notes_public,
-        id: this.props.incident.id
+        id: this.props.incident.id,
+        cliend_id: this.props.incident.client_id
       }
     })
-    this.sendMessage(incidentId); 
-  }
-
-  sendMessage = (incidentId) => {
-    const incidentFollowers = this.props.incidentFollowers;
-    // check the incidentFollowers for the people following that incident
-    for(let i = 0; i < incidentFollowers.length; i++) {
-      if (incidentFollowers[i].incident_id === incidentId) {
-        console.log('sendMessage incidentId', this.props.incident.client_id);
-        
-        this.props.dispatch({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: {phone: incidentFollowers[i].phone, client_id: this.props.incident.client_id}});
-      }     
-    }
   }
 
   handleDuplicate = () => {
@@ -187,6 +175,7 @@ class InternalIncident extends Component {
     let typeToggle = `typeToggle${this.props.incident.id}`;
     let userNotesToggle = `userNotesToggle${this.props.incident.id}`;
     let activeToggle = `activeToggle${this.props.incident.id}`;
+
     return (
       <Container className="centerClass" fluid>
           {/* Row for all the stuff inside of the container */}
@@ -308,7 +297,7 @@ class InternalIncident extends Component {
                   :
                   <h4>This incident is not assigned to anyone.</h4>
                 } */}
-                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident}/>
+                <AssignClaimComponent incidentId={this.props.incident.id} incident={this.props.incident} combinedReducer={this.props.combinedReducer}/>
                 <div>
                   <InternalNotes incidentId={this.props.incident.id}/>
                 </div>

@@ -54,6 +54,11 @@ function* editUser(action) {
   try {
     yield axios.put(`/api/user/editUser/${action.payload.id}`, action.payload); 
     yield put({type: 'GET_ALL_USERS'});
+    yield put({type: 'FETCH_ONCALL'});
+    yield put({type: 'FETCH_PATROL'});
+    yield put({type: 'FETCH_PATROL_CALL'});
+    yield put({type: 'GET_ON_CALL_COUNT'});
+    yield put({type: 'GET_PATROL_COUNT'});
   }
   catch (error){
       console.log('user edit failed', error);

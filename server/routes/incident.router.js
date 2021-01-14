@@ -26,7 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 });
 
-router.put('/editIncident/:id', (req, res) => {
+router.put('/editIncident/:id', rejectUnauthenticated, (req, res) => {
 
   if (Number(req.user.role) === 3) {
     console.log('REQ IS', req.body);
@@ -70,7 +70,7 @@ router.put('/editIncident/:id', (req, res) => {
 router.get('/public', (req, res) => {
   const queryText = `select active, client_id, id, location, location_public, notes, submitted_user,
                     text_for_public_display, time_submitted at time zone 'utc' at time zone 'america/chicago' as time_submitted,
-                    timedate_public, user_notes_public, username, username_public from incidents
+                    timedate_public, type, type_public, user_notes_public, username, username_public from incidents
                     where view_publicly = true
                     order by time_submitted desc;`
   pool.query(queryText)
@@ -215,7 +215,7 @@ router.put('/duplicate', rejectUnauthenticated, (req, res) => {
 });
 
 // this route will mark an incident with its assigned PSC Member
-router.put('/assign', (req, res) => {
+router.put('/assign', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents"
     SET "assigned_user" = $1
@@ -232,15 +232,20 @@ router.put('/assign', (req, res) => {
 })
 
   // route to get count of all active incidents
-  router.get('/active', (req, res) => {
-    // query to count the number of active incidents
-    const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
-    pool.query(queryText)
+  router.get('/active', rejectUnauthenticated, (req, res) => {
+    if (req.user.role > 1) {
+      // query to count the number of active incidents
+      const queryText = `SELECT count("active") AS "active" FROM "incidents" WHERE "active" = 'TRUE';`
+      pool.query(queryText)
       .then((results) => res.send(results.rows))
       .catch((error) => {
         console.log(error);
         res.sendStatus(500);
       });
+    }
+    else {
+      res.sendStatus(403);
+    }
   });
 
   // get all incident data for searched incident
@@ -402,6 +407,7 @@ router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// this is used to get a client id if it exists in the check to make sure it is a unique client id
 router.get('/client_id/:client_id', (req,res) => {
   console.log('client id', req.params.client_id);
   const queryText = `select client_id from incidents where client_id = $1;`;
@@ -429,7 +435,7 @@ router.get('/followed', rejectUnauthenticated, (req, res) => {
   });
 });
 
-router.post('/follow', (req, res) => {
+router.post('/follow', rejectUnauthenticated, (req, res) => {
   console.log('follow route with req.body', req.body);
   const queryText = `insert into incident_followers (incident_id, user_id)
   values($1, $2);`;
@@ -442,7 +448,7 @@ router.post('/follow', (req, res) => {
   });
 });
 
-router.delete('/follow/:incident_Id', (req, res) => {
+router.delete('/follow/:incident_Id', rejectUnauthenticated, (req, res) => {
   console.log('delete follow route with req.body', req.params);
   const queryText = `delete from incident_followers
   where incident_id = $1 and user_id = $2;`;
@@ -451,22 +457,6 @@ router.delete('/follow/:incident_Id', (req, res) => {
     res.sendStatus(200);
   }).catch((error) => {
     console.log('error in delete incident follow route', error);
-    res.sendStatus(500);
-  });
-});
-
-router.get('/followers', rejectUnauthenticated, (req, res) => {
-  console.log('get followers route');
-  const queryText = `select incident_id, "user".id as user_id, phone from "user"
-  join incident_followers
-  on "user".id = incident_followers.user_id
-  order by incident_id;`
-
-  pool.query(queryText).then((response) => {
-    console.log('followers response.rows', response.rows);
-    res.send(response.rows);
-  }).catch((error) => {
-    console.log('error in get followers route');
     res.sendStatus(500);
   });
 });

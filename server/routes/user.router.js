@@ -40,7 +40,7 @@ router.post('/register', (req, res, next) => {
 });
 
 // PUT route to edit user
-router.put('/editUser/:id', (req, res) => {
+router.put('/editUser/:id', rejectUnauthenticated, (req, res) => {
   if (Number(req.user.role) === 3) {
     const id = req.body.id
     const username = req.body.username;
@@ -253,43 +253,38 @@ router.get('/role', rejectUnauthenticated, (req, res) => {
   }
 });
 router.get('/patrol', rejectUnauthenticated, (req, res) => {
-  // sort by patrol status
-  const queryText = `select id, username, first_name, 
-  last_name, address, email, phone, adult, on_patrol, 
-  on_call, role from "user" order by "on_patrol";`
-  pool.query(queryText)
+  if (req.user.role === 3) {
+    // sort by patrol status
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "on_patrol";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
 router.get('/oncall', rejectUnauthenticated, (req, res) => {
-  // sort by on call status
-  const queryText = `select id, username, first_name, 
-  last_name, address, email, phone, adult, on_patrol, 
-  on_call, role from "user" order by "on_call";`
-  pool.query(queryText)
+  if (req.user.role === 3) {
+    // sort by on call status
+    const queryText = `select id, username, first_name, 
+    last_name, address, email, phone, adult, on_patrol, 
+    on_call, role from "user" order by "on_call";`
+    pool.query(queryText)
     .then((results) => res.send(results.rows))
     .catch((error) => {
       console.log(error);
       res.sendStatus(500);
     });
+  }
+  else {
+    res.sendStatus(403);
+  }
 });
-
-// get the admins' id and phone number to send text to when new incident submitted
-router.get('/admins', (req, res) => {
-  const queryText = `select id, phone from "user"
-  where role = 3;`;
-
-  pool.query(queryText).then((results) => {
-    console.log('admins results.rows', results.rows);
-    res.send(results.rows);
-  }).catch((error) => {
-    console.log('error in get admins route');
-    res.sendStatus(500);
-    
-  })
-})
 
 module.exports = router;

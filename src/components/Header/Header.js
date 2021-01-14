@@ -20,10 +20,10 @@ class Header extends Component {
 
   componentDidMount = () => {
     //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
-    this.props.dispatch({type: 'FETCH_PATROL'});//get patrol count
-    this.props.dispatch({type: 'FETCH_ONCALL'});//get oncall count
+    this.props.dispatch({type: "GET_PATROL_COUNT"});
+    this.props.dispatch({type: "GET_ON_CALL_COUNT"});
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
-    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'});//dispatch to GET all active incidents
+    this.props.dispatch( {type: 'GET_PUBLIC_INCIDENTS'}); //dispatch to GET all active incidents
   }
 
   // This function is called whenever either one of the toggles is switched
@@ -115,23 +115,23 @@ class Header extends Component {
           {/* </div> */}
         <Col lg ={4} xs={12}>
           <div className="patrolDisplay">
-            {Number(this.props.store.patrolReducer.length) === 1 && 
-              <h5> {this.props.store.patrolReducer.length} person is on patrol</h5>
+            {Number(this.props.store.patrolCountReducer.count) === 1 && 
+              <h5> 1 person is on patrol</h5>
             }
-            {Number(this.props.store.patrolReducer.length) === 0 &&
+            {Number(this.props.store.patrolCountReducer.count) === 0 &&
               <h5>No One is on Patrol</h5>
               }
-            {Number(this.props.store.patrolReducer.length) > 1 &&
-              <h5>{this.props.store.patrolReducer.length} people are on patrol</h5>
+            {Number(this.props.store.patrolCountReducer.count) > 1 &&
+              <h5>{this.props.store.patrolCountReducer.count} people are on patrol</h5>
             }
-            {Number(this.props.store.onCallReducer.length) === 1 && 
-              <h5>{this.props.store.onCallReducer.length} person is on call</h5>
+            {Number(this.props.store.onCallCountReducer.count) === 1 && 
+              <h5>1 person is on call</h5>
             }
-            {Number(this.props.store.onCallReducer.length) === 0 && 
+            {Number(this.props.store.onCallCountReducer.count) === 0 && 
               <h5>No One is On Call</h5>
             }
-            {Number(this.props.store.onCallReducer.length) > 1 && 
-              <h5>{this.props.store.onCallReducer.length} people are on call</h5>
+            {Number(this.props.store.onCallCountReducer.count) > 1 && 
+              <h5>{this.props.store.onCallCountReducer.count} people are on call</h5>
             }
             <div className="incidents" onClick={this.viewIncidents}>
             {this.props.store.user.role > 1 ?

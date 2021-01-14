@@ -9,7 +9,9 @@ function* addPStatus(action) {
     yield axios.put('api/patrol/status', action.payload);
     yield put({type: 'FETCH_USER'});
     yield put({type: 'FETCH_PATROL'});
-    
+    yield put({type: 'FETCH_PATROL_CALL'});
+    yield put({type: 'GET_ON_CALL_COUNT'});
+    yield put({type: 'GET_PATROL_COUNT'});
   }catch(error) {
     console.log('error in edit patrolstatus');
   }
@@ -21,6 +23,10 @@ function* addCStatus(action){
     yield axios.put('api/oncall/status', action.payload);
     yield put({type: 'FETCH_USER'});
     yield put({type: 'FETCH_ONCALL'});
+    yield put({type: 'FETCH_PATROL_CALL'});
+    yield put({type: 'GET_ON_CALL_COUNT'});
+    yield put({type: 'GET_PATROL_COUNT'});
+    
   }catch(error) {
     console.log('error in edit patrolstatus');
   }
@@ -33,6 +39,35 @@ function* fetchPatrol() {
     yield put({type: 'SET_PATROL', payload: patrol.data});
   }catch(error){
     console.log('error in fetch patrol', error); 
+  }
+}
+
+// this one gets the number of people on patrol
+function* getPatrolCount() {
+  try {
+    console.log('getPatrolCount saga');
+    const patrolCount = yield axios.get('api/patrol/count');
+    console.log('patrolCount', patrolCount);
+    yield put({type: 'SET_PATROL_COUNT', payload: patrolCount.data});
+  }
+  catch (error) {
+    console.log('error in getPatrolCount function', error);
+    
+  }
+}
+
+// This function gets the number of people on call
+function* getOnCallCount() {
+  try {
+    console.log('getOnCall');
+    const onCallCount = yield axios.get('api/oncall/count');
+    console.log('onCallCount', onCallCount.data);
+    yield put({type: 'SET_ON_CALL_COUNT', payload: onCallCount.data});
+    
+  }
+  catch (error) {
+    console.log('error in getOnCallCount fn', error);
+    
   }
 }
 
@@ -58,12 +93,27 @@ function* makePhoneMessageForNewIncident(action) {
   }
 }
 
+function* fetchPatrolCall() {
+  try {
+    const patrolCallResponse = yield axios.get('api/patrol/patrolCall');
+    console.log('pcResponse', patrolCallResponse.data);
+    yield put({type: 'SET_PATROL_CALL', payload: patrolCallResponse.data});
+  }
+  catch (error) {
+    console.log('error in fetchPatrolCall saga', error);
+    
+  }
+}
+
 function* statusSaga() {
   yield takeEvery('ADD_CALL_STATUS', addCStatus);
   yield takeEvery('ADD_PATROL_STATUS', addPStatus);
   yield takeEvery('FETCH_ONCALL', fetchOnCall);
+  yield takeEvery('GET_PATROL_COUNT', getPatrolCount);
   yield takeEvery('FETCH_PATROL', fetchPatrol);
   yield takeEvery('MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', makePhoneMessageForNewIncident);
+  yield takeEvery('FETCH_PATROL_CALL', fetchPatrolCall);
+  yield takeEvery('GET_ON_CALL_COUNT', getOnCallCount);
 }
 
 export default statusSaga;

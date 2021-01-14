@@ -58,6 +58,7 @@ function* postIncident(action) {
     try {
       yield axios.post('/api/incident', action.payload);
       yield put( {type: 'GET_INCIDENTS'} );
+      yield put({type: 'MAKE_PHONE_MESSAGE_FOR_NEW_INCIDENT', payload: action.payload});
     } 
     catch (error) {
       console.log(error);
@@ -119,9 +120,13 @@ function* editIncident(action) {
     console.log('updatePublicPost', action.payload);
     try {
       yield axios.put('api/incident/publicPost', action.payload);
-      yield put({type: 'GET_INCIDENTS'})
+      yield put({type: 'GET_INCIDENTS'});
       swal('Post updated.', '', "success");
-      // maybe here
+      // send the message to people following it if it's been updated and is visible, 
+      // not if it's been taken down
+      if (action.payload.view_publicly){
+        yield put({type: 'MAKE_PHONE_MESSAGE_TO_FOLLOWER_FOR_UPDATE', payload: action.payload});
+      }
     }
     catch (error) {
       console.log('error in updatePublicPost fn', error);      
@@ -131,8 +136,11 @@ function* editIncident(action) {
   // function to assign a PSC member to an incident
   function* addAssigned(action) {
     try {
+      console.log('action.payload for add assigned saga', action.payload);
+      
       yield axios.put('api/incident/assign', action.payload)
       yield put({type: 'GET_INCIDENTS'});
+      yield put({type: 'MAKE_PHONE_MESSAGE_TO_ASSIGNED_USER', payload: action.payload});
     }catch (error) {
       console.log('error in assign saga', error);
     }

@@ -14,18 +14,15 @@ class AdminPage extends Component {
   componentDidMount = () => {
     this.getUsers();
     this.getIncidents();
-    this.getFollowersForIncident();
+    this.props.dispatch({type: 'FETCH_PATROL'});//get members on patrol
+    this.props.dispatch({type: 'FETCH_ONCALL'});//get members on call
+    this.props.dispatch({type: 'FETCH_PATROL_CALL'});
   }
 
   // function to fetch all incident data
   getIncidents = () => {
     this.props.dispatch( {type: 'GET_INCIDENTS'});
     console.log('GETTING INCIDENTS');
-  }
-
-  // find the people who are following all of the incidents
-  getFollowersForIncident = () => {
-    this.props.dispatch({type: 'GET_FOLLOWERS_FOR_INCIDENTS'})
   }
   
   // function to fetch all incident data
@@ -45,7 +42,8 @@ class AdminPage extends Component {
             {this.props.store.incidentReducer.map((incident) => {
               const incidentFollowers = this.props.store.incidentFollowersReducer;
               const users = this.props.store.allUsersReducer;
-              return <><InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users}/><br/></>
+              const combinedReducer = this.props.store.combinedPatrolCallReducer;
+              return <><InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users} combinedReducer={combinedReducer}/><br/></>
             })}
           </Col>{/* end of left section for incident cards */}
           {/* right on patrol / on call display */}

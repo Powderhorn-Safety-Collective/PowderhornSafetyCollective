@@ -35,7 +35,7 @@ class MemberPage extends Component {
     return ( 
       <Container fluid>
         <Col md={9} xs={12}> 
-        <h1 className="centerText" id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
+          <h1 className="centerText" id="welcome">Welcome PSC Volunteer, {this.props.store.user.username}!</h1>
         </Col>
         {/* Row to go across entire page */}
         <Row>
@@ -53,14 +53,14 @@ class MemberPage extends Component {
           <Col md={3} xs={12}>
             {/* on patrol display */}
             {this.props.store.patrolReducer.length > 0 && 
-            <Row className="onPatrolDisplay">
-              <h2>Members on patrol: </h2>
-              <ul>  
-                {this.props.store.patrolReducer.map((patroller) => {
-                  return <PatrolItem patroller={patroller}/>
-                })}
-              </ul>
-            </Row>
+              <Row className="onPatrolDisplay">
+                <h2>Members on patrol: </h2>
+                <ul>  
+                  {this.props.store.patrolReducer.map((patroller) => {
+                    return <PatrolItem patroller={patroller}/>
+                  })}
+                </ul>
+              </Row>
             }
             {/* on call display */}
             <Row className="onCallDisplay">

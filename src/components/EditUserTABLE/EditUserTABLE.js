@@ -26,6 +26,7 @@ const useRowStyles = makeStyles({
   },
 });
 
+// function to render the collapsable rows in the table
 function Row(props) {
   const { row } = props;
   const { skills } = props;
@@ -33,7 +34,8 @@ function Row(props) {
   const classes = useRowStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  
+ 
+// function to render the user's skills to the user table
   function skillsFunction(skills, row) {
     let array = '';
     for(let i = 0; i < skills.length; i++) {
@@ -47,12 +49,14 @@ function Row(props) {
     else { return (array); }
   }
 
+ //function to open and populate the edit user modal 
   function handleClick(row) {
     console.log('WHAT?!');
     history.push("/editUserModal");
     dispatch( {type: 'EDIT_USER', payload: row} );
   }
 
+// function to render the role name based on a user's role number
   function checkRole(row) {
     if(row.role === 3) {
       return 'Admin';
@@ -111,7 +115,7 @@ function Row(props) {
                           {row.adult.toString()}
                         </p>
                       </TableCell>
-                      {/* <TableCell>{row.internal_notes}</TableCell> */}
+                  {/* <TableCell>{row.internal_notes}</TableCell> */}
                       <TableCell>
                         <p>
                             {row.on_patrol.toString()}

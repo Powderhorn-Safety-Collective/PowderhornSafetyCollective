@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 // This component will be displayed on and is consumed by the Comunity 
 // Page component.  It will allow the user to search for an incident 
-// by their 6 digit auto-generated incident ID
+// by their auto-generated client_ID
 class IncidentSearch extends Component {
   state = {
     searchNumber: 0,

@@ -53,13 +53,13 @@ class InternalIncident extends Component {
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     return <>{displayTime}</>
   }
-
+// updates the state with user input
   handleChange = (event) => {
     this.setState({
       publicText: event.target.value
     });
   }
-
+// saves the "headline" for a public incident post
   handlePublicTextSave = () => {
     console.log('this.state.publicText', this.state.publicText);
     // send text to database
@@ -110,7 +110,7 @@ class InternalIncident extends Component {
           id: this.props.incident.id}
       })
   }
-
+// posts a public notice for an incident
   handlePostNotice = (incidentId) => {
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_POST',
@@ -126,6 +126,7 @@ class InternalIncident extends Component {
       }
     })
   }
+// removes a public post for an incident
   handleRemoveNotice = (incidentId) => {
     this.props.dispatch({
       type: 'UPDATE_PUBLIC_POST',
@@ -141,7 +142,7 @@ class InternalIncident extends Component {
       }
     })
   }
-
+// marks an incident as a duplicate
   handleDuplicate = () => {
     console.log('duplicate button clicked');
     this.props.dispatch({
@@ -153,6 +154,7 @@ class InternalIncident extends Component {
     swal('Duplicate entry has been noted.', "", "success");
   }
 
+  // renders the data for the submitted user on an incident
   renderSubmittedUser = (submittedUserId) => {
     let submittedUserData =  this.props.users.find(user => user.id == submittedUserId)
     return( 
@@ -178,7 +180,7 @@ class InternalIncident extends Component {
 
     return (
       <Container className="centerClass" fluid>
-          {/* Row for all the stuff inside of the container */}
+{/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             <Col lg={12} xs={12}>
               <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
@@ -199,12 +201,12 @@ class InternalIncident extends Component {
               }
             </Col>
             <Col lg={12} xs={12}>
-            {/* Row for all the stuff inside the box */}
+{/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
               <br/>
-              {/* toggle for active/inactive goes here 
-              This will change the data directly in the database when toggled*/}
+{/* toggle for active/inactive goes here 
+  This will change the data directly in the database when toggled*/}
                 <div className="whiteBackground">
                 <br/>
                 <h2 className="yellowBackground">Information Provided by Reporter</h2>
@@ -225,7 +227,7 @@ class InternalIncident extends Component {
                   </Collapse>
                 </div>
                 <div>
-                {/* username toggle here to select if username is viewable on the public post*/}
+{/* username toggle here to select if username is viewable on the public post*/}
                 <br/>
                 <p className="internalLine"><strong>Submitted by: </strong>{this.props.incident.username}</p>
                 {this.props.incident.username_public !== undefined &&
@@ -235,7 +237,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-                {/* location toggle here to select if location is viewable on the public post */}
+{/* location toggle here to select if location is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong> Location: </strong>{this.props.incident.location}</p>
@@ -246,7 +248,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-                {/* type toggle here to select if type is viewable on the public post */}
+{/* type toggle here to select if type is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Incident Type:</strong>{this.props.incident.type}</p>
@@ -257,7 +259,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-                {/* user notes toggle here to select if user notes are viewable on the public post */}
+{/* user notes toggle here to select if user notes are viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Submitter Notes:</strong>{this.props.incident.notes}</p>
@@ -268,7 +270,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-                {/* timedate toggle here to select if timedate is viewable on the public post */}
+{/* timedate toggle here to select if timedate is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Time Submitted:</strong> {this.renderTime(this.props.incident.time_submitted)}</p>

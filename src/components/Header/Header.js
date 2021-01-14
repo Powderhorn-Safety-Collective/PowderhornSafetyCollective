@@ -19,7 +19,6 @@ class Header extends Component {
   }
 
   componentDidMount = () => {
-    //TO-DO NEED TO CALL THESE DISPATCHES STRATEGICALLY TO ENSURE THEY UPDATE IN REAL TIME
     this.props.dispatch({type: "GET_PATROL_COUNT"});
     this.props.dispatch({type: "GET_ON_CALL_COUNT"});
     this.props.dispatch({type: 'GET_ACTIVE'}); // dispatch to GET count of all active incidents
@@ -85,10 +84,12 @@ class Header extends Component {
     })
   }
 
+// function to open report incident modal
   reportIncident = () => {
     this.props.history.push('/report');
   }
 
+// determines which dashboard a user will arrive at based on their role
   viewIncidents= () => {
     if (!this.props.store.user.role || this.props.store.user.role < 2){
       this.props.history.push('/community');

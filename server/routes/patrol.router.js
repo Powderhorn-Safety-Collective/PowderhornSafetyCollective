@@ -51,6 +51,7 @@ router.get('/count', (req, res) => {
   });
 });
 
+//route to update a user's on_patrol status
 router.put('/status', rejectUnauthenticated, (req,res) => {
   if (req.user.role > 1) {
     console.log('patrol route REQ IS', req.body.patrolValue);

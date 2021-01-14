@@ -113,10 +113,6 @@ function Row(props) {
                           {row.adult.toString()}
                         </p>
                       </TableCell>
-<<<<<<< HEAD
-                  {/* <TableCell>{row.internal_notes}</TableCell> */}
-=======
->>>>>>> main
                       <TableCell>
                         <p>
                             {row.on_patrol.toString()}

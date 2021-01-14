@@ -1,7 +1,7 @@
 # Powderhorn Safetey Collective (PSC) - app
 This app is a tool to facilitate the PSC's activities in the Powderhorn community. The app allows for unregistered community members to view information about incidents, as well as report incidents to the PSC. Registered users are able do the same, as well as follow and recieve text alerts about incidents. Volunteers (Members) can set their status as on patrol, on call, or off duty, respond to and update information on indidents, receive text alerts when they have been assigned to an incident, set incidents as duplicate, set active-status of incidents, and post public notices about incidents. Administrators have the additional capability of editing and updating users and incidents.
 
-Build Status
+## Build Status
 - Beta
 
 ## Prerequisites
@@ -17,6 +17,7 @@ Before you get started, make sure you have the following software installed on y
 - Node.js
 - React
 - React-Redux
+- Express
 - PostgreSQL
 - Bootstrap
 - Material UI
@@ -63,4 +64,6 @@ https://fb.watch/2-9QoO1J8J/
 # Thank You
 - Prime Digital Academy, Casie Siekman and all of the instructors there, along with Powderhorn Safety Collective, and the Ukkonen Cohort as a whole.
 
+## Support
 
+- For support issues please contact jamie.anne.white@gmail.com

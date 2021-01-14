@@ -5,8 +5,8 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import mapStoreToProps from '../../redux/mapStoreToProps';
-import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps'; //connects this component to the Redux store
+import { connect } from 'react-redux'; //allows a component to be connected to the reduxstore
 
 // import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';

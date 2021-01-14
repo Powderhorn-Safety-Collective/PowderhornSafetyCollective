@@ -26,6 +26,8 @@ router.get('/client_id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+
+
 // route for getting incidents sorted by type  
 router.get('/type', rejectUnauthenticated, (req, res) => {
   console.log('hello sort type');
@@ -84,6 +86,7 @@ router.get('/location', rejectUnauthenticated, (req, res) => {
     res.sendStatus(403);
   }
 });
+
 // route for getting incidents sorted by time
 router.get('/time_submitted', rejectUnauthenticated, (req, res) => {
   if (Number(req.user.role) ===3) {

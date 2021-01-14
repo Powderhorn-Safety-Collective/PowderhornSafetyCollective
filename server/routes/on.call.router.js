@@ -34,6 +34,7 @@ router.get('/count', (req, res) => {
   });
 });
 
+// update a user's oncall status 
 router.put('/status', (req,res) => {
   if (req.user.role > 1) {
     console.log('On call route REQ IS', req.body.onCallValue);

@@ -12,11 +12,11 @@ import './Admin.css';
 class AdminPage extends Component {
   
   componentDidMount = () => {
-    this.getUsers();
-    this.getIncidents();
+    this.getUsers(); //get all users from the db
+    this.getIncidents(); //get all incidents from the db
     this.props.dispatch({type: 'FETCH_PATROL'});//get members on patrol
     this.props.dispatch({type: 'FETCH_ONCALL'});//get members on call
-    this.props.dispatch({type: 'FETCH_PATROL_CALL'});
+    this.props.dispatch({type: 'FETCH_PATROL_CALL'});//get all members who are on patrol or on call
   }
 
   // function to fetch all incident data
@@ -36,7 +36,7 @@ class AdminPage extends Component {
         {/* <h1 className="centerClass" id="welcome">Welcome PSC Admin, {this.props.store.user.username}!</h1> */}
         {/* Row to go across entire page */}
         <Row>
-          {/* left stuff for incidents */}
+          {/* left column for incidents */}
           <Col md={9} xs={12} className="adminLeft">  
             <h1 className="centerClass"> All Incidents</h1>
             {this.props.store.incidentReducer.map((incident) => {
@@ -45,7 +45,8 @@ class AdminPage extends Component {
               const combinedReducer = this.props.store.combinedPatrolCallReducer;
               return <><InternalIncident incident = {incident} incidentFollowers={incidentFollowers} users={users} combinedReducer={combinedReducer}/><br/></>
             })}
-          </Col>{/* end of left section for incident cards */}
+          </Col>
+          {/* end of left section for incident cards */}
           {/* right on patrol / on call display */}
           <Col md={3} xs={12}>
             {/* on patrol display */}

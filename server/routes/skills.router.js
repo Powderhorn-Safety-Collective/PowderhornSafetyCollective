@@ -3,6 +3,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+// delete a user's skill from the user_skill table
 router.delete('/user/:id/:skill', rejectUnauthenticated, (req, res) => {
   if (req.user.role === 3) {
     console.log('deleting skill', req.params.id, req.params.skill);

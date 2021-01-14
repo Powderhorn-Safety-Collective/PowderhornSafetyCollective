@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import EditUserTable from '../EditUserTable/EditUserTable';
+import EditUserTable from '../EditUserTABLE/EditUserTABLE';
 
 class EditUser extends Component {
 

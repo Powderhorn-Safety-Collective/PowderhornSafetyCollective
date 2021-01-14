@@ -8,18 +8,14 @@ import {
 import mapStoreToProps from '../../redux/mapStoreToProps'; //connects this component to the Redux store
 import { connect } from 'react-redux'; //allows a component to be connected to the reduxstore
 
-// import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import UserPage from '../UserPage/UserPage';
-// import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import CommunityPage from '../CommunityPage/CommunityPage';
 import MemberPage from '../MemberPage/MemberPage';
 import AdminPage from '../AdminPage/AdminPage';
-
 import Header from '../Header/Header.js';
 import History from '../IncidentHistoryPage/IncidentHistoryPage'; // Component to display incident table data
 import EditUser from '../EditUser/EditUser'; // Component to display all user data in a table
@@ -94,13 +90,6 @@ class App extends Component {
               path="/admin"
               component={AdminPage}
             />
-
-            {/* <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-              component={InfoPage}
-            /> */}
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will

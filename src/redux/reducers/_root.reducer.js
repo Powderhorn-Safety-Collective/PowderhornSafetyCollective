@@ -17,7 +17,7 @@ import allSkillsReducer from './all.skills.reducer'; //a list of all possible sk
 import clientIdReducer from './client.id.reducer'; //holds the client id for a given incident
 import specialIncidentReducer from './special.incident.reducer'; //holds data for an incident that is submitted by an unregistered user who decides to register DURING incident report
 import followedIncidentsReducer from './followed.incidents.reducer'; //incidents that a given user is following
-import combinedPatrolCallReducer from './comined.patrol.call.reducer'; //holds all patrolling and on call members
+import combinedPatrolCallReducer from './combined.patrol.call.reducer'; //holds all patrolling and on call members
 import patrolCountReducer from './patrol.count.reducer'; //holds the count of patrolling members
 import onCallCountReducer from './on.call.count.reducer'; //holds the count of on_call members
 

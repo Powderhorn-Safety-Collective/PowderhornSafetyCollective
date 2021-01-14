@@ -144,7 +144,7 @@ function Row(props) {
   );
 }
 
-export default function EditUserTABLE(props) {
+export default function EditUserTable(props) {
   const dispatch = useDispatch();
 
   return (

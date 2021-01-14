@@ -4,7 +4,7 @@ import './ToggleSwitch.scss';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class ToggleSwitch extends (Component) {
-
+// reu usable toggle switch component with styling
   render() {
     return(
       <div className="toggle-switch">

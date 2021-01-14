@@ -21,6 +21,7 @@ class ReportIncident extends Component {
       client_id_ok: false
   }
 
+// fires the clock function (see below) and ensures the client id is unique
   componentDidMount = () => {
     this.clock();
     this.clientCheck();
@@ -50,7 +51,7 @@ class ReportIncident extends Component {
       }
     }, 500);
   }
-
+// function to set time_submitted to current time
   clock = () => {
     setInterval(() => {
       this.setState({
@@ -59,6 +60,7 @@ class ReportIncident extends Component {
     }, 1000)
   }
 
+  // updates local state with user input
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
     this.setState( {
@@ -66,6 +68,7 @@ class ReportIncident extends Component {
     });
   }
 
+  // sends new incident to DB
   submitReport = () => {
     console.log('clicked on report incident');
     // check to make sure inputs for type and location are valid
@@ -81,13 +84,14 @@ class ReportIncident extends Component {
       showReport: true
     });
   }
-  
+ 
+// allows a user to edit their submission before the report is sent
   editSubmission = () => {
     this.setState( {
       showReport: false
     });
   }
-
+// input verification
   inputCheck = () => {
     if (this.state.type && this.state.location) {
       return true
@@ -179,7 +183,7 @@ class ReportIncident extends Component {
       }
     }// end not logged in user section
   }
-
+// function to handle user input for follow incident and register as a user toggles
   handleToggle = (event) => {
     if(event.target.name === 'followToggle') {
       this.setState( {

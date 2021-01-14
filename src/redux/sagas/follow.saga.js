@@ -18,7 +18,7 @@ function* unfollowIncidentSaga(action) {
   yield put({type: 'GET_FOLLOWED_INCIDENTS'});
   yield put({type: 'GET_PERSONAL_INCIDENTS'});
 } 
-
+// sends a text message for incident updates
 function* makePhoneMessageUpdate(action) {
   try {
     console.log('update to follower phone number', action.payload);

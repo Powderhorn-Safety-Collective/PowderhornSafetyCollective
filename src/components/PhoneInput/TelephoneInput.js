@@ -11,19 +11,19 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
   // Otherwise, "National" format is used.
 
   
-  class TelephoneInput extends Component {
-    state = {
-    }
-    render() {
-      return (
-        <div>
-          <h2>{this.state.heading}</h2>
-          <PhoneInput
-            country="US"
-            value={this.props.value}
-            onChange={(event) => this.props.onChange(event)} 
-          />
-        </div>
+class TelephoneInput extends Component {
+  state = {
+  }
+  render() {
+    return (
+      <div>
+        <h2>{this.state.heading}</h2>
+        <PhoneInput
+          country="US"
+          value={this.props.value}
+          onChange={(event) => this.props.onChange(event)} 
+        />
+      </div>
     );
   }
 }

@@ -98,100 +98,91 @@ class Header extends Component {
     }else if (this.props.store.user.role === 3) {
       this.props.history.push('/admin');
     }
-   }
+  }
   
   render() {
     return ( 
       <Container fluid>
         <Row className="titleContainer">
-      {/* <div className="header"> */}
-        {/* <div className="titleContainer"> */}
-        <Col lg = {4} xs={12} >
-          <Link to="/community">
-            <img src="/logo.png" alt="PSC Logo"/>
-          </Link>
-        </Col>
-
-          {/* </div> */}
-          {/* </div> */}
-        <Col lg ={4} xs={12}>
-          <div className="patrolDisplay">
-            {Number(this.props.store.patrolCountReducer.count) === 1 && 
-              <h5> 1 person is on patrol</h5>
-            }
-            {Number(this.props.store.patrolCountReducer.count) === 0 &&
-              <h5>No One is on Patrol</h5>
+          <Col lg = {4} xs={12} >
+            <Link to="/community">
+              <img src="/logo.png" alt="PSC Logo"/>
+            </Link>
+          </Col>
+          <Col lg ={4} xs={12}>
+            <div className="patrolDisplay">
+              {Number(this.props.store.patrolCountReducer.count) === 1 && 
+                <h5> 1 person is on patrol</h5>
               }
-            {Number(this.props.store.patrolCountReducer.count) > 1 &&
-              <h5>{this.props.store.patrolCountReducer.count} people are on patrol</h5>
-            }
-            {Number(this.props.store.onCallCountReducer.count) === 1 && 
-              <h5>1 person is on call</h5>
-            }
-            {Number(this.props.store.onCallCountReducer.count) === 0 && 
-              <h5>No One is On Call</h5>
-            }
-            {Number(this.props.store.onCallCountReducer.count) > 1 && 
-              <h5>{this.props.store.onCallCountReducer.count} people are on call</h5>
-            }
-            <div className="incidents" onClick={this.viewIncidents}>
-            {this.props.store.user.role > 1 ?
-              <h5> {this.props.store.activeIncidentReducer} active incidents</h5>
-              :
-              <h5>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h5>
-            }
+              {Number(this.props.store.patrolCountReducer.count) === 0 &&
+                <h5>No One is on Patrol</h5>
+              }
+              {Number(this.props.store.patrolCountReducer.count) > 1 &&
+                <h5>{this.props.store.patrolCountReducer.count} people are on patrol</h5>
+              }
+              {Number(this.props.store.onCallCountReducer.count) === 1 && 
+                <h5>1 person is on call</h5>
+              }
+              {Number(this.props.store.onCallCountReducer.count) === 0 && 
+                <h5>No One is On Call</h5>
+              }
+              {Number(this.props.store.onCallCountReducer.count) > 1 && 
+                <h5>{this.props.store.onCallCountReducer.count} people are on call</h5>
+              }
+              <div className="incidents" onClick={this.viewIncidents}>
+                {this.props.store.user.role > 1 ?
+                  <h5> {this.props.store.activeIncidentReducer} active incidents</h5>
+                  :
+                  <h5>Current Incident Count: {this.props.store.publicIncidentReducer.length}</h5>
+                }
+              </div>
             </div>
-        </div>
-        <Row>
-        <div className="headerBtns">
-          {/* on patrol / on call toggles */}
-          {this.props.store.user.role > 1 &&
-            <div className="toggleForm">
-              <label className="whiteText" for="onPatrolToggle">On Patrol:</label>
-              {this.props.store.user.on_patrol !== undefined &&
-                <ToggleSwitch 
-                  toggleName="onPatrolToggle"
-                  handleToggle={this.handleToggle} 
-                  toggleOn={this.props.store.user.on_patrol}
-                  name="onPatrolToggle"
-                />
-              }
+            <Row>
+              <div className="headerBtns">
+                {/* on patrol / on call toggles */}
+                {this.props.store.user.role > 1 &&
+                  <div className="toggleForm">
+                    <label className="whiteText" for="onPatrolToggle">On Patrol:</label>
+                    {this.props.store.user.on_patrol !== undefined &&
+                      <ToggleSwitch 
+                        toggleName="onPatrolToggle"
+                        handleToggle={this.handleToggle} 
+                        toggleOn={this.props.store.user.on_patrol}
+                        name="onPatrolToggle"
+                      />
+                    }
 
-              <label className="whiteText" for="onCallToggle">On Call:</label>
-              {this.props.store.user.on_call !== undefined &&
-                <ToggleSwitch 
-                  toggleName="onCallToggle"
-                  handleToggle={this.handleToggle} 
-                  toggleOn={this.props.store.user.on_call}
-                  name="onCallToggle"
-                />
-              }
-
-            </div>
-            
-          }  
-        </div>
-        </Row>
-
-        {/* </div> */}
-      {/* // </div> */}
-      </Col>
+                    <label className="whiteText" for="onCallToggle">On Call:</label>
+                    {this.props.store.user.on_call !== undefined &&
+                      <ToggleSwitch 
+                        toggleName="onCallToggle"
+                        handleToggle={this.handleToggle} 
+                        toggleOn={this.props.store.user.on_call}
+                        name="onCallToggle"
+                      />
+                    }
+                  </div>
+                }  
+              </div>
+            </Row>
+          </Col>
       
-      <Col lg = {4} xs = {12}> 
-          {/* <div id="greeting"> */}
-              {this.props.store.user.first_name ?
-                <p className="whiteText">Hello, {this.props.store.user.first_name}!</p>
-                :
-                <p className="whiteText">Please Login</p> 
-              }
+          <Col lg = {4} xs = {12}> 
+            {this.props.store.user.first_name ?
+              <p className="whiteText">Hello, {this.props.store.user.first_name}!</p>
+            :
+              <p className="whiteText">Please Login</p> 
+            }
             <Row>
               <Col lg={6} xs={6}>
                 <Nav/>
               </Col>
-            <Col lg = {6} xs={6}><Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button></Col></Row>
-
-      </Col>
-      </Row>
+              <Col lg = {6} xs={6}>
+                <Button variant="warning" onClick={this.reportIncident}> Report an Incident</Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Container>
     )
   }

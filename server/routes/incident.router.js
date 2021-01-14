@@ -26,6 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// edit data in an incident
 router.put('/editIncident/:id', rejectUnauthenticated, (req, res) => {
 
   if (Number(req.user.role) === 3) {
@@ -370,6 +371,7 @@ router.put('/editactive/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// toggle an incident between publicly viewable and not viewable
 router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
@@ -388,6 +390,7 @@ router.put('/editpublic/:id', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// route to update an incident as a duplicate
 router.put('/editduplicate/:id', rejectUnauthenticated, (req, res) => {
   if (req.user.role > 1) {
     const queryText = `UPDATE "incidents" 
@@ -421,6 +424,7 @@ router.get('/client_id/:client_id', (req,res) => {
   });
 });
 
+// route to get followed incidents for a given user
 router.get('/followed', rejectUnauthenticated, (req, res) => {
   const queryText = `select incident_id from incident_followers
   where user_id = $1;`;
@@ -434,6 +438,7 @@ router.get('/followed', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// add an incident to a user's followed incidents
 router.post('/follow', rejectUnauthenticated, (req, res) => {
   console.log('follow route with req.body', req.body);
   const queryText = `insert into incident_followers (incident_id, user_id)
@@ -447,6 +452,7 @@ router.post('/follow', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// remove an incident from a user's followed incidents
 router.delete('/follow/:incident_Id', rejectUnauthenticated, (req, res) => {
   console.log('delete follow route with req.body', req.params);
   const queryText = `delete from incident_followers

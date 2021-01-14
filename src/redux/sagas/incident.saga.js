@@ -145,7 +145,7 @@ function* editIncident(action) {
       console.log('error in assign saga', error);
     }
   }
-
+// marks an incident as a duplicate
   function* updateDuplicate(action) {
     console.log('updateDuplicate', action.payload);
     try {

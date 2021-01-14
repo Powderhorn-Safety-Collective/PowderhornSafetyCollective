@@ -33,6 +33,7 @@ class AssignClaimComponent extends Component {
 
   render() {
     return(
+      // displays the assigned PSC member for an incident, or an alert if no one is assigned
       <>
         {this.props.incident.assigned ?
           <h4>This incident is assigned to: {this.props.incident.assigned}</h4>

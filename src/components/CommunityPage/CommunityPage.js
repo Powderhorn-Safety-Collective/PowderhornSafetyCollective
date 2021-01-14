@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';//connects this component to the ReduxStore
 import LoginForm from '../LoginForm/LoginForm';
 import './CommunityPage.css';
 import IncidentSearch from '../IncidentSearch/IncidentSearch';
@@ -23,7 +23,7 @@ class CommunityPage extends Component {
     aboutOpen: false,
     missionOpen: false,
   };
-
+// function to render the timestamp into a readable format
   renderTime = (time) => {
     let timeHour = Number(time.slice(11,13));
     let timeMorningEvening = 'a.m.';
@@ -51,6 +51,7 @@ class CommunityPage extends Component {
     }
   }
 
+  // get all the incidents a given user is following
   getFollowedIncidentIds = () => {
     this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});
   }
@@ -92,7 +93,7 @@ class CommunityPage extends Component {
     return (
       <Container fluid>
         <Row id="topBoxes">
-          {/* This div has the boxes at the top of the page */}
+{/* This div has the boxes at the top of the page */}
             <div className="box">
               <a className="links" target="_blank" href="https://www.powderhornsafetycollective.org" rel="noopener noreferrer">
                 <h2>
@@ -227,9 +228,9 @@ class CommunityPage extends Component {
             </Row>
 {/* end of login Column */}
             <Row className="box">
-              {/* section to search for an incident */}
+{/* section to search for an incident */}
               <IncidentSearch/>
-              {/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
+{/* Render the searched incident to the DOM, not using incident module, because incident will show even if not publicly viewable in this module */}
             {this.props.store.searchIncidentReducer.client_id &&
             <div className="white">
               <p className="yellowBackground"><strong>Incident ID: </strong>{this.props.store.searchIncidentReducer.client_id}</p>
@@ -245,8 +246,9 @@ class CommunityPage extends Component {
             }
             </Row>
           </Col> 
-          {/* end of search incident */}
+{/* end of search incident */}
           <Col></Col>
+{/* seperate row for displaying mailchimp form */}
         </Row>
             <Row id="newsBox">
               <h4> Sign Up for the PSC Newsletter
@@ -273,6 +275,7 @@ class CommunityPage extends Component {
                 />
               </h4>
             </Row>
+{/* end mailchimp row */}
       </Container>
     );
   }

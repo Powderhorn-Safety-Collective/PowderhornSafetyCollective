@@ -22,7 +22,7 @@ class UserPage extends Component {
       this.getFollowedIncidentIds();
     }
   }
-
+// get the incidents followed by this user
   getFollowedIncidentIds = () => {
     this.props.dispatch({type: 'GET_FOLLOWED_INCIDENTS'});  
   }
@@ -72,18 +72,18 @@ class UserPage extends Component {
               <h2 className="whiteText">
                 Incidents
               </h2>
-              {/* incident cards are mapped onto cards for display here */}
-              {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
-                const followedIncidents = this.props.store.followedIncidentsReducer
-                return(
-                  <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
-                );
-              })}
+{/* incident cards are mapped onto cards for display here */}
+                {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
+                  const followedIncidents = this.props.store.followedIncidentsReducer
+                  return(
+                    <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
+                  );
+                })}
             </Row>
           </Col>
           <Col></Col>
 
-          {/* right column with incidents user submitted or is following */}
+{/* right column with incidents user submitted or is following */}
           <Col md={6} lg={4} className="box scrollable" id="followedIncidentContainer">
             <h3 className="whiteText">Your Followed and Submitted Incidents</h3>
             {this.props.store.personalIncidentReducer.map( (personalIncident, index) => {

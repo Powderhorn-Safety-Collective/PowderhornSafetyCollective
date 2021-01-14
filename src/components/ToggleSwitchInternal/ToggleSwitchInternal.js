@@ -4,7 +4,7 @@ import './ToggleSwitchInternal.scss';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class ToggleSwitchInternal extends (Component) {
-
+// reusable toggle switch for internal incidents
   render() {
     return(
       <div className="toggle-switch-int">

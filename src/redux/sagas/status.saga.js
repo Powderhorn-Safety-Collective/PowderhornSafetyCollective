@@ -31,7 +31,7 @@ function* addCStatus(action){
     console.log('error in edit patrolstatus');
   }
 }
-
+// fetch the users who are on patrol
 function* fetchPatrol() {
   try{
     const patrol = yield axios.get('/api/patrol');
@@ -70,7 +70,7 @@ function* getOnCallCount() {
     
   }
 }
-
+// fetches the users who are on call
 function* fetchOnCall() {
   try{
     const onCallCount = yield axios.get('/api/oncall');
@@ -80,7 +80,7 @@ function* fetchOnCall() {
     console.log('error in fetch oncall', error); 
   }
 }
-
+// notifies members of new incidents
 function* makePhoneMessageForNewIncident(action) {
   try {
 
@@ -93,6 +93,7 @@ function* makePhoneMessageForNewIncident(action) {
   }
 }
 
+// fetches all users on patrol or on call
 function* fetchPatrolCall() {
   try {
     const patrolCallResponse = yield axios.get('api/patrol/patrolCall');

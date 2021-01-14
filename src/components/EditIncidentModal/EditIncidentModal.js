@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from 'react-bootstrap/Button';
 
 class EditIncidentModal extends Component {
-
+// state is populated with current data from this incident
     state = {
       id: this.props.store.editIncidentReducer.id,
       type: this.props.store.editIncidentReducer.type,
@@ -17,18 +17,18 @@ class EditIncidentModal extends Component {
       duplicate_entry: this.props.store.editIncidentReducer.duplicate_entry,
       client_id: this.props.store.editIncidentReducer.client_id,
       }
-    
+// updates state with user input for the given event  
       handleChange = (event, typeParam) => {
         this.setState( {
             [typeParam]: event.target.value
         });
       }
-
+// sends dispatch to update an incident with new data 
       submitEdit = () => {
         this.props.dispatch( {type: 'SUBMIT_EDIT_INCIDENT', payload: this.state} );
         this.props.history.push('/history');
       }
-
+// back button
       goBack = () => {
         this.props.history.push('/history');
       }

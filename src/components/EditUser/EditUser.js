@@ -5,21 +5,21 @@ import EditUserTABLE from '../EditUserTABLE/EditUserTABLE';
 
 class EditUser extends Component {
 
-    // GET request is called on page load
-    // to retrieve all incident data
-    componentDidMount = () => {
-        this.getUsers();
-        this.getUserSkills();
-      }
-
-    // function to fetch all incident data
-    getUsers = () => {
-        this.props.dispatch( {type: 'GET_ALL_USERS'});
+  // GET request is called on page load
+  // to retrieve all user and skill data
+  componentDidMount = () => {
+      this.getUsers();
+      this.getUserSkills();
     }
 
-    getUserSkills = () => {
-      this.props.dispatch({type: 'FETCH_USER_SKILLS'});
-    }
+  // function to fetch all user data
+  getUsers = () => {
+      this.props.dispatch( {type: 'GET_ALL_USERS'});
+  }
+  // function to fetch all skills data 
+  getUserSkills = () => {
+    this.props.dispatch({type: 'FETCH_USER_SKILLS'});
+  }
 
   render() {
     return (

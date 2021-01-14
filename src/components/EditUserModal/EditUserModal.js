@@ -7,7 +7,7 @@ import PhoneInput from 'react-phone-number-input/input';
 import swal from 'sweetalert';
 
 class EditUserModal extends Component {
-
+// state is populated from existing date for the selected user
   state = {
     id: this.props.store.editUserReducer.id,
     username: this.props.store.editUserReducer.username,
@@ -27,7 +27,7 @@ class EditUserModal extends Component {
     // fetches all the skills from the skills list in the DB
     this.props.dispatch({type:'FETCH_ALL_SKILLS'});
   }
-
+// conditionally renders skills with checkboxes in a checked or unchecked state depending on the content of the user_skills table
   renderSkills = (skillItem) => {
     const thisUserSkillArray = [];
     this.props.store.userSkillsReducer.map((skill) => {
@@ -62,7 +62,7 @@ class EditUserModal extends Component {
       );
     }
   }
-
+// updates state with user input for a given key
   handleChange = (event, typeParam) => {
     console.log(event.target.value, typeParam);
     this.setState( {
@@ -119,7 +119,7 @@ class EditUserModal extends Component {
         payload: deleteSkill
       })
     }
-
+// back button
   goBack = () => {
     this.props.history.push('/edit');
   }
@@ -200,7 +200,7 @@ class EditUserModal extends Component {
             />
             </div>
             <br/>
-            {/* Adult Section */}
+{/* Adult Section */}
             <strong>Is the user an adult?:</strong>
             <div className="form-check">
               <label>
@@ -229,7 +229,7 @@ class EditUserModal extends Component {
               </label>
             </div>
             <br/>
-            {/* On Patrol / On Call Section */}
+{/* On Patrol / On Call Section */}
             <strong htmlFor="patrolRadios">Current Status:</strong>
             <div className="form-check">
               <label>
@@ -273,7 +273,7 @@ class EditUserModal extends Component {
             </div>
             <br/>
             <strong>User's Skills:</strong>
-            {/* Skills section */}
+{/* Skills section */}
             <div>
               {this.props.store.allSkillsReducer.map((skill) => {
                 return this.renderSkills(skill);
@@ -282,7 +282,7 @@ class EditUserModal extends Component {
             {/* Role Section */}
             <br/>
             <strong>Role:</strong>
-            {/* use radio buttons here for user, volunteer, and admin */}
+{/* use radio buttons here for user, volunteer, and admin */}
             <div className="form-check">
               <label>
                 <input 

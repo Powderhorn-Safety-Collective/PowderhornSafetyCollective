@@ -68,9 +68,9 @@ class IncidentModule extends Component {
           :
           <p className="alertresolved">Resolved</p>
         }
-        {/* this function gets called to display time submitted*/}
+{/* this function gets called to display time submitted*/}
         {this.renderTime(this.props.incident.timedate_public, this.props.incident.time_submitted)}
-        {/* short circuit AND operator used for rest*/}
+{/* short circuit AND operator used for rest*/}
         {this.props.incident.location_public &&
           <p><strong>Location: </strong>{this.props.incident.location}</p>
         }

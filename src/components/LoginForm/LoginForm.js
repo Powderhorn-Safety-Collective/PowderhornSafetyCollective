@@ -7,7 +7,7 @@ class LoginForm extends Component {
     username: '',
     password: '',
   };
-
+// login function
   login = (event) => {
     event.preventDefault();
     if (this.state.username && this.state.password) {
@@ -23,7 +23,7 @@ class LoginForm extends Component {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
   }; // end login
-
+// updates localstate with user input
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,

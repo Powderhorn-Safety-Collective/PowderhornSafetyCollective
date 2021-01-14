@@ -31,17 +31,18 @@ class InternalNotes extends Component {
     let displayTime = timeHour + ':' + timeMinute + ' ' + timeMorningEvening + ' ' + month + '/' + day + '/' + year;
     return <>{displayTime}</>
   }
-
+// gets all the internal notes for a given incident
   componentDidMount = () => {
     this.props.dispatch({type: 'GET_NOTES'});
   }
 
+// updates the local state with the user's input
   handleChange = (event) => {
     this.setState({
       noteText: event.target.value
     })
   }
-
+// saves an internal note to the database and resets the localstate to clear the input
   handleSubmit = () => {
     this.props.dispatch({
       type: 'ADD_NOTE',

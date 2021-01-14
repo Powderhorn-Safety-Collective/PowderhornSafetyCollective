@@ -18,12 +18,12 @@ import followSaga from './follow.saga';
 export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
-    registrationSaga(),
-    userSaga(),
+    registrationSaga(),//saga that will direct registration traffic
+    userSaga(), //saga that will direct user traffic
     incidentSaga(), // saga for all things relating to incidents
-    statusSaga(),
-    internalNoteSaga(),
-    skillsSaga(),
-    followSaga(),
+    statusSaga(), //saga for status
+    internalNoteSaga(), //saga for internal notes
+    skillsSaga(), //saga for skills
+    followSaga(), //saga for followed incidents
   ]);
 }

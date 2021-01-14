@@ -1,3 +1,5 @@
+
+// holds user data for logged in user
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':

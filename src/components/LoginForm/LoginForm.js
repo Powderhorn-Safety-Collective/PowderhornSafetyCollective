@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import Button from 'react-bootstrap/Button';
 
 class LoginForm extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import TestTable from '../TestTable/TestTable';
+import IncidentTable from '../IncidentTable/IncidentTable';
 import './IncidentHistoryPage.css';
 
 class IncidentHistoryPage extends Component {
@@ -24,7 +24,7 @@ class IncidentHistoryPage extends Component {
       <div>
         <h2 className="centerClass">Incident Table</h2>
         <h3 className="centerClass">Click on a column's heading to sort by that data type.</h3>
-          <TestTable incident={this.props.store.incidentReducer}/>
+          <IncidentTable incident={this.props.store.incidentReducer}/>
       </div>
     );
   }

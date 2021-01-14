@@ -179,7 +179,7 @@ class InternalIncident extends Component {
 
     return (
       <Container className="centerClass" fluid>
-{/* Row for all the stuff inside of the container */}
+          {/* Row for all the stuff inside of the container */}
           <Row className="internalRow">
             <Col lg={12} xs={12}>
               <h3 className="yellowBackground">Incident Number: {this.props.incident.client_id}</h3>
@@ -200,12 +200,12 @@ class InternalIncident extends Component {
               }
             </Col>
             <Col lg={12} xs={12}>
-{/* Row for all the stuff inside the box */}
+              {/* Row for all the stuff inside the box */}
               {/* <Row> */}
                 <div className="internalModule">
               <br/>
-{/* toggle for active/inactive goes here 
-  This will change the data directly in the database when toggled*/}
+              {/* toggle for active/inactive goes here 
+                This will change the data directly in the database when toggled*/}
                 <div className="whiteBackground">
                 <br/>
                 <h2 className="yellowBackground">Information Provided by Reporter</h2>
@@ -226,7 +226,7 @@ class InternalIncident extends Component {
                   </Collapse>
                 </div>
                 <div>
-{/* username toggle here to select if username is viewable on the public post*/}
+                {/* username toggle here to select if username is viewable on the public post*/}
                 <br/>
                 <p className="internalLine"><strong>Submitted by: </strong>{this.props.incident.username}</p>
                 {this.props.incident.username_public !== undefined &&
@@ -236,7 +236,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-{/* location toggle here to select if location is viewable on the public post */}
+                {/* location toggle here to select if location is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong> Location: </strong>{this.props.incident.location}</p>
@@ -247,7 +247,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-{/* type toggle here to select if type is viewable on the public post */}
+                {/* type toggle here to select if type is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Incident Type:</strong>{this.props.incident.type}</p>
@@ -258,7 +258,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-{/* user notes toggle here to select if user notes are viewable on the public post */}
+                {/* user notes toggle here to select if user notes are viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Submitter Notes:</strong>{this.props.incident.notes}</p>
@@ -269,7 +269,7 @@ class InternalIncident extends Component {
                   />
                 }
 
-{/* timedate toggle here to select if timedate is viewable on the public post */}
+                {/* timedate toggle here to select if timedate is viewable on the public post */}
                 <br/>
                 <br/>
                 <p className="internalLine"><strong>Time Submitted:</strong> {this.renderTime(this.props.incident.time_submitted)}</p>
@@ -280,7 +280,7 @@ class InternalIncident extends Component {
                   />
                 }
                 <br/>
-                </div>
+                {/* </div> */}
                 </div>
               </div>
               <br/>
@@ -362,7 +362,7 @@ class InternalIncident extends Component {
                     Remove Public Notice</Button>
                 }
               </div>
-            </div>
+              </div>
             <h2>_____**_____</h2>
           </Col>
         </Row>

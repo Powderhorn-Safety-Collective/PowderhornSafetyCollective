@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import EditUserTABLE from '../EditUserTABLE/EditUserTABLE';
+import EditUserTable from '../EditUserTable/EditUserTable';
 
 class EditUser extends Component {
 
@@ -26,7 +26,7 @@ class EditUser extends Component {
       <div>
         <h2 className="centerClass">User Table</h2>
         <h3 className="centerClass">Click on a column's heading to sort by that data type.</h3>
-            <EditUserTABLE className="blackdrop" user={this.props.store.allUsersReducer} skills={this.props.store.userSkillsReducer}/>
+            <EditUserTable className="blackdrop" user={this.props.store.allUsersReducer} skills={this.props.store.userSkillsReducer}/>
       </div>
     );
   }

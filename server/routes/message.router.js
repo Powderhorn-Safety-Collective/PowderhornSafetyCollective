@@ -43,7 +43,7 @@ router.post('/update', rejectUnauthenticated, (req, res) => {
 
 // route for sending a notice to people on patrol / on call and admins when a new incident is submitted
 router.post('/newIncident', (req, res) => {
-  console.log('new incident req.body', req.body);
+  console.log('newIncident post router', req.body);
 
   const queryText =  `select phone from "user" 
                       where on_patrol = true

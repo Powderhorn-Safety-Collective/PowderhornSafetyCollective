@@ -72,7 +72,6 @@ class UserPage extends Component {
               <h2 className="whiteText">
                 Incidents
               </h2>
-<<<<<<< HEAD
 {/* incident cards are mapped onto cards for display here */}
                 {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
                   const followedIncidents = this.props.store.followedIncidentsReducer
@@ -80,15 +79,6 @@ class UserPage extends Component {
                     <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
                   );
                 })}
-=======
-              {/* incident cards are mapped onto cards for display here */}
-              {this.props.store.publicIncidentReducer.map( (publicIncident, index) => {
-                const followedIncidents = this.props.store.followedIncidentsReducer
-                return(
-                  <IncidentModule incident={publicIncident} key={index} followedIncidents={followedIncidents}/>
-                );
-              })}
->>>>>>> main
             </Row>
           </Col>
           <Col></Col>

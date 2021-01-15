@@ -16,7 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { formatPhoneNumber } from 'react-phone-number-input';
-import Button from "react-bootstrap/button";
+import Button from "react-bootstrap/Button";
 
 const useRowStyles = makeStyles({
   root: {

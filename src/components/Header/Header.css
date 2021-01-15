@@ -74,12 +74,13 @@ label {
 }
 
 .btn-warning {
-background-color: #fdf761 !important;
-border-color:#fdf761 !important;
+  background-color: #fdf761 !important;
+  border-color:#fdf761 !important;
+  color: black !important;
   padding: 35px;
   /* text-align: right !important; */
   background-color: #fdf761;
   border-radius: 50%;
   -webkit-box-shadow: 2px 2px 6px 2px #022324 !important; 
   box-shadow: 2px 2px 6px 2px #022324 !important;
-  }
+}

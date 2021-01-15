@@ -1,6 +1,9 @@
 {
   "name": "prime-solo-project",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.13.0"
+  },
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {

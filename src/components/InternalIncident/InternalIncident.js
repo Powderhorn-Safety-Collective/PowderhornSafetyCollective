@@ -363,7 +363,6 @@ class InternalIncident extends Component {
                 }
               </div>
               </div>
-            <h2>_____**_____</h2>
           </Col>
         </Row>
       </Container>

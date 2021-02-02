@@ -206,6 +206,8 @@ class ReportIncident extends Component {
           <p><strong>Incident type: </strong>{this.state.type}</p>
           <p><strong>Notes: </strong>{this.state.notes}</p>
           <br/>
+          <Button id="confirm" className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
+          <br/>
           {this.props.store.user.id ?
             <>
               <p>Would you like to receive text updates on this incident?</p>
@@ -226,10 +228,9 @@ class ReportIncident extends Component {
               </p>
             </>
           }
+          <br/>
           <div className="module">
           <strong>TERMS AND CONDITIONS</strong>
-          <Button id="confirm" className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
-          <br/>
           <p>            
             The goal of the Powderhorn Safety Collective is to make the neighborhood safer and to build community by providing a non-violent presence. 
             Please keep in mind that we are your neighbors, and we are volunteers working independently of the city. 

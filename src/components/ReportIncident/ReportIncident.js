@@ -228,6 +228,7 @@ class ReportIncident extends Component {
           }
           <div className="module">
           <strong>TERMS AND CONDITIONS</strong>
+          <Button id="confirm" className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
           <br/>
           <p>            
             The goal of the Powderhorn Safety Collective is to make the neighborhood safer and to build community by providing a non-violent presence. 
@@ -239,7 +240,6 @@ class ReportIncident extends Component {
           </p>
           </div>
           <br/>
-          <Button id="confirm" className="btn btn-primary" onClick={this.editSubmission}>Edit Submission</Button>
           <Button id="confirm" className="btn btn-success" onClick={this.confirmIncident}>Confirm Submission</Button>
         </div>
         :
